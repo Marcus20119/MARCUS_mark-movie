@@ -1,0 +1,31 @@
+@import './fonts';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'DM Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  input,
+  textarea {
+    outline: none;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    @apply transition-all;
+  }
+  a {
+    text-decoration: none !important;
+  }
+  li {
+    list-style: none;
+  }
+}
