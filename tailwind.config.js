@@ -2,6 +2,9 @@ module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
+      padding: {
+        full: '100%',
+      },
       backgroundImage: {
         'banner-overlay': `linear-gradient(45deg, rgba(0, 0, 0, 0.9), transparent)`,
       },
@@ -10,5 +13,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/line-clamp')],
 };

@@ -1,4 +1,5 @@
-import CarouselFadeExample from '../CarouselFadeExample';
+import Banner from './Banner';
+import NowPlaying from './NowPlaying';
 
 const MainSection = () => {
   return (
@@ -11,9 +12,9 @@ const MainSection = () => {
         ))}
       </div>
       {/* <div className="banner w-full h-[150px] bg-white my-5"></div> */}
-      <div className="banner w-full h-[350px] my-5 rounded-xl overflow-hidden shadow-[0_50px_100px_rgb(255,_61,_113,_0.1)]">
-        <CarouselFadeExample />
-      </div>
+
+      <Banner />
+      <NowPlaying />
     </div>
   );
 };
