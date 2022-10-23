@@ -1,4 +1,5 @@
 @import './fonts';
+@import './variables';
 
 @tailwind base;
 @tailwind components;
@@ -28,5 +29,12 @@
   }
   li {
     list-style: none;
+  }
+}
+
+@layer components {
+  .app-layout {
+    display: grid;
+    grid-template-columns: 15% 65% 20%;
   }
 }
