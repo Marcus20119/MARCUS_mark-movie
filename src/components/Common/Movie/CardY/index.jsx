@@ -1,8 +1,9 @@
 import ButtonPrimary from '../../Button/Primary';
 
-const MovieCard = () => {
-  const imgLink =
-    'https://oyster.ignimgs.com/wordpress/stg.ign.com/2017/05/Spiderman.jpg';
+const MovieCardY = ({ movieData }) => {
+  //https://image.tmdb.org/t/p/w500/
+  const { title, poster_path, release_date, vote_average } = movieData;
+  const imgLink = `https://image.tmdb.org/t/p/w500${poster_path}`;
   return (
     <div className="flex flex-col gap-[10px] w-full p-[10px] rounded-xl bg-[rgba(255,_255,_255,_0.08)] text-white">
       <div className="relative w-full pt-full rounded-lg overflow-hidden">
@@ -12,11 +13,11 @@ const MovieCard = () => {
           alt=""
         />
       </div>
-      <h5 className="font-bold line-clamp-1 mb-1">Spiderman: Homecoming</h5>
+      <h5 className="font-bold line-clamp-1 mb-1">{title}</h5>
       <div className="flex justify-between items-center text-xs mb-2">
-        <span>2017</span>
+        <span>{new Date(release_date).getFullYear()}</span>
         <div className="inline-flex gap-1">
-          <span>7.4</span>
+          <span>{vote_average}</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -43,4 +44,4 @@ const MovieCard = () => {
   );
 };
 
-export default MovieCard;
+export default MovieCardY;
