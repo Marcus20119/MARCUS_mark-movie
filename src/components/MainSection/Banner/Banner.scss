@@ -122,3 +122,10 @@
 .carousel-indicators {
   justify-content: flex-end !important;
 }
+.carousel-indicators button {
+  width: 20px !important;
+  height: 5px !important;
+  border-radius: 4px !important;
+  border: none !important;
+  transform: translateY(-8px);
+}

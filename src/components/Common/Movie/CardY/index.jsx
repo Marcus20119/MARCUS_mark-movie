@@ -1,7 +1,7 @@
+import PropTypes from 'prop-types';
 import ButtonPrimary from '../../Button/Primary';
 
 const MovieCardY = ({ movieData }) => {
-  //https://image.tmdb.org/t/p/w500/
   const { title, poster_path, release_date, vote_average } = movieData;
   const imgLink = `https://image.tmdb.org/t/p/w500${poster_path}`;
   return (
@@ -42,6 +42,10 @@ const MovieCardY = ({ movieData }) => {
       </ButtonPrimary>
     </div>
   );
+};
+
+MovieCardY.propTypes = {
+  movieData: PropTypes.object.isRequired,
 };
 
 export default MovieCardY;

@@ -1,16 +1,18 @@
 import { Fragment } from 'react';
-import MainSection from './components/MainSection';
-import NavSection from './components/NavSection';
-import SearchSection from './components/SearchSection';
+import { Routes, Route } from 'react-router-dom';
+import Home from './layout/Home';
+import Movies from './pages/Movies';
 
 function App() {
   return (
     <Fragment>
-      <div className="app-layout">
-        <NavSection />
-        <MainSection />
-        <SearchSection />
-      </div>
+      <Routes>
+        <Route path="/" element={<Home />}>
+          <Route path="tv-series" element={<div></div>} />
+          <Route path="movies" element={<Movies />} />
+          <Route path="anime" element={<div></div>} />
+        </Route>
+      </Routes>
     </Fragment>
   );
 }

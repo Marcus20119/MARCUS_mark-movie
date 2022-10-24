@@ -1,14 +1,12 @@
 import PropTypes from 'prop-types';
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
-import { Navigation } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 import MovieCardY from '../CardY';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import NextBtn from './NextBtn';
 import PrevBtn from './PrevBtn';
 
 const MovieCardListY = ({ moviesData }) => {
-  console.log(moviesData);
   const nextRef = useRef();
   const prevRef = useRef();
   return (
