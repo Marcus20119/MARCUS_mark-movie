@@ -4,15 +4,11 @@ const Navbar = () => {
   const navList = [
     {
       name: 'TV Series',
-      path: '/tv-series',
+      path: '/home/tv-series',
     },
     {
       name: 'Movies',
-      path: '/movies',
-    },
-    {
-      name: 'Anime',
-      path: '/anime',
+      path: '/home/movies',
     },
   ];
   return (

@@ -1,30 +1,33 @@
 import { Fragment } from 'react';
-import Banner from '../../components/MainSection/Banner';
-import ScrollList from '../../components/MainSection/ScrollList';
+import MainSection from '../../components/MainSection';
+import SearchSection from '../../components/SearchSection';
+import { apiKey } from '../../config';
 
 const Movies = () => {
   const apiList = [
     {
       name: 'Now Playing',
-      api: 'https://api.themoviedb.org/3/movie/now_playing?api_key=ca5bec6407d971b84c656385ba10351d&language=en-US&page=1',
+      api: `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=1`,
     },
     {
       name: 'Up Coming',
-      api: 'https://api.themoviedb.org/3/movie/upcoming?api_key=ca5bec6407d971b84c656385ba10351d&language=en-US&page=1',
+      api: `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US&page=1`,
     },
     {
       name: 'Top Rated Movies',
-      api: 'https://api.themoviedb.org/3/movie/top_rated?api_key=ca5bec6407d971b84c656385ba10351d&language=en-US&page=1',
+      api: `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=1`,
     },
   ];
+  const apiBanner = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=1`;
+  const apiGenres = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`;
   return (
     <Fragment>
-      <Banner apiLink="https://api.themoviedb.org/3/movie/now_playing?api_key=ca5bec6407d971b84c656385ba10351d&language=en-US&page=1" />
-      <div className="flex flex-col gap-4">
-        {apiList.map(item => (
-          <ScrollList key={item.name} title={item.name} apiLink={item.api} />
-        ))}
-      </div>
+      <MainSection
+        apiBanner={apiBanner}
+        apiList={apiList}
+        apiGenres={apiGenres}
+      />
+      <SearchSection />
     </Fragment>
   );
 };

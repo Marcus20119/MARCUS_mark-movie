@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import ButtonPrimary from '../../Button/Primary';
 
 const MovieCardY = ({ movieData }) => {
-  const { title, poster_path, release_date, vote_average } = movieData;
+  const { poster_path, vote_average } = movieData;
   const imgLink = `https://image.tmdb.org/t/p/w500${poster_path}`;
   return (
     <div className="flex flex-col gap-[10px] w-full p-[10px] rounded-xl bg-[rgba(255,_255,_255,_0.08)] text-white">
@@ -13,9 +13,15 @@ const MovieCardY = ({ movieData }) => {
           alt=""
         />
       </div>
-      <h5 className="font-bold line-clamp-1 mb-1">{title}</h5>
+      <h5 className="font-bold line-clamp-1 mb-1">
+        {movieData.title || movieData.name}
+      </h5>
       <div className="flex justify-between items-center text-xs mb-2">
-        <span>{new Date(release_date).getFullYear()}</span>
+        <span>
+          {new Date(
+            movieData.release_date || movieData.first_air_date
+          ).getFullYear()}
+        </span>
         <div className="inline-flex gap-1">
           <span>{vote_average}</span>
           <svg
