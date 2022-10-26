@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { withErrorBoundary } from 'react-error-boundary';
 
 import './Banner.scss';
-import ErrorFallBack from '../../Base/ErrorFallBack';
-import useMySWR from '../../../hooks/useMySWR';
-import ButtonPlay from '../../Common/Button/Play';
-import ButtonPlus from '../../Common/Button/Plus';
-import LoadingSkeleton from '../../Base/Loading/Skeleton';
+import useMySWR from '~/hooks/useMySWR';
+import ButtonPlay from '~/components/Common/Button/Play';
+import ButtonPlus from '~/components/Common/Button/Plus';
+import ErrorFallBack from '~/components/Base/ErrorFallBack';
+import LoadingSkeleton from '~/components/Base/Loading/Skeleton';
 
 function Banner({ apiLink, apiGenres }) {
   const { myData: catagories, isLoading: catagoriesLoading } = useMySWR({
@@ -75,9 +75,9 @@ function Banner({ apiLink, apiGenres }) {
         <div className="relative w-full h-full text-transparent bg-transparent">
           <LoadingSkeleton className="absolute inset-0 opacity-30" />
           <div className="absolute left-[2.5rem] bottom-[0.5rem] py-[20px] flex flex-col">
-            <LoadingSkeleton className="w-[400px] h-[57.6px] mb-[12px] rounded-lg" />
+            <LoadingSkeleton className="w-[300px] h-[57.6px] mb-[12px] rounded-lg" />
             <div className="carousel-caption__tag-wrap">
-              {['Horror', 'Romantic', 'Science Fiction'].map(item => (
+              {['Horror', 'Romantic'].map(item => (
                 <button
                   key={`loadingGenres${item}`}
                   className="carousel-caption__tag"

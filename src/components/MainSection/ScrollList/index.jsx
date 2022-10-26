@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import { withErrorBoundary } from 'react-error-boundary';
 
-import useMySWR from '../../../hooks/useMySWR';
-import ErrorFallBack from '../../Base/ErrorFallBack';
-import MovieCardListY from '../../Common/Movie/CardListY';
-import MovieLoadingCardListY from '../../Common/Movie/LoadingCardListY';
+import useMySWR from '~/hooks/useMySWR';
+import ErrorFallBack from '~/components/Base/ErrorFallBack';
+import MovieCardListY from '~/components/Common/Movie/CardListY';
+import MovieLoadingCardListY from '~/components/Common/Movie/LoadingCardListY';
 
 const ScrollList = ({ title = 'This is the title', apiLink }) => {
   const { myData: moviesData, isLoading } = useMySWR({ api: apiLink });

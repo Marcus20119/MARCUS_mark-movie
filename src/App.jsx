@@ -1,12 +1,6 @@
 import { Fragment, lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
-// import { Routes, Route } from 'react-router-loading';
 import MainLayout from './layout/MainLayout';
-
-// import CommunityPage from './pages/Community';
-// import MoviesPage from './pages/Home/Movies';
-// import NotFoundPage from './pages/NotFound';
-// import TVSeriesPage from './pages/Home/TVSeries';
 
 const CommunityPage = lazy(() => import('./pages/Community'));
 const MoviesPage = lazy(() => import('./pages/Home/Movies'));
