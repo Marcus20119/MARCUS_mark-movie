@@ -1,0 +1,40 @@
+.dashedLoading {
+  position: relative;
+  width: 35px;
+  height: 35px;
+}
+
+.dashedLoading:after,
+.dashedLoading:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+}
+
+.dashedLoading:before {
+  z-index: 5;
+  border: 3px dashed black;
+  border-left: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  -webkit-animation: dashed 1s linear infinite;
+  animation: dashed 1s linear infinite;
+}
+
+.dashedLoading:after {
+  z-index: 10;
+  border: 3px solid #2e3440;
+  border-left: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  -webkit-animation: dashed 1s ease infinite;
+  animation: dashed 1s ease infinite;
+}
+
+@keyframes dashed {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,16 @@
+.loadingSkeleton {
+  background-color: rgba(238, 238, 238, 0.105);
+  background-image: linear-gradient(
+    110deg,
+    #ececec4a 40%,
+    #f9f9f974 55%,
+    #ececec4a 70%
+  );
+  background-size: 200% 100%;
+  animation: 1.5s shine linear infinite;
+}
+@keyframes shine {
+  to {
+    background-position-x: -200%;
+  }
+}

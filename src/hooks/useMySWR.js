@@ -20,7 +20,7 @@ export default function useMySWR({ api, max = '' }) {
 
   return {
     myData,
-    setMyData,
-    error,
+    isLoading: !data,
+    isError: error,
   };
 }

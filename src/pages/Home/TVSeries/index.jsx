@@ -1,8 +1,8 @@
 import { Fragment } from 'react';
-import MainSection from '../../components/MainSection';
-import SearchSection from '../../components/SearchSection';
+import MainSection from '../../../components/MainSection';
+import SearchSection from '../../../components/SearchSection';
 
-const TVSeries = () => {
+const TVSeriesPage = () => {
   const apiList = [
     {
       name: 'TV Airing Today',
@@ -39,4 +39,4 @@ const TVSeries = () => {
   );
 };
 
-export default TVSeries;
+export default TVSeriesPage;

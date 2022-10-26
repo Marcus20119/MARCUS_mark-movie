@@ -105,18 +105,18 @@ const NavSection = () => {
             movie
           </span>
         </h1>
-        <div className="flex flex-col gap-3 mt-auto">
+        <div className="flex flex-col gap-[24px] mt-auto">
           {navList &&
             navList.length > 0 &&
             navList.map(navSection => (
               <div
                 key={navSection.groupName}
-                className="flex flex-col gap-[20px]"
+                className="flex flex-col gap-[16px]"
               >
                 <h3 className="text-[0.65rem] tracking-[0.15rem] text-[rgba(255,_255,_255,_0.4)]">
                   {navSection.groupName}
                 </h3>
-                <div className="flex flex-col gap-3 ml-4 text-[rgba(255,_255,_255,_0.8)]">
+                <div className="flex flex-col gap-[14px] ml-4 text-[rgba(255,_255,_255,_0.8)]">
                   {navSection.items.length > 0 &&
                     navSection.items.map(navItem => (
                       <NavLink

@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 
-const Community = () => {
+const CommunityPage = () => {
   return (
     <Fragment>
       <div></div>
@@ -9,4 +9,4 @@ const Community = () => {
   );
 };
 
-export default Community;
+export default CommunityPage;

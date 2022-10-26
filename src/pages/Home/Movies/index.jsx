@@ -1,9 +1,9 @@
 import { Fragment } from 'react';
-import MainSection from '../../components/MainSection';
-import SearchSection from '../../components/SearchSection';
-import { apiKey } from '../../config';
+import MainSection from '../../../components/MainSection';
+import SearchSection from '../../../components/SearchSection';
+import { apiKey } from '../../../config';
 
-const Movies = () => {
+const MoviesPage = () => {
   const apiList = [
     {
       name: 'Now Playing',
@@ -32,4 +32,4 @@ const Movies = () => {
   );
 };
 
-export default Movies;
+export default MoviesPage;

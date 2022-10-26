@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import ButtonPrimary from '../../Button/Primary';
+import ButtonPlay from '../../Button/Play';
 
-const MovieCardY = ({ movieData }) => {
+const CardY = ({ movieData }) => {
   const { poster_path, vote_average } = movieData;
   const imgLink = `https://image.tmdb.org/t/p/w500${poster_path}`;
   return (
@@ -38,20 +38,13 @@ const MovieCardY = ({ movieData }) => {
           </svg>
         </div>
       </div>
-      <ButtonPrimary>
-        <span>Watch now</span>
-        <img
-          className="block w-7 h-7 object-cover object-center"
-          src="/small-round-play-button.png"
-          alt="play-icon"
-        />
-      </ButtonPrimary>
+      <ButtonPlay message="Watch now" widthType="full" />
     </div>
   );
 };
 
-MovieCardY.propTypes = {
+CardY.propTypes = {
   movieData: PropTypes.object.isRequired,
 };
 
-export default MovieCardY;
+export default CardY;
