@@ -1,17 +1,29 @@
-import LoadingSkeleton from '../../../Base/Loading/Skeleton';
+import PropTypes from 'prop-types';
 import ButtonPlay from '../../Button/Play';
 
-const LoadingCardY = () => {
+const MovieCardY = ({ movieData }) => {
+  const { poster_path, vote_average } = movieData;
+  const imgLink = `https://image.tmdb.org/t/p/w500${poster_path}`;
   return (
     <div className="flex flex-col gap-[10px] w-full p-[10px] rounded-xl bg-[rgba(255,_255,_255,_0.08)] text-white">
       <div className="relative w-full pt-full rounded-lg overflow-hidden">
-        <LoadingSkeleton className="absolute w-full inset-0" />
+        <img
+          className="absolute w-full inset-0 block object-cover object-center"
+          src={imgLink}
+          alt=""
+        />
       </div>
-      <LoadingSkeleton className="h-[19.2px] w-full rounded-sm " />
+      <h5 className="font-bold line-clamp-1 mb-1">
+        {movieData.title || movieData.name}
+      </h5>
       <div className="flex justify-between items-center text-xs mb-2">
-        <LoadingSkeleton className="h-[16px] w-[30px] rounded-sm " />
+        <span>
+          {new Date(
+            movieData.release_date || movieData.first_air_date
+          ).getFullYear()}
+        </span>
         <div className="inline-flex gap-1">
-          <LoadingSkeleton className="h-[16px] w-[30px] rounded-sm " />
+          <span>{vote_average}</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -26,9 +38,13 @@ const LoadingCardY = () => {
           </svg>
         </div>
       </div>
-      <ButtonPlay message="Watch now" widthType="full" disabled={true} />
+      <ButtonPlay message="Watch now" widthType="full" />
     </div>
   );
 };
 
-export default LoadingCardY;
+MovieCardY.propTypes = {
+  movieData: PropTypes.object.isRequired,
+};
+
+export default MovieCardY;

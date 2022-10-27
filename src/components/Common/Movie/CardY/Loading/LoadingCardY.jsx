@@ -1,29 +1,17 @@
-import PropTypes from 'prop-types';
-import ButtonPlay from '../../Button/Play';
+import LoadingSkeleton from '../../../../Base/Loading/Skeleton';
+import ButtonPlay from '../../../Button/Play';
 
-const CardY = ({ movieData }) => {
-  const { poster_path, vote_average } = movieData;
-  const imgLink = `https://image.tmdb.org/t/p/w500${poster_path}`;
+const MovieCardYLoading = () => {
   return (
     <div className="flex flex-col gap-[10px] w-full p-[10px] rounded-xl bg-[rgba(255,_255,_255,_0.08)] text-white">
       <div className="relative w-full pt-full rounded-lg overflow-hidden">
-        <img
-          className="absolute w-full inset-0 block object-cover object-center"
-          src={imgLink}
-          alt=""
-        />
+        <LoadingSkeleton className="absolute w-full inset-0" />
       </div>
-      <h5 className="font-bold line-clamp-1 mb-1">
-        {movieData.title || movieData.name}
-      </h5>
+      <LoadingSkeleton className="h-[19.2px] w-full rounded-sm " />
       <div className="flex justify-between items-center text-xs mb-2">
-        <span>
-          {new Date(
-            movieData.release_date || movieData.first_air_date
-          ).getFullYear()}
-        </span>
+        <LoadingSkeleton className="h-[16px] w-[30px] rounded-sm " />
         <div className="inline-flex gap-1">
-          <span>{vote_average}</span>
+          <LoadingSkeleton className="h-[16px] w-[30px] rounded-sm " />
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -38,13 +26,9 @@ const CardY = ({ movieData }) => {
           </svg>
         </div>
       </div>
-      <ButtonPlay message="Watch now" widthType="full" />
+      <ButtonPlay message="Watch now" widthType="full" disabled={true} />
     </div>
   );
 };
 
-CardY.propTypes = {
-  movieData: PropTypes.object.isRequired,
-};
-
-export default CardY;
+export default MovieCardYLoading;

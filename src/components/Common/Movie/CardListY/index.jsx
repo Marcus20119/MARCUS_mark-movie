@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useRef } from 'react';
 
-import CardY from './CardY';
 import NextBtn from './NextBtn';
 import PrevBtn from './PrevBtn';
+import MovieCardY from '../CardY';
 
 const MovieCardListY = ({ moviesData }) => {
   const nextRef = useRef();
@@ -16,7 +16,7 @@ const MovieCardListY = ({ moviesData }) => {
           moviesData.length > 0 &&
           moviesData.map(movieData => (
             <SwiperSlide key={movieData.id}>
-              <CardY movieData={movieData} />
+              <MovieCardY movieData={movieData} />
             </SwiperSlide>
           ))}
         <NextBtn ref={nextRef} />

@@ -1,6 +1,6 @@
 import { Fragment, lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import MainLayout from './layout/MainLayout';
+import HomeLayout from './layout/HomeLayout';
 
 const CommunityPage = lazy(() => import('./pages/Community'));
 const MoviesPage = lazy(() => import('./pages/Home/Movies'));
@@ -10,9 +10,9 @@ const TVSeriesPage = lazy(() => import('./pages/Home/TVSeries'));
 function App() {
   return (
     <Fragment>
-      <Suspense fallback={<MainLayout />}>
+      <Suspense fallback={<HomeLayout />}>
         <Routes>
-          <Route path="/" element={<MainLayout />}>
+          <Route path="/" element={<HomeLayout />}>
             <Route path="home/tv-series" element={<TVSeriesPage />} />
             <Route path="home/movies" element={<MoviesPage />} />
             <Route path="community" element={<CommunityPage />} />

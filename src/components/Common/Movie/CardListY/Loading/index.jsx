@@ -1,8 +1,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
+import MovieCardYLoading from '../../CardY/Loading/LoadingCardY';
 
-import LoadingCardY from './LoadingCardY';
-
-const MovieLoadingCardListY = () => {
+const MovieCardListYLoading = () => {
   return (
     <div className="relative">
       <Swiper grabCursor spaceBetween={10} slidesPerView="auto">
@@ -10,7 +9,7 @@ const MovieLoadingCardListY = () => {
           .fill('')
           .map((item, index) => (
             <SwiperSlide key={`loadingCardY${index}`}>
-              <LoadingCardY />
+              <MovieCardYLoading />
             </SwiperSlide>
           ))}
       </Swiper>
@@ -32,4 +31,4 @@ const MovieLoadingCardListY = () => {
   );
 };
 
-export default MovieLoadingCardListY;
+export default MovieCardListYLoading;

@@ -1,2 +1,2 @@
-export * from './configKeys';
+export * from './configApi';
 export * from './configSWR';
