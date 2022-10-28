@@ -13,7 +13,7 @@ const MovieCardY = ({ movieData }) => {
           alt=""
         />
       </div>
-      <h5 className="font-bold line-clamp-1 mb-1">
+      <h5 className="font-bold line-clamp-1">
         {movieData.title || movieData.name}
       </h5>
       <div className="flex justify-between items-center text-xs mb-2">

@@ -10,6 +10,7 @@ import ErrorFallBack from '~/components/Base/ErrorFallBack';
 import LoadingSkeleton from '~/components/Base/Loading/Skeleton';
 import { api, genres } from '~/config';
 import MovieTagList from '~/components/Common/Movie/TagList';
+import MovieTagListLoading from '~/components/Common/Movie/TagList/Loading';
 
 function Banner({ apiLink, type }) {
   const { myData: movies, isLoading: moviesLoading } = useMySWR({
@@ -69,16 +70,7 @@ function Banner({ apiLink, type }) {
           <LoadingSkeleton className="absolute inset-0 opacity-30" />
           <div className="absolute left-[2.5rem] bottom-[0.5rem] py-[20px] flex flex-col">
             <LoadingSkeleton className="w-[300px] h-[57.6px] mb-[12px] rounded-lg" />
-            <div className="carousel-caption__tag-wrap">
-              {['Horror', 'Romantic'].map(item => (
-                <button
-                  key={`loadingGenres${item}`}
-                  className="carousel-caption__tag"
-                >
-                  {item}
-                </button>
-              ))}
-            </div>
+            <MovieTagListLoading />
             <div className="carousel-caption__wrap-btn">
               <ButtonPlay
                 message="Watch"
