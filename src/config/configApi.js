@@ -6,11 +6,14 @@ export const api = {
   getBackdrop(backdrop_path) {
     return `https://image.tmdb.org/t/p/original${backdrop_path}`;
   },
-  getPopular(page = 1, type = 'movie') {
+  getPopular(type = 'movie', page = 1) {
     return `https://api.themoviedb.org/3/${type}/popular?api_key=${apiKey}&language=en-US&page=${page}`;
   },
-  getTopRated(page = 1, type = 'movie') {
+  getTopRated(type = 'movie', page = 1) {
     return `https://api.themoviedb.org/3/${type}/top_rated?api_key=${apiKey}&language=en-US&page=${page}`;
+  },
+  getSearch(query = '', type = 'movie', page = 1) {
+    return `https://api.themoviedb.org/3/search/${type}?api_key=${apiKey}&language=en-US&query=${query}&page=${page}`;
   },
   movie: {
     getNowPlaying(page = 1) {

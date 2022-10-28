@@ -21,7 +21,7 @@ const MovieCardX = ({ movieData, type }) => {
       <div className="relative w-[34%] h-0 pt-[34%] rounded-lg overflow-hidden">
         <img
           className="absolute w-full inset-0 block object-cover object-center"
-          src={api.getPoster(poster_path)}
+          src={poster_path ? api.getPoster(poster_path) : '/no-poster.jpg'}
           alt=""
         />
       </div>
@@ -31,9 +31,11 @@ const MovieCardX = ({ movieData, type }) => {
         </h5>
         <div className="w-full flex justify-between items-center text-xs mb-2">
           <span>
-            {new Date(
-              movieData.release_date || movieData.first_air_date
-            ).getFullYear()}
+            {movieData.release_date || movieData.first_air_date
+              ? new Date(
+                  movieData.release_date || movieData.first_air_date
+                ).getFullYear()
+              : 'Unknown year'}
           </span>
           <div className="inline-flex gap-1">
             <span>{vote_average}</span>

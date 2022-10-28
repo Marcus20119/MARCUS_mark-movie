@@ -2,7 +2,12 @@ import PropTypes from 'prop-types';
 
 import MovieCardX from '../CardX';
 
-const MovieCardListX = ({ moviesData, quantity = NaN, type }) => {
+const MovieCardListX = ({
+  moviesData,
+  quantity = NaN,
+  type,
+  mode = 'default',
+}) => {
   return (
     <div className="flex flex-col w-full gap-[10px]">
       {moviesData &&
