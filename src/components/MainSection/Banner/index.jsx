@@ -9,6 +9,7 @@ import ButtonPlus from '~/components/Common/Button/Plus';
 import ErrorFallBack from '~/components/Base/ErrorFallBack';
 import LoadingSkeleton from '~/components/Base/Loading/Skeleton';
 import { api, genres } from '~/config';
+import MovieTagList from '~/components/Common/Movie/TagList';
 
 function Banner({ apiLink, type }) {
   const { myData: movies, isLoading: moviesLoading } = useMySWR({
@@ -49,18 +50,7 @@ function Banner({ apiLink, type }) {
                 <h3 className="carousel-caption__name line-clamp-1">
                   {movie.title || movie.name}
                 </h3>
-                <div className="carousel-caption__tag-wrap">
-                  {movie.genre_ids &&
-                    movie.genre_ids.map(id => (
-                      <button
-                        key={`genres${id}`}
-                        className="carousel-caption__tag"
-                      >
-                        {neededGenres.find(genre => genre.id === id) &&
-                          neededGenres.find(genre => genre.id === id).name}
-                      </button>
-                    ))}
-                </div>
+                <MovieTagList movieData={movie} genresData={neededGenres} />
                 <div className="carousel-caption__wrap-btn">
                   <ButtonPlay
                     message="Watch"

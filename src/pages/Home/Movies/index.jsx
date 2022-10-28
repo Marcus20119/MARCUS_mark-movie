@@ -26,7 +26,7 @@ const MoviesPage = () => {
         apiList={apiList}
         type="movie"
       />
-      <SearchSection />
+      <SearchSection type="movie" />
     </Fragment>
   );
 };

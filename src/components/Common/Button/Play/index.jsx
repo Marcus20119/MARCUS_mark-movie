@@ -6,6 +6,7 @@ const ButtonPlay = ({
   message = '',
   widthType = 'full',
   disabled = false,
+  displayIcon = true,
 }) => {
   let widthClassName = '';
   switch (widthType) {
@@ -27,11 +28,13 @@ const ButtonPlay = ({
       } tracking-wider ${widthClassName} ${className}`}
     >
       <span>{message}</span>
-      <img
-        className="block w-7 h-7 object-cover object-center"
-        src="/small-round-play-button.png"
-        alt="play-icon"
-      />
+      {displayIcon && (
+        <img
+          className="block w-7 h-7 object-cover object-center"
+          src="/small-round-play-button.png"
+          alt="play-icon"
+        />
+      )}
     </button>
   );
 };
@@ -42,6 +45,7 @@ ButtonPlay.propTypes = {
   message: PropTypes.string.isRequired,
   widthType: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
+  displayIcon: PropTypes.bool,
 };
 
 export default ButtonPlay;

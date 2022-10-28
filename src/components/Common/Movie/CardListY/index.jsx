@@ -13,6 +13,7 @@ const MovieCardListY = ({ moviesData }) => {
     <div className="relative">
       <Swiper grabCursor spaceBetween={10} slidesPerView="auto">
         {moviesData &&
+          moviesData.length &&
           moviesData.length > 0 &&
           moviesData.map(movieData => (
             <SwiperSlide key={movieData.id}>

@@ -6,6 +6,12 @@ export const api = {
   getBackdrop(backdrop_path) {
     return `https://image.tmdb.org/t/p/original${backdrop_path}`;
   },
+  getPopular(page = 1, type = 'movie') {
+    return `https://api.themoviedb.org/3/${type}/popular?api_key=${apiKey}&language=en-US&page=${page}`;
+  },
+  getTopRated(page = 1, type = 'movie') {
+    return `https://api.themoviedb.org/3/${type}/top_rated?api_key=${apiKey}&language=en-US&page=${page}`;
+  },
   movie: {
     getNowPlaying(page = 1) {
       return `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=${page}`;
@@ -15,6 +21,9 @@ export const api = {
     },
     getTopRated(page = 1) {
       return `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=${page}`;
+    },
+    getPopular(page = 1) {
+      return `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${page}`;
     },
     getGenres() {
       return `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`;
@@ -29,6 +38,9 @@ export const api = {
     },
     getTopRated(page = 1) {
       return `https://api.themoviedb.org/3/tv/top_rated?api_key=${apiKey}&language=en-US&page=${page}`;
+    },
+    getPopular(page = 1) {
+      return `https://api.themoviedb.org/3/tv/popular?api_key=${apiKey}&language=en-US&page=${page}`;
     },
     getGenres() {
       return `https://api.themoviedb.org/3/genre/tv/list?api_key=${apiKey}&language=en-US`;

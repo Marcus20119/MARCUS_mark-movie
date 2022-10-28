@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import { api, genres } from '~/config';
+import MovieTagList from '../TagList';
 
-const MovieCardX = ({ movieData, type = 'movie' }) => {
+const MovieCardX = ({ movieData, type }) => {
   const { poster_path, vote_average } = movieData;
   let neededGenres;
   switch (type) {
@@ -16,15 +17,15 @@ const MovieCardX = ({ movieData, type = 'movie' }) => {
       break;
   }
   return (
-    <div className="flex gap-[10px] w-full p-[10px] rounded-xl bg-[rgba(255,_255,_255,_0.06)] text-white">
-      <div className="relative w-[40%] pt-[40%] rounded-lg overflow-hidden">
+    <div className="flex items-center gap-[10px] w-full p-[10px] rounded-xl bg-[rgba(255,_255,_255,_0.06)] text-white">
+      <div className="relative w-[34%] h-0 pt-[34%] rounded-lg overflow-hidden">
         <img
           className="absolute w-full inset-0 block object-cover object-center"
           src={api.getPoster(poster_path)}
           alt=""
         />
       </div>
-      <div className="flex flex-1 flex-col justify-center items-start">
+      <div className="flex w-[66%] h-[95%] flex-col justify-between items-start">
         <h5 className="w-full font-bold line-clamp-1 mb-1">
           {movieData.title || movieData.name}
         </h5>
@@ -50,23 +51,20 @@ const MovieCardX = ({ movieData, type = 'movie' }) => {
             </svg>
           </div>
         </div>
-        <div className="carousel-caption__tag-wrap">
-          {movieData.genre_ids &&
-            movieData.genre_ids.slice(0, 2).map(id => (
-              <button key={`genres${id}`} className="carousel-caption__tag">
-                {neededGenres.find(genre => genre.id === id) &&
-                  neededGenres.find(genre => genre.id === id).name}
-              </button>
-            ))}
-        </div>
-        {/* <ButtonPlay message="Watch" widthType="full" /> */}
+        <MovieTagList
+          movieData={movieData}
+          genresData={neededGenres}
+          disabled={true}
+          className="!mb-0"
+        />
       </div>
     </div>
   );
 };
 
 MovieCardX.propTypes = {
-  movieData: PropTypes.object.isRequired,
+  movieData: PropTypes.any.isRequired,
+  type: PropTypes.oneOf(['movie', 'tv']).isRequired,
 };
 
 export default MovieCardX;

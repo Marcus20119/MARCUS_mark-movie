@@ -26,7 +26,7 @@ const TVSeriesPage = () => {
         apiList={apiList}
         type="tv"
       />
-      <SearchSection />
+      <SearchSection type="tv" />
     </Fragment>
   );
 };
