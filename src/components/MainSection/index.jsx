@@ -13,7 +13,12 @@ const MainSection = ({ apiBanner, apiList, type }) => {
       <Banner apiLink={apiBanner} type={type} />
       <div className="flex flex-col gap-4">
         {apiList.map(item => (
-          <ScrollList key={item.name} title={item.name} apiLink={item.api} />
+          <ScrollList
+            key={item.name}
+            title={item.name}
+            apiLink={item.api}
+            type={type}
+          />
         ))}
       </div>
     </div>

@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import PropTypes from 'prop-types';
 
 import LoadingBounce from '~/components/Base/Loading/Bounce';
 import ButtonPlay from '~/components/Common/Button/Play';
@@ -31,6 +32,11 @@ const SearchUI = ({ type, query }) => {
       )}
     </div>
   );
+};
+
+SearchUI.propTypes = {
+  type: PropTypes.oneOf(['movie', 'tv']).isRequired,
+  query: PropTypes.any.isRequired,
 };
 
 export default SearchUI;

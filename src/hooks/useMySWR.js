@@ -16,6 +16,9 @@ export default function useMySWR({ api, max = '' }) {
         setMyData(data.results);
       }
     }
+    if (data && data.id) {
+      setMyData(data);
+    }
   }, [data, max]);
 
   return {

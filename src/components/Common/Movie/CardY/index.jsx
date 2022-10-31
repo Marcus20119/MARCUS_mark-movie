@@ -2,8 +2,9 @@ import PropTypes from 'prop-types';
 import { api } from '~/config';
 import ButtonPlay from '../../Button/Play';
 
-const MovieCardY = ({ movieData }) => {
-  const { poster_path, vote_average } = movieData;
+const MovieCardY = ({ movieData, type }) => {
+  const { poster_path, vote_average, id } = movieData;
+  const path = `/details/${type}/${id}`;
   return (
     <div className="flex flex-col gap-[10px] w-full p-[10px] rounded-xl bg-[rgba(255,_255,_255,_0.08)] text-white">
       <div className="relative w-full pt-full rounded-lg overflow-hidden">
@@ -38,7 +39,12 @@ const MovieCardY = ({ movieData }) => {
           </svg>
         </div>
       </div>
-      <ButtonPlay message="Watch now" widthType="full" />
+      <ButtonPlay
+        message="Watch now"
+        widthType="full"
+        isLink={true}
+        path={path}
+      />
     </div>
   );
 };

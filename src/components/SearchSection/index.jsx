@@ -1,5 +1,6 @@
 import debounce from 'lodash.debounce';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import NonSearchUI from './NonSearchUI';
 import SearchUI from './SearchUI';
@@ -40,6 +41,10 @@ const SearchSection = ({ type }) => {
       </div>
     </div>
   );
+};
+
+SearchUI.SearchSection = {
+  type: PropTypes.oneOf(['movie', 'tv']).isRequired,
 };
 
 export default SearchSection;

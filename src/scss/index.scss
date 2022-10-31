@@ -46,8 +46,12 @@
 }
 
 @layer components {
-  .app-layout {
+  .home-layout {
     display: grid;
     grid-template-columns: 15% 65% 20%;
+  }
+  .sub-layout {
+    display: grid;
+    grid-template-columns: 15% 85%;
   }
 }

@@ -4,7 +4,7 @@ import NavSection from '../../components/NavSection';
 
 const MainLayout = () => {
   return (
-    <div className="app-layout">
+    <div className="home-layout">
       <NavSection />
       <Outlet />
     </div>

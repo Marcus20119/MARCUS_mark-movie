@@ -6,7 +6,7 @@ import NextBtn from './NextBtn';
 import PrevBtn from './PrevBtn';
 import MovieCardY from '../CardY';
 
-const MovieCardListY = ({ moviesData }) => {
+const MovieCardListY = ({ moviesData, type }) => {
   const nextRef = useRef();
   const prevRef = useRef();
   return (
@@ -17,7 +17,7 @@ const MovieCardListY = ({ moviesData }) => {
           moviesData.length > 0 &&
           moviesData.map(movieData => (
             <SwiperSlide key={movieData.id}>
-              <MovieCardY movieData={movieData} />
+              <MovieCardY movieData={movieData} type={type} />
             </SwiperSlide>
           ))}
         <NextBtn ref={nextRef} />
@@ -47,6 +47,7 @@ const MovieCardListY = ({ moviesData }) => {
 
 MovieCardListY.propTypes = {
   moviesData: PropTypes.array.isRequired,
+  type: PropTypes.oneOf(['movie', 'tv']).isRequired,
 };
 
 export default MovieCardListY;
