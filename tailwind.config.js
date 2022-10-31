@@ -39,6 +39,10 @@ module.exports = {
         'fade-in': 'fade-in 0.2s ease',
         'increase-height': 'increase-height 0.5s ease',
       },
+      fontFamily: {
+        khandy: 'Khandy Holand Regular',
+        merri: "'Merriweather', serif",
+      },
     },
   },
   plugins: [

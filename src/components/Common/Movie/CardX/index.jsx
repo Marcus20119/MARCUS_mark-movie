@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { api, genres } from '~/config';
 import MovieTagList from '../TagList';
 
 const MovieCardX = ({ movieData, type }) => {
-  const { poster_path, vote_average } = movieData;
+  const { poster_path, vote_average, id } = movieData;
   let neededGenres;
   switch (type) {
     case 'movie':
@@ -17,7 +18,10 @@ const MovieCardX = ({ movieData, type }) => {
       break;
   }
   return (
-    <div className="flex items-center gap-[10px] w-full p-[10px] rounded-xl bg-[rgba(255,_255,_255,_0.06)] text-white hover:bg-[rgba(255,_255,_255,_0.2)] hover:shadow-md cursor-pointer">
+    <Link
+      to={`/details/${type}/${id}`}
+      className="flex items-center gap-[10px] w-full p-[10px] rounded-xl bg-[rgba(255,_255,_255,_0.06)] text-white hover:bg-[rgba(255,_255,_255,_0.2)] hover:shadow-md cursor-pointer"
+    >
       <div className="relative w-[34%] h-0 pt-[34%] rounded-lg overflow-hidden">
         <img
           className="absolute w-full inset-0 block object-cover object-center"
@@ -60,7 +64,7 @@ const MovieCardX = ({ movieData, type }) => {
           className="!mb-0"
         />
       </div>
-    </div>
+    </Link>
   );
 };
 

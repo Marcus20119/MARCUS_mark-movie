@@ -25,13 +25,26 @@ const MovieTagList = ({
               genresData.find(genre => genre.id === id).name}
           </button>
         ))}
+      {movieData &&
+        movieData?.genres &&
+        movieData.genres.map(genre => (
+          <button
+            key={`genres${genre.id}`}
+            className={`px-[11px] py-[8px] border border-white text-[0.65rem] leading-[0.75rem] rounded-md opacity-70 ${
+              disabled ? '' : 'hover:opacity-100'
+            }`}
+            disabled={disabled}
+          >
+            {genre.name}
+          </button>
+        ))}
     </div>
   );
 };
 
 MovieTagList.propTypes = {
   movieData: PropTypes.any.isRequired,
-  genresData: PropTypes.array.isRequired,
+  genresData: PropTypes.array,
   numberOfTag: PropTypes.number,
   disabled: PropTypes.bool,
   className: PropTypes.string,
