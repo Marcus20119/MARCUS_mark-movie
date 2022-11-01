@@ -10,7 +10,7 @@ const DetailPosterSection = ({ movieData }) => {
       {movieData && movieData.title && (
         <div className="flex flex-col gap-[20px] w-[20%]">
           <img
-            className="w-full object-contain rounded-sm"
+            className="w-full object-contain rounded-md"
             src={
               movieData.poster_path
                 ? api.getPoster(movieData.poster_path)

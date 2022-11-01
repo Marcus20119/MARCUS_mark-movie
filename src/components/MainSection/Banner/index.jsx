@@ -57,6 +57,8 @@ function Banner({ apiLink, type }) {
                     message="Watch"
                     widthType="fit"
                     className="tracking-[0.15rem]"
+                    isLink={true}
+                    path={`/details/${type}/${movie.id}`}
                   />
                   <ButtonPlus padding={14} iconSize={24} />
                 </div>

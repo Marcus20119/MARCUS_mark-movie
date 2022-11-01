@@ -8,14 +8,18 @@ import DetailPosterSection from '../Common/PosterSection';
 import DetailContentSection from '../Common/ContentSection';
 import DetailCastsList from '../Common/CastsList';
 import './DetailMovie.scss';
+import DetailTrailerThumbnail from '../Common/TrailerThumbnail';
 
-const DetailMovie = () => {
+const DetailMovie = ({ type }) => {
   const { id } = useParams();
   const { myData: movieData, isLoading: movieLoading } = useMySWR({
-    api: api.getDetail(id, 'movie'),
+    api: api.getDetail(id, type),
   });
   const { myData: creditsData, isLoading: creditsLoading } = useMySWR({
-    api: api.getCredits(id, 'movie'),
+    api: api.getCredits(id, type),
+  });
+  const { myData: videosData, isLoading: videosLoading } = useMySWR({
+    api: api.getTrailer(id, type),
   });
   return (
     <div className="relative bg-[#222222] min-h-[150vh] ">
@@ -29,6 +33,9 @@ const DetailMovie = () => {
             </div>
             {!creditsLoading && creditsData.cast && (
               <DetailCastsList castsData={creditsData.cast} />
+            )}
+            {!videosLoading && (
+              <DetailTrailerThumbnail videosData={videosData} />
             )}
           </div>
         </Fragment>

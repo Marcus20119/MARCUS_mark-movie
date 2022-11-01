@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useRef } from 'react';
 
-import NextBtn from './NextBtn';
-import PrevBtn from './PrevBtn';
 import MovieCardY from '../CardY';
+import NextBtn from '~/components/Base/Swiper/NextBtn';
+import PrevBtn from '~/components/Base/Swiper/PrevBtn';
 
 const MovieCardListY = ({ moviesData, type }) => {
   const nextRef = useRef();

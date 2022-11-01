@@ -4,7 +4,7 @@ import DetailMovie from '~/components/Detail/Movie';
 const DetailMoviePage = () => {
   return (
     <Fragment>
-      <DetailMovie />
+      <DetailMovie type="movie" />
     </Fragment>
   );
 };
