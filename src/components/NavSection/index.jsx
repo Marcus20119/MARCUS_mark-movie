@@ -98,7 +98,7 @@ const NavSection = () => {
   const navigateTo = useNavigate();
   return (
     <div className="relative">
-      <div className="fixed top-0 bottom-0 left-0 right-[85%] gap-[40px] flex flex-col py-[20px] px-[20px] bg-transparent text-white">
+      <div className="fixed top-0 bottom-0 left-0 right-[85%] gap-[40px] flex flex-col py-[20px] px-[20px] bg-transparent text-white border-r-[1px] border-r-[#353338]">
         <h1 className="font-bold text-xl tracking-wider">
           MARK
           <span className="text-[var(--primary-color)] text-lg tracking-normal">

@@ -18,6 +18,9 @@ export const api = {
   getDetail(id = '', type = 'movie') {
     return `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}&language=en-US`;
   },
+  getCredits(id = '', type = 'movie') {
+    return `https://api.themoviedb.org/3/${type}/${id}/credits?api_key=${apiKey}&language=en-US`;
+  },
   movie: {
     getNowPlaying(page = 1) {
       return `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=${page}`;

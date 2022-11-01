@@ -7,7 +7,7 @@ import ScrollList from './ScrollList';
 
 const MainSection = ({ apiBanner, apiList, type }) => {
   return (
-    <div className="bg-[#222222] py-[20px] px-10 border-x-[1px] border-x-[#353338] overflow-hidden">
+    <div className="bg-[#222222] py-[20px] px-10 border-r-[1px] border-r-[#353338] overflow-hidden">
       <Navbar />
       {/* {children} */}
       <Banner apiLink={apiBanner} type={type} />

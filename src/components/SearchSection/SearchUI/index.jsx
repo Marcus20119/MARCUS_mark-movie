@@ -23,11 +23,7 @@ const SearchUI = ({ type, query }) => {
       ) : (
         <Fragment>
           <MovieCardListX moviesData={searchData} type={type} />
-          <ButtonPlay
-            message="Load more"
-            displayIcon={false}
-            widthType="full"
-          />
+          <ButtonPlay message="See more" displayIcon={false} widthType="full" />
         </Fragment>
       )}
     </div>
