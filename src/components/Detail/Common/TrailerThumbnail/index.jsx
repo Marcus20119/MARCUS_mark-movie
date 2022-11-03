@@ -2,11 +2,11 @@ import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import NextBtn from '~/components/Base/Swiper/NextBtn';
 import PrevBtn from '~/components/Base/Swiper/PrevBtn';
-import { api } from '~/config';
+import TrailerItem from './TrailerItem';
 
 const DetailTrailerThumbnail = ({ videosData }) => {
   const keys = videosData.map(videoData => videoData.key);
-  console.log('keys', keys);
+
   const nextRef = useRef();
   const prevRef = useRef();
   return (
@@ -16,22 +16,44 @@ const DetailTrailerThumbnail = ({ videosData }) => {
         {keys &&
           keys.length &&
           keys.length > 0 &&
-          keys.slice(0, 20).map((key, index) => (
-            <SwiperSlide key={`thumbnailKey${index}`}>
-              <div className="group relative w-full h-0 pt-[60%] overflow-hidden border-[2px] rounded-sm border-solid border-[#222222] hover:border-[var(--primary-color)] cursor-pointer">
-                <img
-                  className="absolute left-0 top-1/2 block w-full h-full object-cover object-center -translate-y-1/2"
-                  src={api.getThumbnail(key)}
-                  alt={`thumbnailKey${index}`}
-                />
-                <img
-                  className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 hidden w-[45px] h-[45px] opacity-70 object-center object-cover group-hover:block"
-                  src="/small-round-play-button.png"
-                  alt="play icon"
-                />
-              </div>
-            </SwiperSlide>
-          ))}
+          keys.slice(0, 20).map((key, index) => {
+            return (
+              <SwiperSlide key={`thumbnailKey${index}`}>
+                {/* <Fragment>
+                <div
+                  className="group relative w-full h-0 pt-[60%] overflow-hidden border-[2px] rounded-sm border-solid border-[#222222] hover:border-[var(--primary-color)] cursor-pointer"
+                  onClick={handleShow}
+                >
+                  <img
+                    className="absolute left-0 top-1/2 block w-full h-full object-cover object-center -translate-y-1/2"
+                    src={api.getThumbnail(key)}
+                    alt={`thumbnailKey${index}`}
+                  />
+                  <img
+                    className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 hidden w-[45px] h-[45px] opacity-70 object-center object-cover group-hover:block"
+                    src="/small-round-play-button.png"
+                    alt="play icon"
+                  />
+                </div>
+                <ModalBase visible={show} onClose={handleHide}>
+                  <div className="w-[80%] aspect-video">
+                    <iframe
+                      width="560"
+                      height="315"
+                      src={`https://www.youtube.com/embed/${key}`}
+                      title="YouTube video player"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      // className="w-full h-full"
+                    ></iframe>
+                  </div>
+                </ModalBase>
+              </Fragment> */}
+                <TrailerItem keyId={key} index={index}></TrailerItem>
+              </SwiperSlide>
+            );
+          })}
         <NextBtn ref={nextRef} />
         <PrevBtn ref={prevRef} />
       </Swiper>

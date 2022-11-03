@@ -1,0 +1,42 @@
+.zoom {
+  // Start enter
+  &-enter {
+    .overlay {
+      opacity: 0;
+    }
+    .content {
+      opacity: 0;
+    }
+  }
+  // Done enter
+  &-enter-active {
+    .overlay {
+      opacity: 1;
+      transition: all 500ms ease;
+    }
+    .content {
+      opacity: 1;
+      transition: all 500ms ease;
+    }
+  }
+  // Start exit
+  &-exit {
+    .overlay {
+      opacity: 1;
+    }
+    .content {
+      opacity: 1;
+    }
+  }
+  // Done exit
+  &-exit-active {
+    .overlay {
+      opacity: 0;
+      transition: all 500ms ease;
+    }
+    .content {
+      opacity: 0;
+      transition: all 500ms ease;
+    }
+  }
+}
