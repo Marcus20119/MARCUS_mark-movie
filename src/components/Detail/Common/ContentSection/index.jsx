@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
+import { withErrorBoundary } from 'react-error-boundary';
 
+import ErrorFallBack from '~/components/Base/ErrorFallBack';
 import DetailMainContent from './MainContent';
 import DetailSubContent from './SubContent';
 
@@ -20,4 +22,6 @@ DetailContentSection.propTypes = {
   movieData: PropTypes.object.isRequired,
 };
 
-export default DetailContentSection;
+export default withErrorBoundary(DetailContentSection, {
+  FallbackComponent: ErrorFallBack,
+});

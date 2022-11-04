@@ -1,4 +1,6 @@
 import { Fragment } from 'react';
+import PropTypes from 'prop-types';
+
 import ModalBase from '~/components/Base/ModalBase';
 import { api } from '~/config';
 import useModal from '~/hooks/useModal';
@@ -45,6 +47,11 @@ const TrailerItem = ({ keyId, index }) => {
       </Fragment>
     </div>
   );
+};
+
+TrailerItem.propTypes = {
+  keyId: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 export default TrailerItem;

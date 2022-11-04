@@ -11,7 +11,7 @@ const MovieCardListY = ({ moviesData, type }) => {
   const prevRef = useRef();
   return (
     <div className="relative">
-      <Swiper grabCursor spaceBetween={10} slidesPerView="auto">
+      <Swiper spaceBetween={10} slidesPerView="auto">
         {moviesData &&
           moviesData.length &&
           moviesData.length > 0 &&

@@ -1,11 +1,13 @@
 import { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { withErrorBoundary } from 'react-error-boundary';
 
 import LoadingBounce from '~/components/Base/Loading/Bounce';
 import ButtonPlay from '~/components/Common/Button/Play';
 import MovieCardListX from '~/components/Common/Movie/CardListX';
 import { api } from '~/config';
 import useMySWR from '~/hooks/useMySWR';
+import ErrorFallBack from '~/components/Base/ErrorFallBack';
 
 const SearchUI = ({ type, query }) => {
   const searchApi = api.getSearch(
@@ -35,4 +37,6 @@ SearchUI.propTypes = {
   query: PropTypes.any.isRequired,
 };
 
-export default SearchUI;
+export default withErrorBoundary(SearchUI, {
+  FallbackComponent: ErrorFallBack,
+});

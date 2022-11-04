@@ -1,13 +1,15 @@
 import { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { withErrorBoundary } from 'react-error-boundary';
 
 import ButtonPlay from '~/components/Common/Button/Play';
 import { api } from '~/config';
+import ErrorFallBack from '~/components/Base/ErrorFallBack';
 
 const DetailPosterSection = ({ movieData }) => {
   return (
     <Fragment>
-      {movieData && movieData.title && (
+      {movieData && (movieData.title || movieData.name) && (
         <div className="flex flex-col gap-[20px] w-[20%]">
           <img
             className="w-full object-contain rounded-md"
@@ -34,4 +36,6 @@ DetailPosterSection.propTypes = {
   movieData: PropTypes.object.isRequired,
 };
 
-export default DetailPosterSection;
+export default withErrorBoundary(DetailPosterSection, {
+  FallbackComponent: ErrorFallBack,
+});

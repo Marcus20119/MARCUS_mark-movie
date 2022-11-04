@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 const ErrorFallBack = ({ error, resetErrorBoundary }) => {
   return (
-    <div role="alert">
+    <div role="alert" style={{ color: 'red' }}>
       <p>Something went wrong:</p>
       <pre>{error && error.message}</pre>
       <button onClick={resetErrorBoundary}>Try again</button>

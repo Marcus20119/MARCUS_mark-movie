@@ -25,8 +25,10 @@ export const api = {
     return `https://img.youtube.com/vi/${key}/hqdefault.jpg`;
   },
   getTrailer(id = '', type = 'movie') {
-    return `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${apiKey}&language=en-US
-    `;
+    return `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${apiKey}&language=en-US`;
+  },
+  getRecommend(id = '', type = 'movie', page = 1) {
+    return `https://api.themoviedb.org/3/${type}/${id}/recommendations?api_key=${apiKey}&language=en-US&page=${page}`;
   },
   movie: {
     getNowPlaying(page = 1) {
@@ -35,15 +37,6 @@ export const api = {
     getUpComing(page = 1) {
       return `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US&page=${page}`;
     },
-    getTopRated(page = 1) {
-      return `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=${page}`;
-    },
-    getPopular(page = 1) {
-      return `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${page}`;
-    },
-    getGenres() {
-      return `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`;
-    },
   },
   tv: {
     getAiringToday(page = 1) {
@@ -51,15 +44,6 @@ export const api = {
     },
     getOnTheAir(page = 1) {
       return `https://api.themoviedb.org/3/tv/on_the_air?api_key=${apiKey}&language=en-US&page=${page}`;
-    },
-    getTopRated(page = 1) {
-      return `https://api.themoviedb.org/3/tv/top_rated?api_key=${apiKey}&language=en-US&page=${page}`;
-    },
-    getPopular(page = 1) {
-      return `https://api.themoviedb.org/3/tv/popular?api_key=${apiKey}&language=en-US&page=${page}`;
-    },
-    getGenres() {
-      return `https://api.themoviedb.org/3/genre/tv/list?api_key=${apiKey}&language=en-US`;
     },
   },
 };

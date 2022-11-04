@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 import MainSection from '~/components/MainSection';
 import SearchSection from '~/components/SearchSection';
 
@@ -16,9 +16,13 @@ const TVSeriesPage = () => {
     },
     {
       name: 'Top Rated TV Series',
-      api: api.tv.getTopRated(),
+      api: api.getTopRated('tv'),
     },
   ];
+  useEffect(() => {
+    document.documentElement.scrollTop = 0;
+  }, []);
+
   return (
     <Fragment>
       <MainSection

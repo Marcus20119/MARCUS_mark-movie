@@ -7,25 +7,34 @@ import MovieTagList from '~/components/Common/Movie/TagList';
 const DetailMainContent = ({ movieData }) => {
   return (
     <Fragment>
-      {movieData && movieData.title && (
+      {movieData && (movieData.title || movieData.name) && (
         <Fragment>
           <h1
             className={`text-5xl font-merri mb-2 ${
-              movieData.tagline ? 'line-clamp-1' : 'line-clamp-2'
+              movieData.tagline ? 'line-clamp-1' : 'line-clamp-2 !mb-0'
             }`}
           >
-            {movieData.title}
+            {movieData.title || movieData.name}
           </h1>
           <h3 className="text-lg text-[#b5b5b5] mb-[28px] line-clamp-1">
             {movieData.tagline}
           </h3>
-          <h4 className="mt-auto mb-[12px]">
-            {movieData.runtime < 60
-              ? `${movieData.runtime} mins`
-              : `${Math.floor(movieData.runtime / 60)} h ${
-                  movieData.runtime % 60
-                } mins`}
-          </h4>
+          {movieData.runtime && (
+            <h4 className="mt-auto mb-[12px]">
+              {movieData.runtime < 60
+                ? `${movieData.runtime} mins`
+                : `${Math.floor(movieData.runtime / 60)} h ${
+                    movieData.runtime % 60
+                  } mins`}
+            </h4>
+          )}
+          {movieData.number_of_seasons && (
+            <h4 className="mt-auto mb-[12px]">
+              {movieData.number_of_seasons > 1
+                ? `${movieData.number_of_seasons} seasons - ${movieData.number_of_episodes} episodes`
+                : `${movieData.number_of_seasons} season - ${movieData.number_of_episodes} episodes`}
+            </h4>
+          )}
           <div className="flex justify-start items-center gap-2 h-[20px] mb-[16px]">
             <img
               className="block h-full object-contain object-center"
@@ -38,7 +47,7 @@ const DetailMainContent = ({ movieData }) => {
           </div>
           <div className="flex justify-between items-center w-full mb-[8px]">
             <div className="inline-flex justify-start items-center gap-[12px]">
-              <button className="inline-flex justify-start items-center gap-[10px] bg-[#3E56C4] px-[16px] py-[8px] rounded-md">
+              <button className="inline-flex justify-start items-center gap-[10px] bg-[#3E56C4] px-[16px] py-[8px] rounded-md opacity-90 hover:opacity-100">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
