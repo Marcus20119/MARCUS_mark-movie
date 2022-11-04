@@ -66,14 +66,14 @@ const NavSection = () => {
         {
           name: 'TV Series',
           iconClass: 'bx bxs-tv',
-          originLink: '/tv-series',
+          originLink: '/tv',
           navigateLink: '/tv',
         },
         {
           name: 'Movies',
           iconClass: 'bx bxs-film',
-          originLink: '/movies',
-          navigateLink: '/movies',
+          originLink: '/movie',
+          navigateLink: '/movie',
         },
       ],
     },

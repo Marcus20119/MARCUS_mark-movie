@@ -4,13 +4,14 @@ import { withErrorBoundary } from 'react-error-boundary';
 
 import './Banner.scss';
 import useMySWR from '~/hooks/useMySWR';
-import ButtonPlay from '~/components/Common/Button/Play';
-import ButtonPlus from '~/components/Common/Button/Plus';
+import ButtonPlay from '~/components/Button/Play';
+import ButtonPlus from '~/components/Button/Plus';
 import ErrorFallBack from '~/components/Base/ErrorFallBack';
 import LoadingSkeleton from '~/components/Base/Loading/Skeleton';
 import { api, genres } from '~/config';
-import MovieTagList from '~/components/Common/Movie/TagList';
-import MovieTagListLoading from '~/components/Common/Movie/TagList/Loading';
+import MovieTagList from '~/components/CardAndList/TagList';
+import MovieTagListLoading from '~/components/CardAndList/TagList/Loading';
+import { route } from '~/config/configRoute';
 
 function Banner({ apiLink, type }) {
   const { myData: movies, isLoading: moviesLoading } = useMySWR({
@@ -58,7 +59,7 @@ function Banner({ apiLink, type }) {
                     widthType="fit"
                     className="tracking-[0.15rem]"
                     isLink={true}
-                    path={`/details/${type}/${movie.id}`}
+                    path={route.toDetail(type, movie.id)}
                   />
                   <ButtonPlus padding={14} iconSize={24} />
                 </div>

@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import { withErrorBoundary } from 'react-error-boundary';
 
 import ErrorFallBack from '~/components/Base/ErrorFallBack';
-import ButtonPlay from '~/components/Common/Button/Play';
-import MovieCardListX from '~/components/Common/Movie/CardListX';
-import MovieCardListXLoading from '~/components/Common/Movie/CardListX/Loading';
+import ButtonPlay from '~/components/Button/Play';
+import MovieCardListX from '~/components/CardAndList/CardListX';
+import MovieCardListXLoading from '~/components/CardAndList/CardListX/Loading';
 import { api } from '~/config';
 import useMySWR from '~/hooks/useMySWR';
 

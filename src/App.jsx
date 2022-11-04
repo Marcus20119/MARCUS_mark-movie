@@ -2,28 +2,40 @@ import { Fragment, lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 const HomeLayout = lazy(() => import('./layout/HomeLayout'));
-const DetailLayout = lazy(() => import('./layout/DetailLayout'));
+const SubLayout = lazy(() => import('./layout/SubLayout'));
 const CommunityPage = lazy(() => import('./pages/Community'));
 const MoviesPage = lazy(() => import('./pages/Home/Movies'));
 const NotFoundPage = lazy(() => import('./pages/NotFound'));
 const TVSeriesPage = lazy(() => import('./pages/Home/TVSeries'));
-const DetailMoviePage = lazy(() => import('./pages/Detail/Movie'));
-const DetailTVPage = lazy(() => import('./pages/Detail/TV'));
+const MovieDetailPage = lazy(() => import('./pages/Movie/Detail'));
+const TVDetailPage = lazy(() => import('./pages/TV/Detail'));
 
 function App() {
   return (
     <Fragment>
       <Suspense fallback={<HomeLayout />}>
         <Routes>
+          {/* Home */}
           <Route path="/" element={<HomeLayout />}>
             <Route path="home/tv-series" element={<TVSeriesPage />} />
             <Route path="home/movies" element={<MoviesPage />} />
             <Route path="community" element={<CommunityPage />} />
           </Route>
 
-          <Route path="/details" element={<DetailLayout />}>
-            <Route path="movie/:id" element={<DetailMoviePage />} />
-            <Route path="tv/:id" element={<DetailTVPage />} />
+          {/* Detail */}
+          <Route path="/movie" element={<SubLayout />}>
+            <Route path="details/:id" element={<MovieDetailPage />} />
+            {/* <Route path="general" element={<TVDetailPage />} /> */}
+          </Route>
+          <Route path="/tv" element={<SubLayout />}>
+            <Route path="details/:id" element={<TVDetailPage />} />
+            {/* <Route path="general" element={<MovieDetailPage />} /> */}
+          </Route>
+
+          {/* Celeb detail */}
+          <Route path="/person" element={<SubLayout />}>
+            <Route path="details/:id" element={<MovieDetailPage />} />
+            {/* <Route path="general" element={<TVDetailPage />} /> */}
           </Route>
 
           <Route path="*" element={<NotFoundPage />} />

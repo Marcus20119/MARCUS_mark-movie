@@ -3,8 +3,8 @@ import { withErrorBoundary } from 'react-error-boundary';
 
 import useMySWR from '~/hooks/useMySWR';
 import ErrorFallBack from '~/components/Base/ErrorFallBack';
-import MovieCardListY from '~/components/Common/Movie/CardListY';
-import MovieCardListYLoading from '~/components/Common/Movie/CardListY/Loading';
+import MovieCardListY from '~/components/CardAndList/CardListY';
+import MovieCardListYLoading from '~/components/CardAndList/CardListY/Loading';
 
 const ScrollList = ({ title = 'This is the title', apiLink, type }) => {
   const { myData: moviesData, isLoading } = useMySWR({ api: apiLink });

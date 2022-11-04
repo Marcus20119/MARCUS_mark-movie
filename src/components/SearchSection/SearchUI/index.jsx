@@ -3,16 +3,20 @@ import PropTypes from 'prop-types';
 import { withErrorBoundary } from 'react-error-boundary';
 
 import LoadingBounce from '~/components/Base/Loading/Bounce';
-import ButtonPlay from '~/components/Common/Button/Play';
-import MovieCardListX from '~/components/Common/Movie/CardListX';
+import ButtonPlay from '~/components/Button/Play';
+import MovieCardListX from '~/components/CardAndList/CardListX';
 import { api } from '~/config';
 import useMySWR from '~/hooks/useMySWR';
 import ErrorFallBack from '~/components/Base/ErrorFallBack';
 
 const SearchUI = ({ type, query }) => {
-  const searchApi = api.getSearch(
+  // const searchApi = api.getSearch(
+  //   query ? query : 'spiderman no way home',
+  //   type,
+  //   1
+  // );
+  const searchApi = api.getSearchMulti(
     query ? query : 'spiderman no way home',
-    type,
     1
   );
   const { myData: searchData, isLoading: searchLoading } = useMySWR({

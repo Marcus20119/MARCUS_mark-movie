@@ -15,6 +15,9 @@ export const api = {
   getSearch(query = '', type = 'movie', page = 1) {
     return `https://api.themoviedb.org/3/search/${type}?api_key=${apiKey}&language=en-US&query=${query}&page=${page}`;
   },
+  getSearchMulti(query = '', page = 1) {
+    return `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&language=en-US&query=${query}&page=${page}`;
+  },
   getDetail(id = '', type = 'movie') {
     return `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}&language=en-US`;
   },
