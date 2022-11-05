@@ -3,12 +3,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import PropTypes from 'prop-types';
 import { withErrorBoundary } from 'react-error-boundary';
 
-import CastCard from './CastCard';
+import CastItem from './CastItem';
 import NextBtn from '~/components/Base/Swiper/NextBtn';
 import PrevBtn from '~/components/Base/Swiper/PrevBtn';
 import ErrorFallBack from '~/components/Base/ErrorFallBack';
 
-const DetailCastsList = ({ castsData }) => {
+const DetailCastSection = ({ castsData }) => {
   const nextRef = useRef();
   const prevRef = useRef();
   return (
@@ -24,7 +24,7 @@ const DetailCastsList = ({ castsData }) => {
           castsData.length > 0 &&
           castsData.slice(0, 20).map((castData, index) => (
             <SwiperSlide key={`castDataKey${index}`}>
-              <CastCard castData={castData} />
+              <CastItem castData={castData} />
             </SwiperSlide>
           ))}
         <NextBtn ref={nextRef} />
@@ -53,10 +53,10 @@ const DetailCastsList = ({ castsData }) => {
     </div>
   );
 };
-DetailCastsList.propTypes = {
+DetailCastSection.propTypes = {
   castsData: PropTypes.array.isRequired,
 };
 
-export default withErrorBoundary(DetailCastsList, {
+export default withErrorBoundary(DetailCastSection, {
   FallbackComponent: ErrorFallBack,
 });

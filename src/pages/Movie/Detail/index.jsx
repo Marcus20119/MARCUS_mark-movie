@@ -1,14 +1,16 @@
 import { Fragment, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { withErrorBoundary } from 'react-error-boundary';
 
 import { api } from '~/config';
 import useMySWR from '~/hooks/useMySWR';
 import DetailBackdrop from '~/components/Detail/Backdrop';
 import DetailPosterSection from '~/components/Detail/PosterSection';
 import DetailContentSection from '~/components/Detail/ContentSection';
-import DetailCastsList from '~/components/Detail/CastsList';
+import DetailCastSection from '~/components/Detail/CastSection';
 import TrailerSection from '~/components/Detail/TrailerSection';
 import RecommendSection from '~/components/Detail/RecommendSection';
+import ErrorFallBack from '~/components/Base/ErrorFallBack';
 import './MovieDetailPage.scss';
 
 const MovieDetailPage = () => {
@@ -45,7 +47,7 @@ const MovieDetailPage = () => {
             {!creditsLoading &&
               creditsData.cast &&
               creditsData.cast.length > 0 && (
-                <DetailCastsList castsData={creditsData.cast} />
+                <DetailCastSection castsData={creditsData.cast} />
               )}
             {!videosLoading && videosData.length > 0 && (
               <TrailerSection videosData={videosData} />
@@ -60,4 +62,6 @@ const MovieDetailPage = () => {
   );
 };
 
-export default MovieDetailPage;
+export default withErrorBoundary(MovieDetailPage, {
+  FallbackComponent: ErrorFallBack,
+});

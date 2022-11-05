@@ -38,10 +38,6 @@ const TrailerItem = ({ keyId, index }) => {
               allowFullScreen
               className="w-[1000px] h-[562.5px]"
             ></iframe>
-            <i
-              className="bx bx-x absolute top-[10%] right-[10%]"
-              onClick={handleHide}
-            ></i>
           </Fragment>
         </ModalBase>
       </Fragment>

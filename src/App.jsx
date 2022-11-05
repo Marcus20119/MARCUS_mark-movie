@@ -9,6 +9,7 @@ const NotFoundPage = lazy(() => import('./pages/NotFound'));
 const TVSeriesPage = lazy(() => import('./pages/Home/TVSeries'));
 const MovieDetailPage = lazy(() => import('./pages/Movie/Detail'));
 const TVDetailPage = lazy(() => import('./pages/TV/Detail'));
+const CelebDetailPage = lazy(() => import('./pages/Celeb/Detail'));
 
 function App() {
   return (
@@ -34,7 +35,7 @@ function App() {
 
           {/* Celeb detail */}
           <Route path="/person" element={<SubLayout />}>
-            <Route path="details/:id" element={<MovieDetailPage />} />
+            <Route path="details/:id" element={<CelebDetailPage />} />
             {/* <Route path="general" element={<TVDetailPage />} /> */}
           </Route>
 

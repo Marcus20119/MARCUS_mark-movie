@@ -1,4 +1,7 @@
 import { Fragment, useEffect } from 'react';
+import { withErrorBoundary } from 'react-error-boundary';
+
+import ErrorFallBack from '~/components/Base/ErrorFallBack';
 import MainSection from '~/components/MainSection';
 import SearchSection from '~/components/SearchSection';
 
@@ -35,4 +38,6 @@ const TVSeriesPage = () => {
   );
 };
 
-export default TVSeriesPage;
+export default withErrorBoundary(TVSeriesPage, {
+  FallbackComponent: ErrorFallBack,
+});

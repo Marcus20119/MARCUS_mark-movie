@@ -1,5 +1,7 @@
 import { Fragment, useEffect } from 'react';
+import { withErrorBoundary } from 'react-error-boundary';
 
+import ErrorFallBack from '~/components/Base/ErrorFallBack';
 import MainSection from '~/components/MainSection';
 import SearchSection from '~/components/SearchSection';
 import { api } from '~/config';
@@ -34,4 +36,6 @@ const MoviesPage = () => {
   );
 };
 
-export default MoviesPage;
+export default withErrorBoundary(MoviesPage, {
+  FallbackComponent: ErrorFallBack,
+});
