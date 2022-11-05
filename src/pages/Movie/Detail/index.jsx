@@ -24,7 +24,7 @@ const MovieDetailPage = () => {
     api: api.getDetail(id, 'movie'),
   });
   const { myData: creditsData, isLoading: creditsLoading } = useMySWR({
-    api: api.getCredits(id, 'movie'),
+    api: api.getMovieCredits(id, 'movie'),
   });
   const { myData: videosData, isLoading: videosLoading } = useMySWR({
     api: api.getTrailer(id, 'movie'),

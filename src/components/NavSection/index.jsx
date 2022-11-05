@@ -32,8 +32,8 @@ const NavSection = () => {
         {
           name: 'Celebs',
           iconClass: 'bx bxs-user',
-          originLink: '/celebs',
-          navigateLink: '/celebs',
+          originLink: '/person',
+          navigateLink: '/person',
         },
       ],
     },

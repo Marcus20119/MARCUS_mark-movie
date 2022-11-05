@@ -57,4 +57,17 @@
     display: grid;
     grid-template-columns: 15% 85%;
   }
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    background-color: #181818;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #a9a9a945;
+    -webkit-background-clip: padding-box; /* for Safari */
+    background-clip: padding-box;
+  }
 }

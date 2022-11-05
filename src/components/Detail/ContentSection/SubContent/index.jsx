@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
+import { convertDate } from '~/helpers/convertDate';
 
 const DetailSubContent = ({ movieData }) => {
   const subInfo = [
@@ -19,7 +20,9 @@ const DetailSubContent = ({ movieData }) => {
     },
     {
       title: 'RELEASE DATE',
-      content: movieData.release_date || 'Unknown',
+      content: movieData.release_date
+        ? convertDate(movieData.release_date)
+        : 'Unknown',
     },
   ];
   return (

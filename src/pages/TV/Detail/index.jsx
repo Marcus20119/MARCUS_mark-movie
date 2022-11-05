@@ -23,7 +23,7 @@ const TVDetailPage = () => {
     api: api.getDetail(id, 'tv'),
   });
   const { myData: creditsData, isLoading: creditsLoading } = useMySWR({
-    api: api.getCredits(id, 'tv'),
+    api: api.getMovieCredits(id, 'tv'),
   });
   const { myData: videosData, isLoading: videosLoading } = useMySWR({
     api: api.getTrailer(id, 'tv'),

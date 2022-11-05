@@ -21,7 +21,7 @@ export const api = {
   getDetail(id = '', type = 'movie') {
     return `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}&language=en-US`;
   },
-  getCredits(id = '', type = 'movie') {
+  getMovieCredits(id = '', type = 'movie') {
     return `https://api.themoviedb.org/3/${type}/${id}/credits?api_key=${apiKey}&language=en-US`;
   },
   getThumbnail(key = '') {
@@ -32,6 +32,9 @@ export const api = {
   },
   getRecommend(id = '', type = 'movie', page = 1) {
     return `https://api.themoviedb.org/3/${type}/${id}/recommendations?api_key=${apiKey}&language=en-US&page=${page}`;
+  },
+  getPersonCredits(id = '', type = 'movie') {
+    return `https://api.themoviedb.org/3/person/${id}/${type}_credits?api_key=${apiKey}&language=en-US`;
   },
   movie: {
     getNowPlaying(page = 1) {

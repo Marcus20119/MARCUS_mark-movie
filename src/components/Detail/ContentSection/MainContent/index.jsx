@@ -5,6 +5,8 @@ import ButtonPlus from '~/components/Button/Plus';
 import MovieTagList from '~/components/CardAndList/TagList';
 
 const DetailMainContent = ({ movieData }) => {
+  console.log('movieData', movieData);
+  console.log(movieData.runtime);
   return (
     <Fragment>
       {movieData && (movieData.title || movieData.name) && (
@@ -19,7 +21,7 @@ const DetailMainContent = ({ movieData }) => {
           <h3 className="text-lg text-[#b5b5b5] mb-[28px] mt-1 line-clamp-1">
             {movieData.tagline}
           </h3>
-          {movieData.runtime && (
+          {movieData.runtime ? (
             <h4 className="mt-auto mb-[12px]">
               {movieData.runtime < 60
                 ? `${movieData.runtime} mins`
@@ -27,6 +29,8 @@ const DetailMainContent = ({ movieData }) => {
                     movieData.runtime % 60
                   } mins`}
             </h4>
+          ) : (
+            ''
           )}
           {movieData.number_of_seasons && (
             <h4 className="mt-auto mb-[12px]">
@@ -35,7 +39,11 @@ const DetailMainContent = ({ movieData }) => {
                 : `${movieData.number_of_seasons} season - ${movieData.number_of_episodes} episodes`}
             </h4>
           )}
-          <div className="flex justify-start items-center gap-2 h-[20px] mb-[16px]">
+          <div
+            className={`flex justify-start items-center gap-2 h-[20px] mb-[16px] ${
+              !movieData.runtime && !movieData.number_of_seasons && 'mt-auto'
+            }`}
+          >
             <img
               className="block h-full object-contain object-center"
               src="/IMDb.png"

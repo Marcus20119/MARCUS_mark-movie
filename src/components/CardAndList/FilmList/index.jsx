@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { api } from '~/config';
 import { route } from '~/config/configRoute';
 
-const RecommendList = ({
-  recommendsData = [],
+const FilmList = ({
+  filmsData = [],
   numberOfCol = 5,
   className = '',
   cardStyle = '',
@@ -18,27 +18,27 @@ const RecommendList = ({
         ...cardStyle,
       }}
     >
-      {recommendsData &&
-        recommendsData.length > 0 &&
-        recommendsData.map((recommendData, index) => (
+      {filmsData &&
+        filmsData.length > 0 &&
+        filmsData.map((filmData, index) => (
           <Link
-            key={`recommendCardKey${recommendData.poster_path}${index}`}
-            to={route.toDetail(type, recommendData.id)}
+            key={`filmCardKey${filmData.poster_path}${index}`}
+            to={route.toDetail(type, filmData.id)}
             className="group w-full cursor-pointer rounded-md"
           >
             <div className="relative w-full h-0 pt-[145%] rounded-md overflow-hidden group-hover:-translate-y-2">
               <img
                 className="absolute inset-0 block w-full object-cover object-center"
                 src={
-                  recommendData.poster_path
-                    ? api.getPoster(recommendData.poster_path)
+                  filmData.poster_path
+                    ? api.getPoster(filmData.poster_path)
                     : '/no-poster.jpg'
                 }
-                alt={recommendData.poster_path}
+                alt={filmData.poster_path}
               />
             </div>
             <h6 className="text-center text-white my-[10px] text-[1.1rem]">
-              {recommendData.title}
+              {filmData.title || filmData.name}
             </h6>
           </Link>
         ))}
@@ -46,12 +46,12 @@ const RecommendList = ({
   );
 };
 
-RecommendList.propTypes = {
-  recommendsData: PropTypes.array.isRequired,
+FilmList.propTypes = {
+  filmsData: PropTypes.array.isRequired,
   type: PropTypes.oneOf(['movie', 'tv']).isRequired,
   numberOfCol: PropTypes.number,
   className: PropTypes.string,
   cardStyle: PropTypes.string,
 };
 
-export default RecommendList;
+export default FilmList;
