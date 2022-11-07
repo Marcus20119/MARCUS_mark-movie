@@ -22,7 +22,7 @@ const TrailerItem = ({ keyId, index }) => {
           />
           <img
             className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 hidden w-[45px] h-[45px] opacity-70 object-center object-cover group-hover:block"
-            src="/small-round-play-button.png"
+            src="/imgs/small-round-play-button.png"
             alt="play icon"
           />
         </div>

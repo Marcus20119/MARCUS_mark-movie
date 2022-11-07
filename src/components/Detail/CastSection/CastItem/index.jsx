@@ -19,7 +19,7 @@ const CastItem = ({ castData }) => {
                 src={
                   castData.profile_path
                     ? api.getPoster(castData.profile_path)
-                    : '/no-face.jpg'
+                    : '/imgs/no-face.jpg'
                 }
                 alt={castData.original_name}
               />

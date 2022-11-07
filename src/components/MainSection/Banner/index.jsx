@@ -52,7 +52,11 @@ function Banner({ apiLink, type }) {
                 <h3 className="carousel-caption__name line-clamp-1">
                   {movie.title || movie.name}
                 </h3>
-                <MovieTagList movieData={movie} genresData={neededGenres} />
+                <MovieTagList
+                  movieData={movie}
+                  genresData={neededGenres}
+                  disabled={true}
+                />
                 <div className="carousel-caption__wrap-btn">
                   <ButtonPlay
                     message="Watch"

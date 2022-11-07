@@ -28,7 +28,7 @@ const SeasonSection = ({ seasonsData }) => {
                     src={
                       seasonData.poster_path
                         ? api.getPoster(seasonData.poster_path)
-                        : '/no-poster.jpg'
+                        : '/imgs/no-poster.jpg'
                     }
                     alt={`Season ${index}`}
                   />

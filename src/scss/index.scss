@@ -46,6 +46,11 @@
   li {
     list-style: none;
   }
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+  }
 }
 
 @layer components {

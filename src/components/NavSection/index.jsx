@@ -33,7 +33,7 @@ const NavSection = () => {
           name: 'Celebs',
           iconClass: 'bx bxs-user',
           originLink: '/person',
-          navigateLink: '/person',
+          navigateLink: '/person/general',
         },
       ],
     },
@@ -50,7 +50,7 @@ const NavSection = () => {
           name: 'Top rated',
           iconClass: 'bx bxs-star',
           originLink: '/top-rated',
-          navigateLink: '/top',
+          navigateLink: '/top-rated',
         },
         {
           name: 'Downloaded',
@@ -67,13 +67,13 @@ const NavSection = () => {
           name: 'TV Series',
           iconClass: 'bx bxs-tv',
           originLink: '/tv',
-          navigateLink: '/tv',
+          navigateLink: '/tv/general',
         },
         {
           name: 'Movies',
           iconClass: 'bx bxs-film',
           originLink: '/movie',
-          navigateLink: '/movie',
+          navigateLink: '/movie/general',
         },
       ],
     },
@@ -143,7 +143,7 @@ const NavSection = () => {
         <div className="flex justify-start items-center gap-2 mb-2">
           <img
             className="block w-7 h-7 object-cover object-center rounded-full"
-            src="/marcus.jpg"
+            src="/imgs/marcus.jpg"
             alt="marcus freeman"
           />
           <h5>Marcus Freeman</h5>

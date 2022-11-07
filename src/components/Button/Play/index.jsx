@@ -38,7 +38,7 @@ const ButtonPlay = ({
           {displayIcon && (
             <img
               className="block w-7 h-7 object-cover object-center"
-              src="/small-round-play-button.png"
+              src="/imgs/small-round-play-button.png"
               alt="play-icon"
             />
           )}
@@ -56,7 +56,7 @@ const ButtonPlay = ({
           {displayIcon && (
             <img
               className="block w-7 h-7 object-cover object-center"
-              src="/small-round-play-button.png"
+              src="/imgs/small-round-play-button.png"
               alt="play-icon"
             />
           )}

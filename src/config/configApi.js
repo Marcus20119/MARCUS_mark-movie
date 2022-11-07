@@ -36,6 +36,9 @@ export const api = {
   getPersonCredits(id = '', type = 'movie') {
     return `https://api.themoviedb.org/3/person/${id}/${type}_credits?api_key=${apiKey}&language=en-US`;
   },
+  getDiscover(category = '', query = '', page = 1) {
+    return `https://api.themoviedb.org/3/discover/${category}?api_key=${apiKey}&page=${page}&${query}`;
+  },
   movie: {
     getNowPlaying(page = 1) {
       return `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=${page}`;
@@ -135,7 +138,7 @@ export const genres = {
   tv: [
     {
       id: 10759,
-      name: 'Action & Adventure',
+      name: 'Action',
     },
     {
       id: 16,
@@ -199,3 +202,77 @@ export const genres = {
     },
   ],
 };
+export const countries = [
+  {
+    name: 'United States',
+    id: 'US',
+  },
+  {
+    name: 'United Kingdom',
+    id: 'GB',
+  },
+  {
+    name: 'Korea',
+    id: 'KP',
+  },
+  {
+    name: 'France',
+    id: 'FR',
+  },
+  {
+    name: 'Canada',
+    id: 'CA',
+  },
+  {
+    name: 'Hong Kong',
+    id: 'HK',
+  },
+  {
+    name: 'Japan',
+    id: 'JP',
+  },
+  {
+    name: 'China',
+    id: 'CN',
+  },
+  {
+    name: 'Taiwan',
+    id: 'TW',
+  },
+  {
+    name: 'India',
+    id: 'IN',
+  },
+  {
+    name: 'Thailand',
+    id: 'TH',
+  },
+  {
+    name: 'Australia',
+    id: 'AU',
+  },
+  {
+    name: 'Vietnam',
+    id: 'VN',
+  },
+  {
+    name: 'German',
+    id: 'DE',
+  },
+  {
+    name: 'Sweden',
+    id: 'SE',
+  },
+  {
+    name: 'Mexico',
+    id: 'MX',
+  },
+  {
+    name: 'Philippines',
+    id: 'PH',
+  },
+  {
+    name: 'CZech Republic',
+    id: 'CZ',
+  },
+];

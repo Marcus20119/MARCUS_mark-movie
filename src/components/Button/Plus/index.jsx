@@ -20,7 +20,7 @@ const ButtonPlus = ({
     >
       <img
         className={`block ${sizeClass}`}
-        src="/plus.png"
+        src="/imgs/plus.png"
         alt="plus button"
         style={{ width: `${sizeClass}`, height: `${sizeClass}` }}
       />

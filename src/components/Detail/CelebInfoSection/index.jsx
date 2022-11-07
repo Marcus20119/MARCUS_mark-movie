@@ -35,7 +35,7 @@ const DetailCelebInfoSection = ({ personData }) => {
           src={
             personData.profile_path
               ? api.getPoster(personData.profile_path)
-              : '/no-face.jpg'
+              : '/imgs/no-face.jpg'
           }
           alt={personData.name}
         />

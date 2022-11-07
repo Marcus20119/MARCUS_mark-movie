@@ -5,8 +5,6 @@ import ButtonPlus from '~/components/Button/Plus';
 import MovieTagList from '~/components/CardAndList/TagList';
 
 const DetailMainContent = ({ movieData }) => {
-  console.log('movieData', movieData);
-  console.log(movieData.runtime);
   return (
     <Fragment>
       {movieData && (movieData.title || movieData.name) && (
@@ -18,9 +16,11 @@ const DetailMainContent = ({ movieData }) => {
           >
             {movieData.title || movieData.name}
           </h1>
-          <h3 className="text-lg text-[#b5b5b5] mb-[28px] mt-1 line-clamp-1">
-            {movieData.tagline}
-          </h3>
+          {movieData.tagline && (
+            <h3 className="text-lg text-[#b5b5b5] mb-[28px] mt-1 line-clamp-1">
+              {movieData.tagline}
+            </h3>
+          )}
           {movieData.runtime ? (
             <h4 className="mt-auto mb-[12px]">
               {movieData.runtime < 60
@@ -46,7 +46,7 @@ const DetailMainContent = ({ movieData }) => {
           >
             <img
               className="block h-full object-contain object-center"
-              src="/IMDb.png"
+              src="/imgs/IMDb.png"
               alt="IMDb"
             />
             <span className="font-semibold">
@@ -73,7 +73,11 @@ const DetailMainContent = ({ movieData }) => {
                 buttonClass="!rounded-md"
               />
             </div>
-            <MovieTagList movieData={movieData} className="!mb-0" />
+            <MovieTagList
+              movieData={movieData}
+              className="!mb-0"
+              disabled={true}
+            />
           </div>
         </Fragment>
       )}

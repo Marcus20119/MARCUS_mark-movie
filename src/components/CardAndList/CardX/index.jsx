@@ -34,7 +34,7 @@ const MovieCardX = ({ movieData, type }) => {
               src={
                 movieData.poster_path
                   ? api.getPoster(movieData.poster_path)
-                  : '/no-poster.jpg'
+                  : '/imgs/no-poster.jpg'
               }
               alt=""
             />

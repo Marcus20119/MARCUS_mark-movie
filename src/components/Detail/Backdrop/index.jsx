@@ -15,7 +15,7 @@ const DetailBackdrop = ({ movieData }) => {
               ? `linear-gradient(0deg, rgb(34, 34, 34, 0.85), transparent), url('${api.getBackdrop(
                   movieData.backdrop_path
                 )}')`
-              : `linear-gradient(0deg, rgb(34, 34, 34, 0.85), transparent), url('/no-backdrop.jpg')`,
+              : `linear-gradient(0deg, rgb(34, 34, 34, 0.85), transparent), url('/imgs/no-backdrop.jpg')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center top',
           }}

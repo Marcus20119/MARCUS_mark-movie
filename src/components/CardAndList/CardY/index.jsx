@@ -10,7 +10,7 @@ const MovieCardY = ({ movieData, type }) => {
       <div className="relative w-full pt-full rounded-lg overflow-hidden">
         <img
           className="absolute w-full inset-0 block object-cover object-center"
-          src={poster_path ? api.getPoster(poster_path) : '/no-poster.jpg'}
+          src={poster_path ? api.getPoster(poster_path) : '/imgs/no-poster.jpg'}
           alt=""
         />
       </div>

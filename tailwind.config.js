@@ -43,6 +43,9 @@ module.exports = {
         khandy: 'Khandy Holand Regular',
         merri: "'Merriweather', serif",
       },
+      boxShadow: {
+        select: '0 0 5px 5px rgb(255, 61, 113, 0.3)',
+      },
     },
   },
   plugins: [

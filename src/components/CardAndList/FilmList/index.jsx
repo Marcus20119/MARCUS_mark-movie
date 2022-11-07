@@ -32,7 +32,7 @@ const FilmList = ({
                 src={
                   filmData.poster_path
                     ? api.getPoster(filmData.poster_path)
-                    : '/no-poster.jpg'
+                    : '/imgs/no-poster.jpg'
                 }
                 alt={filmData.poster_path}
               />
