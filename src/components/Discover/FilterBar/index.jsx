@@ -1,10 +1,15 @@
-import { useRef } from 'react';
-import { countries, genres } from '~/config';
+import { useRef, useState } from 'react';
+import queryString from 'query-string';
+import { useNavigate } from 'react-router-dom';
 
-const DiscoverFilterBar = ({ category, setCategory, setQueries }) => {
+import { countries, genres } from '~/config';
+import { useEffect } from 'react';
+
+const DiscoverFilterBar = ({ paramData, currentPage, setCurrentPage }) => {
   const filterTabs = [
     {
       label: 'Category:',
+      query: 'category',
       options: [
         {
           name: 'Movie',
@@ -24,7 +29,7 @@ const DiscoverFilterBar = ({ category, setCategory, setQueries }) => {
           name: 'All genre',
           id: '',
         },
-        ...genres[category],
+        ...genres[paramData.category],
       ],
     },
     {
@@ -72,54 +77,52 @@ const DiscoverFilterBar = ({ category, setCategory, setQueries }) => {
       ],
     },
   ];
+  const navigateTo = useNavigate();
+
+  const { page, ...initialState } = paramData;
+  const [queries, setQueries] = useState(initialState);
   const selectionWrapRef = useRef();
-  const buttonSubmit = useRef();
+  useEffect(() => {
+    navigateTo(
+      `/discover?${queryString.stringify(queries)}&page=${currentPage}`
+    );
+  }, [currentPage, navigateTo, queries]);
   const resetOptions = () => {
     if (selectionWrapRef.current) {
       const selections = Array.from(selectionWrapRef.current.children);
       selections.forEach((selection, index) => {
+        const selectionTag = selection.querySelector('select');
         if (index > 0) {
-          const selectionTag = selection.querySelector('select');
           selectionTag.value = '';
+        } else {
+          selectionTag.value = 'movie';
         }
       });
     }
   };
   const handleSetQueries = (query, value) => {
+    console.log('set');
     if (value) {
       setQueries(prevState => {
-        return { ...prevState, [query]: `${query}=${value}` };
+        return { ...prevState, [query]: value };
       });
     } else {
       setQueries(prevState => {
-        const nextState = prevState;
+        const nextState = { ...prevState };
         delete nextState[query];
         return nextState;
       });
     }
-    // if (buttonSubmit.current) {
-    //   console.log('buttonSubmit.current', buttonSubmit.current);
-    //   buttonSubmit.current.click();
-    // }
-  };
-  const handleSetCategory = value => {
-    setCategory(value);
-    setQueries({});
-    resetOptions();
   };
   const handleResetQueries = () => {
-    setCategory('movie');
-    setQueries({});
+    setQueries({ category: 'movie' });
+    setCurrentPage(1);
     resetOptions();
   };
 
   return (
     <div className="flex justify-between items-center gap-3 w-full px-4 pb-3 pt-[10px] bg-[rgba(255,_255,_255,_0.06)] rounded-md">
-      <form
-        method="GET"
-        ref={selectionWrapRef}
-        className="grid grid-cols-6 gap-4 w-[90%] "
-      >
+      <div ref={selectionWrapRef} className="grid grid-cols-6 gap-4 w-[90%] ">
         {filterTabs.map((tab, index) => (
           <div
             key={`discoverFilterTab${index}`}
@@ -136,12 +139,9 @@ const DiscoverFilterBar = ({ category, setCategory, setQueries }) => {
                 className="relative w-full px-2 py-1 rounded-md focus:shadow-select"
                 name={tab.query}
                 id={`#discoverFilterTab${index}`}
+                defaultValue={paramData[tab.query] || ''}
                 onChange={e => {
-                  if (index !== 0) {
-                    handleSetQueries(tab.query, e.target.value);
-                  } else {
-                    handleSetCategory(e.target.value);
-                  }
+                  handleSetQueries(tab.query, e.target.value);
                 }}
               >
                 {tab.options.map((option, index) => (
@@ -154,13 +154,7 @@ const DiscoverFilterBar = ({ category, setCategory, setQueries }) => {
             </div>
           </div>
         ))}
-        <button
-          ref={buttonSubmit}
-          type="submit"
-          hidden
-          onClick={e => e.preventDefault()}
-        ></button>
-      </form>
+      </div>
       <button
         className="self-end px-4 py-1 rounded-md bg-[var(--primary-color)] text-white font-bold tracking-wider opacity-90 hover:opacity-100"
         onClick={handleResetQueries}

@@ -21,7 +21,7 @@ const NavSection = () => {
           name: 'Discover',
           iconClass: 'bx bxs-compass',
           originLink: '/discover',
-          navigateLink: '/discover',
+          navigateLink: '/discover?category=movie&page=1',
         },
         {
           name: 'Awards',

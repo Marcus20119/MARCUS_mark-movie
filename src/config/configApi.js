@@ -36,8 +36,8 @@ export const api = {
   getPersonCredits(id = '', type = 'movie') {
     return `https://api.themoviedb.org/3/person/${id}/${type}_credits?api_key=${apiKey}&language=en-US`;
   },
-  getDiscover(category = '', query = '', page = 1) {
-    return `https://api.themoviedb.org/3/discover/${category}?api_key=${apiKey}&page=${page}&${query}`;
+  getDiscover(category = '', query = '') {
+    return `https://api.themoviedb.org/3/discover/${category}?api_key=${apiKey}${query}`;
   },
   movie: {
     getNowPlaying(page = 1) {
