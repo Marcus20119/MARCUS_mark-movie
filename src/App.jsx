@@ -12,6 +12,7 @@ const TVDetailPage = lazy(() => import('./pages/TV/Detail'));
 const CelebDetailPage = lazy(() => import('./pages/Celeb/Detail'));
 const NotFoundPage = lazy(() => import('./pages/NotFound'));
 const SorryPage = lazy(() => import('./pages/Sorry'));
+const TestPage = lazy(() => import('./pages/Test'));
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
           </Route>
           <Route path="settings" element={<SorryPage />} />
           <Route path="log" element={<SorryPage />} />
+          <Route path="/test" element={<TestPage />} />
 
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

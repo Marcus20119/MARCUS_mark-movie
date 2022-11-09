@@ -1,6 +1,6 @@
-const LoadingBounce = () => {
+const LoadingBounce = ({ mainClass }) => {
   return (
-    <div>
+    <div className={mainClass}>
       <div className="flex w-full justify-center mt-3">
         <div
           className="

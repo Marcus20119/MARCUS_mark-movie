@@ -26,7 +26,7 @@ const FilmList = ({
             to={route.toDetail(type, filmData.id)}
             className="group w-full cursor-pointer rounded-md"
           >
-            <div className="relative w-full h-0 pt-[145%] rounded-md overflow-hidden group-hover:-translate-y-2">
+            <div className="relative w-full h-0 bg-[#ffffff50] pt-[145%] rounded-md overflow-hidden group-hover:-translate-y-2">
               <img
                 className="absolute inset-0 block w-full h-full object-cover object-center"
                 src={

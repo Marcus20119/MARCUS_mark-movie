@@ -7,7 +7,7 @@ const MovieCardY = ({ movieData, type }) => {
   const { poster_path, vote_average, id } = movieData;
   return (
     <div className="flex flex-col gap-[10px] w-full p-[10px] rounded-xl bg-[rgba(255,_255,_255,_0.08)] text-white">
-      <div className="relative w-full pt-full rounded-lg overflow-hidden">
+      <div className="relative w-full pt-full bg-[#ffffff50] rounded-lg overflow-hidden">
         <img
           className="absolute w-full inset-0 block object-cover object-center"
           src={poster_path ? api.getPoster(poster_path) : '/imgs/no-poster.jpg'}
