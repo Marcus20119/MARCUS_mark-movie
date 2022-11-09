@@ -101,7 +101,6 @@ const DiscoverFilterBar = ({ paramData, currentPage, setCurrentPage }) => {
     }
   };
   const handleSetQueries = (query, value) => {
-    console.log('set');
     if (value) {
       setQueries(prevState => {
         return { ...prevState, [query]: value };
@@ -113,6 +112,7 @@ const DiscoverFilterBar = ({ paramData, currentPage, setCurrentPage }) => {
         return nextState;
       });
     }
+    setCurrentPage(1);
   };
   const handleResetQueries = () => {
     setQueries({ category: 'movie' });

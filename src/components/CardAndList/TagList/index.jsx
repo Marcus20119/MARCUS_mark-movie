@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
 const MovieTagList = ({
   movieData,
@@ -6,7 +7,9 @@ const MovieTagList = ({
   numberOfTag = 3,
   disabled = false,
   className = '',
+  category = 'movie',
 }) => {
+  const navigateTo = useNavigate();
   return (
     <div
       className={`flex flex-wrap justify-start items-center gap-[0.5rem] mb-[1.5rem] max-h-[30px] overflow-hidden ${className}`}
@@ -20,6 +23,11 @@ const MovieTagList = ({
               disabled ? '' : 'hover:opacity-100'
             }`}
             disabled={disabled}
+            onClick={() => {
+              navigateTo(
+                `/discover?category=${category}&with_genres=${id}&page=1`
+              );
+            }}
           >
             {genresData.find(genre => genre.id === id) &&
               genresData.find(genre => genre.id === id).name}
@@ -34,6 +42,11 @@ const MovieTagList = ({
               disabled ? '' : 'hover:opacity-100'
             }`}
             disabled={disabled}
+            onClick={() => {
+              navigateTo(
+                `/discover?category=${category}&with_genres=${genre.id}&page=1`
+              );
+            }}
           >
             {genre.name}
           </button>

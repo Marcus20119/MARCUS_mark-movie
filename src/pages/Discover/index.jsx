@@ -26,7 +26,7 @@ const DiscoverPage = () => {
     usePaginate(location);
 
   return (
-    <div className="sub-layout h-screen w-full">
+    <div className="sub-layout min-h-screen w-full">
       <NavSection />
       <div className="flex flex-col w-full min-h-screen justify-between items-start gap-[28px] bg-[#222222] p-[40px]">
         <DiscoverFilterBar
@@ -45,6 +45,7 @@ const DiscoverPage = () => {
               <MainPaginate
                 totalPage={discoverData.total_pages}
                 handlePageClick={handlePageClick}
+                currentPage={currentPage}
               />
             </Fragment>
           )}

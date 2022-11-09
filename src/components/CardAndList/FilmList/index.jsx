@@ -28,7 +28,7 @@ const FilmList = ({
           >
             <div className="relative w-full h-0 pt-[145%] rounded-md overflow-hidden group-hover:-translate-y-2">
               <img
-                className="absolute inset-0 block w-full object-cover object-center"
+                className="absolute inset-0 block w-full h-full object-cover object-center"
                 src={
                   filmData.poster_path
                     ? api.getPoster(filmData.poster_path)

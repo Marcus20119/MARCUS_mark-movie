@@ -1,19 +1,14 @@
 import ReactPaginate from 'react-paginate';
 import PropTypes from 'prop-types';
 import './MainPaginate.scss';
+import { memo } from 'react';
 
-const MainPaginate = ({ handlePageClick, totalPage }) => {
+const MainPaginate = ({ handlePageClick, totalPage, currentPage }) => {
   const prevElement = (
-    <div className="inline-flex items-center gap-1">
-      <i className="bx bx-chevron-left inline-flex items-center justify-center mt-[3px]"></i>
-      <span>previous</span>
-    </div>
+    <i className="bx bx-chevron-left inline-flex items-center justify-center mt-[1px] !text-lg"></i>
   );
   const nextElement = (
-    <div className="inline-flex items-center gap-1">
-      <span>next</span>
-      <i className="bx bx-chevron-right inline-flex items-center justify-center mt-[3px]"></i>
-    </div>
+    <i className="bx bx-chevron-right inline-flex items-center justify-center mt-[1px] !text-lg"></i>
   );
   return (
     <div className="flex w-full justify-center items-center">
@@ -22,9 +17,11 @@ const MainPaginate = ({ handlePageClick, totalPage }) => {
         nextLabel={nextElement}
         onPageChange={handlePageClick}
         pageRangeDisplayed={5}
-        pageCount={totalPage <= 100 ? totalPage : 100}
+        marginPagesDisplayed={1}
+        pageCount={totalPage <= 99 ? totalPage : 99}
         previousLabel={prevElement}
-        marginPagesDisplayed={3}
+        initialPage={currentPage - 1}
+        disableInitialCallback={true}
         renderOnZeroPageCount={null}
         className="main-paginate"
       />
@@ -37,4 +34,4 @@ MainPaginate.propTypes = {
   totalPage: PropTypes.number.isRequired,
 };
 
-export default MainPaginate;
+export default memo(MainPaginate);

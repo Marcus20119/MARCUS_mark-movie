@@ -34,30 +34,34 @@ const CelebDetailPage = () => {
         )}
       </div>
       <div className="flex flex-col">
-        {!movieCreditLoading && movieCreditsData?.cast && (
-          <div className="relative w-full p-[30px] bg-[#222222]">
-            <h3 className="text-2xl text-white font-bold mb-[24px]">
-              {`${personData.name} Movies`}
-            </h3>
-            <FilmList
-              filmsData={movieCreditsData.cast}
-              numberOfCol={5}
-              type="movie"
-            />
-          </div>
-        )}
-        {!tvCreditLoading && tvCreditsData?.cast && (
-          <div className="relative w-full p-[30px] bg-[#222222]">
-            <h3 className="text-2xl text-white font-bold mb-[24px]">
-              {`${personData.name} TV Shows`}
-            </h3>
-            <FilmList
-              filmsData={tvCreditsData.cast}
-              numberOfCol={5}
-              type="tv"
-            />
-          </div>
-        )}
+        {!movieCreditLoading &&
+          movieCreditsData?.cast &&
+          movieCreditsData.cast.length > 0 && (
+            <div className="relative w-full p-[30px] bg-[#222222]">
+              <h3 className="text-2xl text-white font-bold mb-[24px]">
+                {`${personData.name} Movies`}
+              </h3>
+              <FilmList
+                filmsData={movieCreditsData.cast}
+                numberOfCol={5}
+                type="movie"
+              />
+            </div>
+          )}
+        {!tvCreditLoading &&
+          tvCreditsData?.cast &&
+          tvCreditsData.cast.length > 0 && (
+            <div className="relative w-full p-[30px] bg-[#222222]">
+              <h3 className="text-2xl text-white font-bold mb-[24px]">
+                {`${personData.name} TV Shows`}
+              </h3>
+              <FilmList
+                filmsData={tvCreditsData.cast}
+                numberOfCol={5}
+                type="tv"
+              />
+            </div>
+          )}
       </div>
     </div>
   );

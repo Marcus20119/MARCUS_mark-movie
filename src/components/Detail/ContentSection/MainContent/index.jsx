@@ -76,7 +76,8 @@ const DetailMainContent = ({ movieData }) => {
             <MovieTagList
               movieData={movieData}
               className="!mb-0"
-              disabled={true}
+              // disabled={true}
+              category={movieData.title ? 'movie' : 'tv'}
             />
           </div>
         </Fragment>

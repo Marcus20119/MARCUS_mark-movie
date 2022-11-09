@@ -14,7 +14,7 @@ const SearchSection = ({ type }) => {
 
   return (
     <div className="relative">
-      <div className="fixed top-0 bottom-0 right-0 left-[80%] gap-[20px] flex flex-col py-[24px] px-[20px] bg-transparent text-[rgba(255,_255,_255,_0.4)]">
+      <div className="fixed top-0 bottom-0 right-0 left-[80%] gap-[20px] flex flex-col bg-[#181818] py-[24px] px-[20px] text-[rgba(255,_255,_255,_0.4)]">
         <div className="relative w-full">
           <input
             className="block w-full pl-3 pr-9 py-2 rounded-xl border-[2px] border-[rgba(255,_255,_255,_0.1)] bg-transparent placeholder:text-[rgba(255,_255,_255,_0.1)] focus:border-[rgba(255,_255,_255,_0.4)]"

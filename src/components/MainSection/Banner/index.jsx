@@ -55,7 +55,7 @@ function Banner({ apiLink, type }) {
                 <MovieTagList
                   movieData={movie}
                   genresData={neededGenres}
-                  disabled={true}
+                  category={type}
                 />
                 <div className="carousel-caption__wrap-btn">
                   <ButtonPlay
