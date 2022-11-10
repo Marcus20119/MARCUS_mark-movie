@@ -10,7 +10,7 @@ const SearchSection = ({ type }) => {
   const [input, setInput] = useState('');
   const handleSetInput = debounce(e => {
     setInput(e.target.value);
-  }, 200);
+  }, 300);
 
   return (
     <div className="relative">

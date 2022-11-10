@@ -4,7 +4,12 @@ import { api, fetcher } from '~/config';
 
 const TestPage = () => {
   const { data, error, mutate, size, setSize, isValidating } = useSWRInfinite(
-    index => api.getPopular('movie', index + 1),
+    // index => api.getPopular('movie', index + 1),
+    index =>
+      `https://api.themoviedb.org/3/discover/movie?api_key=ca5bec6407d971b84c656385ba10351d&primary_release_year=2020&with_origin_country=VN&page=${
+        index + 1
+      }`,
+
     fetcher
   );
   const concatData = data
@@ -13,7 +18,10 @@ const TestPage = () => {
         []
       )
     : [];
+  const isEmpty = data?.[0]?.results?.length === 0;
+  const isReachingEnd = isEmpty || data?.length >= data?.[0]?.total_pages;
   console.log('concatData', concatData);
+  console.log('isReachingEnd', isReachingEnd);
   return (
     <div className="sub-layout h-screen w-full bg-[#181818]">
       <NavSection />
