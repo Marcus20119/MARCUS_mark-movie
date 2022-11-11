@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment } from 'react';
 import { withErrorBoundary } from 'react-error-boundary';
 
 import ErrorFallBack from '~/components/Base/ErrorFallBack';
@@ -6,25 +6,25 @@ import MainSection from '~/components/MainSection';
 import SearchSection from '~/components/SearchSection';
 
 import { api } from '~/config';
+import useScrollOnTop from '~/hooks/useScrollOnTop';
+
+const apiList = [
+  {
+    name: 'TV Airing Today',
+    api: api.tv.getAiringToday(),
+  },
+  {
+    name: 'On The Air',
+    api: api.tv.getOnTheAir(),
+  },
+  {
+    name: 'Top Rated TV Series',
+    api: api.getTopRated('tv'),
+  },
+];
 
 const TVSeriesPage = () => {
-  const apiList = [
-    {
-      name: 'TV Airing Today',
-      api: api.tv.getAiringToday(),
-    },
-    {
-      name: 'On The Air',
-      api: api.tv.getOnTheAir(),
-    },
-    {
-      name: 'Top Rated TV Series',
-      api: api.getTopRated('tv'),
-    },
-  ];
-  useEffect(() => {
-    document.documentElement.scrollTop = 0;
-  }, []);
+  useScrollOnTop();
 
   return (
     <Fragment>

@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 const NavSection = () => {
   const navList = [
@@ -67,13 +67,13 @@ const NavSection = () => {
           name: 'TV Series',
           iconClass: 'bx bxs-tv',
           originLink: '/tv',
-          navigateLink: '/tv/general',
+          navigateLink: '/tv/general/on-the-air?page=1',
         },
         {
           name: 'Movies',
           iconClass: 'bx bxs-film',
           originLink: '/movie',
-          navigateLink: '/movie/general',
+          navigateLink: '/movie/general/now-playing?page=1',
         },
       ],
     },
@@ -99,12 +99,15 @@ const NavSection = () => {
   return (
     <div className="relative">
       <div className="fixed top-0 bottom-0 left-0 right-[85%] gap-[40px] flex flex-col bg-[#181818] py-[20px] px-[20px] text-white border-r-[1px] border-r-[#353338]">
-        <h1 className="font-bold text-xl tracking-wider">
+        <Link
+          to="/home/movies"
+          className="font-bold text-xl tracking-wider text-white hover:text-white"
+        >
           MARK
           <span className="text-[var(--primary-color)] text-lg tracking-normal">
             movie
           </span>
-        </h1>
+        </Link>
         <div className="flex flex-col gap-[24px] mt-auto">
           {navList &&
             navList.length > 0 &&

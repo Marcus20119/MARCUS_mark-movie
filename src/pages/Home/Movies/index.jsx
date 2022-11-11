@@ -1,29 +1,30 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment } from 'react';
 import { withErrorBoundary } from 'react-error-boundary';
 
+import { api } from '~/config';
 import ErrorFallBack from '~/components/Base/ErrorFallBack';
 import MainSection from '~/components/MainSection';
 import SearchSection from '~/components/SearchSection';
-import { api } from '~/config';
+import useScrollOnTop from '~/hooks/useScrollOnTop';
+
+const apiList = [
+  {
+    name: 'Now Playing',
+    api: api.movie.getNowPlaying(),
+  },
+  {
+    name: 'Up Coming',
+    api: api.movie.getUpComing(),
+  },
+  {
+    name: 'Top Rated Movies',
+    api: api.getTopRated('movie'),
+  },
+];
 
 const MoviesPage = () => {
-  const apiList = [
-    {
-      name: 'Now Playing',
-      api: api.movie.getNowPlaying(),
-    },
-    {
-      name: 'Up Coming',
-      api: api.movie.getUpComing(),
-    },
-    {
-      name: 'Top Rated Movies',
-      api: api.getTopRated('movie'),
-    },
-  ];
-  useEffect(() => {
-    document.documentElement.scrollTop = 0;
-  }, []);
+  useScrollOnTop();
+
   return (
     <Fragment>
       <MainSection

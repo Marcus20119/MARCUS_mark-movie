@@ -16,7 +16,7 @@ const TrailerItem = ({ keyId, index }) => {
           onClick={handleShow}
         >
           <img
-            className="absolute left-0 top-1/2 block w-full h-full object-cover object-center -translate-y-1/2"
+            className="absolute left-0 top-1/2 block w-full h-full bg-[#ffffff50] object-cover object-center -translate-y-1/2"
             src={api.getThumbnail(keyId)}
             alt={`thumbnailKey${index}`}
           />

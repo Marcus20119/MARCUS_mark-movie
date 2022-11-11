@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 import { withErrorBoundary } from 'react-error-boundary';
 
@@ -12,12 +12,11 @@ import TrailerSection from '~/components/Detail/TrailerSection';
 import SeasonSection from '~/components/Detail/SeasonSection';
 import './Detail.scss';
 import ErrorFallBack from '~/components/Base/ErrorFallBack';
+import useScrollOnTop from '~/hooks/useScrollOnTop';
 
 const TVDetailPage = () => {
+  useScrollOnTop();
   const { id } = useParams();
-  useEffect(() => {
-    document.documentElement.scrollTop = 0;
-  }, [id]);
 
   const { myData: movieData, isLoading: movieLoading } = useMySWR({
     api: api.getDetail(id, 'tv'),

@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { withErrorBoundary } from 'react-error-boundary';
 import { useParams } from 'react-router-dom';
 
@@ -7,13 +6,12 @@ import FilmList from '~/components/CardAndList/FilmList';
 import DetailCelebInfoSection from '~/components/Detail/CelebInfoSection';
 import { api } from '~/config';
 import useMySWR from '~/hooks/useMySWR';
+import useScrollOnTop from '~/hooks/useScrollOnTop';
 
 const CelebDetailPage = () => {
   const { id } = useParams();
 
-  useEffect(() => {
-    document.documentElement.scrollTop = 0;
-  }, [id]);
+  useScrollOnTop();
 
   const { myData: personData, isLoading: personLoading } = useMySWR({
     api: api.getDetail(id, 'person'),

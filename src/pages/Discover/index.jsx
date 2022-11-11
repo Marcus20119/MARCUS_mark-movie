@@ -1,15 +1,17 @@
 import { Fragment, useEffect } from 'react';
 import queryString from 'query-string';
 import { useLocation } from 'react-router-dom';
+import { withErrorBoundary } from 'react-error-boundary';
 
 import usePaginate from '~/hooks/usePaginate';
 import useMySWR from '~/hooks/useMySWR';
 import { api } from '~/config';
-import DiscoverFilterBar from '~/components/Discover/FilterBar';
+import FilterBar from '~/components/FilterBar';
 import NavSection from '~/components/NavSection';
 import FilmList from '~/components/CardAndList/FilmList';
 import MainPaginate from '~/components/MainPaginate';
 import LoadingBounce from '~/components/Base/Loading/Bounce';
+import ErrorFallBack from '~/components/Base/ErrorFallBack';
 
 const DiscoverPage = () => {
   useEffect(() => {
@@ -30,7 +32,7 @@ const DiscoverPage = () => {
     <div className="sub-layout min-h-screen w-full">
       <NavSection />
       <div className="flex flex-col w-full min-h-screen items-start gap-[28px] bg-[#222222] p-[40px]">
-        <DiscoverFilterBar
+        <FilterBar
           paramData={paramData}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
@@ -69,4 +71,6 @@ const DiscoverPage = () => {
   );
 };
 
-export default DiscoverPage;
+export default withErrorBoundary(DiscoverPage, {
+  FallbackComponent: ErrorFallBack,
+});

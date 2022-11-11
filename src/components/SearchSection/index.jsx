@@ -19,9 +19,7 @@ const SearchSection = ({ type }) => {
           <input
             className="block w-full pl-3 pr-9 py-2 rounded-xl border-[2px] border-[rgba(255,_255,_255,_0.1)] bg-transparent placeholder:text-[rgba(255,_255,_255,_0.1)] focus:border-[rgba(255,_255,_255,_0.4)]"
             type="text"
-            placeholder={
-              type === 'movie' ? 'Find your movie' : 'Find your show'
-            }
+            placeholder={'Quick Search'}
             defaultValue={input}
             onFocus={() => setIsFocus(true)}
             onBlur={() => setIsFocus(false)}

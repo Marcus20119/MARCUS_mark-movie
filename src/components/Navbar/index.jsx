@@ -1,16 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
-const Navbar = () => {
-  const navList = [
-    {
-      name: 'TV Series',
-      path: '/home/tv-series',
-    },
-    {
-      name: 'Movies',
-      path: '/home/movies',
-    },
-  ];
+const Navbar = ({ navList }) => {
   return (
     <nav className="navbar flex justify-start items-center gap-8 text-white text-[14px]">
       {navList.map(item => (

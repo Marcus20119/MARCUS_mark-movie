@@ -2,14 +2,24 @@ import PropTypes from 'prop-types';
 
 import Banner from './Banner';
 import './MainSection.scss';
-import Navbar from './Navbar';
+import Navbar from '../Navbar';
 import ScrollList from './ScrollList';
+
+const navList = [
+  {
+    name: 'TV Series',
+    path: '/home/tv-series',
+  },
+  {
+    name: 'Movies',
+    path: '/home/movies',
+  },
+];
 
 const MainSection = ({ apiBanner, apiList, type }) => {
   return (
     <div className="bg-[#222222] py-[20px] px-10 border-r-[1px] border-r-[#353338] overflow-hidden">
-      <Navbar />
-      {/* {children} */}
+      <Navbar navList={navList} />
       <Banner apiLink={apiBanner} type={type} />
       <div className="flex flex-col gap-4">
         {apiList.map(item => (

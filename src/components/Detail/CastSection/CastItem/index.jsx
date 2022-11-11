@@ -15,7 +15,7 @@ const CastItem = ({ castData }) => {
               className="relative block w-full pt-[100%] h-0"
             >
               <img
-                className="absolute inset-0 block w-full h-full rounded-full object-cover brightness-85 border-[2px] border-solid border-[#222222] hover:border-[var(--primary-color)] cursor-pointer"
+                className="absolute inset-0 block w-full h-full rounded-full bg-[#ffffff50] object-cover brightness-85 border-[2px] border-solid border-[#222222] hover:border-[var(--primary-color)] cursor-pointer"
                 src={
                   castData.profile_path
                     ? api.getPoster(castData.profile_path)

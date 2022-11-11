@@ -1,11 +1,12 @@
 import { useRef, useState } from 'react';
 import queryString from 'query-string';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { countries, genres } from '~/config';
 import { useEffect } from 'react';
 
-const DiscoverFilterBar = ({ paramData, currentPage, setCurrentPage }) => {
+const FilterBar = ({ paramData, currentPage, setCurrentPage }) => {
   const filterTabs = [
     {
       label: 'Category:',
@@ -87,6 +88,7 @@ const DiscoverFilterBar = ({ paramData, currentPage, setCurrentPage }) => {
       `/discover?${queryString.stringify(queries)}&page=${currentPage}`
     );
   }, [currentPage, navigateTo, queries]);
+
   const resetOptions = () => {
     if (selectionWrapRef.current) {
       const selections = Array.from(selectionWrapRef.current.children);
@@ -165,4 +167,10 @@ const DiscoverFilterBar = ({ paramData, currentPage, setCurrentPage }) => {
   );
 };
 
-export default DiscoverFilterBar;
+FilterBar.propTypes = {
+  paramData: PropTypes.object.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  setCurrentPage: PropTypes.func.isRequired,
+};
+
+export default FilterBar;

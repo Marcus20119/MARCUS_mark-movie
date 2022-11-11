@@ -1,9 +1,10 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 import { withErrorBoundary } from 'react-error-boundary';
 
 import { api } from '~/config';
 import useMySWR from '~/hooks/useMySWR';
+import useScrollOnTop from '~/hooks/useScrollOnTop';
 import DetailBackdrop from '~/components/Detail/Backdrop';
 import DetailPosterSection from '~/components/Detail/PosterSection';
 import DetailContentSection from '~/components/Detail/ContentSection';
@@ -14,11 +15,8 @@ import ErrorFallBack from '~/components/Base/ErrorFallBack';
 import './MovieDetailPage.scss';
 
 const MovieDetailPage = () => {
+  useScrollOnTop();
   const { id } = useParams();
-
-  useEffect(() => {
-    document.documentElement.scrollTop = 0;
-  }, [id]);
 
   const { myData: movieData, isLoading: movieLoading } = useMySWR({
     api: api.getDetail(id, 'movie'),
