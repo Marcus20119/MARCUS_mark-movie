@@ -44,7 +44,11 @@ function Banner({ apiLink, type }) {
             <Carousel.Item key={`banner${movie.id}`}>
               <img
                 className="carousel-item__img"
-                src={api.getBackdrop(movie.backdrop_path)}
+                src={
+                  movie.backdrop_path
+                    ? api.getBackdrop(movie.backdrop_path)
+                    : '/imgs/no-backdrop.jpg'
+                }
                 alt={movie.title || movie.name}
               />
               <div className="carousel-item__overlay"></div>
