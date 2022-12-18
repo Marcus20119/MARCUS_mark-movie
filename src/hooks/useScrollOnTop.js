@@ -1,7 +1,13 @@
 import { useEffect } from 'react';
 
-export default function useScrollOnTop() {
+/**
+ *
+ * @param {variable} rerenderCondition - condition for re-rendering
+ */
+
+export default function useScrollOnTop(rerenderCondition = 'nothing') {
   useEffect(() => {
+    console.log('kaka');
     document.documentElement.scrollTop = 0;
-  }, []);
+  }, [rerenderCondition]);
 }
