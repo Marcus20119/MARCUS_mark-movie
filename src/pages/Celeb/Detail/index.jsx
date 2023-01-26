@@ -1,12 +1,11 @@
 import { withErrorBoundary } from 'react-error-boundary';
 import { useParams } from 'react-router-dom';
 
-import ErrorFallBack from '~/components/Base/ErrorFallBack';
-import FilmList from '~/components/CardAndList/FilmList';
-import DetailCelebInfoSection from '~/components/Detail/CelebInfoSection';
+import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
+import { FilmList } from '~/components/CardAndList';
+import { DetailCelebInfoSection } from '~/components/Detail';
 import { api } from '~/config';
-import useMySWR from '~/hooks/useMySWR';
-import useScrollOnTop from '~/hooks/useScrollOnTop';
+import { useMySWR, useScrollOnTop } from '~/hooks';
 
 const CelebDetailPage = () => {
   const { id } = useParams();

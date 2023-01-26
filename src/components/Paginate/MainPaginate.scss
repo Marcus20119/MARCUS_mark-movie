@@ -1,0 +1,55 @@
+.main-paginate {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  color: white;
+  font-size: 1.2rem;
+  margin-top: 12px;
+
+  li,
+  a {
+    transition-property: all !important;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transition-duration: 150ms !important;
+    color: white;
+    opacity: 0.8;
+  }
+
+  li:hover,
+  a:hover {
+    opacity: 1;
+  }
+
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid white;
+    border-radius: 6px;
+    font-size: 1.05rem;
+    padding-top: 2px;
+  }
+
+  .break a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+  }
+
+  .selected {
+    color: white;
+    opacity: 1 !important;
+
+    a {
+      opacity: 1 !important;
+      background-color: var(--primary-color);
+      border: 1px solid var(--primary-color);
+    }
+  }
+}

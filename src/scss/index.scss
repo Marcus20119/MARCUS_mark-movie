@@ -1,5 +1,6 @@
 @import './fonts';
 @import './variables';
+@import './mixins';
 
 @tailwind base;
 @tailwind components;
@@ -58,7 +59,7 @@
     display: grid;
     grid-template-columns: 15% 65% 20%;
   }
-  .sub-layout {
+  .main-layout {
     display: grid;
     grid-template-columns: 15% 85%;
   }

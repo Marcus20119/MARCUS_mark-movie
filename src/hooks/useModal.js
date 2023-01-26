@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-export default function useModal() {
+export function useModal() {
   const [show, setShow] = useState(false);
   const handleShow = useCallback(() => {
     setShow(true);

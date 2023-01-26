@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-export default function usePaginate(location) {
+export function usePaginate(location) {
   const [currentPage, setCurrentPage] = useState(
     parseInt(location.search.slice(location.search.indexOf('page=') + 5))
   );

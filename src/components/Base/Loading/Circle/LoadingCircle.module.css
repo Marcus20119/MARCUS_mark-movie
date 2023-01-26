@@ -11,13 +11,13 @@
   top: 0;
   left: 0;
   border-radius: 50%;
-  width: 35px;
-  height: 35px;
+  width: 60px;
+  height: 60px;
 }
 
 .dashedLoading:before {
   z-index: 5;
-  border: 3px dashed black;
+  border: 3px dashed #ff3d71;
   border-left: 3px solid transparent;
   border-bottom: 3px solid transparent;
   -webkit-animation: dashed 1s linear infinite;
@@ -26,7 +26,7 @@
 
 .dashedLoading:after {
   z-index: 10;
-  border: 3px solid #2e3440;
+  border: 3px solid #f1386950;
   border-left: 3px solid transparent;
   border-bottom: 3px solid transparent;
   -webkit-animation: dashed 1s ease infinite;

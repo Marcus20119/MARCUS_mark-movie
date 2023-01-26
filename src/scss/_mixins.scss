@@ -1,0 +1,22 @@
+@mixin responsive($device) {
+  @if ($device == 'mobile') {
+    @media only screen and (max-width: 46.1875em) {
+      @content;
+    }
+  }
+  @if ($device == 'tablet') {
+    @media only screen and (max-width: 63.9375em) and (min-width: 46.25em) {
+      @content;
+    }
+  }
+  @if ($device == 'tablet and mobile') {
+    @media only screen and (max-width: 63.9375em) {
+      @content;
+    }
+  }
+  @if ($device == 'pc') {
+    @media only screen and (min-width: 64em) {
+      @content;
+    }
+  }
+}
