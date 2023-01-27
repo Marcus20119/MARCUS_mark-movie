@@ -1,4 +1,5 @@
 export * from './FilmList';
+export * from './PersonList';
 export * from './MovieTagList';
 export * from './MovieCardListX';
 export * from './MovieCardListY';

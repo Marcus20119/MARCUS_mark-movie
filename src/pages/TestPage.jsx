@@ -1,38 +1,29 @@
-import useSWRInfinite from 'swr/infinite';
-import { NavSection } from '~/components/NavSection';
-import { fetcher } from '~/config';
-
+import { useEffect, useState } from 'react';
+import { supabase } from '~/supabase';
+import Account from '~/Account';
+import Auth from '~/Auth';
 const TestPage = () => {
-  const { data, size, setSize } = useSWRInfinite(
-    // index => api.getPopular('movie', index + 1),
-    index =>
-      `https://api.themoviedb.org/3/discover/movie?api_key=ca5bec6407d971b84c656385ba10351d&primary_release_year=2020&with_origin_country=VN&page=${
-        index + 1
-      }`,
+  const [session, setSession] = useState(null);
+  // console.log('session', session);
 
-    fetcher
-  );
-  const concatData = data
-    ? data.reduce(
-        (newData, currentItem) => newData.concat(currentItem.results),
-        []
-      )
-    : [];
-  const isEmpty = data?.[0]?.results?.length === 0;
-  const isReachingEnd = isEmpty || data?.length >= data?.[0]?.total_pages;
-  console.log('concatData', concatData);
-  console.log('isReachingEnd', isReachingEnd);
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+    console.log('session', session);
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+  }, []);
+
   return (
-    <div className="main-layout h-screen w-full bg-[#181818]">
-      <NavSection />
-      <div className="relative flex-1 flex justify-center items-center w-full h-screen ">
-        <button
-          className="px-3 py-2 bg-[var(--primary-color)] rounded-lg text-white font-bold opacity-80 hover:opacity-100"
-          onClick={() => setSize(size + 1)}
-        >
-          Load More
-        </button>
-      </div>
+    <div className="container" style={{ padding: '50px 0 100px 0' }}>
+      {!session ? (
+        <Auth />
+      ) : (
+        <Account key={session.user.id} session={session} />
+      )}
     </div>
   );
 };

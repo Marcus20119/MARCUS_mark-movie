@@ -9,9 +9,9 @@ import { useMySWR, usePaginate, useScrollOnTop } from '~/hooks';
 import { navTV } from '~/utils';
 
 const TVTypePage = () => {
-  useScrollOnTop();
   const location = useLocation();
   const pageQuery = location.search.slice(location.search.indexOf('?') + 6);
+  useScrollOnTop(pageQuery);
   const typeApi = location.pathname.split('/')[2];
   let myApi;
   switch (typeApi) {
@@ -38,6 +38,7 @@ const TVTypePage = () => {
     api: myApi,
     origin: true,
   });
+  console.log('filmsLoading', filmsLoading);
   const { currentPage, handlePageClick } = usePaginate(location);
 
   const navigateTo = useNavigate();

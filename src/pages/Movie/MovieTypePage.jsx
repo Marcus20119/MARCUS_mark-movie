@@ -9,9 +9,9 @@ import { useMySWR, usePaginate, useScrollOnTop } from '~/hooks';
 import { navMovie } from '~/utils';
 
 const MovieTypePage = () => {
-  useScrollOnTop();
   const location = useLocation();
   const pageQuery = location.search.slice(location.search.indexOf('?') + 6);
+  useScrollOnTop(pageQuery);
   const typeApi = location.pathname.split('/')[2];
   let myApi;
   switch (typeApi) {

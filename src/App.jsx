@@ -10,15 +10,17 @@ import LoadingPage from './pages/LoadingPage';
 const MoviesHomePage = lazy(() => import('./pages/Movie/MoviesHomePage'));
 const TVSeriesHomePage = lazy(() => import('./pages/TV/TVSeriesHomePage'));
 const DiscoverPage = lazy(() => import('./pages/Discover/DiscoverPage'));
+const UserInfoPage = lazy(() => import('./pages/UserInfoPage'));
 
+const PersonDetailPage = lazy(() => import('./pages/Person/PersonDetailPage'));
+const PersonTypePage = lazy(() => import('./pages/Person/PersonTypePage'));
+const PersonSearchPage = lazy(() => import('./pages/Person/PersonSearchPage'));
 const MovieDetailPage = lazy(() => import('./pages/Movie/MovieDetailPage'));
 const MovieTypePage = lazy(() => import('./pages/Movie/MovieTypePage'));
 const MovieSearchPage = lazy(() => import('./pages/Movie/MovieSearchPage'));
 const TVDetailPage = lazy(() => import('./pages/TV/TVDetailPage'));
 const TVTypePage = lazy(() => import('./pages/TV/TVTypePage'));
 const TVSearchPage = lazy(() => import('./pages/TV/TVSearchPage'));
-
-const CelebDetailPage = lazy(() => import('./pages/Celeb/Detail'));
 
 const TestPage = lazy(() => import('./pages/TestPage'));
 
@@ -34,7 +36,14 @@ function App() {
           <Route path="/" element={<MainLayout />}>
             <Route path="" element={<Navigate replace to="/home/movies" />} />
             <Route path="discover" element={<DiscoverPage />} />
-            <Route path="person/details/:id" element={<CelebDetailPage />} />
+            <Route path="settings" element={<UserInfoPage />} />
+
+            <Route path="/person">
+              <Route path="details/:id" element={<PersonDetailPage />} />
+              <Route path=":type" element={<PersonTypePage />} />
+              <Route path="search" element={<PersonSearchPage />} />
+            </Route>
+            <Route path="person/details/:id" element={<PersonDetailPage />} />
 
             <Route path="/movie">
               <Route path="details/:id" element={<MovieDetailPage />} />

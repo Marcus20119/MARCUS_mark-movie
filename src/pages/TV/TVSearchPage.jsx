@@ -10,11 +10,10 @@ import { MainPaginate } from '~/components/Paginate';
 import LoadingBounce from '~/components/Base/Loading/Bounce';
 import { navTV } from '~/utils';
 
-const TVGeneralSearchPage = () => {
-  useScrollOnTop();
-
+const TVSearchPage = () => {
   const location = useLocation();
   const { query, page } = queryString.parse(location.search);
+  useScrollOnTop(page);
 
   const { myData: filmsData, isLoading: filmsLoading } = useMySWR({
     api: query ? api.getSearch(query, 'tv', page) : api.getPopular('tv', page),
@@ -71,4 +70,4 @@ const TVGeneralSearchPage = () => {
   );
 };
 
-export default TVGeneralSearchPage;
+export default TVSearchPage;

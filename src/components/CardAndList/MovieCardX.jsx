@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Fragment } from 'react';
+import { Fragment, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { api, genres, route } from '~/config';
 import { MovieTagList } from './MovieTagList';
@@ -19,12 +19,27 @@ const MovieCardX = ({ movieData, type }) => {
     default:
       break;
   }
+
+  // Xử lý hover vào tag thì unhover thẻ
+  const cardRef = useRef();
+  const handleHoverTag = () => {
+    if (cardRef?.current) {
+      cardRef.current.classList.remove('hover:bg-[rgba(255,_255,_255,_0.2)]');
+    }
+  };
+  const handleUnHoverTag = () => {
+    if (cardRef?.current) {
+      cardRef.current.classList.add('hover:bg-[rgba(255,_255,_255,_0.2)]');
+    }
+  };
   return (
     <Fragment>
       {/* For movie and tv, ignore actors*/}
       {!(movieData.media_type === 'person') && (
         <Link
+          ref={cardRef}
           to={route.toDetail(type, id)}
+          as="li"
           className="flex items-center gap-[10px] w-full p-[10px] rounded-xl bg-[rgba(255,_255,_255,_0.06)] text-white hover:bg-[rgba(255,_255,_255,_0.2)] hover:shadow-md cursor-pointer"
         >
           <div className="relative w-[34%] h-0 pt-[34%] rounded-lg overflow-hidden">
@@ -69,8 +84,10 @@ const MovieCardX = ({ movieData, type }) => {
             <MovieTagList
               movieData={movieData}
               genresData={neededGenres}
-              disabled={true}
+              category={type}
               className="!mb-0"
+              handleHoverTag={handleHoverTag}
+              handleUnHoverTag={handleUnHoverTag}
             />
           </div>
         </Link>

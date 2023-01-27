@@ -3,22 +3,22 @@ import { Fragment, useEffect } from 'react';
 import queryString from 'query-string';
 
 import { Navbar, SearchBar } from '~/components/Bar';
-import { FilmList } from '~/components/CardAndList/FilmList';
 import { useMySWR, usePaginate, useScrollOnTop, useSearch } from '~/hooks';
 import { api } from '~/config';
 import { MainPaginate } from '~/components/Paginate';
 import LoadingBounce from '~/components/Base/Loading/Bounce';
-import { navMovie } from '~/utils';
+import { navPerson } from '~/utils';
+import { PersonList } from '~/components/CardAndList';
 
-const MovieGeneralSearchPage = () => {
+const PersonSearchPage = () => {
   const location = useLocation();
   const { query, page } = queryString.parse(location.search);
   useScrollOnTop(page);
 
-  const { myData: filmsData, isLoading: filmsLoading } = useMySWR({
+  const { myData: peopleData, isLoading: peopleLoading } = useMySWR({
     api: query
-      ? api.getSearch(query, 'movie', page)
-      : api.getPopular('movie', page),
+      ? api.getSearch(query, 'person', page)
+      : api.getPopular('person', page + 1),
     origin: true,
   });
 
@@ -27,44 +27,46 @@ const MovieGeneralSearchPage = () => {
 
   const navigateTo = useNavigate();
   useEffect(() => {
-    navigateTo(`/movie/search?query=${input}&page=${currentPage}`);
+    navigateTo(`/person/search?query=${input}&page=${currentPage}`);
   }, [navigateTo, input, currentPage]);
 
   return (
-    <div className="bg-[#222222] py-[20px] px-10  overflow-hidden">
-      <Navbar navList={navMovie} />
+    <div className="bg-[#222222] py-[20px] px-10 overflow-hidden">
+      <Navbar navList={navPerson} />
       <div className="mt-[24px]">
         <SearchBar
           input={input}
           handleSetInput={handleSetInput}
           isFocus={isFocus}
           setIsFocus={setIsFocus}
-          placeholder="Find Your Movie"
+          placeholder="Find Your Actor"
         />
-        {!filmsLoading && filmsData.results && filmsData.results.length > 0 && (
-          <Fragment>
-            <FilmList
-              filmsData={filmsData.results}
-              className="my-[24px]"
-              type="movie"
-            />
-            {filmsData.total_pages > 1 && (
-              <MainPaginate
-                totalPage={filmsData.total_pages}
-                handlePageClick={handlePageClick}
-                currentPage={currentPage}
+        {!peopleLoading &&
+          peopleData.results &&
+          peopleData.results.length > 0 && (
+            <Fragment>
+              <PersonList
+                peopleData={peopleData.results}
+                className="my-[24px]"
+                type="tv"
               />
-            )}
-          </Fragment>
-        )}
-        {!filmsLoading &&
-          filmsData.results &&
-          filmsData.results.length === 0 && (
+              {peopleData.total_pages > 1 && (
+                <MainPaginate
+                  totalPage={peopleData.total_pages}
+                  handlePageClick={handlePageClick}
+                  currentPage={currentPage}
+                />
+              )}
+            </Fragment>
+          )}
+        {!peopleLoading &&
+          peopleData.results &&
+          peopleData.results.length === 0 && (
             <span className="block text-[rgba(255,_255,_255,_0.8)] mt-3 ml-1">
               No result was found! Try another keyword . . .
             </span>
           )}
-        {(filmsLoading || !filmsData.results) && (
+        {(peopleLoading || !peopleData.results) && (
           <LoadingBounce mainClass="flex justify-center items-center w-full mb-auto mt-3" />
         )}
       </div>
@@ -72,4 +74,4 @@ const MovieGeneralSearchPage = () => {
   );
 };
 
-export default MovieGeneralSearchPage;
+export default PersonSearchPage;

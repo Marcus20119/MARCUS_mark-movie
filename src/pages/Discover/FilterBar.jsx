@@ -138,7 +138,7 @@ const FilterBar = ({ paramData, currentPage, setCurrentPage }) => {
             </label>
             <div className="relative w-full">
               <select
-                className="relative w-full px-2 py-1 rounded-md focus:shadow-select"
+                className="relative w-full px-2 py-1 rounded-md cursor-pointer focus:shadow-select"
                 name={tab.query}
                 id={`#discoverFilterTab${index}`}
                 defaultValue={paramData[tab.query] || ''}

@@ -8,6 +8,8 @@ const MovieTagList = ({
   disabled = false,
   className = '',
   category = 'movie',
+  handleHoverTag = () => {},
+  handleUnHoverTag = () => {},
 }) => {
   const navigateTo = useNavigate();
   return (
@@ -19,15 +21,20 @@ const MovieTagList = ({
         movieData.genre_ids.slice(0, numberOfTag).map(id => (
           <button
             key={`genres${id}`}
-            className={`px-[11px] py-[8px] border border-white text-[0.65rem] leading-[0.75rem] rounded-md opacity-70 ${
+            className={`px-[11px] py-[8px] border border-white text-[0.65rem] leading-[0.75rem] rounded-md opacity-70 hover:!text-white ${
               disabled ? '' : 'hover:opacity-100'
             }`}
             disabled={disabled}
-            onClick={() => {
+            href={`/discover?category=${category}&with_genres=${id}&page=1`}
+            onClick={e => {
+              e.preventDefault();
+              e.stopPropagation();
               navigateTo(
                 `/discover?category=${category}&with_genres=${id}&page=1`
               );
             }}
+            onMouseOver={handleHoverTag}
+            onMouseLeave={handleUnHoverTag}
           >
             {genresData.find(genre => genre.id === id) &&
               genresData.find(genre => genre.id === id).name}
@@ -36,20 +43,25 @@ const MovieTagList = ({
       {movieData &&
         movieData?.genres &&
         movieData.genres.map(genre => (
-          <button
+          <a
             key={`genres${genre.id}`}
-            className={`px-[11px] py-[8px] border border-white text-[0.65rem] leading-[0.75rem] rounded-md opacity-70 ${
+            className={`px-[11px] py-[8px] border border-white text-[0.65rem] leading-[0.75rem] rounded-md opacity-70 hover:!text-white ${
               disabled ? '' : 'hover:opacity-100'
             }`}
             disabled={disabled}
-            onClick={() => {
+            href={`/discover?category=${category}&with_genres=${genre.id}&page=1`}
+            onClick={e => {
+              e.preventDefault();
+              e.stopPropagation();
               navigateTo(
                 `/discover?category=${category}&with_genres=${genre.id}&page=1`
               );
             }}
+            onMouseOver={handleHoverTag}
+            onMouseLeave={handleUnHoverTag}
           >
             {genre.name}
-          </button>
+          </a>
         ))}
     </div>
   );

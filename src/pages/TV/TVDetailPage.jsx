@@ -17,8 +17,8 @@ import './TVDetailPage.scss';
 import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 
 const TVDetailPage = () => {
-  useScrollOnTop();
   const { id } = useParams();
+  useScrollOnTop(id);
 
   const { myData: movieData, isLoading: movieLoading } = useMySWR({
     api: api.getDetail(id, 'tv'),

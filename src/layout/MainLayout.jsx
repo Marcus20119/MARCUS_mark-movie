@@ -3,7 +3,7 @@ import { NavSection } from '~/components/NavSection';
 
 const MainLayout = () => {
   return (
-    <div className="main-layout">
+    <div className="main-layout min-h-[120vh]">
       <NavSection />
       <Outlet />
     </div>

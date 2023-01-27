@@ -7,10 +7,10 @@ import { DetailCelebInfoSection } from '~/components/Detail';
 import { api } from '~/config';
 import { useMySWR, useScrollOnTop } from '~/hooks';
 
-const CelebDetailPage = () => {
+const PersonDetailPage = () => {
   const { id } = useParams();
 
-  useScrollOnTop();
+  useScrollOnTop(id);
 
   const { myData: personData, isLoading: personLoading } = useMySWR({
     api: api.getDetail(id, 'person'),
@@ -64,6 +64,6 @@ const CelebDetailPage = () => {
   );
 };
 
-export default withErrorBoundary(CelebDetailPage, {
+export default withErrorBoundary(PersonDetailPage, {
   FallbackComponent: ErrorFallBack,
 });

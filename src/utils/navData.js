@@ -1,3 +1,6 @@
+import Swal from 'sweetalert2';
+import { supabase } from '~/supabase';
+
 export const navSection = [
   {
     groupName: 'MENU',
@@ -7,30 +10,35 @@ export const navSection = [
         iconClass: 'bx bxs-home',
         originLink: '/home',
         navigateLink: '/home/movies',
+        needLogIn: false,
       },
       {
         name: 'Community',
         iconClass: 'bx bx-globe',
         originLink: '/community',
         navigateLink: '/community',
+        needLogIn: false,
       },
       {
         name: 'Discover',
         iconClass: 'bx bxs-compass',
         originLink: '/discover',
         navigateLink: '/discover?category=movie&page=1',
+        needLogIn: false,
       },
       {
         name: 'Awards',
         iconClass: 'bx bxs-award',
         originLink: '/awards',
         navigateLink: '/awards',
+        needLogIn: true,
       },
       {
         name: 'Celebs',
         iconClass: 'bx bxs-user',
         originLink: '/person',
-        navigateLink: '/person/general',
+        navigateLink: '/person/popular?page=1',
+        needLogIn: false,
       },
     ],
   },
@@ -42,18 +50,21 @@ export const navSection = [
         iconClass: 'bx bxs-stopwatch',
         originLink: '/recent',
         navigateLink: '/recent',
+        needLogIn: true,
       },
       {
         name: 'Watch List',
         iconClass: 'bx bxs-bookmark',
         originLink: '/top-rated',
         navigateLink: '/top-rated',
+        needLogIn: true,
       },
       {
         name: 'Downloaded',
         iconClass: 'bx bxs-download',
         originLink: '/downloaded',
         navigateLink: '/downloaded',
+        needLogIn: true,
       },
     ],
   },
@@ -65,12 +76,14 @@ export const navSection = [
         iconClass: 'bx bxs-tv',
         originLink: '/tv',
         navigateLink: '/tv/on-the-air?page=1',
+        needLogIn: false,
       },
       {
         name: 'Movies',
         iconClass: 'bx bxs-film',
         originLink: '/movie',
         navigateLink: '/movie/now-playing?page=1',
+        needLogIn: false,
       },
     ],
   },
@@ -82,12 +95,46 @@ export const navSection = [
         iconClass: 'bx bxs-cog',
         originLink: '/settings',
         navigateLink: '/settings',
+        needLogIn: true,
       },
       {
         name: 'Log outs',
         iconClass: 'bx bx-log-out',
         originLink: '/log-out',
-        navigateLink: '/log',
+        needLogIn: true,
+        handleClick: async () => {
+          Swal.fire({
+            title: 'Are you sure?',
+            text: `You will immediately sign out!`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#FF3D71',
+            cancelButtonColor: '#cccccc30',
+            confirmButtonText: 'Sign out',
+            scrollbarPadding: false,
+          }).then(async result => {
+            if (result.isConfirmed) {
+              // Loading pop-up
+              Swal.fire({
+                title: 'Loading...',
+                text: 'Please wait',
+                imageUrl: '/imgs/loading-gif.gif',
+                imageHeight: '60px',
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                scrollbarPadding: false,
+              });
+              await supabase.auth.signOut();
+              Swal.fire({
+                title: 'Deleted!',
+                text: 'Your file has been deleted.',
+                icon: 'success',
+                scrollbarPadding: false,
+                confirmButtonColor: '#FF3D71',
+              });
+            }
+          });
+        },
       },
     ],
   },
@@ -147,5 +194,16 @@ export const navTV = [
   {
     name: 'Search',
     path: '/tv/search?query=&page=1',
+  },
+];
+
+export const navPerson = [
+  {
+    name: 'Popular',
+    path: '/person/popular?page=1',
+  },
+  {
+    name: 'Search',
+    path: '/person/search?query=&page=1',
   },
 ];

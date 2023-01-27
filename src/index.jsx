@@ -8,12 +8,15 @@ import 'swiper/css/navigation';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './scss/index.scss';
 import reportWebVitals from './reportWebVitals';
+import AuthProvider from './contexts/authContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Fragment>
     <BrowserRouter>
-      <App />
+      <AuthProvider>
+        <App />
+      </AuthProvider>
     </BrowserRouter>
   </Fragment>
 );
