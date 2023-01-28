@@ -32,13 +32,13 @@ const NavSection = () => {
                   {navItem.items.length > 0 &&
                     navItem.items.map(navItem => (
                       <NavLink
-                        onClick={e => {
+                        onClick={async e => {
                           e.preventDefault();
-                          if (navItem?.navigateLink) {
-                            navigateTo(navItem.navigateLink);
-                          }
                           if (navItem?.handleClick) {
-                            navItem.handleClick();
+                            await navItem.handleClick();
+                            navigateTo(navItem.navigateLink);
+                          } else {
+                            navigateTo(navItem.navigateLink);
                           }
                         }}
                         to={navItem.originLink}

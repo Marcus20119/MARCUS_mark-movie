@@ -10,7 +10,7 @@ import LoadingPage from './pages/LoadingPage';
 const MoviesHomePage = lazy(() => import('./pages/Movie/MoviesHomePage'));
 const TVSeriesHomePage = lazy(() => import('./pages/TV/TVSeriesHomePage'));
 const DiscoverPage = lazy(() => import('./pages/Discover/DiscoverPage'));
-const UserInfoPage = lazy(() => import('./pages/UserInfoPage'));
+const UserInfoPage = lazy(() => import('./pages/User/UserInfoPage'));
 
 const PersonDetailPage = lazy(() => import('./pages/Person/PersonDetailPage'));
 const PersonTypePage = lazy(() => import('./pages/Person/PersonTypePage'));

@@ -3,7 +3,7 @@ import queryString from 'query-string';
 import { useLocation } from 'react-router-dom';
 import { withErrorBoundary } from 'react-error-boundary';
 
-import { useMySWR, usePaginate } from '~/hooks';
+import { useMySWR, usePaginate, useScrollOnTop } from '~/hooks';
 import { api } from '~/config';
 import FilterBar from './FilterBar';
 import { FilmList } from '~/components/CardAndList';
@@ -12,11 +12,8 @@ import LoadingBounce from '~/components/Base/Loading/Bounce';
 import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 
 const DiscoverPage = () => {
-  useEffect(() => {
-    document.documentElement.scrollTop = 0;
-  }, []);
-
   const location = useLocation();
+  useScrollOnTop(location);
   const paramData = queryString.parse(location.search);
   const paramQuery = location.search.slice(location.search.indexOf('&'));
   const { myData: discoverData, isLoading: discoverLoading } = useMySWR({

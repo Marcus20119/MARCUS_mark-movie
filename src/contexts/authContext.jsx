@@ -7,13 +7,15 @@ import { supabase } from '../supabase';
 const AuthContext = createContext();
 
 const AuthProvider = props => {
-  const [session, setSession] = useState(null);
-  console.log('session', session);
+  // Xử lý logic ẩn hiện portal login
   const {
     show: showModelLogIn,
     handleShow: handleShowModelLogIn,
     handleHide: handleHideModelLogIn,
   } = useModal();
+
+  // Xử lý authentication
+  const [session, setSession] = useState({});
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -27,7 +29,49 @@ const AuthProvider = props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Lấy dữ liệu user
+  const [userRow, setUserRow] = useState({});
+  const [loadingGetUserRow, setLoadingGetUserRow] = useState(false);
+  const [forceGetUserRow, setForceGetUserRow] = useState(false);
+
+  const handleForceGetUserRow = () => {
+    setForceGetUserRow(!forceGetUserRow);
+  };
+
+  useEffect(() => {
+    const getProfile = async () => {
+      try {
+        setLoadingGetUserRow(true);
+        const { user } = session;
+
+        let { data, error, status } = await supabase
+          .from('profiles')
+          .select()
+          .eq('id', user.id)
+          .single();
+
+        if (error && status !== 406) {
+          throw error;
+        }
+        if (data) {
+          setUserRow(data);
+        }
+      } catch (error) {
+        console.log(error.message);
+      } finally {
+        setLoadingGetUserRow(false);
+      }
+    };
+    if (session?.user?.id) {
+      getProfile();
+    }
+  }, [session, forceGetUserRow]);
+
   const value = {
+    userRow,
+    setUserRow,
+    loadingGetUserRow,
+    handleForceGetUserRow,
     session,
     setSession,
     showModelLogIn,
@@ -43,6 +87,10 @@ function useAuth() {
     throw new Error('useAuth must be used within AuthContext');
   }
   const {
+    userRow,
+    setUserRow,
+    loadingGetUserRow,
+    handleForceGetUserRow,
     session,
     setSession,
     showModelLogIn,
@@ -50,6 +98,10 @@ function useAuth() {
     handleHideModelLogIn,
   } = context;
   return {
+    userRow,
+    setUserRow,
+    loadingGetUserRow,
+    handleForceGetUserRow,
     session,
     setSession,
     showModelLogIn,

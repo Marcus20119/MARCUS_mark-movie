@@ -101,9 +101,10 @@ export const navSection = [
         name: 'Log outs',
         iconClass: 'bx bx-log-out',
         originLink: '/log-out',
+        navigateLink: '/home/movies',
         needLogIn: true,
         handleClick: async () => {
-          Swal.fire({
+          await Swal.fire({
             title: 'Are you sure?',
             text: `You will immediately sign out!`,
             icon: 'warning',
@@ -125,7 +126,7 @@ export const navSection = [
                 scrollbarPadding: false,
               });
               await supabase.auth.signOut();
-              Swal.fire({
+              await Swal.fire({
                 title: 'Deleted!',
                 text: 'Your file has been deleted.',
                 icon: 'success',

@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react';
-import { supabase } from './supabase';
+import { Fragment, useEffect, useRef, useState } from 'react';
+import ToolTipBase from '~/components/Base/ToolTipBase';
+import { supabase } from '~/supabase';
+import './Avatar.scss';
 
 export default function Avatar({ url, size, onUpload }) {
   const [avatarUrl, setAvatarUrl] = useState(null);
@@ -23,6 +25,8 @@ export default function Avatar({ url, size, onUpload }) {
       console.log('Error downloading image: ', error.message);
     }
   };
+
+  const inputRef = useRef();
 
   const uploadAvatar = async event => {
     try {
@@ -54,31 +58,37 @@ export default function Avatar({ url, size, onUpload }) {
   };
 
   return (
-    <div style={{ width: size }} aria-live="polite">
-      <img
-        src={avatarUrl ? avatarUrl : `https://place-hold.it/${size}x${size}`}
-        alt={avatarUrl ? 'Avatar' : 'No image'}
-        className="avatar image"
-        style={{ height: size, width: size }}
-      />
-      {uploading ? (
-        'Uploading...'
-      ) : (
-        <>
-          <label className="button primary block" htmlFor="single">
-            Upload an avatar
-          </label>
-          <div className="visually-hidden">
-            <input
-              type="file"
-              id="single"
-              accept="image/*"
-              onChange={uploadAvatar}
-              disabled={uploading}
-            />
-          </div>
-        </>
-      )}
+    <div aria-live="polite" className="userAvatar w-[200px]">
+      <div className="relative">
+        <img
+          src={avatarUrl ? avatarUrl : `https://place-hold.it/${size}x${size}`}
+          alt={avatarUrl ? 'Avatar' : 'No image'}
+          className="block w-[200px] h-[200px] rounded-full border-[2px] border-solid border-[var(--primary-color)] cursor-pointer"
+        />
+        <div
+          className="inputAvatar-icon"
+          title="Upload an avatar"
+          onClick={() => inputRef.current.click()}
+        >
+          <i className="bx bxs-camera"></i>
+        </div>
+      </div>
+      {uploading && 'Uploading...'}
+      <Fragment>
+        <label className="button primary hidden" htmlFor="single">
+          Upload an avatar
+        </label>
+        <div className="visually-hidden hidden">
+          <input
+            ref={inputRef}
+            type="file"
+            id="single"
+            accept="image/*"
+            onChange={uploadAvatar}
+            disabled={uploading}
+          />
+        </div>
+      </Fragment>
     </div>
   );
 }

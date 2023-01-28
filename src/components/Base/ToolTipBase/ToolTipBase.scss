@@ -1,0 +1,28 @@
+.fade {
+  // Start enter
+  &-enter {
+    .content {
+      opacity: 0;
+    }
+  }
+  // Done enter
+  &-enter-active {
+    .content {
+      opacity: 1;
+      transition: all 200ms ease;
+    }
+  }
+  // Start exit
+  &-exit {
+    .content {
+      opacity: 1;
+    }
+  }
+  // Done exit
+  &-exit-active {
+    .content {
+      opacity: 0;
+      transition: all 200ms ease;
+    }
+  }
+}
