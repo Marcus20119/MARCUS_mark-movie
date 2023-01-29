@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { api, route } from '~/config';
+import { api, route } from '~/utils';
 
 const FilmList = ({
   filmsData = [],
@@ -8,6 +8,7 @@ const FilmList = ({
   className = '',
   cardStyle = '',
   type = 'movie',
+  loading = false,
 }) => {
   return (
     <div
@@ -17,7 +18,8 @@ const FilmList = ({
         ...cardStyle,
       }}
     >
-      {filmsData &&
+      {!loading &&
+        filmsData &&
         filmsData.length > 0 &&
         filmsData.map((filmData, index) => (
           <Link

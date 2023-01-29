@@ -5,7 +5,7 @@ import queryString from 'query-string';
 import { Navbar, SearchBar } from '~/components/Bar';
 import { FilmList } from '~/components/CardAndList/FilmList';
 import { useMySWR, usePaginate, useScrollOnTop, useSearch } from '~/hooks';
-import { api } from '~/config';
+import { api } from '~/utils';
 import { MainPaginate } from '~/components/Paginate';
 import LoadingBounce from '~/components/Base/Loading/Bounce';
 import { navTV } from '~/utils';

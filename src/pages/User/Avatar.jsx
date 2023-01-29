@@ -1,38 +1,14 @@
-import { Fragment, useEffect, useRef, useState } from 'react';
-import ToolTipBase from '~/components/Base/ToolTipBase';
-import { useAuth } from '~/contexts/authContext';
+import { Fragment, useRef, useState } from 'react';
+import { useUser } from '~/contexts/userContext';
+import { useForceRerender } from '~/hooks';
 import { supabase } from '~/supabase';
 import './Avatar.scss';
 
-export default function Avatar({ url, size, onUpload }) {
-  const [avatarUrl, setAvatarUrl] = useState(null);
+export default function Avatar({ onUpload }) {
   const [uploading, setUploading] = useState(false);
-  console.log('uploading', uploading);
-  const { loadingGetUserRow } = useAuth();
-  console.log('loadingGetUserRow', loadingGetUserRow);
 
-  useEffect(() => {
-    if (url) {
-      downloadImage(url);
-      return () => URL.revokeObjectURL(avatarUrl);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [url]);
-
-  const downloadImage = async path => {
-    try {
-      const { data, error } = await supabase.storage
-        .from('avatars')
-        .download(path);
-      if (error) {
-        throw error;
-      }
-      const url = URL.createObjectURL(data);
-      setAvatarUrl(url);
-    } catch (error) {
-      console.log('Error downloading image: ', error.message);
-    }
-  };
+  const { avatarUrl } = useUser();
+  useForceRerender([avatarUrl]);
 
   const inputRef = useRef();
 
@@ -59,19 +35,19 @@ export default function Avatar({ url, size, onUpload }) {
 
       onUpload(filePath);
     } catch (error) {
-      alert(error.message);
+      console.log(error.message);
     } finally {
       setUploading(false);
     }
   };
 
   return (
-    <div aria-live="polite" className="userAvatar w-[200px]">
+    <div className="userAvatar w-[200px]">
       <div className="relative">
         <img
-          src={avatarUrl ? avatarUrl : `https://place-hold.it/${size}x${size}`}
+          src={avatarUrl ? avatarUrl : '/imgs/no-face.jpg'}
           alt={avatarUrl ? 'Avatar' : 'No image'}
-          className="block w-[200px] h-[200px] object-cover rounded-full border-[2px] border-solid border-[var(--primary-color)] cursor-pointer"
+          className="block w-[200px] h-[200px] object-cover rounded-full border-[4px] border-solid border-[#222] cursor-pointer"
         />
         <div
           className="inputAvatar-icon z-10"
@@ -80,13 +56,12 @@ export default function Avatar({ url, size, onUpload }) {
         >
           <i className="bx bxs-camera"></i>
         </div>
-        {(uploading || loadingGetUserRow) && (
+        {uploading && (
           <div className="absolute inset-0 bg-black bg-opacity-50 rounded-full border-[2px] border-solid border-transparent p-16 z-5">
             <img src="/imgs/loading-gif.gif" alt="loading" />
           </div>
         )}
       </div>
-      {uploading && 'Uploading...'}
       <Fragment>
         <label className="button primary hidden" htmlFor="single">
           Upload an avatar

@@ -1,6 +1,8 @@
 import { Fragment } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '~/contexts/authContext';
+import { useUser } from '~/contexts/userContext';
+import { useForceRerender } from '~/hooks';
 import { navSection } from '~/utils';
 import { ButtonPrimary } from '../Button';
 import ModalLogIn from './ModalLogIn';
@@ -8,6 +10,13 @@ import ModalLogIn from './ModalLogIn';
 const NavSection = () => {
   const navigateTo = useNavigate();
   const { session, handleShowModelLogIn } = useAuth();
+  const { avatarUrl } = useUser();
+  useForceRerender([avatarUrl]);
+
+  const { pathname } = useLocation();
+  const redirectToCurrentPath = () => {
+    navigateTo(pathname);
+  };
 
   return (
     <Fragment>
@@ -36,7 +45,7 @@ const NavSection = () => {
                           e.preventDefault();
                           if (navItem?.handleClick) {
                             await navItem.handleClick();
-                            navigateTo(navItem.navigateLink);
+                            redirectToCurrentPath();
                           } else {
                             navigateTo(navItem.navigateLink);
                           }
@@ -61,8 +70,8 @@ const NavSection = () => {
             <div className="flex justify-start items-center gap-2 mb-2">
               <img
                 className="block w-7 h-7 object-cover object-center rounded-full"
-                src="/imgs/marcus.jpg"
-                alt="marcus freeman"
+                src={avatarUrl ? avatarUrl : '/imgs/no-face.jpg'}
+                alt={avatarUrl ? 'Avatar' : 'No image'}
               />
               <h5>Marcus Freeman</h5>
             </div>

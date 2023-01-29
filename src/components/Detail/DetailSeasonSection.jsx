@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withErrorBoundary } from 'react-error-boundary';
 
 import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
-import { api } from '~/config';
+import { api } from '~/utils';
 
 const DetailSeasonSection = ({ seasonsData }) => {
   return (

@@ -6,7 +6,8 @@ import useSWRInfinite from 'swr/infinite';
 import LoadingBounce from '~/components/Base/Loading/Bounce';
 import { ButtonPlay } from '~/components/Button';
 import { MovieCardListX } from '~/components/CardAndList';
-import { api, fetcher } from '~/config';
+import { api } from '~/utils';
+import { fetcher } from '~/config';
 import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 
 const SearchUI = ({ type, query }) => {

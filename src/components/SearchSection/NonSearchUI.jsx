@@ -7,7 +7,7 @@ import {
   MovieCardListX,
   LoadingMovieCardListX,
 } from '~/components/CardAndList';
-import { api } from '~/config';
+import { api } from '~/utils';
 import { useMySWR } from '~/hooks';
 
 const NonSearchUI = ({ type }) => {

@@ -6,11 +6,13 @@ import { InputBar, Navbar } from '~/components/Bar';
 import { navTV } from '~/utils';
 import { ButtonPrimary } from '~/components/Button';
 import { Fragment } from 'react';
+import { useUser } from '~/contexts/userContext';
 
 const UserInfoPage = () => {
   const [loading, setLoading] = useState(false);
 
-  const { session, userRow } = useAuth();
+  const { session } = useAuth();
+  const { userRow } = useUser();
   const [newUserRow, setNewUserRow] = useState({});
   useEffect(() => {
     if (userRow) {

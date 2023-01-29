@@ -4,9 +4,10 @@ import { Navbar } from '~/components/Bar';
 
 import { FilmList } from '~/components/CardAndList';
 import { MainPaginate } from '~/components/Paginate';
-import { api } from '~/config';
+import { api } from '~/utils';
 import { useMySWR, usePaginate, useScrollOnTop } from '~/hooks';
 import { navMovie } from '~/utils';
+import LoadingBounce from '~/components/Base/Loading/Bounce';
 
 const MovieTypePage = () => {
   const location = useLocation();
@@ -38,12 +39,22 @@ const MovieTypePage = () => {
     api: myApi,
     origin: true,
   });
-  const { currentPage, handlePageClick } = usePaginate(location);
+  const { currentPage, handlePageClick, setCurrentPage } =
+    usePaginate(location);
 
   const navigateTo = useNavigate();
   useEffect(() => {
     navigateTo(`/movie/${typeApi}?page=${currentPage}`);
-  }, [navigateTo, currentPage, typeApi]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navigateTo, currentPage]);
+
+  // Reset currentPage nếu như chuyển type
+  useEffect(() => {
+    navigateTo(`/movie/${typeApi}?page=1`);
+    setCurrentPage(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [typeApi]);
+
   return (
     <div className="bg-[#222222] py-[20px] px-10  overflow-hidden">
       <Navbar navList={navMovie} />
@@ -62,6 +73,9 @@ const MovieTypePage = () => {
             />
           )}
         </Fragment>
+      )}
+      {(filmsLoading || !filmsData.results) && (
+        <LoadingBounce mainClass="flex justify-center items-center w-full mb-auto mt-3" />
       )}
     </div>
   );

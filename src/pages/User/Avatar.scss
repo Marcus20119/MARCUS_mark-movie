@@ -9,7 +9,7 @@
     width: 25%;
     height: 25%;
     border-radius: 50%;
-    background-color: rgb(204, 39, 83);
+    background-color: #333;
     cursor: pointer;
 
     i {
@@ -19,7 +19,7 @@
     }
 
     &:hover {
-      background-color: rgb(204, 39, 83);
+      background-color: #444;
     }
   }
 }

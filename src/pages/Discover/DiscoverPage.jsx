@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { withErrorBoundary } from 'react-error-boundary';
 
 import { useMySWR, usePaginate, useScrollOnTop } from '~/hooks';
-import { api } from '~/config';
+import { api } from '~/utils';
 import FilterBar from './FilterBar';
 import { FilmList } from '~/components/CardAndList';
 import { MainPaginate } from '~/components/Paginate';

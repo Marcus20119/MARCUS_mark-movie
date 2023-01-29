@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import ModalBase from '~/components/Base/ModalBase';
-import { api } from '~/config';
+import { api } from '~/utils';
 import { useModal } from '~/hooks';
 
 const TrailerItem = ({ keyId, index }) => {

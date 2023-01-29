@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { api, route } from '~/config';
+import { api, route } from '~/utils';
 
 const CastItem = ({ castData }) => {
   return (

@@ -4,7 +4,7 @@ import { withErrorBoundary } from 'react-error-boundary';
 import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 import { MainSection } from '~/components/MainSection';
 import { SearchSection } from '~/components/SearchSection';
-import { api } from '~/config';
+import { api } from '~/utils';
 import { useScrollOnTop } from '~/hooks';
 
 const TVSeriesHomePage = () => {

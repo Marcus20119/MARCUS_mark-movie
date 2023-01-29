@@ -3,7 +3,7 @@ import queryString from 'query-string';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { countries, genres } from '~/config';
+import { countries, genres } from '~/utils';
 import { useEffect } from 'react';
 
 const FilterBar = ({ paramData, currentPage, setCurrentPage }) => {

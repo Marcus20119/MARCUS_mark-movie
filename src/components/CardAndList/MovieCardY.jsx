@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { api, route } from '~/config';
+import { api, route } from '~/utils';
 import { ButtonPlay } from '../Button';
 
 const MovieCardY = ({ movieData, type }) => {

@@ -1,22 +1,29 @@
 import { Fragment } from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
 import { BrowserRouter } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+
+import App from './App';
+import AuthProvider from './contexts/authContext';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './scss/index.scss';
+import 'react-toastify/dist/ReactToastify.css';
 import reportWebVitals from './reportWebVitals';
-import AuthProvider from './contexts/authContext';
+import UserProvider from './contexts/userContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Fragment>
     <BrowserRouter>
       <AuthProvider>
-        <App />
+        <UserProvider>
+          <App />
+        </UserProvider>
       </AuthProvider>
+      <ToastContainer />
     </BrowserRouter>
   </Fragment>
 );

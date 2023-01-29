@@ -17,6 +17,7 @@ const PortalWrapper = ({
   bodyClassName = '',
   containerStyle = {},
   bodyStyle = {},
+  displayCloseButton = true,
   children,
 }) => {
   // append div tag to body
@@ -34,10 +35,12 @@ const PortalWrapper = ({
       <div className={bodyClassName} style={bodyStyle}>
         {children}
       </div>
-      <i
-        className="bx bx-x absolute top-[5%] right-[5%] z-[666] cursor-pointer text-white text-4xl"
-        onClick={onClose}
-      ></i>
+      {displayCloseButton && (
+        <i
+          className="close-button bx bx-x absolute top-[5%] right-[5%] z-[666] cursor-pointer text-white text-4xl"
+          onClick={onClose}
+        ></i>
+      )}
     </div>
   );
   return createPortal(renderContent, portalWrapperEle);

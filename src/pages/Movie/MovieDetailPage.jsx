@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 import { withErrorBoundary } from 'react-error-boundary';
 
-import { api } from '~/config';
+import { api } from '~/utils';
 import { useMySWR, useScrollOnTop } from '~/hooks';
 import {
   DetailBackdrop,

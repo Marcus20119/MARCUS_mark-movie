@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withErrorBoundary } from 'react-error-boundary';
 
 import { ButtonPlay } from '~/components/Button';
-import { api } from '~/config';
+import { api } from '~/utils';
 import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 
 const DetailPosterSection = ({ movieData }) => {

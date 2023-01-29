@@ -4,7 +4,7 @@ import { Navbar } from '~/components/Bar';
 
 import { PersonList } from '~/components/CardAndList';
 import { MainPaginate } from '~/components/Paginate';
-import { api } from '~/config';
+import { api } from '~/utils';
 import { useMySWR, usePaginate, useScrollOnTop } from '~/hooks';
 import { navPerson } from '~/utils';
 

@@ -1,5 +1,6 @@
 import Swal from 'sweetalert2';
 import { supabase } from '~/supabase';
+import { loadingAlert, successAlert } from './sweetAlert';
 
 export const navSection = [
   {
@@ -103,7 +104,7 @@ export const navSection = [
         originLink: '/log-out',
         navigateLink: '/home/movies',
         needLogIn: true,
-        handleClick: async () => {
+        handleClick: async (directToCurrentPath = () => {}) => {
           await Swal.fire({
             title: 'Are you sure?',
             text: `You will immediately sign out!`,
@@ -115,24 +116,13 @@ export const navSection = [
             scrollbarPadding: false,
           }).then(async result => {
             if (result.isConfirmed) {
-              // Loading pop-up
-              Swal.fire({
-                title: 'Loading...',
-                text: 'Please wait',
-                imageUrl: '/imgs/loading-gif.gif',
-                imageHeight: '60px',
-                showConfirmButton: false,
-                allowOutsideClick: false,
-                scrollbarPadding: false,
-              });
+              loadingAlert();
               await supabase.auth.signOut();
-              await Swal.fire({
+              await successAlert({
                 title: 'Deleted!',
                 text: 'Your file has been deleted.',
-                icon: 'success',
-                scrollbarPadding: false,
-                confirmButtonColor: '#FF3D71',
               });
+              directToCurrentPath();
             }
           });
         },

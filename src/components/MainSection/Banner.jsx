@@ -7,7 +7,7 @@ import { useMySWR } from '~/hooks';
 import { ButtonPlay, ButtonPlus } from '~/components/Button';
 import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 import LoadingSkeleton from '~/components/Base/Loading/Skeleton';
-import { api, genres, route } from '~/config';
+import { api, genres, route } from '~/utils';
 import { MovieTagList, LoadingMovieTagList } from '~/components/CardAndList';
 
 function Banner({ apiLink, type }) {

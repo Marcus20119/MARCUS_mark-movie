@@ -1,20 +1,10 @@
 import { Fragment, useEffect, useRef, useState } from 'react';
-import ToolTipBase from '~/components/Base/ToolTipBase';
 import { supabase } from '~/supabase';
 import './Avatar.scss';
 
-export default function Wallpaper({ url, size, onUpload }) {
-  console.log('url', url);
+export default function Wallpaper({ url, onUpload }) {
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [uploading, setUploading] = useState(false);
-
-  useEffect(() => {
-    if (url) {
-      downloadImage(url);
-      return () => URL.revokeObjectURL(avatarUrl);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [url]);
 
   const downloadImage = async path => {
     try {
@@ -24,12 +14,21 @@ export default function Wallpaper({ url, size, onUpload }) {
       if (error) {
         throw error;
       }
-      const url = URL.createObjectURL(data);
-      setAvatarUrl(url);
+      const blob = URL.createObjectURL(data);
+      setAvatarUrl(blob);
     } catch (error) {
       console.log('Error downloading image: ', error.message);
+      return '';
     }
   };
+
+  useEffect(() => {
+    if (url) {
+      downloadImage(url);
+      return () => URL.revokeObjectURL(avatarUrl);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [url]);
 
   const inputRef = useRef();
 
@@ -56,43 +55,61 @@ export default function Wallpaper({ url, size, onUpload }) {
 
       onUpload(filePath);
     } catch (error) {
-      alert(error.message);
+      console.log(error.message);
     } finally {
       setUploading(false);
     }
   };
 
   return (
-    <div aria-live="polite" className="userAvatar w-[200px]">
-      <div className="relative">
-        <img
-          src={avatarUrl ? avatarUrl : `https://place-hold.it/${size}x${size}`}
-          alt={avatarUrl ? 'Avatar' : 'No image'}
-          className="block w-[200px] h-[200px] object-cover rounded-full border-[2px] border-solid border-[var(--primary-color)] cursor-pointer"
-        />
-        <div
-          className="inputAvatar-icon"
-          title="Upload an avatar"
-          onClick={() => inputRef.current.click()}
-        >
-          <i className="bx bxs-camera"></i>
+    <Fragment>
+      <div className="userAvatar w-full ">
+        <div className="overflow-hidden">
+          <div
+            className="block w-full h-[350px] object-top backdrop-blur-3xl opacity-50 bg-center bg-cover bg-no-repeat"
+            style={{
+              backgroundImage: avatarUrl
+                ? `linear-gradient(0deg, rgb(34, 34, 34, 0.85), transparent), url('${avatarUrl}')`
+                : `linear-gradient(0deg, rgb(34, 34, 34, 0.85), transparent), url('/imgs/no-backdrop.jpg')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center top',
+            }}
+          ></div>
+
+          {uploading && (
+            <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50">
+              <img
+                src="/imgs/loading-gif.gif"
+                alt="loading"
+                className="block w-[64px] h-[64px]"
+              />
+            </div>
+          )}
         </div>
+        <Fragment>
+          <label className="button primary hidden" htmlFor="single">
+            Upload an avatar
+          </label>
+          <div className="visually-hidden hidden">
+            <input
+              ref={inputRef}
+              type="file"
+              id="single"
+              accept="image/*"
+              onChange={uploadAvatar}
+              disabled={uploading}
+            />
+          </div>
+        </Fragment>
       </div>
-      <Fragment>
-        <label className="button primary hidden" htmlFor="single">
-          Upload an avatar
-        </label>
-        <div className="visually-hidden hidden">
-          <input
-            ref={inputRef}
-            type="file"
-            id="single"
-            accept="image/*"
-            onChange={uploadAvatar}
-            disabled={uploading}
-          />
-        </div>
-      </Fragment>
-    </div>
+      <div
+        className="absolute top-[275px] right-[5%] flex justify-center items-center gap-2 bg-[rgba(255,_255,_255,_0.8)] px-3 py-2 rounded-lg z-20 cursor-pointer hover:bg-white"
+        title="Upload an avatar"
+        onClick={() => inputRef.current.click()}
+      >
+        <i className="bx bxs-camera text-lg"></i>
+        <span className="font-bold">Edit cover photo</span>
+      </div>
+    </Fragment>
   );
 }

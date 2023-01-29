@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 import { FilmList } from '~/components/CardAndList';
 import { DetailCelebInfoSection } from '~/components/Detail';
-import { api } from '~/config';
+import { api } from '~/utils';
 import { useMySWR, useScrollOnTop } from '~/hooks';
 
 const PersonDetailPage = () => {
@@ -25,11 +25,9 @@ const PersonDetailPage = () => {
 
   return (
     <div>
-      <div className="flex w-full justify-between items-start gap-[28px] bg-[#222222] p-[40px]">
-        {!personLoading && personData.name && (
-          <DetailCelebInfoSection personData={personData} />
-        )}
-      </div>
+      {!personLoading && personData.name && (
+        <DetailCelebInfoSection personData={personData} />
+      )}
       <div className="flex flex-col">
         {!movieCreditLoading &&
           movieCreditsData?.cast &&

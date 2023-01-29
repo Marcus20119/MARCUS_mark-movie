@@ -6,6 +6,7 @@ const ButtonPlus = ({
   iconSize = 20,
   disabled = false,
   buttonClass = '',
+  onClick = () => {},
 }) => {
   const sizeClass = `${iconSize.toString()}px`;
   const paddingClass = `${padding.toString()}px`;
@@ -13,10 +14,11 @@ const ButtonPlus = ({
     <button
       type={type}
       disabled={disabled}
-      className={`flex justify-center items-center bg-[rgba(207,_207,_207,_0.3)] rounded-[0.65rem] opacity-80 ${
-        disabled ? '' : 'hover:opacity-100'
+      className={`flex justify-center items-center bg-[#534C4E] rounded-[0.65rem] cursor-pointer opacity-70 ${
+        disabled ? '' : 'hover:opacity-90'
       } ${buttonClass}`}
       style={{ padding: `${paddingClass}` }}
+      onClick={onClick}
     >
       <img
         className={`block ${sizeClass}`}
