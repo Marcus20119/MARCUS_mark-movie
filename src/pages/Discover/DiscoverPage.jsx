@@ -24,7 +24,7 @@ const DiscoverPage = () => {
     usePaginate(location);
 
   return (
-    <div className="flex flex-col w-full min-h-screen items-start gap-[28px] bg-[#222222] p-[40px]">
+    <div className="flex flex-col w-full min-h-screen items-start gap-[28px] !bg-mainSection p-[40px]">
       <FilterBar
         paramData={paramData}
         currentPage={currentPage}

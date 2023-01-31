@@ -32,7 +32,7 @@ const PersonDetailPage = () => {
         {!movieCreditLoading &&
           movieCreditsData?.cast &&
           movieCreditsData.cast.length > 0 && (
-            <div className="relative w-full p-[30px] bg-[#222222]">
+            <div className="relative w-full p-[30px] !bg-mainSection">
               <h3 className="text-2xl text-white font-bold mb-[24px]">
                 {`${personData.name} Movies`}
               </h3>
@@ -46,7 +46,7 @@ const PersonDetailPage = () => {
         {!tvCreditLoading &&
           tvCreditsData?.cast &&
           tvCreditsData.cast.length > 0 && (
-            <div className="relative w-full p-[30px] bg-[#222222]">
+            <div className="relative w-full p-[30px] !bg-mainSection">
               <h3 className="text-2xl text-white font-bold mb-[24px]">
                 {`${personData.name} TV Shows`}
               </h3>

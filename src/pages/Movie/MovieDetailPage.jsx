@@ -34,7 +34,7 @@ const MovieDetailPage = () => {
   });
 
   return (
-    <div className="relative bg-[#222222] min-h-[150vh] ">
+    <div className="relative !bg-mainSection min-h-[150vh] ">
       {!movieLoading && !Array.isArray(movieData) && (
         <Fragment>
           <DetailBackdrop movieData={movieData} />

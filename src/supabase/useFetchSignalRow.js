@@ -28,14 +28,18 @@ export function useFetchSingleRow({
       if (table) {
         try {
           setLoading(true);
-          let respond;
+          let response;
           if (match) {
-            respond = await supabase.from(table).select().match(match).single();
+            response = await supabase
+              .from(table)
+              .select()
+              .match(match)
+              .single();
           } else {
-            respond = await supabase.from(table).select().single();
+            response = await supabase.from(table).select().single();
           }
 
-          const { data, error, status } = respond;
+          const { data, error, status } = response;
 
           if (error && status !== 406) {
             throw error;

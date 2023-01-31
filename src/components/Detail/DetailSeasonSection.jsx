@@ -7,7 +7,7 @@ import { api } from '~/utils';
 
 const DetailSeasonSection = ({ seasonsData }) => {
   return (
-    <div className="relative w-full p-[30px] bg-[#222222]">
+    <div className="relative w-full p-[30px] !bg-mainSection">
       <h3 className="text-2xl text-white font-bold mb-3">Seasons</h3>
       <div className="flex flex-col items-start w-full">
         {seasonsData &&

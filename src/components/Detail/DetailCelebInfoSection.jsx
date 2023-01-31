@@ -12,7 +12,6 @@ import { supabase, useFetchSingleRow } from '~/supabase';
 import { useState } from 'react';
 
 const DetailCelebInfoSection = ({ personData }) => {
-  console.log('personData', personData);
   const PersonalInfo = [
     {
       field: 'Known for department',
@@ -81,7 +80,7 @@ const DetailCelebInfoSection = ({ personData }) => {
   };
 
   return (
-    <div className="flex w-full justify-between items-stretch gap-[28px] bg-[#222222] p-[40px]">
+    <div className="flex w-full justify-between items-stretch gap-[28px] !bg-mainSection p-[40px]">
       <div className="relative flex-grow flex flex-col justify-start items-center gap-[20px] w-[20%]">
         <img
           className="block w-full h-full object-cover object-center rounded-md"

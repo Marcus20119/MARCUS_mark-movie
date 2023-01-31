@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext, createContext } from 'react';
-import { supabase } from '../supabase';
+import { supabase, useFetchAllTable } from '../supabase';
 import { useAuth } from './authContext';
 
 const UserContext = createContext();
@@ -72,6 +72,19 @@ const UserProvider = props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userRow]);
 
+  // Lấy danh sách favorite actors
+
+  const {
+    tableData: favoriteActorsTable,
+    loading: loadingFavoriteActorsTable,
+  } = useFetchAllTable({
+    table: 'favorite_actors',
+    neededLogIn: true,
+    match: { user_id: session?.user?.id ? session.user.id : '' },
+    rerenderCondition: [session],
+    initialLoading: true,
+  });
+
   const value = {
     session,
     userRow,
@@ -80,6 +93,8 @@ const UserProvider = props => {
     handleForceGetUserRow,
     avatarUrl,
     setAvatarUrl,
+    favoriteActorsTable,
+    loadingFavoriteActorsTable,
   };
   return <UserContext.Provider value={value} {...props}></UserContext.Provider>;
 };
@@ -97,6 +112,8 @@ function useUser() {
     handleForceGetUserRow,
     avatarUrl,
     setAvatarUrl,
+    favoriteActorsTable,
+    loadingFavoriteActorsTable,
   } = context;
   return {
     session,
@@ -106,6 +123,9 @@ function useUser() {
     handleForceGetUserRow,
     avatarUrl,
     setAvatarUrl,
+
+    favoriteActorsTable,
+    loadingFavoriteActorsTable,
   };
 }
 

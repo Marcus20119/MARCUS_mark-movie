@@ -14,7 +14,7 @@ const DetailTrailerSection = ({ videosData }) => {
   const nextRef = useRef();
   const prevRef = useRef();
   return (
-    <div className="relative w-full p-[30px] bg-[#222222]">
+    <div className="relative w-full p-[30px] !bg-mainSection">
       <h3 className="text-2xl text-white font-bold mb-3">Trailers & Videos</h3>
       <Swiper spaceBetween={16} slidesPerView="auto" className="detail-trailer">
         {keys &&

@@ -31,7 +31,7 @@ const PersonSearchPage = () => {
   }, [navigateTo, input, currentPage]);
 
   return (
-    <div className="bg-[#222222] py-[20px] px-10 overflow-hidden">
+    <div className="!bg-mainSection py-[20px] px-10 overflow-hidden">
       <Navbar navList={navPerson} />
       <div className="mt-[24px]">
         <SearchBar

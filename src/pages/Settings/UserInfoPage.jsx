@@ -43,7 +43,7 @@ const UserInfoPage = () => {
   return (
     <Fragment>
       {newUserRow.email && (
-        <div className="bg-[#222222] py-[20px] px-10  overflow-hidden !text-white">
+        <div className="!bg-mainSection py-[20px] px-10  overflow-hidden !text-white">
           <Navbar navList={navTV} />
           <div>
             <div

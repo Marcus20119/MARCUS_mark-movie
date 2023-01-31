@@ -10,7 +10,7 @@ import ModalLogIn from './ModalLogIn';
 const NavSection = () => {
   const navigateTo = useNavigate();
   const { session, handleShowModelLogIn } = useAuth();
-  const { avatarUrl } = useUser();
+  const { avatarUrl, userRow } = useUser();
   useForceRerender([avatarUrl]);
 
   const { pathname } = useLocation();
@@ -27,9 +27,7 @@ const NavSection = () => {
             className="font-bold text-xl tracking-wider text-white hover:text-white"
           >
             MARK
-            <span className="text-[var(--primary-color)] text-lg tracking-normal">
-              movie
-            </span>
+            <span className="!text-primary text-lg tracking-normal">movie</span>
           </Link>
           <div className="flex flex-col gap-[24px] mt-auto">
             {navSection.map(navItem => (
@@ -54,8 +52,8 @@ const NavSection = () => {
                         key={navItem.name}
                         className={({ isActive }) =>
                           isActive
-                            ? 'flex items-center gap-2 text-[var(--primary-color)] hover:text-[var(--primary-color)] transition-none'
-                            : 'flex items-center gap-2 hover:text-[var(--primary-color)] transition-none'
+                            ? 'flex items-center gap-2 !text-primary hover:!text-primary transition-none'
+                            : 'flex items-center gap-2 hover:!text-primary transition-none'
                         }
                       >
                         <i className={navItem.iconClass}></i>
@@ -67,14 +65,17 @@ const NavSection = () => {
             ))}
           </div>
           {session?.user?.email ? (
-            <div className="flex justify-start items-center gap-2 mb-2">
+            <Link
+              to="/user?section=info"
+              className="flex justify-start items-center gap-2 mb-2 hover:!text-primary"
+            >
               <img
                 className="block w-7 h-7 object-cover object-center rounded-full"
                 src={avatarUrl ? avatarUrl : '/imgs/no-face.jpg'}
                 alt={avatarUrl ? 'Avatar' : 'No image'}
               />
-              <h5>Marcus Freeman</h5>
-            </div>
+              <h5 className="line-clamp-1 ">{userRow.username}</h5>
+            </Link>
           ) : (
             <ButtonPrimary onClick={handleShowModelLogIn}>
               Sign In

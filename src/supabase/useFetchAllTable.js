@@ -6,17 +6,21 @@ import { supabase } from './supabase';
  *
  * @param {string} table - required (table name)
  * @param {boolean} neededLogin - optional/default = false
+ * @param {object} match conditions - optional/default = {}
+ * @param {boolean} initialLoading - optional/default = false
  * @param {Array} rerenderCondition - optional/default = []
  * @returns
  */
 
 export function useFetchAllTable({
   table,
-  neededLogin = false,
+  neededLogIn = false,
+  match = {},
+  initialLoading = false,
   rerenderCondition = [],
 }) {
   const [tableData, setTableData] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(initialLoading);
   const { session } = useAuth();
 
   useEffect(() => {
@@ -24,7 +28,14 @@ export function useFetchAllTable({
       if (table) {
         try {
           setLoading(true);
-          let { data, error, status } = await supabase.from(table).select();
+          let response;
+          if (match) {
+            response = await supabase.from(table).select();
+          } else {
+            response = await supabase.from(table).select();
+          }
+
+          const { data, error, status } = response;
 
           if (error && status !== 406) {
             throw error;
@@ -39,7 +50,7 @@ export function useFetchAllTable({
         }
       }
     };
-    if (neededLogin) {
+    if (neededLogIn) {
       if (session?.user?.id) {
         fetchTableData();
       }

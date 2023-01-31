@@ -6,7 +6,7 @@ import { FilmList } from '~/components/CardAndList';
 
 const DetailRecommendSection = ({ recommendsData }) => {
   return (
-    <div className="relative w-full p-[30px] bg-[#222222]">
+    <div className="relative w-full p-[30px] !bg-mainSection">
       <h3 className="text-2xl text-white font-bold mb-3">You may also like</h3>
       <FilmList filmsData={recommendsData} numberOfCol={5} type="movie" />
     </div>

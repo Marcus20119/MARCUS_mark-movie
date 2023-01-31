@@ -12,7 +12,7 @@ const DetailCastSection = ({ castsData }) => {
   const nextRef = useRef();
   const prevRef = useRef();
   return (
-    <div className="relative w-full px-[40px] pt-[40px] pb-[30px] bg-[#222222]">
+    <div className="relative w-full px-[40px] pt-[40px] pb-[30px] !bg-mainSection">
       <h3 className="text-2xl text-white font-bold mb-3">Casts</h3>
       <Swiper
         spaceBetween={12}

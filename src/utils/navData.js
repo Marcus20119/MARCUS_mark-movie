@@ -1,3 +1,4 @@
+import { info } from 'autoprefixer';
 import Swal from 'sweetalert2';
 import { supabase } from '~/supabase';
 import { loadingAlert, successAlert } from './sweetAlert';
@@ -196,5 +197,16 @@ export const navPerson = [
   {
     name: 'Search',
     path: '/person/search?query=&page=1',
+  },
+];
+
+export const navUser = [
+  {
+    section: 'info',
+    name: 'Info',
+  },
+  {
+    section: 'favorite-actors',
+    name: 'Favorite Actors',
   },
 ];

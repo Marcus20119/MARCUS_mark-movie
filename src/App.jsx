@@ -36,7 +36,7 @@ function App() {
           <Route path="/" element={<MainLayout />}>
             <Route path="" element={<Navigate replace to="/home/movies" />} />
             <Route path="discover" element={<DiscoverPage />} />
-            <Route path="settings" element={<UserInfoPage />} />
+            <Route path="user" element={<UserInfoPage />} />
 
             <Route path="/person">
               <Route path="details/:id" element={<PersonDetailPage />} />

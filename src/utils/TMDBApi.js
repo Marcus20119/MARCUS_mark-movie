@@ -1,7 +1,7 @@
 export const apiKey = 'ca5bec6407d971b84c656385ba10351d';
 export const api = {
-  getPoster(poster_path) {
-    return `https://image.tmdb.org/t/p/w500${poster_path}`;
+  getPoster(poster_path, width = 'w500') {
+    return `https://image.tmdb.org/t/p/${width}${poster_path}`;
   },
   getBackdrop(backdrop_path) {
     return `https://image.tmdb.org/t/p/original${backdrop_path}`;

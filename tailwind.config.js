@@ -10,6 +10,8 @@ module.exports = {
       },
       colors: {
         primary: '#FF3D71',
+        mainSection: '#222222',
+        white80: '#D1D1D1',
       },
       animationDelay: {
         450: '450ms',
