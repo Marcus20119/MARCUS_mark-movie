@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Avatar from '~/pages/User/Avatar';
-import { useAuth } from '~/contexts/authContext';
 import { supabase } from '~/supabase';
 import { Fragment } from 'react';
 import Wallpaper from './Wallpaper';
@@ -15,7 +14,6 @@ const UserInfoPage = () => {
   useScrollOnTop();
   const { search } = useLocation();
   const section = search.split('=')[1];
-  console.log('section', section);
 
   const [loading, setLoading] = useState(false);
 
@@ -69,12 +67,12 @@ const UserInfoPage = () => {
                 </div>
                 <div className="ml-auto mb-[16px]">
                   <ButtonPrimary className="px-3 py-2 rounded-lg font-normal">
-                    <i class="bx bxs-edit-alt"></i>
+                    <i className="bx bxs-edit-alt"></i>
                     <span>Edit Info</span>
                   </ButtonPrimary>
                 </div>
               </div>
-              <SectionTab section={section} />
+              <SectionTab section={section} userRow={userRow} />
             </div>
           </div>
         </div>

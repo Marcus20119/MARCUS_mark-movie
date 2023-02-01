@@ -48,6 +48,7 @@ export default function Avatar({ onUpload }) {
           src={avatarUrl ? avatarUrl : '/imgs/no-face.jpg'}
           alt={avatarUrl ? 'Avatar' : 'No image'}
           className="block w-[200px] h-[200px] object-cover rounded-full border-[4px] border-solid border-[#222] cursor-pointer"
+          onClick={() => inputRef.current.click()}
         />
         <div
           className="inputAvatar-icon z-10"

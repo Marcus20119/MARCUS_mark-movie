@@ -1,9 +1,17 @@
 import PropTypes from 'prop-types';
 
-const InputBar = ({ name, label, type, value, setValue, placeholder }) => {
+const InputBar = ({
+  name,
+  label,
+  type,
+  value,
+  setValue,
+  placeholder,
+  className,
+}) => {
   return (
     <div>
-      <label htmlFor={name}>{label}</label>
+      {label && <label htmlFor={name}>{label}</label>}
       <input
         id={name}
         name={name}
@@ -15,7 +23,7 @@ const InputBar = ({ name, label, type, value, setValue, placeholder }) => {
             return { ...prev, [name]: e.target.value };
           })
         }
-        className="text-black"
+        className={`block w-full bg-white80 px-2 py-1 text-black ${className}`}
       />
     </div>
   );

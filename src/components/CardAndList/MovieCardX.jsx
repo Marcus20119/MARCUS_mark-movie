@@ -42,7 +42,7 @@ const MovieCardX = ({ movieData, type }) => {
           as="li"
           className="flex items-center gap-[10px] w-full p-[10px] rounded-xl bg-[rgba(255,_255,_255,_0.06)] text-white hover:bg-[rgba(255,_255,_255,_0.2)] hover:shadow-md cursor-pointer"
         >
-          <div className="relative w-[34%] h-0 pt-[34%] bg-slate-700 rounded-lg overflow-hidden">
+          <div className="relative w-[34%] h-0 pt-[34%] bg-[#ececec4a] rounded-lg overflow-hidden">
             <img
               className="absolute w-full inset-0 block  object-cover object-center"
               src={

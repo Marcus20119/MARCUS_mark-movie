@@ -1,4 +1,4 @@
-export function convertDate(date) {
+export function convertDate(date, type = '') {
   const [year, month, day] = date.split('-');
   let monthConvert;
   switch (month) {
@@ -54,6 +54,8 @@ export function convertDate(date) {
       break;
   }
 
-  const result = `${monthConvert} ${day}, ${year}`;
+  const result = `${monthConvert} ${
+    type === 'tz' ? day.split('T')[0] : day
+  }, ${year}`;
   return result;
 }

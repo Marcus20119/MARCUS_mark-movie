@@ -13,6 +13,7 @@ export function useMySWR({ api, max = '', origin = false }) {
   const [myData, setMyData] = useState([]);
   const { data, error } = useSWR(api, fetcher);
   useEffect(() => {
+    setMyData([]);
     if (origin) {
       if (data) {
         setMyData(data);
