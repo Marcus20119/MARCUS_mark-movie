@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { navUser } from '~/utils';
-import SectionTabInfo from './SectionTabInfo';
+import { SectionTabInfo } from './SectionTabInfo';
 
 const SectionTab = ({ section, userRow }) => {
   return (
@@ -12,10 +12,10 @@ const SectionTab = ({ section, userRow }) => {
             <Link
               key={`navUser-${index}`}
               to={`/user?section=${nav.section}`}
-              className={`px-[18px] py-[14px] font-bold ${
+              className={`px-[18px] py-[14px] font-bold border-b-2 ${
                 nav.section === section
-                  ? '!text-primary border-b-2 border-b-primary'
-                  : '!text-white80 border-none'
+                  ? '!text-primary border-b-primary'
+                  : '!text-white80 border-b-mainSection'
               }`}
             >
               {nav.name}

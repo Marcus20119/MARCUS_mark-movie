@@ -49,7 +49,6 @@ const DetailCelebInfoSection = ({ personData }) => {
         try {
           setLoading(true);
           const castRow = {
-            // id: uuidv4(),
             user_id: userRow.id,
             biography: personData.biography,
             birthday: personData.birthday,

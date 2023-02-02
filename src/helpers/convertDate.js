@@ -1,3 +1,10 @@
+/**
+ *
+ * @param {string} date
+ * @param {string} type - 'tz' to transform date system data
+ * @returns
+ */
+
 export function convertDate(date, type = '') {
   const [year, month, day] = date.split('-');
   let monthConvert;

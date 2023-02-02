@@ -15,7 +15,6 @@ const UserProvider = props => {
   const handleForceGetUserRow = () => {
     setForceGetUserRow(!forceGetUserRow);
   };
-
   useEffect(() => {
     const getProfile = async () => {
       try {
@@ -72,18 +71,16 @@ const UserProvider = props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userRow]);
 
-  // Lấy danh sách favorite actors
-
-  const {
-    tableData: favoriteActorsTable,
-    loading: loadingFavoriteActorsTable,
-  } = useFetchAllTable({
-    table: 'favorite_actors',
-    neededLogIn: true,
-    match: { user_id: session?.user?.id ? session.user.id : '' },
-    rerenderCondition: [session],
-    initialLoading: true,
-  });
+  // Lấy dữ liệu like và dislike
+  const [forceGetLikes, setForceGetLikes] = useState(false);
+  const { tableData: likesTable, loading: loadingLikesTable } =
+    useFetchAllTable({
+      table: 'likes',
+      neededLogIn: true,
+      match: { user_id: userRow.id },
+      rerenderCondition: [forceGetLikes, userRow],
+      initialLoading: true,
+    });
 
   const value = {
     session,
@@ -93,8 +90,9 @@ const UserProvider = props => {
     handleForceGetUserRow,
     avatarUrl,
     setAvatarUrl,
-    favoriteActorsTable,
-    loadingFavoriteActorsTable,
+    likesTable,
+    loadingLikesTable,
+    setForceGetLikes,
   };
   return <UserContext.Provider value={value} {...props}></UserContext.Provider>;
 };
@@ -112,8 +110,9 @@ function useUser() {
     handleForceGetUserRow,
     avatarUrl,
     setAvatarUrl,
-    favoriteActorsTable,
-    loadingFavoriteActorsTable,
+    likesTable,
+    loadingLikesTable,
+    setForceGetLikes,
   } = context;
   return {
     session,
@@ -123,9 +122,9 @@ function useUser() {
     handleForceGetUserRow,
     avatarUrl,
     setAvatarUrl,
-
-    favoriteActorsTable,
-    loadingFavoriteActorsTable,
+    likesTable,
+    loadingLikesTable,
+    setForceGetLikes,
   };
 }
 

@@ -1,4 +1,3 @@
-import { info } from 'autoprefixer';
 import Swal from 'sweetalert2';
 import { supabase } from '~/supabase';
 import { loadingAlert, successAlert } from './sweetAlert';
@@ -120,8 +119,8 @@ export const navSection = [
               loadingAlert();
               await supabase.auth.signOut();
               await successAlert({
-                title: 'Deleted!',
-                text: 'Your file has been deleted.',
+                title: 'Signed Out!',
+                text: 'See you next time.',
               });
               directToCurrentPath();
             }

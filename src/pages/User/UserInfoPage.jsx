@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Avatar from '~/pages/User/Avatar';
-import { supabase } from '~/supabase';
+import { supabase, useFetchAllTable } from '~/supabase';
 import { Fragment } from 'react';
 import Wallpaper from './Wallpaper';
 import { useScrollOnTop } from '~/hooks';
@@ -9,16 +9,15 @@ import { useUser } from '~/contexts/userContext';
 import { ButtonPrimary } from '~/components/Button';
 import { useLocation } from 'react-router-dom';
 import SectionTab from './SectionTab';
+import { useAuth } from '~/contexts/authContext';
 
 const UserInfoPage = () => {
   useScrollOnTop();
+  const { userRow, handleForceGetUserRow } = useUser();
   const { search } = useLocation();
   const section = search.split('=')[1];
 
   const [loading, setLoading] = useState(false);
-
-  const { userRow, handleForceGetUserRow } = useUser();
-
   const updateProfile = async newUserRow => {
     try {
       setLoading(true);
@@ -37,6 +36,19 @@ const UserInfoPage = () => {
       setLoading(false);
     }
   };
+
+  // Lấy danh sách favorite actors
+
+  const {
+    tableData: favoriteActorsTable,
+    loading: loadingFavoriteActorsTable,
+  } = useFetchAllTable({
+    table: 'favorite_actors',
+    neededLogIn: true,
+    match: { user_id: userRow?.id ? userRow.id : '' },
+    rerenderCondition: [userRow],
+    initialLoading: true,
+  });
 
   return (
     <Fragment>
@@ -63,7 +75,11 @@ const UserInfoPage = () => {
                   }}
                 />
                 <div>
-                  <SectionMainInfo userRow={userRow} />
+                  <SectionMainInfo
+                    userRow={userRow}
+                    favoriteActorsTable={favoriteActorsTable}
+                    loadingFavoriteActorsTable={loadingFavoriteActorsTable}
+                  />
                 </div>
                 <div className="ml-auto mb-[16px]">
                   <ButtonPrimary className="px-3 py-2 rounded-lg font-normal">

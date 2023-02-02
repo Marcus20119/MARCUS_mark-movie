@@ -12,6 +12,7 @@ import LoadingBounce from '~/components/Base/Loading/Bounce';
 import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 
 const DiscoverPage = () => {
+  console.log('discover');
   const location = useLocation();
   useScrollOnTop(location);
   const paramData = queryString.parse(location.search);

@@ -25,6 +25,7 @@ const ToolTipBase = ({
         className={className}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        onMouseUp={handleMouseLeave}
       >
         {children}
       </span>

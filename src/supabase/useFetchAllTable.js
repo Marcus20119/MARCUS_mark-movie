@@ -8,6 +8,8 @@ import { supabase } from './supabase';
  * @param {boolean} neededLogin - optional/default = false
  * @param {object} match conditions - optional/default = {}
  * @param {boolean} initialLoading - optional/default = false
+ * @param {string} orderBy - optional/default = created_at
+ * @param {boolean} orderAsc - optional/default = false
  * @param {Array} rerenderCondition - optional/default = []
  * @returns
  */
@@ -17,6 +19,8 @@ export function useFetchAllTable({
   neededLogIn = false,
   match = {},
   initialLoading = false,
+  orderBy = 'created_at',
+  orderAsc = false,
   rerenderCondition = [],
 }) {
   const [tableData, setTableData] = useState({});
@@ -30,9 +34,15 @@ export function useFetchAllTable({
           setLoading(true);
           let response;
           if (match) {
-            response = await supabase.from(table).select();
+            response = await supabase
+              .from(table)
+              .select()
+              .order(orderBy, { ascending: orderAsc });
           } else {
-            response = await supabase.from(table).select();
+            response = await supabase
+              .from(table)
+              .select()
+              .order(orderBy, { ascending: orderAsc });
           }
 
           const { data, error, status } = response;
