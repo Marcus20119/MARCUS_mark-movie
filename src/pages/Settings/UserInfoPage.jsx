@@ -31,7 +31,7 @@ const UserInfoPage = () => {
       });
 
       if (error) {
-        throw error;
+        console.error(error);
       }
     } catch (error) {
       alert(error.message);

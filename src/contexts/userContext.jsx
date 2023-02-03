@@ -73,6 +73,9 @@ const UserProvider = props => {
 
   // Lấy dữ liệu like và dislike
   const [forceGetLikes, setForceGetLikes] = useState(false);
+  const handleForceGetLikes = () => {
+    setForceGetLikes(!forceGetLikes);
+  };
   const { tableData: likesTable, loading: loadingLikesTable } =
     useFetchAllTable({
       table: 'likes',
@@ -92,7 +95,7 @@ const UserProvider = props => {
     setAvatarUrl,
     likesTable,
     loadingLikesTable,
-    setForceGetLikes,
+    handleForceGetLikes,
   };
   return <UserContext.Provider value={value} {...props}></UserContext.Provider>;
 };
@@ -112,7 +115,7 @@ function useUser() {
     setAvatarUrl,
     likesTable,
     loadingLikesTable,
-    setForceGetLikes,
+    handleForceGetLikes,
   } = context;
   return {
     session,
@@ -124,7 +127,7 @@ function useUser() {
     setAvatarUrl,
     likesTable,
     loadingLikesTable,
-    setForceGetLikes,
+    handleForceGetLikes,
   };
 }
 

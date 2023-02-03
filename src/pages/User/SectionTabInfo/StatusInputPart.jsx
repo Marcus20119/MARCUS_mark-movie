@@ -22,7 +22,7 @@ const StatusInputPart = ({ userRow, forceRerender, setForceRerender }) => {
       }).then(async result => {
         if (result.isConfirmed) {
           loadingAlert();
-          await supabase.from('statuses').upsert({
+          const { error } = await supabase.from('statuses').upsert({
             user_id: userRow.id,
             user_name: userRow.username,
             user_avatar: userRow.avatar_url,
@@ -31,6 +31,9 @@ const StatusInputPart = ({ userRow, forceRerender, setForceRerender }) => {
             content: content,
             created_at: new Date(),
           });
+          if (error) {
+            console.error(error);
+          }
           setContent('');
           setForceRerender(!forceRerender);
           await successAlert({

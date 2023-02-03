@@ -55,7 +55,7 @@ const Account = ({ session }) => {
       let { error } = await supabase.from('profiles').upsert(updates);
 
       if (error) {
-        throw error;
+        console.error(error);
       }
     } catch (error) {
       alert(error.message);

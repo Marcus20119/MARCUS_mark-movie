@@ -18,3 +18,10 @@ export function warningToast(message) {
     hideProgressBar: true,
   });
 }
+export function errorToast(message) {
+  toast.error(message, {
+    autoClose: 300,
+    delay: 100,
+    hideProgressBar: true,
+  });
+}
