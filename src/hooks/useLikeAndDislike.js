@@ -6,6 +6,7 @@ import { errorToast } from '~/utils';
 
 export function useLikeAndDislike({ status, likesTable }) {
   const { userRow } = useUser();
+  const [forceDisable, setForceDisable] = useState(false);
   const [quantityLike, setQuantityLike] = useState(status.like_count);
   const [quantityDislike, setQuantityDislike] = useState(status.dislike_count);
 
@@ -34,6 +35,7 @@ export function useLikeAndDislike({ status, likesTable }) {
 
   const handleReset = async currentStatus => {
     block: try {
+      setForceDisable(true);
       if (currentStatus === 'like') {
         setQuantityLike(prev => prev - 1);
         const { error } = await supabase
@@ -65,10 +67,13 @@ export function useLikeAndDislike({ status, likesTable }) {
       }
     } catch (err) {
       console.log(err);
+    } finally {
+      setForceDisable(false);
     }
   };
   const handleSingleUpdate = async newStatus => {
     block: try {
+      setForceDisable(true);
       if (newStatus === 'like') {
         setQuantityLike(prev => prev + 1);
         setLikeStatus(1);
@@ -76,6 +81,7 @@ export function useLikeAndDislike({ status, likesTable }) {
           .from('statuses')
           .upsert({ ...status, like_count: quantityLike + 1 });
         if (error) {
+          errorToast('Error: ', error.message);
           console.error(error);
           break block;
         }
@@ -86,6 +92,7 @@ export function useLikeAndDislike({ status, likesTable }) {
           .from('statuses')
           .upsert({ ...status, dislike_count: quantityDislike + 1 });
         if (error) {
+          errorToast('Error: ', error.message);
           console.error(error);
           break block;
         }
@@ -94,14 +101,18 @@ export function useLikeAndDislike({ status, likesTable }) {
         .from('likes')
         .upsert({ ...likeRow, like_status: newStatus === 'like' ? 1 : -1 });
       if (error) {
+        errorToast('Error: ', error.message);
         console.error(error);
       }
     } catch (err) {
       console.log(err);
+    } finally {
+      setForceDisable(false);
     }
   };
   const handleDoubleUpdate = async newStatus => {
     block: try {
+      setForceDisable(true);
       if (newStatus === 'like') {
         setQuantityLike(prev => prev + 1);
         setQuantityDislike(prev => prev - 1);
@@ -112,6 +123,7 @@ export function useLikeAndDislike({ status, likesTable }) {
           dislike_count: quantityDislike - 1,
         });
         if (error) {
+          errorToast('Error: ', error.message);
           console.error(error);
           break block;
         }
@@ -125,6 +137,7 @@ export function useLikeAndDislike({ status, likesTable }) {
           dislike_count: quantityDislike + 1,
         });
         if (error) {
+          errorToast('Error: ', error.message);
           console.error(error);
           break block;
         }
@@ -133,14 +146,18 @@ export function useLikeAndDislike({ status, likesTable }) {
         .from('likes')
         .upsert({ ...likeRow, like_status: newStatus === 'like' ? 1 : -1 });
       if (error) {
+        errorToast('Error: ', error.message);
         console.error(error);
       }
     } catch (err) {
       console.log(err);
+    } finally {
+      setForceDisable(false);
     }
   };
 
   return {
+    forceDisable,
     quantityLike,
     quantityDislike,
     likeStatus,

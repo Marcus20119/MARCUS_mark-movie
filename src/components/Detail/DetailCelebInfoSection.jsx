@@ -1,8 +1,15 @@
+/* eslint-disable no-labels */
 import PropTypes from 'prop-types';
 import { withErrorBoundary } from 'react-error-boundary';
 
 import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
-import { api, neededSignInAlert, successToast, warningToast } from '~/utils';
+import {
+  api,
+  errorToast,
+  neededSignInAlert,
+  successToast,
+  warningToast,
+} from '~/utils';
 import { convertDate } from '~/helpers';
 import { ButtonPlus } from '../Button';
 import ToolTipBase from '../Base/ToolTipBase';
@@ -37,7 +44,7 @@ const DetailCelebInfoSection = ({ personData }) => {
   const [forceRefetching, setForceRefetching] = useState(false);
   const { rowData, loading, setLoading } = useFetchSingleRow({
     table: 'favorite_actors',
-    match: { user_id: userRow.id, actor_id: personData.id },
+    match: { user_id: session.user.id, actor_id: personData.id },
     neededLogIn: true,
     initialLoading: true,
     rerenderCondition: [forceRefetching],
@@ -46,7 +53,7 @@ const DetailCelebInfoSection = ({ personData }) => {
   const handleAddToFavoriteList = () => {
     if (session?.user?.email) {
       const handleUpsertData = async () => {
-        try {
+        block: try {
           setLoading(true);
           const castRow = {
             user_id: userRow.id,
@@ -58,10 +65,15 @@ const DetailCelebInfoSection = ({ personData }) => {
             name: personData.name,
             place_of_birth: personData.place_of_birth,
             profile_path: personData.profile_path,
-            created_at: new Date(),
           };
-          // await handleInsertToTable('favorite_actors', castRow);
-          await supabase.from('favorite_actors').insert(castRow);
+          const { error } = await supabase
+            .from('favorite_actors')
+            .insert(castRow);
+          if (error) {
+            errorToast('Error: ', error.message);
+            console.error(error);
+            break block;
+          }
           setForceRefetching(true);
           successToast('Successfully added to favorite list');
         } catch (err) {

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Swal from 'sweetalert2';
 import { ButtonPrimary } from '~/components/Button';
 import { supabase } from '~/supabase';
-import { loadingAlert, successAlert } from '~/utils';
+import { errorToast, loadingAlert, successAlert } from '~/utils';
 
 const StatusInputPart = ({ userRow, forceRerender, setForceRerender }) => {
   const [content, setContent] = useState('');
@@ -32,6 +32,7 @@ const StatusInputPart = ({ userRow, forceRerender, setForceRerender }) => {
             created_at: new Date(),
           });
           if (error) {
+            errorToast('Error: ', error.message);
             console.error(error);
           }
           setContent('');

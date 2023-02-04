@@ -12,7 +12,7 @@ const SectionTabInfo = ({ userRow }) => {
       table: 'statuses',
       neededLogIn: true,
       match: { user_id: userRow.id },
-      rerenderCondition: [forceRerender],
+      rerenderCondition: [forceRerender, userRow],
       initialLoading: true,
     });
 
@@ -20,7 +20,7 @@ const SectionTabInfo = ({ userRow }) => {
     <div className="flex items-start gap-[30px] ">
       <IntroPart userRow={userRow} />
 
-      <div className="flex-1 flex flex-col gap-[30px] w-full ">
+      <div className="flex-1 flex flex-col gap-[30px] w-full">
         <StatusInputPart
           userRow={userRow}
           forceRerender={forceRerender}
@@ -30,7 +30,7 @@ const SectionTabInfo = ({ userRow }) => {
         {!loadingStatusesTable &&
           statusesTable?.length &&
           statusesTable.length > 0 && (
-            <PostedStatuses statusesTable={statusesTable} userRow={userRow} />
+            <PostedStatuses statusesTable={statusesTable} />
           )}
       </div>
     </div>

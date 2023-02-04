@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Avatar from './pages/User/Avatar';
 import { supabase } from './supabase';
+import { errorToast } from './utils';
 
 const Account = ({ session }) => {
   const [loading, setLoading] = useState(true);
@@ -10,6 +11,7 @@ const Account = ({ session }) => {
 
   useEffect(() => {
     getProfile();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
   const getProfile = async () => {
@@ -55,6 +57,7 @@ const Account = ({ session }) => {
       let { error } = await supabase.from('profiles').upsert(updates);
 
       if (error) {
+        errorToast('Error: ', error.message);
         console.error(error);
       }
     } catch (error) {

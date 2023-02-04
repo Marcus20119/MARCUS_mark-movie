@@ -33,6 +33,12 @@ module.exports = {
           from: { maxHeight: '42px' },
           to: { maxHeight: '200px' },
         },
+        'status-increase-height': {
+          to: {
+            maxHeight: '50px',
+            opacity: '1',
+          },
+        },
       },
       animation: {
         'loading-bounce': 'loading-bounce 0.6s infinite alternate',
@@ -40,6 +46,7 @@ module.exports = {
         'flow-from-top': 'flow-from-top 0.2s ease-out',
         'fade-in': 'fade-in 0.2s ease',
         'increase-height': 'increase-height 0.5s ease',
+        'status-increase-height': 'status-increase-height 0.3s ease forward',
       },
       fontFamily: {
         khandy: 'Khandy Holand Regular',

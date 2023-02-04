@@ -1,4 +1,5 @@
 import { Fragment, useRef, useState } from 'react';
+import ToolTipBase from '~/components/Base/ToolTipBase';
 import { useUser } from '~/contexts/userContext';
 import { useForceRerender } from '~/hooks';
 import { supabase } from '~/supabase';
@@ -50,13 +51,18 @@ export default function Avatar({ onUpload }) {
           className="block w-[200px] h-[200px] object-cover rounded-full border-[4px] border-solid border-[#222] cursor-pointer"
           onClick={() => inputRef.current.click()}
         />
-        <div
-          className="inputAvatar-icon z-10"
-          title="Upload an avatar"
-          onClick={() => inputRef.current.click()}
+        <ToolTipBase
+          tipMessage="Upload an avatar"
+          position="bottom"
+          moveDown={10}
         >
-          <i className="bx bxs-camera"></i>
-        </div>
+          <div
+            className="inputAvatar-icon z-10"
+            onClick={() => inputRef.current.click()}
+          >
+            <i className="bx bxs-camera"></i>
+          </div>
+        </ToolTipBase>
         {uploading && (
           <div className="absolute inset-0 bg-black bg-opacity-50 rounded-full border-[2px] border-solid border-transparent p-16 z-5">
             <img src="/imgs/loading-gif.gif" alt="loading" />

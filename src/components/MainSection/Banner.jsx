@@ -9,6 +9,7 @@ import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 import LoadingSkeleton from '~/components/Base/Loading/Skeleton';
 import { api, genres, route } from '~/utils';
 import { MovieTagList, LoadingMovieTagList } from '~/components/CardAndList';
+import PlusDropDownBanner from './PlusDropDownBanner';
 
 function Banner({ apiLink, type }) {
   const { myData: movies, isLoading: moviesLoading } = useMySWR({
@@ -66,7 +67,10 @@ function Banner({ apiLink, type }) {
                     isLink={true}
                     path={route.toDetail(type, movie.id)}
                   />
-                  <ButtonPlus padding={14} iconSize={24} />
+                  <div className="group relative">
+                    <ButtonPlus padding={14} iconSize={24} />
+                    <PlusDropDownBanner movieData={movie} type={type} />
+                  </div>
                 </div>
               </Carousel.Caption>
             </Carousel.Item>

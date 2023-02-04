@@ -34,15 +34,15 @@ export function useFetchSingleRow({
               .from(table)
               .select()
               .match(match)
-              .single();
+              .maybeSingle();
           } else {
-            response = await supabase.from(table).select().single();
+            response = await supabase.from(table).select().maybeSingle();
           }
 
           const { data, error, status } = response;
 
           if (error && status !== 406) {
-            throw error;
+            console.log(error);
           }
           if (data) {
             setTableData(data);

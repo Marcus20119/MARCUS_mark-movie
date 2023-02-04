@@ -3,7 +3,7 @@ import Avatar from '~/pages/User/Avatar';
 import { useAuth } from '~/contexts/authContext';
 import { supabase } from '~/supabase';
 import { InputBar, Navbar } from '~/components/Bar';
-import { navTV } from '~/utils';
+import { errorToast, navTV } from '~/utils';
 import { ButtonPrimary } from '~/components/Button';
 import { Fragment } from 'react';
 import { useUser } from '~/contexts/userContext';
@@ -31,6 +31,7 @@ const UserInfoPage = () => {
       });
 
       if (error) {
+        errorToast('Error: ', error.message);
         console.error(error);
       }
     } catch (error) {

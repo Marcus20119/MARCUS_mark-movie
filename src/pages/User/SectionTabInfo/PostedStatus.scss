@@ -1,0 +1,9 @@
+@keyframes statusIncreaseHeight {
+  to {
+    max-height: 40px;
+  }
+}
+
+.increase-status {
+  animation: statusIncreaseHeight 0.5s ease forwards;
+}

@@ -39,7 +39,6 @@ const TVTypePage = () => {
     api: myApi,
     origin: true,
   });
-  console.log('filmsLoading', filmsLoading);
   const { currentPage, handlePageClick, setCurrentPage } =
     usePaginate(location);
 

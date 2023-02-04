@@ -6,21 +6,21 @@ import { toast } from 'react-toastify';
 
 export function successToast(message) {
   toast.success(message, {
-    autoClose: 300,
+    autoClose: 400,
     delay: 100,
     hideProgressBar: true,
   });
 }
 export function warningToast(message) {
   toast.warning(message, {
-    autoClose: 300,
+    autoClose: 400,
     delay: 100,
     hideProgressBar: true,
   });
 }
 export function errorToast(message) {
   toast.error(message, {
-    autoClose: 300,
+    autoClose: 400,
     delay: 100,
     hideProgressBar: true,
   });

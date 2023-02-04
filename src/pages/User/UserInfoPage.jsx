@@ -1,15 +1,15 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { Fragment } from 'react';
 import Avatar from '~/pages/User/Avatar';
 import { supabase, useFetchAllTable } from '~/supabase';
-import { Fragment } from 'react';
 import Wallpaper from './Wallpaper';
 import { useScrollOnTop } from '~/hooks';
 import SectionMainInfo from './SectionMainInfo';
 import { useUser } from '~/contexts/userContext';
 import { ButtonPrimary } from '~/components/Button';
-import { useLocation } from 'react-router-dom';
 import SectionTab from './SectionTab';
-import { useAuth } from '~/contexts/authContext';
+import { errorToast } from '~/utils';
 
 const UserInfoPage = () => {
   useScrollOnTop();
@@ -28,6 +28,7 @@ const UserInfoPage = () => {
       });
 
       if (error) {
+        errorToast('Error: ', error.message);
         console.error(error);
       }
     } catch (err) {

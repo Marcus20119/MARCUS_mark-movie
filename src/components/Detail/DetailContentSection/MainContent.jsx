@@ -1,10 +1,13 @@
 import { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { useLocation } from 'react-router-dom';
 
 import { ButtonPlus } from '~/components/Button';
 import { MovieTagList } from '~/components/CardAndList';
+import PlusDropDown from './PlusDropDown';
 
 const MainContent = ({ movieData }) => {
+  const { pathname } = useLocation();
   return (
     <Fragment>
       {movieData && (movieData.title || movieData.name) && (
@@ -67,11 +70,17 @@ const MainContent = ({ movieData }) => {
                 </svg>
                 <span>Share</span>
               </button>
-              <ButtonPlus
-                padding={12}
-                iconSize={16}
-                buttonClass="!rounded-md"
-              />
+              <div className="group relative">
+                <ButtonPlus
+                  padding={12}
+                  iconSize={16}
+                  buttonClass="!rounded-md"
+                />
+                <PlusDropDown
+                  movieData={movieData}
+                  type={pathname.split('/')[1]}
+                />
+              </div>
             </div>
             <MovieTagList
               movieData={movieData}

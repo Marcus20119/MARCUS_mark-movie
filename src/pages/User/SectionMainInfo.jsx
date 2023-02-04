@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import LoadingSkeleton from '~/components/Base/Loading/Skeleton';
+import ToolTipBase from '~/components/Base/ToolTipBase';
 import { api, route } from '~/utils';
 
 const SectionMainInfo = ({
@@ -21,32 +22,53 @@ const SectionMainInfo = ({
               <span className="text-white text-lg">{`${favoriteActorsTable.length} Favorite Actors`}</span>
               <div className="flex mb-[16px] -translate-x-[3px]">
                 {favoriteActorsTable.slice(0, 7).map((actorRow, index) => (
-                  <Link
+                  <ToolTipBase
                     key={`favoriteActor-${index}`}
-                    to={route.toDetail('person', actorRow.actor_id)}
-                    className="relative flex justify-center items-center w-9 h-9 rounded-full overflow-hidden border-[3px] border-solid opacity-90 !border-mainSection hover:!border-primary hover:border-[2px] hover:opacity-100 hover:!z-10"
-                    style={{
-                      transform: `translateX(-${index * 8}px)`,
-                      zIndex: `${7 - index}`,
-                    }}
+                    tipMessage={
+                      (
+                        favoriteActorsTable.length > 6
+                          ? index === 6
+                          : index === favoriteActorsTable.length - 1
+                      )
+                        ? 'View All'
+                        : actorRow.name
+                    }
+                    position="bottom"
                   >
-                    <img
-                      src={
-                        actorRow.profile_path
-                          ? api.getPoster(actorRow.profile_path, 'w92')
-                          : '/imgs/no-face.jpg'
+                    <Link
+                      to={
+                        (
+                          favoriteActorsTable.length > 6
+                            ? index === 6
+                            : index === favoriteActorsTable.length - 1
+                        )
+                          ? '/user?section=favorite-actors'
+                          : route.toDetail('person', actorRow.actor_id)
                       }
-                      alt={actorRow.name}
-                      className="block w-full h-full object-cover object-center"
-                    />
-                    {(favoriteActorsTable.length > 6
-                      ? index === 6
-                      : index === favoriteActorsTable.length - 1) && (
-                      <div className="absolute inset-0 flex justify-center items-center bg-[rgba(0,0,0,0.4)] z-10">
-                        <i className="bx bx-dots-horizontal-rounded text-white"></i>
-                      </div>
-                    )}
-                  </Link>
+                      className="relative flex justify-center items-center w-9 h-9 rounded-full overflow-hidden border-[3px] border-solid opacity-90 !border-mainSection hover:!border-primary hover:border-[2px] hover:opacity-100 hover:!z-10"
+                      style={{
+                        transform: `translateX(-${index * 8}px)`,
+                        zIndex: `${7 - index}`,
+                      }}
+                    >
+                      <img
+                        src={
+                          actorRow.profile_path
+                            ? api.getPoster(actorRow.profile_path, 'w92')
+                            : '/imgs/no-face.jpg'
+                        }
+                        alt={actorRow.name}
+                        className="block w-full h-full object-cover object-center"
+                      />
+                      {(favoriteActorsTable.length > 6
+                        ? index === 6
+                        : index === favoriteActorsTable.length - 1) && (
+                        <div className="absolute inset-0 flex justify-center items-center bg-[rgba(0,0,0,0.4)] z-10">
+                          <i className="bx bx-dots-horizontal-rounded text-white"></i>
+                        </div>
+                      )}
+                    </Link>
+                  </ToolTipBase>
                 ))}
               </div>
             </Fragment>
