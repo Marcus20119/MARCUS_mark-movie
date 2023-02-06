@@ -10,6 +10,7 @@ import { supabase } from './supabase';
  * @param {boolean} initialLoading - optional/default = false
  * @param {string} orderBy - optional/default = created_at
  * @param {boolean} orderAsc - optional/default = false
+ * @param {number} limit - optional/default = 999
  * @param {Array} rerenderCondition - optional/default = []
  * @returns
  */
@@ -21,9 +22,10 @@ export function useFetchAllTable({
   initialLoading = false,
   orderBy = 'created_at',
   orderAsc = false,
+  limit = 999,
   rerenderCondition = [],
 }) {
-  const [tableData, setTableData] = useState({});
+  const [tableData, setTableData] = useState([]);
   const [loading, setLoading] = useState(initialLoading);
   const { session } = useAuth();
 
@@ -37,12 +39,15 @@ export function useFetchAllTable({
             response = await supabase
               .from(table)
               .select()
-              .order(orderBy, { ascending: orderAsc });
+              .order(orderBy, { ascending: orderAsc })
+              .limit(limit)
+              .match(match);
           } else {
             response = await supabase
               .from(table)
               .select()
-              .order(orderBy, { ascending: orderAsc });
+              .order(orderBy, { ascending: orderAsc })
+              .limit(limit);
           }
 
           const { data, error, status } = response;
@@ -63,6 +68,8 @@ export function useFetchAllTable({
     if (neededLogIn) {
       if (session?.user?.id) {
         fetchTableData();
+      } else {
+        setLoading(false);
       }
     } else {
       fetchTableData();
@@ -70,5 +77,5 @@ export function useFetchAllTable({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [...rerenderCondition]);
 
-  return { tableData, loading };
+  return { tableData, loading, setTableData, setLoading };
 }

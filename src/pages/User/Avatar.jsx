@@ -45,12 +45,14 @@ export default function Avatar({ onUpload }) {
   return (
     <div className="userAvatar w-[200px]">
       <div className="relative">
-        <img
-          src={avatarUrl ? avatarUrl : '/imgs/no-face.jpg'}
-          alt={avatarUrl ? 'Avatar' : 'No image'}
-          className="block w-[200px] h-[200px] object-cover rounded-full border-[4px] border-solid border-[#222] cursor-pointer"
-          onClick={() => inputRef.current.click()}
-        />
+        <div className="block w-[200px] h-[200px] rounded-full border-[4px] border-solid border-[#222] overflow-hidden">
+          <img
+            src={avatarUrl ? avatarUrl : '/imgs/no-face.jpg'}
+            alt={avatarUrl ? 'Avatar' : 'No image'}
+            className="block w-full h-full object-cover cursor-pointer"
+            onClick={() => inputRef.current.click()}
+          />
+        </div>
         <ToolTipBase
           tipMessage="Upload an avatar"
           position="bottom"

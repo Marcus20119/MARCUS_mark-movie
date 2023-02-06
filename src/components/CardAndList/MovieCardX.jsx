@@ -4,9 +4,12 @@ import { Link } from 'react-router-dom';
 import { api, genres, route } from '~/utils';
 import { MovieTagList } from './MovieTagList';
 
-const MovieCardX = ({ movieData, type }) => {
-  type = movieData.title ? 'movie' : 'tv';
-  const { vote_average, id } = movieData;
+const MovieCardX = ({ movieData, type, isSearch }) => {
+  // Check 1 lần nữa vì khi search sẽ không biết type là gì
+  if (isSearch) {
+    type = movieData.title ? 'movie' : 'tv';
+  }
+  const { vote_average, id, movie_id, tv_id } = movieData;
   let neededGenres;
   switch (type) {
     case 'movie':
@@ -35,10 +38,10 @@ const MovieCardX = ({ movieData, type }) => {
   return (
     <Fragment>
       {/* For movie and tv, ignore actors*/}
-      {!(movieData.media_type === 'person') && (
+      {!(movieData?.media_type && movieData.media_type === 'person') && (
         <Link
           ref={cardRef}
-          to={route.toDetail(type, id)}
+          to={route.toDetail(type, movie_id || tv_id || id)}
           as="li"
           className="flex items-center gap-[10px] w-full p-[10px] rounded-xl bg-[rgba(255,_255,_255,_0.06)] text-white hover:bg-[rgba(255,_255,_255,_0.2)] hover:shadow-md cursor-pointer"
         >

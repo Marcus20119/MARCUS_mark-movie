@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 
 const ButtonPlay = ({
   type = 'button',
@@ -27,7 +27,7 @@ const ButtonPlay = ({
   return (
     <Fragment>
       {isLink ? (
-        <Link
+        <HashLink
           to={path}
           onClick={onClick}
           className={`flex justify-center items-center gap-2 bg-[var(--primary-color)] py-[10px] rounded-[0.65rem] text-white font-bold opacity-80 ${
@@ -42,7 +42,7 @@ const ButtonPlay = ({
               alt="play-icon"
             />
           )}
-        </Link>
+        </HashLink>
       ) : (
         <button
           type={type}

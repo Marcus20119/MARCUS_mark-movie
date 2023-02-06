@@ -1,6 +1,7 @@
 /* eslint-disable no-labels */
 import PropTypes from 'prop-types';
 import { withErrorBoundary } from 'react-error-boundary';
+import { useState } from 'react';
 
 import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 import {
@@ -14,9 +15,8 @@ import { convertDate } from '~/helpers';
 import { ButtonPlus } from '../Button';
 import ToolTipBase from '../Base/ToolTipBase';
 import { useAuth } from '~/contexts/authContext';
-import { useUser } from '~/contexts/userContext';
 import { supabase, useFetchSingleRow } from '~/supabase';
-import { useState } from 'react';
+import { useUser } from '~/contexts/userContext';
 
 const DetailCelebInfoSection = ({ personData }) => {
   const PersonalInfo = [
@@ -39,15 +39,18 @@ const DetailCelebInfoSection = ({ personData }) => {
       }${personData.place_of_birth || ''}`,
     },
   ];
-  const { session } = useAuth();
-  const { userRow, handleShowModelLogIn } = useUser();
+  const { session, handleShowModelLogIn } = useAuth();
+  const { userRow } = useUser();
   const [forceRefetching, setForceRefetching] = useState(false);
   const { rowData, loading, setLoading } = useFetchSingleRow({
     table: 'favorite_actors',
-    match: { user_id: session.user.id, actor_id: personData.id },
+    match: {
+      user_id: session?.user?.id ? session.user.id : '',
+      actor_id: personData.id,
+    },
     neededLogIn: true,
     initialLoading: true,
-    rerenderCondition: [forceRefetching],
+    rerenderCondition: [forceRefetching, session],
   });
 
   const handleAddToFavoriteList = () => {
@@ -80,7 +83,7 @@ const DetailCelebInfoSection = ({ personData }) => {
           console.log(err);
         }
       };
-      if (rowData?.id && !loading) {
+      if (rowData?.[0]?.id && !loading) {
         warningToast('Already in favorite list');
       } else {
         handleUpsertData();
@@ -98,7 +101,7 @@ const DetailCelebInfoSection = ({ personData }) => {
           src={
             personData.profile_path
               ? api.getPoster(personData.profile_path)
-              : '/imgs/no-face.jpg'
+              : '/imgs/no-user.png'
           }
           alt={personData.name}
         />

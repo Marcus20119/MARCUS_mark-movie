@@ -29,14 +29,11 @@ export function useFetchSingleRow({
         try {
           setLoading(true);
           let response;
+          // Dùng single sẽ trả về object, nhưng lại báo lỗi 406, không dùng thì trả về mảng
           if (match) {
-            response = await supabase
-              .from(table)
-              .select()
-              .match(match)
-              .maybeSingle();
+            response = await supabase.from(table).select().match(match);
           } else {
-            response = await supabase.from(table).select().maybeSingle();
+            response = await supabase.from(table).select();
           }
 
           const { data, error, status } = response;
@@ -57,6 +54,8 @@ export function useFetchSingleRow({
     if (neededLogIn) {
       if (session?.user?.id) {
         fetchTableData();
+      } else {
+        setLoading(false);
       }
     } else {
       fetchTableData();

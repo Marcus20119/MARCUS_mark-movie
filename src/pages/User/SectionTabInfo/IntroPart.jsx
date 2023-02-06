@@ -14,21 +14,27 @@ const IntroPart = ({ userRow }) => {
     },
     {
       content: `Phone number: ${
-        userRow?.phone_number ? userRow?.phone_number : '. . .'
+        userRow?.phone_number ? userRow.phone_number : '...'
       }`,
       iconClass: 'bx bxs-phone',
       additionalClass: '',
     },
     {
-      content: `Website: ${userRow?.website ? userRow?.website : '. . .'}`,
+      content: `Website: ${userRow?.website ? userRow.website : '...'}`,
       iconClass: 'bx bx-globe',
       additionalClass: '',
     },
   ];
   return (
-    <div className="w-[35%] bg-mainSection py-3 px-4 rounded-lg">
+    <div className="w-full bg-mainSection py-3 px-4 rounded-lg">
       <div className="flex flex-col items-start gap-3 text-white80">
-        <h3 className="font-bold text-xl text-white tracking-wide">Intro</h3>
+        <div className="flex justify-between items-center w-full">
+          <h3 className="font-bold text-xl text-white tracking-wide">Intro</h3>
+          <span className="italic text-white opacity-50 hover:!opacity-80 hover:!text-primary cursor-pointer">
+            Edit Info
+          </span>
+        </div>
+
         <ul className="flex flex-col items-start gap-2">
           {infoList.map((infoItem, index) => (
             <li
@@ -38,7 +44,10 @@ const IntroPart = ({ userRow }) => {
               <i
                 className={`flex justify-center items-center text-xl opacity-50 ${infoItem.iconClass}`}
               ></i>
-              <span>{infoItem.content}</span>
+              <span>
+                {/* <pre className="font-mono">{infoItem.content}</pre> */}
+                {infoItem.content}
+              </span>
             </li>
           ))}
         </ul>

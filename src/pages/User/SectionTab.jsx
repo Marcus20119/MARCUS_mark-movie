@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { navUser } from '~/utils';
+import SectionTabFavoriteFilm from './SectionTabFavoriteFilm';
 import { SectionTabInfo } from './SectionTabInfo';
 
 const SectionTab = ({ section, userRow }) => {
@@ -12,7 +13,7 @@ const SectionTab = ({ section, userRow }) => {
             <Link
               key={`navUser-${index}`}
               to={`/user?section=${nav.section}`}
-              className={`px-[18px] py-[14px] font-bold border-b-2 ${
+              className={`px-[18px] py-[14px] font-bold border-b-2 hover:!text-primary ${
                 nav.section === section
                   ? '!text-primary border-b-primary'
                   : '!text-white80 border-b-mainSection'
@@ -25,6 +26,12 @@ const SectionTab = ({ section, userRow }) => {
       </div>
       <div className="min-h-[400px] bg-[#181818] p-[30px]">
         {section === 'info' && <SectionTabInfo userRow={userRow} />}
+        {section === 'favorite-movies' && (
+          <SectionTabFavoriteFilm userRow={userRow} type="movie" />
+        )}
+        {section === 'favorite-tvs' && (
+          <SectionTabFavoriteFilm userRow={userRow} type="tv" />
+        )}
       </div>
     </Fragment>
   );

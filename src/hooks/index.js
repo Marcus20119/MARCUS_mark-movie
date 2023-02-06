@@ -6,3 +6,4 @@ export * from './useSearch';
 export * from './useForceRerender';
 export * from './useLikeAndDislike';
 export * from './usePlusDropDown';
+export * from './useChangeTitleWebsite';

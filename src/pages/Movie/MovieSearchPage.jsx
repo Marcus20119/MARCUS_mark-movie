@@ -4,13 +4,20 @@ import queryString from 'query-string';
 
 import { Navbar, SearchBar } from '~/components/Bar';
 import { FilmList } from '~/components/CardAndList/FilmList';
-import { useMySWR, usePaginate, useScrollOnTop, useSearch } from '~/hooks';
+import {
+  useChangeTitleWebsite,
+  useMySWR,
+  usePaginate,
+  useScrollOnTop,
+  useSearch,
+} from '~/hooks';
 import { api } from '~/utils';
 import { MainPaginate } from '~/components/Paginate';
 import LoadingBounce from '~/components/Base/Loading/Bounce';
 import { navMovie } from '~/utils';
 
 const MovieGeneralSearchPage = () => {
+  useChangeTitleWebsite({ title: 'Mark Movie - Movie/Search' });
   const location = useLocation();
   const { query, page } = queryString.parse(location.search);
   useScrollOnTop(page);
@@ -23,12 +30,20 @@ const MovieGeneralSearchPage = () => {
   });
 
   const { input, handleSetInput, isFocus, setIsFocus } = useSearch();
-  const { currentPage, handlePageClick } = usePaginate(location);
+  const { currentPage, handlePageClick, setCurrentPage } =
+    usePaginate(location);
 
   const navigateTo = useNavigate();
   useEffect(() => {
     navigateTo(`/movie/search?query=${input}&page=${currentPage}`);
   }, [navigateTo, input, currentPage]);
+
+  // Reset currentPage nếu như thay đổi từ khoá search
+  useEffect(() => {
+    navigateTo(`/movie/search?query=${input}&page=1`);
+    setCurrentPage(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [input]);
 
   return (
     <div className="!bg-mainSection py-[20px] px-10  overflow-hidden">

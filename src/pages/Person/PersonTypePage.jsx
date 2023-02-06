@@ -5,10 +5,18 @@ import { Navbar } from '~/components/Bar';
 import { PersonList } from '~/components/CardAndList';
 import { MainPaginate } from '~/components/Paginate';
 import { api } from '~/utils';
-import { useMySWR, usePaginate, useScrollOnTop } from '~/hooks';
+import {
+  useChangeTitleWebsite,
+  useMySWR,
+  usePaginate,
+  useScrollOnTop,
+} from '~/hooks';
 import { navPerson } from '~/utils';
 
 const TVTypePage = () => {
+  useChangeTitleWebsite({
+    title: 'Mark Movie - Celebs',
+  });
   const location = useLocation();
   const pageQuery = location.search.slice(location.search.indexOf('?') + 6);
   useScrollOnTop(pageQuery);

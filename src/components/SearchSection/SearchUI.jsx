@@ -22,6 +22,7 @@ const SearchUI = ({ type, query }) => {
         []
       )
     : [];
+  console.log('searchData', searchData);
   const searchLoading = !data && !error;
   const isEmpty = data?.[0]?.results?.length === 0;
   const isReachingEnd = isEmpty || data?.length >= data?.[0]?.total_pages;
@@ -29,7 +30,7 @@ const SearchUI = ({ type, query }) => {
     <div className="flex flex-col w-full gap-[10px] overflow-y-auto scrollbar-hide">
       {!searchLoading && searchData && searchData.length > 0 && (
         <Fragment>
-          <MovieCardListX moviesData={searchData} type={type} />
+          <MovieCardListX moviesData={searchData} type={type} isSearch={true} />
           {!isReachingEnd && (
             <ButtonPlay
               message="See more"

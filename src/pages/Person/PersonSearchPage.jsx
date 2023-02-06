@@ -3,7 +3,13 @@ import { Fragment, useEffect } from 'react';
 import queryString from 'query-string';
 
 import { Navbar, SearchBar } from '~/components/Bar';
-import { useMySWR, usePaginate, useScrollOnTop, useSearch } from '~/hooks';
+import {
+  useChangeTitleWebsite,
+  useMySWR,
+  usePaginate,
+  useScrollOnTop,
+  useSearch,
+} from '~/hooks';
 import { api } from '~/utils';
 import { MainPaginate } from '~/components/Paginate';
 import LoadingBounce from '~/components/Base/Loading/Bounce';
@@ -11,6 +17,9 @@ import { navPerson } from '~/utils';
 import { PersonList } from '~/components/CardAndList';
 
 const PersonSearchPage = () => {
+  useChangeTitleWebsite({
+    title: 'Mark Movie - Celebs/Search',
+  });
   const location = useLocation();
   const { query, page } = queryString.parse(location.search);
   useScrollOnTop(page);

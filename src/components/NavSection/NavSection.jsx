@@ -1,9 +1,9 @@
 import { Fragment } from 'react';
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '~/contexts/authContext';
 import { useUser } from '~/contexts/userContext';
 import { useForceRerender } from '~/hooks';
-import { navSection } from '~/utils';
+import { navSection, neededSignInAlert } from '~/utils';
 import { ButtonPrimary } from '../Button';
 import ModalLogIn from './ModalLogIn';
 
@@ -12,11 +12,6 @@ const NavSection = () => {
   const { session, handleShowModelLogIn } = useAuth();
   const { avatarUrl, userRow } = useUser();
   useForceRerender([avatarUrl]);
-
-  const { pathname } = useLocation();
-  const redirectToCurrentPath = () => {
-    navigateTo(pathname);
-  };
 
   return (
     <Fragment>
@@ -41,11 +36,15 @@ const NavSection = () => {
                       <NavLink
                         onClick={async e => {
                           e.preventDefault();
-                          if (navItem?.handleClick) {
-                            await navItem.handleClick();
-                            redirectToCurrentPath();
+                          if (navItem.needLogIn && !session?.user?.id) {
+                            neededSignInAlert(handleShowModelLogIn);
                           } else {
-                            navigateTo(navItem.navigateLink);
+                            if (navItem?.handleClick) {
+                              await navItem.handleClick();
+                              navigateTo(navItem.navigateLink);
+                            } else {
+                              navigateTo(navItem.navigateLink);
+                            }
                           }
                         }}
                         to={navItem.originLink}
@@ -69,12 +68,16 @@ const NavSection = () => {
               to="/user?section=info"
               className="flex justify-start items-center gap-2 mb-2 hover:!text-primary"
             >
-              <img
-                className="block w-7 h-7 object-cover object-center rounded-full"
-                src={avatarUrl ? avatarUrl : '/imgs/no-face.jpg'}
-                alt={avatarUrl ? 'Avatar' : 'No image'}
-              />
-              <h5 className="line-clamp-1 ">{userRow.username}</h5>
+              <div className="w-7 h-7 rounded-full overflow-hidden">
+                <img
+                  className="block w-full h-full object-cover object-center"
+                  src={avatarUrl ? avatarUrl : '/imgs/no-face.jpg'}
+                  alt={avatarUrl ? 'Avatar' : 'No image'}
+                />
+              </div>
+              <h5 className="flex-1 line-clamp-1">
+                {userRow.username || `User-${userRow.id}`}
+              </h5>
             </Link>
           ) : (
             <ButtonPrimary onClick={handleShowModelLogIn}>

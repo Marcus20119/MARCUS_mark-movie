@@ -7,9 +7,10 @@ import { useMySWR } from '~/hooks';
 import { ButtonPlay, ButtonPlus } from '~/components/Button';
 import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 import LoadingSkeleton from '~/components/Base/Loading/Skeleton';
-import { api, genres, route } from '~/utils';
+import { api, genres, neededSignInAlert, route } from '~/utils';
 import { MovieTagList, LoadingMovieTagList } from '~/components/CardAndList';
 import PlusDropDownBanner from './PlusDropDownBanner';
+import { useAuth } from '~/contexts/authContext';
 
 function Banner({ apiLink, type }) {
   const { myData: movies, isLoading: moviesLoading } = useMySWR({
@@ -28,6 +29,9 @@ function Banner({ apiLink, type }) {
     default:
       break;
   }
+
+  const { session, handleShowModelLogIn } = useAuth();
+
   return (
     <div className="banner w-full h-[350px] my-4 rounded-xl overflow-hidden shadow-[0_50px_100px_rgb(255,_61,_113,_0.1)]">
       {!moviesLoading && movies && movies.length > 0 && (
@@ -67,10 +71,18 @@ function Banner({ apiLink, type }) {
                     isLink={true}
                     path={route.toDetail(type, movie.id)}
                   />
-                  <div className="group relative">
-                    <ButtonPlus padding={14} iconSize={24} />
-                    <PlusDropDownBanner movieData={movie} type={type} />
-                  </div>
+                  {session?.user?.id ? (
+                    <div className="group relative">
+                      <ButtonPlus padding={14} iconSize={24} />
+                      <PlusDropDownBanner movieData={movie} type={type} />
+                    </div>
+                  ) : (
+                    <ButtonPlus
+                      padding={14}
+                      iconSize={24}
+                      onClick={() => neededSignInAlert(handleShowModelLogIn)}
+                    />
+                  )}
                 </div>
               </Carousel.Caption>
             </Carousel.Item>

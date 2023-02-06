@@ -5,9 +5,12 @@ import { useLocation } from 'react-router-dom';
 import { ButtonPlus } from '~/components/Button';
 import { MovieTagList } from '~/components/CardAndList';
 import PlusDropDown from './PlusDropDown';
+import { useAuth } from '~/contexts/authContext';
+import { neededSignInAlert } from '~/utils';
 
 const MainContent = ({ movieData }) => {
   const { pathname } = useLocation();
+  const { session, handleShowModelLogIn } = useAuth();
   return (
     <Fragment>
       {movieData && (movieData.title || movieData.name) && (
@@ -70,17 +73,27 @@ const MainContent = ({ movieData }) => {
                 </svg>
                 <span>Share</span>
               </button>
-              <div className="group relative">
+
+              {session?.user?.id ? (
+                <div className="group relative">
+                  <ButtonPlus
+                    padding={12}
+                    iconSize={16}
+                    buttonClass="!rounded-md"
+                  />
+                  <PlusDropDown
+                    movieData={movieData}
+                    type={pathname.split('/')[1]}
+                  />
+                </div>
+              ) : (
                 <ButtonPlus
                   padding={12}
                   iconSize={16}
                   buttonClass="!rounded-md"
+                  onClick={() => neededSignInAlert(handleShowModelLogIn)}
                 />
-                <PlusDropDown
-                  movieData={movieData}
-                  type={pathname.split('/')[1]}
-                />
-              </div>
+              )}
             </div>
             <MovieTagList
               movieData={movieData}

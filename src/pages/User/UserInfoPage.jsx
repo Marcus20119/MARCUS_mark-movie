@@ -4,7 +4,7 @@ import { Fragment } from 'react';
 import Avatar from '~/pages/User/Avatar';
 import { supabase, useFetchAllTable } from '~/supabase';
 import Wallpaper from './Wallpaper';
-import { useScrollOnTop } from '~/hooks';
+import { useChangeTitleWebsite, useScrollOnTop } from '~/hooks';
 import SectionMainInfo from './SectionMainInfo';
 import { useUser } from '~/contexts/userContext';
 import { ButtonPrimary } from '~/components/Button';
@@ -12,10 +12,11 @@ import SectionTab from './SectionTab';
 import { errorToast } from '~/utils';
 
 const UserInfoPage = () => {
-  useScrollOnTop();
+  useChangeTitleWebsite({ title: 'Mark Movie - User' });
   const { userRow, handleForceGetUserRow } = useUser();
   const { search } = useLocation();
   const section = search.split('=')[1];
+  useScrollOnTop(section, 178);
 
   const [loading, setLoading] = useState(false);
   const updateProfile = async newUserRow => {
@@ -75,7 +76,7 @@ const UserInfoPage = () => {
                     updateProfile(newData);
                   }}
                 />
-                <div>
+                <div className="max-w-[60%]">
                   <SectionMainInfo
                     userRow={userRow}
                     favoriteActorsTable={favoriteActorsTable}

@@ -18,7 +18,7 @@ export const navSection = [
         iconClass: 'bx bx-globe',
         originLink: '/community',
         navigateLink: '/community',
-        needLogIn: false,
+        needLogIn: true,
       },
       {
         name: 'Discover',
@@ -56,9 +56,12 @@ export const navSection = [
       {
         name: 'Watch List',
         iconClass: 'bx bxs-bookmark',
-        originLink: '/top-rated',
-        navigateLink: '/top-rated',
+        originLink: '/watchlist#watchlist_movie',
+        navigateLink: '/watchlist#watchlist_movie',
         needLogIn: true,
+        handleClick: () => {
+          document.documentElement.scrollTop = 0;
+        },
       },
       {
         name: 'Downloaded',
@@ -104,7 +107,7 @@ export const navSection = [
         originLink: '/log-out',
         navigateLink: '/home/movies',
         needLogIn: true,
-        handleClick: async (directToCurrentPath = () => {}) => {
+        handleClick: async () => {
           await Swal.fire({
             title: 'Are you sure?',
             text: `You will immediately sign out!`,
@@ -122,7 +125,6 @@ export const navSection = [
                 title: 'Signed Out!',
                 text: 'See you next time.',
               });
-              directToCurrentPath();
             }
           });
         },
@@ -207,5 +209,13 @@ export const navUser = [
   {
     section: 'favorite-actors',
     name: 'Favorite Actors',
+  },
+  {
+    section: 'favorite-movies',
+    name: 'Favorite Movies',
+  },
+  {
+    section: 'favorite-tvs',
+    name: 'Favorite TV Shows',
   },
 ];

@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { withErrorBoundary } from 'react-error-boundary';
 
 import { api } from '~/utils';
-import { useMySWR, useScrollOnTop } from '~/hooks';
+import { useChangeTitleWebsite, useMySWR, useScrollOnTop } from '~/hooks';
 
 import {
   DetailBackdrop,
@@ -29,6 +29,12 @@ const TVDetailPage = () => {
   const { myData: videosData, isLoading: videosLoading } = useMySWR({
     api: api.getTrailer(id, 'tv'),
   });
+
+  useChangeTitleWebsite({
+    title: movieData?.name ? movieData.name : '',
+    rerenderCondition: [movieData],
+  });
+
   return (
     <div className="relative !bg-mainSection min-h-[150vh] ">
       {!movieLoading && !Array.isArray(movieData) && (

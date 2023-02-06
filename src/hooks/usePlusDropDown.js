@@ -11,8 +11,8 @@ import {
 } from '~/utils';
 
 export function usePlusDropDown({ movieData, type }) {
-  const { session } = useAuth();
-  const { userRow, handleShowModelLogIn } = useUser();
+  const { session, handleShowModelLogIn } = useAuth();
+  const { userRow } = useUser();
   const id_field = `${type}_id`;
 
   // Xử lý add to favorite list
@@ -26,7 +26,7 @@ export function usePlusDropDown({ movieData, type }) {
     match: { user_id: session.user.id, [id_field]: movieData.id },
     neededLogIn: true,
     initialLoading: true,
-    rerenderCondition: [forceRefetchingFavorite],
+    rerenderCondition: [forceRefetchingFavorite, session],
   });
   const handleAddToFavorite = () => {
     if (session?.user?.email) {
@@ -53,7 +53,7 @@ export function usePlusDropDown({ movieData, type }) {
           console.log(err);
         }
       };
-      if (favoriteRow?.id && !favoriteLoading) {
+      if (favoriteRow?.[0]?.id && !favoriteLoading) {
         warningToast('Already in favorite list');
       } else {
         handleUpsertData();
@@ -75,7 +75,7 @@ export function usePlusDropDown({ movieData, type }) {
     match: { user_id: session.user.id, [id_field]: movieData.id },
     neededLogIn: true,
     initialLoading: true,
-    rerenderCondition: [forceRefetchingWatchlist],
+    rerenderCondition: [forceRefetchingWatchlist, session],
   });
   const handleAddToWatchlist = () => {
     if (session?.user?.email) {
@@ -87,6 +87,13 @@ export function usePlusDropDown({ movieData, type }) {
             [id_field]: movieData.id,
             title: type === 'movie' ? movieData.title : movieData.name,
             poster_path: movieData.poster_path,
+            vote_average: parseFloat(movieData.vote_average).toFixed(1),
+            genre_ids: movieData?.genre_ids
+              ? movieData.genre_ids
+              : movieData?.genres
+              ? movieData.genres.map(item => item.id)
+              : [],
+            release_date: movieData.release_date || movieData.first_air_date,
           };
           const { error } = await supabase
             .from(`watchlist_${type}s`)
@@ -102,7 +109,7 @@ export function usePlusDropDown({ movieData, type }) {
           console.log(err);
         }
       };
-      if (watchlistRow?.id && !watchlistLoading) {
+      if (watchlistRow?.[0]?.id && !watchlistLoading) {
         warningToast('Already in watchlist');
       } else {
         handleUpsertData();

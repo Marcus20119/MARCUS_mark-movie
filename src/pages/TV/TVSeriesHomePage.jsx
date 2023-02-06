@@ -5,10 +5,11 @@ import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 import { MainSection } from '~/components/MainSection';
 import { SearchSection } from '~/components/SearchSection';
 import { api } from '~/utils';
-import { useScrollOnTop } from '~/hooks';
+import { useChangeTitleWebsite, useScrollOnTop } from '~/hooks';
 
 const TVSeriesHomePage = () => {
   useScrollOnTop();
+  useChangeTitleWebsite({ title: 'Mark Movie - Home/TVs' });
   const apiList = [
     {
       name: 'TV Airing Today',

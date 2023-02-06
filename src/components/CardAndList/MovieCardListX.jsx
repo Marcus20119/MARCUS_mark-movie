@@ -2,7 +2,12 @@ import PropTypes from 'prop-types';
 
 import MovieCardX from './MovieCardX';
 
-const MovieCardListX = ({ moviesData, quantity = NaN, type }) => {
+const MovieCardListX = ({
+  moviesData,
+  quantity = NaN,
+  type,
+  isSearch = false,
+}) => {
   return (
     <div className="flex flex-col w-full gap-[10px]">
       {moviesData &&
@@ -16,6 +21,7 @@ const MovieCardListX = ({ moviesData, quantity = NaN, type }) => {
                   key={`cardListX${movieData.id}`}
                   movieData={movieData}
                   type={type}
+                  isSearch={isSearch}
                 />
               ))
           : moviesData.map(movieData => (
@@ -23,6 +29,7 @@ const MovieCardListX = ({ moviesData, quantity = NaN, type }) => {
                 key={`cardListX${movieData.id}`}
                 movieData={movieData}
                 type={type}
+                isSearch={isSearch}
               />
             )))}
     </div>

@@ -5,10 +5,11 @@ import { api } from '~/utils';
 import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 import { MainSection } from '~/components/MainSection';
 import { SearchSection } from '~/components/SearchSection';
-import { useScrollOnTop } from '~/hooks';
+import { useChangeTitleWebsite, useScrollOnTop } from '~/hooks';
 
 const MoviesHomePage = () => {
   useScrollOnTop();
+  useChangeTitleWebsite({ title: 'Mark Movie - Home/Movies' });
   const apiList = [
     {
       name: 'Now Playing',

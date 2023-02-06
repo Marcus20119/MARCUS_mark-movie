@@ -1,11 +1,13 @@
+import { Fragment } from 'react';
 import { useUser } from '~/contexts/userContext';
 import PostedStatus from './PostedStatus';
+import PostedStatusesLoading from './PostedStatusesLoading';
 
-const PostedStatuses = ({ statusesTable }) => {
+const PostedStatusesPart = ({ statusesTable }) => {
   const { likesTable, loadingLikesTable } = useUser();
 
   return (
-    <div className="flex flex-col gap-[30px] w-full">
+    <Fragment>
       {!loadingLikesTable &&
         statusesTable.map((status, index) => (
           <PostedStatus
@@ -14,9 +16,9 @@ const PostedStatuses = ({ statusesTable }) => {
             likesTable={likesTable}
           ></PostedStatus>
         ))}
-      ;
-    </div>
+      {loadingLikesTable && <PostedStatusesLoading />}
+    </Fragment>
   );
 };
 
-export default PostedStatuses;
+export default PostedStatusesPart;

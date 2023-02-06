@@ -10,6 +10,7 @@ import LoadingPage from './pages/LoadingPage';
 const MoviesHomePage = lazy(() => import('./pages/Movie/MoviesHomePage'));
 const TVSeriesHomePage = lazy(() => import('./pages/TV/TVSeriesHomePage'));
 const DiscoverPage = lazy(() => import('./pages/Discover/DiscoverPage'));
+const WatchlistPage = lazy(() => import('./pages/Watchlist/WatchlistPage'));
 const UserInfoPage = lazy(() => import('./pages/User/UserInfoPage'));
 
 const PersonDetailPage = lazy(() => import('./pages/Person/PersonDetailPage'));
@@ -36,6 +37,7 @@ function App() {
           <Route path="/" element={<MainLayout />}>
             <Route path="" element={<Navigate replace to="/home/movies" />} />
             <Route path="discover" element={<DiscoverPage />} />
+            <Route path="watchlist" element={<WatchlistPage />} />
             <Route path="user" element={<UserInfoPage />} />
 
             <Route path="/person">

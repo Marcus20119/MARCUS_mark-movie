@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { useFetchAllTable } from '~/supabase';
+import FavoritePart from './FavoritePart';
 import IntroPart from './IntroPart';
-import PostedStatuses from './PostedStatuses';
+import PostedStatusesLoading from './PostedStatusesLoading';
+import PostedStatusesPart from './PostedStatusesPart';
 import StatusInputPart from './StatusInputPart';
 
 const SectionTabInfo = ({ userRow }) => {
@@ -18,7 +20,11 @@ const SectionTabInfo = ({ userRow }) => {
 
   return (
     <div className="flex items-start gap-[30px] ">
-      <IntroPart userRow={userRow} />
+      <div className="flex flex-col justify-start gap-[30px] w-[35%]">
+        <IntroPart userRow={userRow} />
+        <FavoritePart type="movie" />
+        <FavoritePart type="tv" />
+      </div>
 
       <div className="flex-1 flex flex-col gap-[30px] w-full">
         <StatusInputPart
@@ -26,12 +32,14 @@ const SectionTabInfo = ({ userRow }) => {
           forceRerender={forceRerender}
           setForceRerender={setForceRerender}
         />
-
-        {!loadingStatusesTable &&
-          statusesTable?.length &&
-          statusesTable.length > 0 && (
-            <PostedStatuses statusesTable={statusesTable} />
-          )}
+        <div className="flex flex-col gap-[30px] w-full">
+          {!loadingStatusesTable &&
+            !!statusesTable?.length &&
+            statusesTable.length > 0 && (
+              <PostedStatusesPart statusesTable={statusesTable} />
+            )}
+          {loadingStatusesTable && <PostedStatusesLoading />}
+        </div>
       </div>
     </div>
   );

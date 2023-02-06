@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { withErrorBoundary } from 'react-error-boundary';
 
 import { api } from '~/utils';
-import { useMySWR, useScrollOnTop } from '~/hooks';
+import { useChangeTitleWebsite, useMySWR, useScrollOnTop } from '~/hooks';
 import {
   DetailBackdrop,
   DetailCastSection,
@@ -31,6 +31,11 @@ const MovieDetailPage = () => {
   const { myData: recommendsData, isLoading: recommendsLoading } = useMySWR({
     api: api.getRecommend(id, 'movie'),
     max: 20,
+  });
+
+  useChangeTitleWebsite({
+    title: movieData?.title ? movieData.title : '',
+    rerenderCondition: [movieData],
   });
 
   return (

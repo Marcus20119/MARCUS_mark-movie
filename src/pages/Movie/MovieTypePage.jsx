@@ -5,7 +5,12 @@ import { Navbar } from '~/components/Bar';
 import { FilmList } from '~/components/CardAndList';
 import { MainPaginate } from '~/components/Paginate';
 import { api } from '~/utils';
-import { useMySWR, usePaginate, useScrollOnTop } from '~/hooks';
+import {
+  useChangeTitleWebsite,
+  useMySWR,
+  usePaginate,
+  useScrollOnTop,
+} from '~/hooks';
 import { navMovie } from '~/utils';
 import LoadingBounce from '~/components/Base/Loading/Bounce';
 
@@ -14,6 +19,15 @@ const MovieTypePage = () => {
   const pageQuery = location.search.slice(location.search.indexOf('?') + 6);
   useScrollOnTop(pageQuery);
   const typeApi = location.pathname.split('/')[2];
+
+  const typeName = typeApi
+    .split('-')
+    .map(item => item[0].toUpperCase() + item.substring(1));
+  useChangeTitleWebsite({
+    title: typeName ? `Movie - ${typeName.join(' ')}` : '',
+    rerenderCondition: [typeName],
+  });
+
   let myApi;
   switch (typeApi) {
     case 'now-playing': {

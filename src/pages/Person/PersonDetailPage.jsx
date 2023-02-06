@@ -5,7 +5,7 @@ import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 import { FilmList } from '~/components/CardAndList';
 import { DetailCelebInfoSection } from '~/components/Detail';
 import { api } from '~/utils';
-import { useMySWR, useScrollOnTop } from '~/hooks';
+import { useChangeTitleWebsite, useMySWR, useScrollOnTop } from '~/hooks';
 
 const PersonDetailPage = () => {
   const { id } = useParams();
@@ -21,6 +21,11 @@ const PersonDetailPage = () => {
   });
   const { myData: tvCreditsData, isLoading: tvCreditLoading } = useMySWR({
     api: api.getPersonCredits(id, 'tv'),
+  });
+
+  useChangeTitleWebsite({
+    title: personData?.name ? personData.name : '',
+    rerenderCondition: [personData],
   });
 
   return (
