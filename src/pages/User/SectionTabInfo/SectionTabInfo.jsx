@@ -8,6 +8,9 @@ import StatusInputPart from './StatusInputPart';
 
 const SectionTabInfo = ({ userRow }) => {
   const [forceRerender, setForceRerender] = useState(false);
+  const handleForceRerender = () => {
+    setForceRerender(!forceRerender);
+  };
 
   const { tableData: statusesTable, loading: loadingStatusesTable } =
     useFetchAllTable({
@@ -29,14 +32,16 @@ const SectionTabInfo = ({ userRow }) => {
       <div className="flex-1 flex flex-col gap-[30px] w-full">
         <StatusInputPart
           userRow={userRow}
-          forceRerender={forceRerender}
-          setForceRerender={setForceRerender}
+          handleForceRerender={handleForceRerender}
         />
         <div className="flex flex-col gap-[30px] w-full">
           {!loadingStatusesTable &&
             !!statusesTable?.length &&
             statusesTable.length > 0 && (
-              <PostedStatusesPart statusesTable={statusesTable} />
+              <PostedStatusesPart
+                statusesTable={statusesTable}
+                handleForceRerender={handleForceRerender}
+              />
             )}
           {loadingStatusesTable && <PostedStatusesLoading />}
         </div>

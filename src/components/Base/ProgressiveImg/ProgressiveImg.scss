@@ -1,0 +1,62 @@
+.progressiveImg-loading {
+  filter: blur(10px);
+  clip-path: inset(0);
+  // background-color: #222;
+}
+
+.progressiveImg-loaded {
+  filter: blur(0px);
+  transition: filter 0.5s linear;
+}
+.progressiveImg-overlay {
+  background: linear-gradient(
+      180deg,
+      black 0%,
+      rgba(0, 0, 0, 0.9) 2%,
+      rgba(0, 0, 0, 0.8) 4%,
+      rgba(0, 0, 0, 0.7) 6%,
+      rgba(0, 0, 0, 0.6) 8%,
+      rgba(0, 0, 0, 0.5) 10%,
+      rgba(0, 0, 0, 0.4) 12%,
+      rgba(0, 0, 0, 0.3) 14%,
+      rgba(0, 0, 0, 0.2) 16%,
+      rgba(0, 0, 0, 0.1) 18%,
+      transparent 20%,
+      transparent 90%,
+      rgba(0, 0, 0, 0.1) 91%,
+      rgba(0, 0, 0, 0.2) 92%,
+      rgba(0, 0, 0, 0.3) 93%,
+      rgba(0, 0, 0, 0.4) 94%,
+      rgba(0, 0, 0, 0.5) 95%,
+      rgba(0, 0, 0, 0.6) 96%,
+      rgba(0, 0, 0, 0.7) 97%,
+      rgba(0, 0, 0, 0.8) 98%,
+      rgba(0, 0, 0, 0.9) 99%,
+      black 100%
+    ),
+    linear-gradient(
+      90deg,
+      black 0%,
+      rgba(0, 0, 0, 0.9) 2%,
+      rgba(0, 0, 0, 0.8) 4%,
+      rgba(0, 0, 0, 0.7) 6%,
+      rgba(0, 0, 0, 0.6) 8%,
+      rgba(0, 0, 0, 0.5) 10%,
+      rgba(0, 0, 0, 0.4) 12%,
+      rgba(0, 0, 0, 0.3) 14%,
+      rgba(0, 0, 0, 0.2) 16%,
+      rgba(0, 0, 0, 0.1) 18%,
+      transparent 20%,
+      transparent 90%,
+      rgba(0, 0, 0, 0.1) 91%,
+      rgba(0, 0, 0, 0.2) 92%,
+      rgba(0, 0, 0, 0.3) 93%,
+      rgba(0, 0, 0, 0.4) 94%,
+      rgba(0, 0, 0, 0.5) 95%,
+      rgba(0, 0, 0, 0.6) 96%,
+      rgba(0, 0, 0, 0.7) 97%,
+      rgba(0, 0, 0, 0.8) 98%,
+      rgba(0, 0, 0, 0.9) 99%,
+      black 100%
+    );
+}

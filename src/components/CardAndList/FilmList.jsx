@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { api, route } from '~/utils';
+import ProgressiveImg from '../Base/ProgressiveImg';
 
 const FilmList = ({
   filmsData = [],
@@ -27,16 +28,20 @@ const FilmList = ({
             to={route.toDetail(type, filmData.id)}
             className="group w-full cursor-pointer rounded-md"
           >
-            <div className="relative w-full h-0 bg-[#ffffff50] pt-[145%] rounded-md overflow-hidden group-hover:-translate-y-2">
-              <img
-                className="absolute inset-0 block w-full h-full object-cover object-center"
-                src={
-                  filmData.poster_path
-                    ? api.getPoster(filmData.poster_path)
-                    : '/imgs/no-poster.jpg'
-                }
-                alt={filmData.poster_path}
-              />
+            <div className="relative w-full h-0 bg-transparent pt-[145%] rounded-md overflow-hidden group-hover:-translate-y-2">
+              {filmData?.poster_path ? (
+                <ProgressiveImg
+                  src={api.getPoster(filmData.poster_path, 'w342')}
+                  placeholderSrc={api.getPoster(filmData.poster_path, 'w92')}
+                  alt={filmData.poster_path}
+                />
+              ) : (
+                <img
+                  className="absolute inset-0 block w-full h-full object-cover object-center"
+                  src="/imgs/no-poster.jpg"
+                  alt="no-poster"
+                />
+              )}
             </div>
             <h6 className="text-center text-white my-[10px] text-[1.1rem]">
               {filmData.title || filmData.name}

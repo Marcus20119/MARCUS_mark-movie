@@ -4,7 +4,7 @@ import { ButtonPrimary } from '~/components/Button';
 import { supabase } from '~/supabase';
 import { errorToast, loadingAlert, successAlert } from '~/utils';
 
-const StatusInputPart = ({ userRow, forceRerender, setForceRerender }) => {
+const StatusInputPart = ({ userRow, handleForceRerender }) => {
   const [content, setContent] = useState('');
 
   const handleAddPost = async e => {
@@ -36,7 +36,7 @@ const StatusInputPart = ({ userRow, forceRerender, setForceRerender }) => {
             console.error(error);
           }
           setContent('');
-          setForceRerender(!forceRerender);
+          handleForceRerender();
           await successAlert({
             title: 'Posted Successfully!',
             text: 'Your status has been posted.',
@@ -60,7 +60,7 @@ const StatusInputPart = ({ userRow, forceRerender, setForceRerender }) => {
           placeholder="What's on your mind?"
           value={content}
           onChange={e => setContent(e.target.value)}
-          className="w-full bg-white80 rounded-md px-[12px] py-[6px] text-mainSection"
+          className="textarea-scrollbar w-full min-h-[100px] bg-white80 rounded-md px-[12px] py-[6px] text-mainSection"
         />
         <div className="flex justify-between items-center">
           <span className="w-[60%] italic text-white80 opacity-50">

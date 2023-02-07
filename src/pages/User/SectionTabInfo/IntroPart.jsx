@@ -1,3 +1,4 @@
+import { useUser } from '~/contexts/userContext';
 import { convertDate } from '~/helpers';
 
 const IntroPart = ({ userRow }) => {
@@ -23,14 +24,21 @@ const IntroPart = ({ userRow }) => {
       content: `Website: ${userRow?.website ? userRow.website : '...'}`,
       iconClass: 'bx bx-globe',
       additionalClass: '',
+      title: userRow.website,
     },
   ];
+
+  const { handleShowModelEditInfo } = useUser();
+
   return (
     <div className="w-full bg-mainSection py-3 px-4 rounded-lg">
       <div className="flex flex-col items-start gap-3 text-white80">
         <div className="flex justify-between items-center w-full">
           <h3 className="font-bold text-xl text-white tracking-wide">Intro</h3>
-          <span className="italic text-white opacity-50 hover:!opacity-80 hover:!text-primary cursor-pointer">
+          <span
+            className="italic text-white opacity-50 hover:!opacity-80 hover:!text-primary cursor-pointer"
+            onClick={handleShowModelEditInfo}
+          >
             Edit Info
           </span>
         </div>
@@ -44,7 +52,10 @@ const IntroPart = ({ userRow }) => {
               <i
                 className={`flex justify-center items-center text-xl opacity-50 ${infoItem.iconClass}`}
               ></i>
-              <span>
+              <span
+                className="line-clamp-1 break-all"
+                title={infoItem.title ? infoItem.title : ''}
+              >
                 {/* <pre className="font-mono">{infoItem.content}</pre> */}
                 {infoItem.content}
               </span>

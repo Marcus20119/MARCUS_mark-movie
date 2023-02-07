@@ -66,7 +66,7 @@ const NavSection = () => {
           {session?.user?.email ? (
             <Link
               to="/user?section=info"
-              className="flex justify-start items-center gap-2 mb-2 hover:!text-primary"
+              className="flex justify-start items-center gap-2 mb-2 hover:!text-current"
             >
               <div className="w-7 h-7 rounded-full overflow-hidden">
                 <img

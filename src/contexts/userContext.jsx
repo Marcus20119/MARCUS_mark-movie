@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext, createContext } from 'react';
+import { useModal } from '~/hooks';
 import { supabase, useFetchAllTable } from '../supabase';
 import { useAuth } from './authContext';
 
@@ -85,8 +86,14 @@ const UserProvider = props => {
       initialLoading: true,
     });
 
+  // Xử lý ẩn hiện modal Edit User Info
+  const {
+    show: showModelEditInfo,
+    handleShow: handleShowModelEditInfo,
+    handleHide: handleHideModelEditInfo,
+  } = useModal();
+
   const value = {
-    session,
     userRow,
     setUserRow,
     loadingGetUserRow,
@@ -96,6 +103,9 @@ const UserProvider = props => {
     likesTable,
     loadingLikesTable,
     handleForceGetLikes,
+    showModelEditInfo,
+    handleShowModelEditInfo,
+    handleHideModelEditInfo,
   };
   return <UserContext.Provider value={value} {...props}></UserContext.Provider>;
 };
@@ -106,7 +116,6 @@ function useUser() {
     throw new Error('useUser must be used within UserContext');
   }
   const {
-    session,
     userRow,
     setUserRow,
     loadingGetUserRow,
@@ -116,9 +125,11 @@ function useUser() {
     likesTable,
     loadingLikesTable,
     handleForceGetLikes,
+    showModelEditInfo,
+    handleShowModelEditInfo,
+    handleHideModelEditInfo,
   } = context;
   return {
-    session,
     userRow,
     setUserRow,
     loadingGetUserRow,
@@ -128,6 +139,9 @@ function useUser() {
     likesTable,
     loadingLikesTable,
     handleForceGetLikes,
+    showModelEditInfo,
+    handleShowModelEditInfo,
+    handleHideModelEditInfo,
   };
 }
 

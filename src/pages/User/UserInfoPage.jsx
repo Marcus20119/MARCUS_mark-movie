@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Fragment } from 'react';
 import Avatar from '~/pages/User/Avatar';
@@ -10,19 +9,19 @@ import { useUser } from '~/contexts/userContext';
 import { ButtonPrimary } from '~/components/Button';
 import SectionTab from './SectionTab';
 import { errorToast } from '~/utils';
+import ModalEditInfo from './ModalEditInfo';
+import { useAuth } from '~/contexts/authContext';
 
 const UserInfoPage = () => {
   useChangeTitleWebsite({ title: 'Mark Movie - User' });
-  const { userRow, handleForceGetUserRow } = useUser();
+  const { session } = useAuth();
+  const { userRow, handleForceGetUserRow, handleShowModelEditInfo } = useUser();
   const { search } = useLocation();
   const section = search.split('=')[1];
   useScrollOnTop(section, 178);
 
-  const [loading, setLoading] = useState(false);
   const updateProfile = async newUserRow => {
     try {
-      setLoading(true);
-
       let { error } = await supabase.from('profiles').upsert({
         ...newUserRow,
         updated_at: new Date(),
@@ -34,21 +33,18 @@ const UserInfoPage = () => {
       }
     } catch (err) {
       console.log(err);
-    } finally {
-      setLoading(false);
     }
   };
 
   // Lấy danh sách favorite actors
-
   const {
     tableData: favoriteActorsTable,
     loading: loadingFavoriteActorsTable,
   } = useFetchAllTable({
     table: 'favorite_actors',
     neededLogIn: true,
-    match: { user_id: userRow?.id ? userRow.id : '' },
-    rerenderCondition: [userRow],
+    match: { user_id: session?.user?.id ? session.user.id : '' },
+    rerenderCondition: [session],
     initialLoading: true,
   });
 
@@ -84,7 +80,10 @@ const UserInfoPage = () => {
                   />
                 </div>
                 <div className="ml-auto mb-[16px]">
-                  <ButtonPrimary className="px-3 py-2 rounded-lg font-normal">
+                  <ButtonPrimary
+                    className="px-3 py-2 rounded-lg font-normal"
+                    onClick={handleShowModelEditInfo}
+                  >
                     <i className="bx bxs-edit-alt"></i>
                     <span>Edit Info</span>
                   </ButtonPrimary>
@@ -95,6 +94,7 @@ const UserInfoPage = () => {
           </div>
         </div>
       )}
+      <ModalEditInfo />
     </Fragment>
   );
 };

@@ -2,9 +2,7 @@ import { withErrorBoundary } from 'react-error-boundary';
 import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
 import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 import ModalBase from '~/components/Base/ModalBase';
-import { useModal } from '~/hooks';
 import { supabase } from '~/supabase';
-import { useEffect } from 'react';
 import { useAuth } from '~/contexts/authContext';
 
 const ModalLogIn = () => {

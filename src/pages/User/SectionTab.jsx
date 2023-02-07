@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { navUser } from '~/utils';
+import SectionTabFavoriteActor from './SectionTabFavoriteActor';
 import SectionTabFavoriteFilm from './SectionTabFavoriteFilm';
 import { SectionTabInfo } from './SectionTabInfo';
 
@@ -26,6 +27,9 @@ const SectionTab = ({ section, userRow }) => {
       </div>
       <div className="min-h-[400px] bg-[#181818] p-[30px]">
         {section === 'info' && <SectionTabInfo userRow={userRow} />}
+        {section === 'favorite-actors' && (
+          <SectionTabFavoriteActor userRow={userRow} />
+        )}
         {section === 'favorite-movies' && (
           <SectionTabFavoriteFilm userRow={userRow} type="movie" />
         )}

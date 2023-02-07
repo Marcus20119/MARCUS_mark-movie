@@ -36,9 +36,9 @@ export const navSection = [
       },
       {
         name: 'Celebs',
-        iconClass: 'bx bxs-user',
+        iconClass: 'bx bxs-group',
         originLink: '/person',
-        navigateLink: '/person/popular?page=1',
+        navigateLink: '/person/search?query=&page=1',
         needLogIn: false,
       },
     ],
@@ -79,14 +79,14 @@ export const navSection = [
         name: 'TV Series',
         iconClass: 'bx bxs-tv',
         originLink: '/tv',
-        navigateLink: '/tv/on-the-air?page=1',
+        navigateLink: '/tv/search?query=&page=1',
         needLogIn: false,
       },
       {
         name: 'Movies',
         iconClass: 'bx bxs-film',
         originLink: '/movie',
-        navigateLink: '/movie/now-playing?page=1',
+        navigateLink: '/movie/search?query=&page=1',
         needLogIn: false,
       },
     ],
@@ -95,10 +95,10 @@ export const navSection = [
     groupName: 'GENERAL',
     items: [
       {
-        name: 'Settings',
-        iconClass: 'bx bxs-cog',
-        originLink: '/settings',
-        navigateLink: '/settings',
+        name: 'User Site',
+        iconClass: 'bx bxs-user',
+        originLink: '/user',
+        navigateLink: '/user?section=info',
         needLogIn: true,
       },
       {

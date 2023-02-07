@@ -6,10 +6,10 @@ import NotFoundPage from './pages/NotFoundPage';
 import SorryPage from './pages/SorryPage';
 import LoadingPage from './pages/LoadingPage';
 
-// const CommunityPage = lazy(() => import('./pages/Community'));
 const MoviesHomePage = lazy(() => import('./pages/Movie/MoviesHomePage'));
 const TVSeriesHomePage = lazy(() => import('./pages/TV/TVSeriesHomePage'));
 const DiscoverPage = lazy(() => import('./pages/Discover/DiscoverPage'));
+const CommunityPage = lazy(() => import('./pages/Community/CommunityPage'));
 const WatchlistPage = lazy(() => import('./pages/Watchlist/WatchlistPage'));
 const UserInfoPage = lazy(() => import('./pages/User/UserInfoPage'));
 
@@ -36,6 +36,7 @@ function App() {
           </Route>
           <Route path="/" element={<MainLayout />}>
             <Route path="" element={<Navigate replace to="/home/movies" />} />
+            <Route path="community" element={<CommunityPage />} />
             <Route path="discover" element={<DiscoverPage />} />
             <Route path="watchlist" element={<WatchlistPage />} />
             <Route path="user" element={<UserInfoPage />} />
