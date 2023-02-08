@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { api, route } from '~/utils';
+import ProgressiveImg from '../Base/ProgressiveImg';
 
 const PersonList = ({
   peopleData = [],
@@ -24,16 +25,20 @@ const PersonList = ({
             to={route.toDetail('person', peopleData.id)}
             className="group w-full cursor-pointer rounded-md"
           >
-            <div className="relative w-full h-0 bg-[#ffffff50] pt-[145%] rounded-md overflow-hidden group-hover:-translate-y-2">
-              <img
-                className="absolute inset-0 block w-full h-full object-cover object-center"
-                src={
-                  peopleData.profile_path
-                    ? api.getPoster(peopleData.profile_path)
-                    : '/imgs/no-face.jpg'
-                }
-                alt={peopleData.poster_path}
-              />
+            <div className="relative w-full h-0 bg-transparent pt-[145%] rounded-md overflow-hidden group-hover:-translate-y-2">
+              {peopleData?.profile_path ? (
+                <ProgressiveImg
+                  src={api.getPoster(peopleData.profile_path, 'h632')}
+                  placeholderSrc={api.getPoster(peopleData.profile_path, 'w45')}
+                  alt={peopleData.profile_path}
+                />
+              ) : (
+                <img
+                  className="absolute inset-0 block w-full h-full object-cover object-center"
+                  src="/imgs/no-user.png"
+                  alt="no-poster"
+                />
+              )}
             </div>
             <h6 className="text-center text-white my-[10px] text-[1.1rem]">
               {peopleData.name}

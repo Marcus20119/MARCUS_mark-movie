@@ -28,7 +28,7 @@ const FilmList = ({
             to={route.toDetail(type, filmData.id)}
             className="group w-full cursor-pointer rounded-md"
           >
-            <div className="relative w-full h-0 bg-transparent pt-[145%] rounded-md overflow-hidden group-hover:-translate-y-2">
+            <div className="group relative w-full h-0 bg-transparent pt-[145%] rounded-md overflow-hidden group-hover:-translate-y-2">
               {filmData?.poster_path ? (
                 <ProgressiveImg
                   src={api.getPoster(filmData.poster_path, 'w342')}
@@ -42,6 +42,10 @@ const FilmList = ({
                   alt="no-poster"
                 />
               )}
+              <div className="absolute top-[5%] left-[7%] inline-flex items-center gap-1 !bg-primary rounded-full py-1 px-2 text-sm font-bold !text-white80 opacity-70 group-hover:opacity-90">
+                <span>{parseFloat(filmData.vote_average).toFixed(1)}</span>
+                <i className="bx bxs-star"></i>
+              </div>
             </div>
             <h6 className="text-center text-white my-[10px] text-[1.1rem]">
               {filmData.title || filmData.name}

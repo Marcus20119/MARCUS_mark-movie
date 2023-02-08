@@ -37,6 +37,7 @@ export function usePlusDropDown({ movieData, type }) {
             user_id: userRow.id,
             [id_field]: movieData.id,
             title: type === 'movie' ? movieData.title : movieData.name,
+            vote_average: parseFloat(movieData.vote_average).toFixed(1),
             poster_path: movieData.poster_path,
           };
           const { error } = await supabase

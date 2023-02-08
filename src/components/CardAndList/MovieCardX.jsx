@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { Fragment, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { api, genres, route } from '~/utils';
+import ProgressiveImg from '../Base/ProgressiveImg';
 import { MovieTagList } from './MovieTagList';
 
 const MovieCardX = ({ movieData, type, isSearch }) => {
@@ -45,16 +46,20 @@ const MovieCardX = ({ movieData, type, isSearch }) => {
           as="li"
           className="flex items-center gap-[10px] w-full p-[10px] rounded-xl bg-[rgba(255,_255,_255,_0.06)] text-white hover:bg-[rgba(255,_255,_255,_0.2)] hover:shadow-md cursor-pointer"
         >
-          <div className="relative w-[34%] h-0 pt-[34%] bg-[#ececec4a] rounded-lg overflow-hidden">
-            <img
-              className="absolute w-full inset-0 block  object-cover object-center"
-              src={
-                movieData.poster_path
-                  ? api.getPoster(movieData.poster_path)
-                  : '/imgs/no-poster.jpg'
-              }
-              alt=""
-            />
+          <div className="relative w-[34%] h-0 pt-[34%] bg-transparent rounded-lg overflow-hidden">
+            {movieData.poster_path ? (
+              <ProgressiveImg
+                src={api.getPoster(movieData.poster_path, 'w342')}
+                placeholderSrc={api.getPoster(movieData.poster_path, 'w92')}
+                alt={movieData.poster_path}
+              />
+            ) : (
+              <img
+                className="absolute inset-0 block w-full h-full object-cover object-center"
+                src="/imgs/no-poster.jpg"
+                alt="no-poster"
+              />
+            )}
           </div>
           <div className="flex w-[66%] h-[95%] flex-col justify-between items-start">
             <h5 className="w-full font-bold line-clamp-1 mb-1">
@@ -69,7 +74,7 @@ const MovieCardX = ({ movieData, type, isSearch }) => {
                   : 'Unknown year'}
               </span>
               <div className="inline-flex gap-1">
-                <span>{vote_average}</span>
+                <span>{parseFloat(vote_average).toFixed(1)}</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"

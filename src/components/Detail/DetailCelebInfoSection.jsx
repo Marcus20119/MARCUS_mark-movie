@@ -17,6 +17,7 @@ import ToolTipBase from '../Base/ToolTipBase';
 import { useAuth } from '~/contexts/authContext';
 import { supabase, useFetchSingleRow } from '~/supabase';
 import { useUser } from '~/contexts/userContext';
+import ProgressiveImg from '../Base/ProgressiveImg';
 
 const DetailCelebInfoSection = ({ personData }) => {
   const PersonalInfo = [
@@ -96,15 +97,21 @@ const DetailCelebInfoSection = ({ personData }) => {
   return (
     <div className="flex w-full justify-between items-stretch gap-[28px] !bg-mainSection p-[40px]">
       <div className="relative flex-grow flex flex-col justify-start items-center gap-[20px] w-[20%]">
-        <img
-          className="block w-full h-full object-cover object-center rounded-md"
-          src={
-            personData.profile_path
-              ? api.getPoster(personData.profile_path)
-              : '/imgs/no-user.png'
-          }
-          alt={personData.name}
-        />
+        {personData?.profile_path ? (
+          <ProgressiveImg
+            src={api.getPoster(personData.profile_path, 'h632')}
+            placeholderSrc={api.getPoster(personData.profile_path, 'w45')}
+            alt={personData.profile_path}
+            resetClassName={true}
+            className="block w-full h-full object-cover object-center rounded-md"
+          />
+        ) : (
+          <img
+            className="absolute inset-0 block w-full h-full object-cover object-center"
+            src="/imgs/no-user.png"
+            alt="no-poster"
+          />
+        )}
         <div className="absolute top-[5%] right-[5%]">
           <ToolTipBase tipMessage="Add to favorite list">
             <ButtonPlus

@@ -11,6 +11,7 @@ import { api, genres, neededSignInAlert, route } from '~/utils';
 import { MovieTagList, LoadingMovieTagList } from '~/components/CardAndList';
 import PlusDropDownBanner from './PlusDropDownBanner';
 import { useAuth } from '~/contexts/authContext';
+import ProgressiveImg from '../Base/ProgressiveImg';
 
 function Banner({ apiLink, type }) {
   const { myData: movies, isLoading: moviesLoading } = useMySWR({
@@ -44,15 +45,20 @@ function Banner({ apiLink, type }) {
         >
           {movies.map(movie => (
             <Carousel.Item key={`banner${movie.id}`}>
-              <img
-                className="carousel-item__img"
-                src={
-                  movie.backdrop_path
-                    ? api.getBackdrop(movie.backdrop_path)
-                    : '/imgs/no-backdrop.jpg'
-                }
-                alt={movie.title || movie.name}
-              />
+              {movie?.backdrop_path ? (
+                <ProgressiveImg
+                  className="carousel-item__img"
+                  src={api.getPoster(movie.backdrop_path, 'original')}
+                  placeholderSrc={api.getPoster(movie.backdrop_path, 'w300')}
+                  alt={movie.backdrop_path}
+                />
+              ) : (
+                <img
+                  className="carousel-item__img"
+                  src="/imgs/no-backdrop.jpg"
+                  alt="no-backdrop"
+                />
+              )}
               <div className="carousel-item__overlay"></div>
               <Carousel.Caption>
                 <h3 className="carousel-caption__name line-clamp-1">
@@ -93,7 +99,7 @@ function Banner({ apiLink, type }) {
         <div className="relative w-full h-full text-transparent bg-transparent">
           <LoadingSkeleton className="absolute inset-0 opacity-30" />
           <div className="absolute left-[2.5rem] bottom-[0.5rem] py-[20px] flex flex-col">
-            <LoadingSkeleton className="w-[300px] h-[57.6px] mb-[12px] rounded-lg" />
+            <LoadingSkeleton className="w-[300px] h-[57.6px] mb-[12px] rounded-lg opacity-70" />
             <LoadingMovieTagList />
             <div className="carousel-caption__wrap-btn">
               <ButtonPlay

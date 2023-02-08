@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import ModalBase from '~/components/Base/ModalBase';
 import { api } from '~/utils';
 import { useModal } from '~/hooks';
+import ProgressiveImg from '~/components/Base/ProgressiveImg';
 
 const TrailerItem = ({ keyId, index }) => {
   const { show, handleShow, handleHide } = useModal();
@@ -15,10 +16,11 @@ const TrailerItem = ({ keyId, index }) => {
           className="group relative w-full h-0 pt-[60%] overflow-hidden border-[2px] rounded-sm border-solid border-[#222222] hover:border-[var(--primary-color)] cursor-pointer"
           onClick={handleShow}
         >
-          <img
-            className="absolute left-0 top-1/2 block w-full h-full bg-[#ffffff50] object-cover object-center -translate-y-1/2"
-            src={api.getThumbnail(keyId)}
+          <ProgressiveImg
+            src={api.getThumbnail(keyId, 'hqdefault')}
+            placeholderSrc={api.getThumbnail(keyId, 'default')}
             alt={`thumbnailKey${index}`}
+            className="rounded-md"
           />
           <img
             className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 hidden w-[45px] h-[45px] opacity-70 object-center object-cover group-hover:block"

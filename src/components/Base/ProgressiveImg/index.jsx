@@ -1,7 +1,13 @@
 import { useState, useEffect } from 'react';
 import './ProgressiveImg.scss';
 
-const ProgressiveImg = ({ placeholderSrc, src, className, alt }) => {
+const ProgressiveImg = ({
+  placeholderSrc,
+  src,
+  className,
+  alt,
+  resetClassName = false,
+}) => {
   const [imgSrc, setImgSrc] = useState(placeholderSrc || src);
 
   useEffect(() => {
@@ -21,7 +27,11 @@ const ProgressiveImg = ({ placeholderSrc, src, className, alt }) => {
     <img
       src={imgSrc}
       alt={alt || ''}
-      className={`progressiveImg absolute inset-0 block w-full h-full object-cover object-center ${className} ${customClass}`}
+      className={`progressiveImg ${
+        resetClassName
+          ? ''
+          : 'absolute inset-0 block w-full h-full object-cover object-center'
+      } ${className} ${customClass}`}
     />
   );
 };

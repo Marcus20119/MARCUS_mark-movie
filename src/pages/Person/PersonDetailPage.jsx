@@ -6,6 +6,7 @@ import { FilmList } from '~/components/CardAndList';
 import { DetailCelebInfoSection } from '~/components/Detail';
 import { api } from '~/utils';
 import { useChangeTitleWebsite, useMySWR, useScrollOnTop } from '~/hooks';
+import { Fragment } from 'react';
 
 const PersonDetailPage = () => {
   const { id } = useParams();
@@ -31,38 +32,40 @@ const PersonDetailPage = () => {
   return (
     <div>
       {!personLoading && personData.name && (
-        <DetailCelebInfoSection personData={personData} />
+        <Fragment>
+          <DetailCelebInfoSection personData={personData} />
+          <div className="flex flex-col">
+            {!movieCreditLoading &&
+              movieCreditsData?.cast &&
+              movieCreditsData.cast.length > 0 && (
+                <div className="relative w-full p-[30px] !bg-mainSection">
+                  <h3 className="text-2xl text-white font-bold mb-[24px]">
+                    {`${personData.name} Movies`}
+                  </h3>
+                  <FilmList
+                    filmsData={movieCreditsData.cast}
+                    numberOfCol={5}
+                    type="movie"
+                  />
+                </div>
+              )}
+            {!tvCreditLoading &&
+              tvCreditsData?.cast &&
+              tvCreditsData.cast.length > 0 && (
+                <div className="relative w-full p-[30px] !bg-mainSection">
+                  <h3 className="text-2xl text-white font-bold mb-[24px]">
+                    {`${personData.name} TV Shows`}
+                  </h3>
+                  <FilmList
+                    filmsData={tvCreditsData.cast}
+                    numberOfCol={5}
+                    type="tv"
+                  />
+                </div>
+              )}
+          </div>
+        </Fragment>
       )}
-      <div className="flex flex-col">
-        {!movieCreditLoading &&
-          movieCreditsData?.cast &&
-          movieCreditsData.cast.length > 0 && (
-            <div className="relative w-full p-[30px] !bg-mainSection">
-              <h3 className="text-2xl text-white font-bold mb-[24px]">
-                {`${personData.name} Movies`}
-              </h3>
-              <FilmList
-                filmsData={movieCreditsData.cast}
-                numberOfCol={5}
-                type="movie"
-              />
-            </div>
-          )}
-        {!tvCreditLoading &&
-          tvCreditsData?.cast &&
-          tvCreditsData.cast.length > 0 && (
-            <div className="relative w-full p-[30px] !bg-mainSection">
-              <h3 className="text-2xl text-white font-bold mb-[24px]">
-                {`${personData.name} TV Shows`}
-              </h3>
-              <FilmList
-                filmsData={tvCreditsData.cast}
-                numberOfCol={5}
-                type="tv"
-              />
-            </div>
-          )}
-      </div>
     </div>
   );
 };

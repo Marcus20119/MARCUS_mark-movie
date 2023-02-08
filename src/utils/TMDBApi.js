@@ -3,8 +3,8 @@ export const api = {
   getPoster(poster_path, width = 'w500') {
     return `https://image.tmdb.org/t/p/${width}${poster_path}`;
   },
-  getBackdrop(backdrop_path) {
-    return `https://image.tmdb.org/t/p/original${backdrop_path}`;
+  getBackdrop(backdrop_path, width = 'original') {
+    return `https://image.tmdb.org/t/p/${width}${backdrop_path}`;
   },
   getPopular(type = 'movie', page = 1) {
     return `https://api.themoviedb.org/3/${type}/popular?api_key=${apiKey}&language=en-US&page=${page}`;
@@ -24,8 +24,8 @@ export const api = {
   getMovieCredits(id = '', type = 'movie') {
     return `https://api.themoviedb.org/3/${type}/${id}/credits?api_key=${apiKey}&language=en-US`;
   },
-  getThumbnail(key = '') {
-    return `https://img.youtube.com/vi/${key}/hqdefault.jpg`;
+  getThumbnail(key = '', type = 'hqdefault') {
+    return `https://img.youtube.com/vi/${key}/${type}.jpg`;
   },
   getTrailer(id = '', type = 'movie') {
     return `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${apiKey}&language=en-US`;

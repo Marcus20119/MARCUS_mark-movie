@@ -6,3 +6,6 @@ export { default as DetailPosterSection } from './DetailPosterSection';
 export { default as DetailSeasonSection } from './DetailSeasonSection';
 export { default as DetailRecommendSection } from './DetailRecommendSection';
 export { default as DetailCelebInfoSection } from './DetailCelebInfoSection';
+export * from './LoadingPosterSection';
+export * from './LoadingContentSection';
+export * from './LoadingBackdrop';

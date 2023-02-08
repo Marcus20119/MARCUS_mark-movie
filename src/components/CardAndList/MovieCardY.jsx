@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { api, route } from '~/utils';
+import ProgressiveImg from '../Base/ProgressiveImg';
 import { ButtonPlay } from '../Button';
 
 const MovieCardY = ({ movieData, type }) => {
@@ -14,12 +15,20 @@ const MovieCardY = ({ movieData, type }) => {
   }
   return (
     <div className="flex flex-col gap-[10px] w-full p-[10px] rounded-xl bg-[rgba(255,_255,_255,_0.08)] text-white">
-      <div className="relative w-full pt-full bg-[#ffffff50] rounded-lg overflow-hidden">
-        <img
-          className="absolute w-full inset-0 block object-cover object-center"
-          src={poster_path ? api.getPoster(poster_path) : '/imgs/no-poster.jpg'}
-          alt=""
-        />
+      <div className="relative w-full pt-full bg-transparent rounded-lg overflow-hidden">
+        {poster_path ? (
+          <ProgressiveImg
+            src={api.getPoster(poster_path, 'w342')}
+            placeholderSrc={api.getPoster(poster_path, 'w92')}
+            alt={poster_path}
+          />
+        ) : (
+          <img
+            className="absolute inset-0 block w-full h-full object-cover object-center"
+            src="/imgs/no-poster.jpg"
+            alt="no-poster"
+          />
+        )}
       </div>
       <h5 className="font-bold line-clamp-1">
         {movieData.title || movieData.name}
@@ -27,7 +36,7 @@ const MovieCardY = ({ movieData, type }) => {
       <div className="flex justify-between items-center text-xs mb-2">
         <span>{releaseYear}</span>
         <div className="inline-flex gap-1">
-          <span>{vote_average}</span>
+          <span>{parseFloat(vote_average).toFixed(1)}</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"

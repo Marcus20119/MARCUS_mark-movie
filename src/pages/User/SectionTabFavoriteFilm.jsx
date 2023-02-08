@@ -2,6 +2,7 @@
 import { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import LoadingBounce from '~/components/Base/Loading/Bounce';
+import ProgressiveImg from '~/components/Base/ProgressiveImg';
 import ToolTipBase from '~/components/Base/ToolTipBase';
 import { ButtonMinus } from '~/components/Button';
 import { supabase, useFetchAllTable } from '~/supabase';
@@ -53,16 +54,27 @@ const SectionTabFavoriteFilm = ({ userRow, type }) => {
                 to={route.toDetail(type, filmData[`${type}_id`])}
                 className="group w-full cursor-pointer rounded-md"
               >
-                <div className="group relative w-full h-0 bg-[#ffffff50] pt-[145%] rounded-md overflow-hidden group-hover:-translate-y-2">
-                  <img
-                    className="absolute inset-0 block w-full h-full object-cover object-center"
-                    src={
-                      filmData.poster_path
-                        ? api.getPoster(filmData.poster_path)
-                        : '/imgs/no-poster.jpg'
-                    }
-                    alt={filmData.poster_path}
-                  />
+                <div className="group relative w-full h-0 bg-transparent pt-[145%] rounded-md overflow-hidden group-hover:-translate-y-2">
+                  {filmData?.poster_path ? (
+                    <ProgressiveImg
+                      src={api.getPoster(filmData.poster_path, 'w342')}
+                      placeholderSrc={api.getPoster(
+                        filmData.poster_path,
+                        'w92'
+                      )}
+                      alt={filmData.poster_path}
+                    />
+                  ) : (
+                    <img
+                      className="absolute inset-0 block w-full h-full object-cover object-center"
+                      src="/imgs/no-poster.jpg"
+                      alt="no-poster"
+                    />
+                  )}
+                  <div className="absolute top-[5%] left-[7%] inline-flex items-center gap-1 !bg-primary rounded-full py-1 px-2 text-sm font-bold !text-white80 opacity-70 group-hover:opacity-90">
+                    <span>{parseFloat(filmData.vote_average).toFixed(1)}</span>
+                    <i className="bx bxs-star"></i>
+                  </div>
                   <div className="absolute top-[5%] right-[5%] hidden group-hover:block">
                     <ToolTipBase tipMessage="Remove from favorite list">
                       <ButtonMinus

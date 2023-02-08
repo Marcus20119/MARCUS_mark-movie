@@ -11,9 +11,12 @@ import {
   DetailPosterSection,
   DetailRecommendSection,
   DetailTrailerSection,
+  LoadingPosterSection,
 } from '~/components/Detail';
 import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 import './MovieDetailPage.scss';
+import LoadingBackdrop from '~/components/Detail/LoadingBackdrop';
+import LoadingContentSection from '~/components/Detail/LoadingContentSection';
 
 const MovieDetailPage = () => {
   const { id } = useParams();
@@ -43,7 +46,7 @@ const MovieDetailPage = () => {
       {!movieLoading && !Array.isArray(movieData) && (
         <Fragment>
           <DetailBackdrop movieData={movieData} />
-          <div className="absolute top-[250px] right-0 left-0">
+          <div className="absolute top-[250px] right-0 left-0 z-10">
             <div className="flex w-full items-start justify-between gap-5 px-[40px]">
               <DetailPosterSection movieData={movieData} />
               <DetailContentSection movieData={movieData} />
@@ -59,6 +62,17 @@ const MovieDetailPage = () => {
             {!recommendsLoading && recommendsData.length > 0 && (
               <DetailRecommendSection recommendsData={recommendsData} />
             )}
+          </div>
+        </Fragment>
+      )}
+      {movieLoading && (
+        <Fragment>
+          <LoadingBackdrop />
+          <div className="absolute top-[250px] right-0 left-0">
+            <div className="flex w-full items-start justify-between gap-5 px-[40px]">
+              <LoadingPosterSection />
+              <LoadingContentSection />
+            </div>
           </div>
         </Fragment>
       )}
