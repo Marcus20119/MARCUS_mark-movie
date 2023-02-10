@@ -31,7 +31,7 @@ const FilmList = ({
             <div className="group relative w-full h-0 bg-transparent pt-[145%] rounded-md overflow-hidden group-hover:-translate-y-2">
               {filmData?.poster_path ? (
                 <ProgressiveImg
-                  src={api.getPoster(filmData.poster_path, 'w342')}
+                  src={api.getPoster(filmData.poster_path, 'w500')}
                   placeholderSrc={api.getPoster(filmData.poster_path, 'w92')}
                   alt={filmData.poster_path}
                 />

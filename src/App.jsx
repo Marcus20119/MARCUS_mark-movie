@@ -16,10 +16,14 @@ const UserInfoPage = lazy(() => import('./pages/User/UserInfoPage'));
 const PersonDetailPage = lazy(() => import('./pages/Person/PersonDetailPage'));
 const PersonTypePage = lazy(() => import('./pages/Person/PersonTypePage'));
 const PersonSearchPage = lazy(() => import('./pages/Person/PersonSearchPage'));
+
 const MovieDetailPage = lazy(() => import('./pages/Movie/MovieDetailPage'));
+const MovieWatchPage = lazy(() => import('./pages/Movie/MovieWatchPage'));
 const MovieTypePage = lazy(() => import('./pages/Movie/MovieTypePage'));
 const MovieSearchPage = lazy(() => import('./pages/Movie/MovieSearchPage'));
+
 const TVDetailPage = lazy(() => import('./pages/TV/TVDetailPage'));
+const TVWatchPage = lazy(() => import('./pages/TV/TVWatchPage'));
 const TVTypePage = lazy(() => import('./pages/TV/TVTypePage'));
 const TVSearchPage = lazy(() => import('./pages/TV/TVSearchPage'));
 
@@ -31,6 +35,7 @@ function App() {
       <Suspense fallback={<LoadingPage />}>
         <Routes>
           <Route path="/home" element={<HomeLayout />}>
+            <Route path="" element={<Navigate replace to="/home/movies" />} />
             <Route path="tv-series" element={<TVSeriesHomePage />} />
             <Route path="movies" element={<MoviesHomePage />} />
           </Route>
@@ -50,11 +55,13 @@ function App() {
 
             <Route path="/movie">
               <Route path="details/:id" element={<MovieDetailPage />} />
+              <Route path="watch/:id" element={<MovieWatchPage />} />
               <Route path=":type" element={<MovieTypePage />} />
               <Route path="search" element={<MovieSearchPage />} />
             </Route>
             <Route path="/tv">
               <Route path="details/:id" element={<TVDetailPage />} />
+              <Route path="watch/:id" element={<TVWatchPage />} />
               <Route path=":type" element={<TVTypePage />} />
               <Route path="search" element={<TVSearchPage />} />
             </Route>

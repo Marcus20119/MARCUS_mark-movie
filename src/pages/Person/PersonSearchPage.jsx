@@ -32,12 +32,20 @@ const PersonSearchPage = () => {
   });
 
   const { input, handleSetInput, isFocus, setIsFocus } = useSearch();
-  const { currentPage, handlePageClick } = usePaginate(location);
+  const { currentPage, handlePageClick, setCurrentPage } =
+    usePaginate(location);
 
   const navigateTo = useNavigate();
   useEffect(() => {
     navigateTo(`/person/search?query=${input}&page=${currentPage}`);
   }, [navigateTo, input, currentPage]);
+
+  // Reset currentPage nếu như thay đổi từ khoá search
+  useEffect(() => {
+    navigateTo(`/person/search?query=${input}&page=1`);
+    setCurrentPage(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [input]);
 
   return (
     <div className="!bg-mainSection py-[20px] px-10 overflow-hidden">

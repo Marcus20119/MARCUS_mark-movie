@@ -9,7 +9,7 @@ import {
   DetailBackdrop,
   DetailCastSection,
   DetailContentSection,
-  DetailPosterSection,
+  DetailPosterTVSection,
   DetailSeasonSection,
   DetailTrailerSection,
   LoadingPosterSection,
@@ -45,7 +45,7 @@ const TVDetailPage = () => {
           <DetailBackdrop movieData={movieData} type="tv" />
           <div className="absolute top-[250px] right-0 left-0 z-10">
             <div className="flex w-full items-start justify-between gap-5 px-[40px]">
-              <DetailPosterSection movieData={movieData} />
+              <DetailPosterTVSection movieData={movieData} />
               <DetailContentSection movieData={movieData} />
             </div>
             {!creditsLoading &&
@@ -57,7 +57,10 @@ const TVDetailPage = () => {
               <DetailTrailerSection videosData={videosData} />
             )}
             {movieData.seasons && movieData.seasons.length > 0 && (
-              <DetailSeasonSection seasonsData={movieData.seasons} />
+              <DetailSeasonSection
+                seasonsData={movieData.seasons}
+                movieId={movieData.id}
+              />
             )}
           </div>
         </Fragment>

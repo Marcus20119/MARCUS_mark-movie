@@ -8,7 +8,7 @@ import {
   DetailBackdrop,
   DetailCastSection,
   DetailContentSection,
-  DetailPosterSection,
+  DetailPosterMovieSection,
   DetailRecommendSection,
   DetailTrailerSection,
   LoadingPosterSection,
@@ -48,7 +48,7 @@ const MovieDetailPage = () => {
           <DetailBackdrop movieData={movieData} />
           <div className="absolute top-[250px] right-0 left-0 z-10">
             <div className="flex w-full items-start justify-between gap-5 px-[40px]">
-              <DetailPosterSection movieData={movieData} />
+              <DetailPosterMovieSection movieData={movieData} />
               <DetailContentSection movieData={movieData} />
             </div>
             {!creditsLoading &&

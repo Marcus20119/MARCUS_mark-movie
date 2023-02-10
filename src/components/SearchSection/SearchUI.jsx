@@ -22,7 +22,6 @@ const SearchUI = ({ type, query }) => {
         []
       )
     : [];
-  console.log('searchData', searchData);
   const searchLoading = !data && !error;
   const isEmpty = data?.[0]?.results?.length === 0;
   const isReachingEnd = isEmpty || data?.length >= data?.[0]?.total_pages;

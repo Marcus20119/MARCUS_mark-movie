@@ -107,7 +107,7 @@ const DetailCelebInfoSection = ({ personData }) => {
           />
         ) : (
           <img
-            className="absolute inset-0 block w-full h-full object-cover object-center"
+            className="block w-full h-full object-cover object-center rounded-md"
             src="/imgs/no-user.png"
             alt="no-poster"
           />
@@ -150,7 +150,7 @@ const DetailCelebInfoSection = ({ personData }) => {
         {personData.biography && (
           <div className="flex flex-col items-start gap-[2px]">
             <h3 className="text-2xl text-white font-bold mb-3">Biography</h3>
-            <p className="custom-scrollbar w-full pr-[12px] text-[#b5b5b5] h-[7.5rem] overflow-y-auto">
+            <p className="custom-scrollbar w-full pr-[12px] text-[#b5b5b5] h-[9.5rem] overflow-y-auto">
               {personData.biography}
             </p>
           </div>

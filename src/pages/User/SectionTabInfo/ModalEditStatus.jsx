@@ -43,7 +43,7 @@ const ModalEditStatus = ({
       visible={showModelEditStatus}
       onClose={handleHideModelEditStatus}
     >
-      <div className="relative w-[450px] bg-[#181818] px-12 py-[40px] rounded-2xl z-2 transition-all float-border">
+      <div className="relative w-[600px] bg-[#181818] px-12 py-[40px] rounded-2xl z-2 transition-all float-border">
         <div className="flex flex-col gap-3 w-full">
           <div className="flex justify-between items-start w-full">
             <div className="inline-flex items-center gap-2">

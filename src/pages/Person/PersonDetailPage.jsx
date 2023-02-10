@@ -7,6 +7,7 @@ import { DetailCelebInfoSection } from '~/components/Detail';
 import { api } from '~/utils';
 import { useChangeTitleWebsite, useMySWR, useScrollOnTop } from '~/hooks';
 import { Fragment } from 'react';
+import LoadingCelebInfoSection from '~/components/Detail/LoadingCelebInfoSection';
 
 const PersonDetailPage = () => {
   const { id } = useParams();
@@ -40,7 +41,9 @@ const PersonDetailPage = () => {
               movieCreditsData.cast.length > 0 && (
                 <div className="relative w-full p-[30px] !bg-mainSection">
                   <h3 className="text-2xl text-white font-bold mb-[24px]">
-                    {`${personData.name} Movies`}
+                    {`${personData.name}${
+                      personData.name.slice(-1) === 's' ? "'" : "'s"
+                    } Movies`}
                   </h3>
                   <FilmList
                     filmsData={movieCreditsData.cast}
@@ -54,7 +57,9 @@ const PersonDetailPage = () => {
               tvCreditsData.cast.length > 0 && (
                 <div className="relative w-full p-[30px] !bg-mainSection">
                   <h3 className="text-2xl text-white font-bold mb-[24px]">
-                    {`${personData.name} TV Shows`}
+                    {`${personData.name}${
+                      personData.name.slice(-1) === 's' ? "'" : "'s"
+                    } TV Shows`}
                   </h3>
                   <FilmList
                     filmsData={tvCreditsData.cast}
@@ -66,6 +71,7 @@ const PersonDetailPage = () => {
           </div>
         </Fragment>
       )}
+      {personLoading && <LoadingCelebInfoSection />}
     </div>
   );
 };

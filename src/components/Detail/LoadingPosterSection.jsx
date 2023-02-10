@@ -4,7 +4,7 @@ import { ButtonPlay } from '../Button';
 const LoadingPosterSection = () => {
   return (
     <div className="flex flex-col gap-[20px] w-[20%]">
-      <LoadingSkeleton className="w-full h-[356px] rounded-md !bg-mainSection" />
+      <LoadingSkeleton className="w-full h-[410px] rounded-md !bg-mainSection" />
       <ButtonPlay
         message="Watch now"
         displayIcon={true}

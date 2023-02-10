@@ -1,0 +1,34 @@
+.navSection {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+
+  &-wrap {
+    right: unset;
+    width: 85px;
+  }
+  &-logoLeft {
+    color: black !important;
+    text-shadow: 0 0 5px #ffffff10;
+    display: inline-block;
+    transform: scale(1.5);
+  }
+  &-logoRight {
+    display: inline-block;
+
+    transform: scale(1.5);
+  }
+  &-icon {
+    transform: scale(1.8);
+    height: 30px;
+    width: 30px;
+  }
+  &-avatar {
+    // transform: scale(1.2);
+    height: 40px;
+    width: 40px;
+  }
+  &-hide {
+    display: none;
+  }
+}

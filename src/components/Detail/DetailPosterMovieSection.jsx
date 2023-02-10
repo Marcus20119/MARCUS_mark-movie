@@ -7,17 +7,17 @@ import { api } from '~/utils';
 import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 import ProgressiveImg from '../Base/ProgressiveImg';
 
-const DetailPosterSection = ({ movieData }) => {
+const DetailPosterMovieSection = ({ movieData }) => {
   return (
     <Fragment>
       {movieData && (movieData.title || movieData.name) && (
         <div className="flex flex-col gap-[20px] w-[20%]">
           {movieData?.poster_path ? (
             <ProgressiveImg
-              src={api.getPoster(movieData.poster_path, 'w342')}
+              src={api.getPoster(movieData.poster_path, 'w500')}
               placeholderSrc={api.getPoster(movieData.poster_path, 'w92')}
               alt={movieData.poster_path}
-              className="w-full object-contain rounded-md"
+              className="w-full object-contain rounded-md min-h-[365px]"
               resetClassName={true}
             />
           ) : (
@@ -31,7 +31,9 @@ const DetailPosterSection = ({ movieData }) => {
             message="Watch now"
             displayIcon={true}
             widthType="full"
-            className="!rounded-md"
+            className="!rounded-md !text-lg"
+            isLink={true}
+            path={`/movie/watch/${movieData.id}`}
           />
         </div>
       )}
@@ -39,10 +41,10 @@ const DetailPosterSection = ({ movieData }) => {
   );
 };
 
-DetailPosterSection.propTypes = {
+DetailPosterMovieSection.propTypes = {
   movieData: PropTypes.object.isRequired,
 };
 
-export default withErrorBoundary(DetailPosterSection, {
+export default withErrorBoundary(DetailPosterMovieSection, {
   FallbackComponent: ErrorFallBack,
 });

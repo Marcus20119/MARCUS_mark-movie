@@ -8,20 +8,31 @@ const MovieTagList = ({
   disabled = false,
   className = '',
   category = 'movie',
+  size = 'normal',
+  hidden = true,
   handleHoverTag = () => {},
   handleUnHoverTag = () => {},
 }) => {
   const navigateTo = useNavigate();
+  let sizeClassName = '';
+  if (size === 'normal') {
+    sizeClassName = 'px-[11px] py-[8px] text-[0.65rem] leading-[0.75rem]';
+  } else if (size === 'large') {
+    sizeClassName =
+      'px-[13px] py-[10px] text-[0.75rem] leading-[0.85rem] -translate-y-1';
+  }
   return (
     <div
-      className={`flex flex-wrap justify-start items-center gap-[0.5rem] mb-[1.5rem] max-h-[30px] overflow-hidden ${className}`}
+      className={`flex flex-wrap justify-start items-center gap-[0.5rem] mb-[1.5rem] max-h-[30px] ${
+        hidden ? 'overflow-hidden' : ''
+      } ${className}`}
     >
       {movieData &&
         movieData.genre_ids &&
         movieData.genre_ids.slice(0, numberOfTag).map(id => (
           <button
             key={`genres${id}`}
-            className={`px-[11px] py-[8px] border border-white text-[0.65rem] leading-[0.75rem] rounded-md opacity-70 hover:!text-white ${
+            className={`${sizeClassName} border border-white rounded-md opacity-70 hover:!text-white ${
               disabled ? '' : 'hover:opacity-100'
             }`}
             disabled={disabled}
@@ -45,7 +56,7 @@ const MovieTagList = ({
         movieData.genres.map(genre => (
           <a
             key={`genres${genre.id}`}
-            className={`px-[11px] py-[8px] border border-white text-[0.65rem] leading-[0.75rem] rounded-md opacity-70 hover:!text-white ${
+            className={`${sizeClassName} border border-white rounded-md opacity-70 hover:!text-white ${
               disabled ? '' : 'hover:opacity-100'
             }`}
             disabled={disabled}
@@ -73,6 +84,7 @@ MovieTagList.propTypes = {
   numberOfTag: PropTypes.number,
   disabled: PropTypes.bool,
   className: PropTypes.string,
+  size: PropTypes.oneOf(['normal', 'large']),
 };
 
 export { MovieTagList };

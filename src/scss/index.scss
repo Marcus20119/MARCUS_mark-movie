@@ -59,9 +59,13 @@
     display: grid;
     grid-template-columns: 15% 65% 20%;
   }
+  // .main-layout {
+  //   display: grid;
+  //   grid-template-columns: 15% 85%;
+  // }
   .main-layout {
     display: grid;
-    grid-template-columns: 15% 85%;
+    grid-template-columns: 82px calc(100% - 82px);
   }
   .custom-scrollbar::-webkit-scrollbar {
     width: 10px;

@@ -55,6 +55,7 @@ const MovieGeneralSearchPage = () => {
           isFocus={isFocus}
           setIsFocus={setIsFocus}
           placeholder="Find Your Movie"
+          type="2"
         />
         {!filmsLoading && filmsData.results && filmsData.results.length > 0 && (
           <Fragment>

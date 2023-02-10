@@ -99,6 +99,8 @@ const MainContent = ({ movieData }) => {
               movieData={movieData}
               className="!mb-0"
               category={movieData.title ? 'movie' : 'tv'}
+              size="large"
+              hidden={false}
             />
           </div>
         </Fragment>

@@ -24,7 +24,7 @@ const CastItem = ({ castData }) => {
               ) : (
                 <img
                   className="rounded-full absolute inset-0 block w-full h-full object-cover brightness-85 border-[2px] border-solid border-[#222222] hover:!border-primary cursor-pointer"
-                  src="/imgs/no-face.ipg"
+                  src="/imgs/no-face.jpg"
                   alt="no-poster"
                 />
               )}

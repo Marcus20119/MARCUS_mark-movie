@@ -28,18 +28,11 @@ export const navSection = [
         needLogIn: false,
       },
       {
-        name: 'Awards',
-        iconClass: 'bx bxs-award',
-        originLink: '/awards',
-        navigateLink: '/awards',
+        name: 'Search',
+        iconClass: 'bx bx-search font-extrabold',
+        originLink: '/search',
+        navigateLink: '/search',
         needLogIn: true,
-      },
-      {
-        name: 'Celebs',
-        iconClass: 'bx bxs-group',
-        originLink: '/person',
-        navigateLink: '/person/search?query=&page=1',
-        needLogIn: false,
       },
     ],
   },
@@ -59,8 +52,9 @@ export const navSection = [
         originLink: '/watchlist#watchlist_movie',
         navigateLink: '/watchlist#watchlist_movie',
         needLogIn: true,
-        handleClick: () => {
+        handleClick: navigateTo => {
           document.documentElement.scrollTop = 0;
+          navigateTo('/watchlist#watchlist_movie');
         },
       },
       {
@@ -75,6 +69,13 @@ export const navSection = [
   {
     groupName: 'CATEGORIES',
     items: [
+      {
+        name: 'Celebs',
+        iconClass: 'bx bxs-group',
+        originLink: '/person',
+        navigateLink: '/person/search?query=&page=1',
+        needLogIn: false,
+      },
       {
         name: 'TV Series',
         iconClass: 'bx bxs-tv',
@@ -107,7 +108,7 @@ export const navSection = [
         originLink: '/log-out',
         navigateLink: '/home/movies',
         needLogIn: true,
-        handleClick: async () => {
+        handleClick: async navigateTo => {
           await Swal.fire({
             title: 'Are you sure?',
             text: `You will immediately sign out!`,
@@ -125,6 +126,7 @@ export const navSection = [
                 title: 'Signed Out!',
                 text: 'See you next time.',
               });
+              navigateTo('/home/movies');
             }
           });
         },
