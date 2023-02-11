@@ -7,4 +7,3 @@ export * from './LoadingFilmList';
 export * from './LoadingMovieTagList';
 export * from './LoadingMovieCardListX';
 export * from './LoadingMovieCardListY';
-export * from './WatchRecommendList';

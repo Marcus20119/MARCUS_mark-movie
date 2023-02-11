@@ -8,7 +8,6 @@ const SearchBar = ({
   placeholder,
   type = '1',
 }) => {
-  console.log('type', type);
   return (
     <div className="relative w-full">
       <Fragment>

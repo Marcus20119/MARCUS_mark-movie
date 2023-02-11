@@ -1,3 +1,4 @@
+/* eslint-disable no-labels */
 import { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withErrorBoundary } from 'react-error-boundary';
@@ -6,8 +7,54 @@ import { ButtonPlay } from '~/components/Button';
 import { api } from '~/utils';
 import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 import ProgressiveImg from '../Base/ProgressiveImg';
+import { useAuth } from '~/contexts/authContext';
+import { supabase, useFetchSingleRow } from '~/supabase';
 
 const DetailPosterMovieSection = ({ movieData }) => {
+  const { session } = useAuth();
+  const {
+    rowData: recentRow,
+    loading: recentLoading,
+    setLoading: setRecentLoading,
+  } = useFetchSingleRow({
+    table: `recent_movies`,
+    match: { user_id: session.user.id, movie_id: movieData.id },
+    neededLogIn: true,
+    initialLoading: true,
+    rerenderCondition: [session],
+  });
+  const handleAddToRecent = () => {
+    if (session?.user?.email) {
+      const handleUpsertData = async id => {
+        block: try {
+          setRecentLoading(true);
+
+          const newRow = {
+            user_id: session.user.id,
+            movie_id: movieData.id,
+            title: movieData.title,
+            vote_average: parseFloat(movieData.vote_average).toFixed(1),
+            poster_path: movieData.poster_path,
+          };
+          if (id) {
+            newRow.id = id;
+          }
+          const { error } = await supabase.from(`recent_movies`).upsert(newRow);
+          if (error) {
+            console.error(error);
+            break block;
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      if (recentRow?.[0]?.id && !recentLoading) {
+        handleUpsertData(recentRow?.[0]?.id);
+      } else {
+        handleUpsertData();
+      }
+    }
+  };
   return (
     <Fragment>
       {movieData && (movieData.title || movieData.name) && (
@@ -34,6 +81,7 @@ const DetailPosterMovieSection = ({ movieData }) => {
             className="!rounded-md !text-lg"
             isLink={true}
             path={`/movie/watch/${movieData.id}`}
+            onClick={handleAddToRecent}
           />
         </div>
       )}

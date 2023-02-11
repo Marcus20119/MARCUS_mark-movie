@@ -53,6 +53,7 @@ const TVSearchPage = () => {
           isFocus={isFocus}
           setIsFocus={setIsFocus}
           placeholder="Find Your TV Show"
+          type="2"
         />
         {!filmsLoading && filmsData.results && filmsData.results.length > 0 && (
           <Fragment>

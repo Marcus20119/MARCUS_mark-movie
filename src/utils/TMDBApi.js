@@ -54,6 +54,9 @@ export const api = {
     getOnTheAir(page = 1) {
       return `https://api.themoviedb.org/3/tv/on_the_air?api_key=${apiKey}&language=en-US&page=${page}`;
     },
+    getSeason(id, season) {
+      return `https://api.themoviedb.org/3/tv/${id}/season/${season}?api_key=${apiKey}&language=en-US`;
+    },
   },
 };
 export const genres = {

@@ -59,7 +59,7 @@ const TVDetailPage = () => {
             {movieData.seasons && movieData.seasons.length > 0 && (
               <DetailSeasonSection
                 seasonsData={movieData.seasons}
-                movieId={movieData.id}
+                movieData={movieData}
               />
             )}
           </div>

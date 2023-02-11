@@ -80,6 +80,19 @@
     -webkit-background-clip: padding-box; /* for Safari */
     background-clip: padding-box;
   }
+  .custom-scrollbar2::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  .custom-scrollbar2::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #181818;
+    -webkit-background-clip: padding-box; /* for Safari */
+    background-clip: padding-box;
+  }
 
   .textarea-scrollbar {
     cursor: auto;

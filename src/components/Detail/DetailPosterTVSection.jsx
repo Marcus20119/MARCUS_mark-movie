@@ -54,7 +54,7 @@ const DetailPosterTVSection = ({ movieData }) => {
                 showContent={false}
                 showTitle={false}
                 wrapClassName="py-0"
-                movieId={movieData.id}
+                movieData={movieData}
               />
             </div>
           )}

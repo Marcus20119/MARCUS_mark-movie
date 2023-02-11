@@ -57,6 +57,7 @@ const PersonSearchPage = () => {
           isFocus={isFocus}
           setIsFocus={setIsFocus}
           placeholder="Find Your Actor"
+          type="2"
         />
         {!peopleLoading &&
           peopleData.results &&

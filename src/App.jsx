@@ -11,6 +11,7 @@ const TVSeriesHomePage = lazy(() => import('./pages/TV/TVSeriesHomePage'));
 const DiscoverPage = lazy(() => import('./pages/Discover/DiscoverPage'));
 const CommunityPage = lazy(() => import('./pages/Community/CommunityPage'));
 const WatchlistPage = lazy(() => import('./pages/Watchlist/WatchlistPage'));
+const RecentPage = lazy(() => import('./pages/Recent/RecentPage'));
 const UserInfoPage = lazy(() => import('./pages/User/UserInfoPage'));
 
 const PersonDetailPage = lazy(() => import('./pages/Person/PersonDetailPage'));
@@ -44,6 +45,7 @@ function App() {
             <Route path="community" element={<CommunityPage />} />
             <Route path="discover" element={<DiscoverPage />} />
             <Route path="watchlist" element={<WatchlistPage />} />
+            <Route path="recent" element={<RecentPage />} />
             <Route path="user" element={<UserInfoPage />} />
 
             <Route path="/person">
@@ -65,11 +67,12 @@ function App() {
               <Route path=":type" element={<TVTypePage />} />
               <Route path="search" element={<TVSearchPage />} />
             </Route>
+
+            <Route path="test" element={<TestPage />} />
           </Route>
 
           <Route path="settings" element={<SorryPage />} />
           <Route path="log" element={<SorryPage />} />
-          <Route path="test" element={<TestPage />} />
 
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
