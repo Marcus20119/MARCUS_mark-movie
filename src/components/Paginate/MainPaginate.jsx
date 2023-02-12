@@ -1,9 +1,10 @@
 import ReactPaginate from 'react-paginate';
 import PropTypes from 'prop-types';
 import './MainPaginate.scss';
-import { memo } from 'react';
+import { useForceRerender } from '~/hooks';
 
 const MainPaginate = ({ handlePageClick, totalPage, currentPage }) => {
+  useForceRerender([currentPage]);
   const prevElement = (
     <i className="bx bx-chevron-left inline-flex items-center justify-center mt-[1px] !text-lg"></i>
   );
@@ -21,6 +22,7 @@ const MainPaginate = ({ handlePageClick, totalPage, currentPage }) => {
         pageCount={totalPage <= 99 ? totalPage : 99}
         previousLabel={prevElement}
         initialPage={currentPage - 1}
+        forcePage={currentPage - 1}
         disableInitialCallback={true}
         renderOnZeroPageCount={null}
         className="main-paginate"
@@ -34,4 +36,4 @@ MainPaginate.propTypes = {
   totalPage: PropTypes.number.isRequired,
 };
 
-export default memo(MainPaginate);
+export default MainPaginate;

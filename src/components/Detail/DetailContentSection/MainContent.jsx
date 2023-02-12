@@ -1,6 +1,7 @@
-import { Fragment } from 'react';
+import { Fragment, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
+import { FacebookShareButton } from 'react-share';
 
 import { ButtonPlus } from '~/components/Button';
 import { MovieTagList } from '~/components/CardAndList';
@@ -11,6 +12,7 @@ import { neededSignInAlert } from '~/utils';
 const MainContent = ({ movieData }) => {
   const { pathname } = useLocation();
   const { session, handleShowModelLogIn } = useAuth();
+  const facebookRef = useRef();
   return (
     <Fragment>
       {movieData && (movieData.title || movieData.name) && (
@@ -61,7 +63,10 @@ const MainContent = ({ movieData }) => {
           </div>
           <div className="flex justify-between items-center w-full mb-[8px]">
             <div className="inline-flex justify-start items-center gap-[12px]">
-              <button className="inline-flex justify-start items-center gap-[10px] bg-[#3E56C4] px-[16px] py-[8px] rounded-md opacity-90 hover:opacity-100">
+              <button
+                className="inline-flex justify-start items-center gap-[10px] bg-[#3E56C4] px-[16px] py-[8px] rounded-md opacity-90 hover:opacity-100"
+                onClick={() => facebookRef.current.click()}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -103,6 +108,11 @@ const MainContent = ({ movieData }) => {
               hidden={false}
             />
           </div>
+          <FacebookShareButton
+            ref={facebookRef}
+            url={window.location.href}
+            className="meta__social--facebook"
+          ></FacebookShareButton>
         </Fragment>
       )}
     </Fragment>

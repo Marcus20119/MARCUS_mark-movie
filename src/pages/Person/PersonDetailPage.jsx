@@ -2,7 +2,7 @@ import { withErrorBoundary } from 'react-error-boundary';
 import { useParams } from 'react-router-dom';
 
 import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
-import { FilmList } from '~/components/CardAndList';
+import { MainList } from '~/components/CardAndList';
 import { DetailCelebInfoSection } from '~/components/Detail';
 import { api } from '~/utils';
 import { useChangeTitleWebsite, useMySWR, useScrollOnTop } from '~/hooks';
@@ -45,8 +45,8 @@ const PersonDetailPage = () => {
                       personData.name.slice(-1) === 's' ? "'" : "'s"
                     } Movies`}
                   </h3>
-                  <FilmList
-                    filmsData={movieCreditsData.cast}
+                  <MainList
+                    listData={movieCreditsData.cast}
                     numberOfCol={5}
                     type="movie"
                   />
@@ -61,8 +61,8 @@ const PersonDetailPage = () => {
                       personData.name.slice(-1) === 's' ? "'" : "'s"
                     } TV Shows`}
                   </h3>
-                  <FilmList
-                    filmsData={tvCreditsData.cast}
+                  <MainList
+                    listData={tvCreditsData.cast}
                     numberOfCol={5}
                     type="tv"
                   />

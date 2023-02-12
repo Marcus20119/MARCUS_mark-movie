@@ -1,9 +1,8 @@
-import { useLocation, useNavigate } from 'react-router-dom';
 import { Fragment, useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import queryString from 'query-string';
 
-import { Navbar, SuggestionSearchBar } from '~/components/Bar';
-import { MainList } from '~/components/CardAndList';
+import { SuggestionSearchBar } from '~/components/Bar';
 import {
   useChangeTitleWebsite,
   useMySWR,
@@ -13,57 +12,54 @@ import {
 import { api } from '~/utils';
 import { MainPaginate } from '~/components/Paginate';
 import LoadingBounce from '~/components/Base/Loading/Bounce';
-import { navTV } from '~/utils';
+import { SearchList } from '~/components/CardAndList/SearchList';
 
-const TVSearchPage = () => {
-  useChangeTitleWebsite({ title: 'Mark Movie - TV/Search' });
+const SearchPage = () => {
+  useChangeTitleWebsite({ title: 'Mark Movie - Search' });
+
   const location = useLocation();
   const { query, page } = queryString.parse(location.search);
   useScrollOnTop(page);
-
   const { myData: filmsData, isLoading: filmsLoading } = useMySWR({
-    api: query ? api.getSearch(query, 'tv', page) : api.getPopular('tv', page),
+    api: api.getSearchMulti(query, page),
     origin: true,
   });
-
   const { currentPage, handlePageClick, setCurrentPage } =
     usePaginate(location);
 
   const [newQuery, setNewQuery] = useState(query);
   const navigateTo = useNavigate();
   useEffect(() => {
-    navigateTo(`/tv/search?query=${newQuery}&page=${currentPage}`);
+    navigateTo(`/search?query=${newQuery}&page=${currentPage}`);
   }, [navigateTo, newQuery, currentPage]);
 
   return (
     <div className="!bg-mainSection py-[20px] px-10  overflow-hidden">
-      <Navbar navList={navTV} />
-      {!query && (
-        <h2 className="block text-5xl text-white80 text-center mb-4 mt-4">
-          Find your favorite TV Shows and more . . .
-        </h2>
-      )}
       <div className="mt-[24px]">
+        {!query && (
+          <h2 className="block text-5xl text-white80 text-center mb-4">
+            Find your favorite movies, TV shows, people and more
+          </h2>
+        )}
         <SuggestionSearchBar
-          typeQuery="movie"
+          typeQuery="multi"
           query={query}
           setNewQuery={setNewQuery}
           setCurrentPage={setCurrentPage}
-          placeholder="Find Your TV Shows . . ."
+          placeholder="Search . . ."
         />
         {query && (
           <Fragment>
-            <h3 className="italic text-xl text-white my-[24px] mx-[2px]">
-              {`Search result for "${newQuery}" (${filmsData.total_results} results found)`}
-            </h3>
             {!filmsLoading &&
               filmsData.results &&
               filmsData.results.length > 0 && (
                 <Fragment>
-                  <MainList
-                    listData={filmsData.results}
+                  <h3 className="italic text-xl text-white my-[24px] mx-[2px]">
+                    {`Search result for "${newQuery}" (${filmsData.total_results} results found)`}
+                  </h3>
+                  <SearchList
+                    searchData={filmsData.results}
                     className="my-[24px]"
-                    type="tv"
                   />
                   {filmsData.total_pages > 1 && (
                     <MainPaginate
@@ -91,4 +87,4 @@ const TVSearchPage = () => {
   );
 };
 
-export default TVSearchPage;
+export default SearchPage;

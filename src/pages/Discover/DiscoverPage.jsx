@@ -11,7 +11,7 @@ import {
 } from '~/hooks';
 import { api } from '~/utils';
 import FilterBar from './FilterBar';
-import { FilmList } from '~/components/CardAndList';
+import { MainList } from '~/components/CardAndList';
 import { MainPaginate } from '~/components/Paginate';
 import LoadingBounce from '~/components/Base/Loading/Bounce';
 import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
@@ -40,8 +40,8 @@ const DiscoverPage = () => {
         discoverData.results &&
         discoverData.results.length > 0 && (
           <Fragment>
-            <FilmList
-              filmsData={discoverData.results}
+            <MainList
+              listData={discoverData.results}
               type={paramData.category}
             />
             {discoverData.total_pages > 1 && (

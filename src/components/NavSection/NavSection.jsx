@@ -158,12 +158,14 @@ const NavSection = ({ isHomePage = false }) => {
                 </div>
               </Link>
             ) : (
-              <button
-                onClick={handleShowModelLogIn}
-                className="flex justify-center items-center rounded-full w-[41.2px] h-[42.5px] !bg-primary opacity-80 hover:opacity-100"
-              >
-                <i className="bx bxs-log-in-circle text-3xl"></i>
-              </button>
+              <ToolTipBase tipMessage="Sign In" position="right">
+                <button
+                  onClick={handleShowModelLogIn}
+                  className="flex justify-center items-center rounded-full w-[41.2px] h-[42.5px] !bg-primary opacity-80 hover:opacity-100"
+                >
+                  <i className="bx bxs-log-in-circle text-3xl"></i>
+                </button>
+              </ToolTipBase>
             )}
           </div>
         )}

@@ -13,6 +13,7 @@ const CommunityPage = () => {
     initialLoading: true,
     rowPerLoad: 10,
     limit: 20,
+    neededLogIn: true,
   });
 
   return (

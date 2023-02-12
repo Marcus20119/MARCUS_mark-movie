@@ -18,7 +18,10 @@ const DetailPosterMovieSection = ({ movieData }) => {
     setLoading: setRecentLoading,
   } = useFetchSingleRow({
     table: `recent_movies`,
-    match: { user_id: session.user.id, movie_id: movieData.id },
+    match: {
+      user_id: session?.user?.id ? session.user.id : '',
+      movie_id: movieData.id,
+    },
     neededLogIn: true,
     initialLoading: true,
     rerenderCondition: [session],
@@ -80,7 +83,7 @@ const DetailPosterMovieSection = ({ movieData }) => {
             widthType="full"
             className="!rounded-md !text-lg"
             isLink={true}
-            path={`/movie/watch/${movieData.id}`}
+            path={`/movie/watch/${movieData.id}?query=`}
             onClick={handleAddToRecent}
           />
         </div>

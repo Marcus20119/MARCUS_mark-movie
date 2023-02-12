@@ -23,7 +23,10 @@ const DetailSeasonSection = ({
     setLoading: setRecentLoading,
   } = useFetchSingleRow({
     table: `recent_tvs`,
-    match: { user_id: session.user.id, tv_id: movieData.id },
+    match: {
+      user_id: session?.user?.id ? session.user.id : '',
+      tv_id: movieData.id,
+    },
     neededLogIn: true,
     initialLoading: true,
     rerenderCondition: [session],
@@ -73,7 +76,7 @@ const DetailSeasonSection = ({
               {!(seasonItem.season_number === 0) &&
                 seasonItem.episode_count !== 0 && (
                   <Link
-                    to={`/tv/watch/${movieData.id}?season=${seasonItem.season_number}&episode=1`}
+                    to={`/tv/watch/${movieData.id}?season=${seasonItem.season_number}&episode=1?query=`}
                     className="flex justify-start items-start gap-[16px] w-full hover:opacity-60"
                     style={{
                       borderBottom: (
@@ -129,7 +132,6 @@ const DetailSeasonSection = ({
 
 DetailSeasonSection.propTypes = {
   seasonsData: PropTypes.array.isRequired,
-  movieId: PropTypes.number.isRequired,
   showContent: PropTypes.bool,
   showCTitle: PropTypes.bool,
   wrapClassName: PropTypes.string,

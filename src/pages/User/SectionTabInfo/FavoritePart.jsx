@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import LoadingSkeleton from '~/components/Base/Loading/Skeleton';
+import ProgressiveImg from '~/components/Base/ProgressiveImg';
 import { useAuth } from '~/contexts/authContext';
 import { useFetchAllTable } from '~/supabase';
 import { api, route } from '~/utils';
@@ -36,16 +37,23 @@ const FavoritePart = ({ type }) => {
               <Link
                 to={route.toDetail(type, filmData[`${type}_id`])}
                 key={`favorite-movie-${index}`}
-                className="group relative"
+                className="group relative overflow-hidden"
               >
-                <img
-                  src={
-                    filmData.poster_path
-                      ? api.getPoster(filmData.poster_path)
-                      : '/imgs/no-poster.jpg'
-                  }
-                  alt={filmData.poster_path}
-                />
+                {filmData?.poster_path ? (
+                  <ProgressiveImg
+                    src={api.getPoster(filmData.poster_path, 'w500')}
+                    placeholderSrc={api.getPoster(filmData.poster_path, 'w92')}
+                    alt={filmData.poster_path}
+                    resetClassName={true}
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  <img
+                    className="absolute inset-0 block w-full h-full object-cover object-center"
+                    src="/imgs/no-poster.jpg"
+                    alt="no-poster"
+                  />
+                )}
                 <div className="absolute inset-0 hidden bg-[#00000099] p-1 text-white break-all animate-fade-in group-hover:block">
                   {filmData.title}
                 </div>

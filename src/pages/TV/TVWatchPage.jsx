@@ -1,8 +1,8 @@
-import { Fragment, useRef } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { Fragment, useEffect, useRef, useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import queryString from 'query-string';
-import { SearchBar } from '~/components/Bar';
-import { useMySWR, useScrollOnTop, useSearch } from '~/hooks';
+import { SuggestionSearchBar } from '~/components/Bar';
+import { useMySWR, useScrollOnTop } from '~/hooks';
 import { api } from '~/utils';
 import {
   LoadingWatch,
@@ -15,14 +15,21 @@ const TVWatchPage = () => {
   useScrollOnTop(id);
   const { search } = useLocation();
   useScrollOnTop(search);
-  const { season, episode } = queryString.parse(search);
+  const { season, episode, query } = queryString.parse(search);
 
   const seasonRef = useRef();
-
   const { myData: movieData, isLoading: movieLoading } = useMySWR({
     api: api.getDetail(id, 'tv'),
   });
-  const { input, handleSetInput, isFocus, setIsFocus } = useSearch();
+
+  const [newQuery, setNewQuery] = useState(query);
+  const navigateTo = useNavigate();
+  useEffect(() => {
+    if (newQuery) {
+      navigateTo(`/search?query=${newQuery}&page=1`);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [newQuery]);
 
   return (
     <Fragment>
@@ -76,13 +83,11 @@ const TVWatchPage = () => {
             </div>
           </div>
           <div className="flex-1 flex flex-col gap-4 h-full mx-4 py-4">
-            <SearchBar
-              input={input}
-              handleSetInput={handleSetInput}
-              isFocus={isFocus}
-              setIsFocus={setIsFocus}
+            <SuggestionSearchBar
+              typeQuery="multi"
+              query={query}
+              setNewQuery={setNewQuery}
               placeholder="Search . . ."
-              type="2"
             />
             <div className="flex-1 flex flex-col w-full gap-4">
               <h3 className="text-2xl text-white font-bold">Seasons</h3>

@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 import LoadingBounce from '~/components/Base/Loading/Bounce';
 import ToolTipBase from '~/components/Base/ToolTipBase';
 import { ButtonMinus } from '~/components/Button';
+import PersonCard from '~/components/CardAndList/PersonCard';
 import { supabase, useFetchAllTable } from '~/supabase';
-import { api, errorToast, route, successToast } from '~/utils';
+import { errorToast, successToast } from '~/utils';
 
 const SectionTabFavoriteActor = ({ userRow }) => {
   const { tableData, loading, setTableData } = useFetchAllTable({
@@ -47,42 +48,28 @@ const SectionTabFavoriteActor = ({ userRow }) => {
               gridTemplateColumns: `repeat(5, minmax(0, 1fr))`,
             }}
           >
-            {tableData.map((actorData, index) => (
-              <Link
+            {tableData.map((personData, index) => (
+              <PersonCard
                 key={`favoriteCardKey-${index}`}
-                to={route.toDetail('person', actorData.actor_id)}
-                className="group w-full cursor-pointer rounded-md"
+                personData={personData}
+                alternativeId={personData.actor_id}
               >
-                <div className="group relative w-full h-0 bg-[#ffffff50] pt-[145%] rounded-md overflow-hidden group-hover:-translate-y-2">
-                  <img
-                    className="absolute inset-0 block w-full h-full object-cover object-center"
-                    src={
-                      actorData.profile_path
-                        ? api.getPoster(actorData.profile_path)
-                        : '/imgs/no-user.png'
-                    }
-                    alt={actorData.profile_path}
-                  />
-                  <div className="absolute top-[5%] right-[5%] hidden group-hover:block">
-                    <ToolTipBase tipMessage="Remove from favorite list">
-                      <ButtonMinus
-                        padding={12}
-                        iconSize={16}
-                        buttonClass="!rounded-md"
-                        onClick={e => {
-                          e.stopPropagation();
-                          e.preventDefault();
-                          handleRemoveFromFavoriteList(actorData.id);
-                        }}
-                        disabled={forceDisable}
-                      />
-                    </ToolTipBase>
-                  </div>
+                <div className="absolute top-[5%] right-[5%] hidden group-hover:block">
+                  <ToolTipBase tipMessage="Remove from favorite list">
+                    <ButtonMinus
+                      padding={12}
+                      iconSize={16}
+                      buttonClass="!rounded-md"
+                      onClick={e => {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        handleRemoveFromFavoriteList(personData.id);
+                      }}
+                      disabled={forceDisable}
+                    />
+                  </ToolTipBase>
                 </div>
-                <h6 className="text-center text-white my-[10px] text-[1.1rem]">
-                  {actorData.name}
-                </h6>
-              </Link>
+              </PersonCard>
             ))}
           </div>
         </div>

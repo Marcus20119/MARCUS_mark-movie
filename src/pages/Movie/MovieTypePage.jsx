@@ -2,7 +2,7 @@ import { Fragment, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Navbar } from '~/components/Bar';
 
-import { FilmList } from '~/components/CardAndList';
+import { MainList } from '~/components/CardAndList';
 import { MainPaginate } from '~/components/Paginate';
 import { api } from '~/utils';
 import {
@@ -74,8 +74,8 @@ const MovieTypePage = () => {
       <Navbar navList={navMovie} />
       {!filmsLoading && filmsData.results && filmsData.results.length > 0 && (
         <Fragment>
-          <FilmList
-            filmsData={filmsData.results}
+          <MainList
+            listData={filmsData.results}
             className="my-[24px]"
             type="movie"
           />

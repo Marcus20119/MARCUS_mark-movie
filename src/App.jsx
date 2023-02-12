@@ -8,8 +8,9 @@ import LoadingPage from './pages/LoadingPage';
 
 const MoviesHomePage = lazy(() => import('./pages/Movie/MoviesHomePage'));
 const TVSeriesHomePage = lazy(() => import('./pages/TV/TVSeriesHomePage'));
-const DiscoverPage = lazy(() => import('./pages/Discover/DiscoverPage'));
 const CommunityPage = lazy(() => import('./pages/Community/CommunityPage'));
+const DiscoverPage = lazy(() => import('./pages/Discover/DiscoverPage'));
+const SearchPage = lazy(() => import('./pages/SearchPage'));
 const WatchlistPage = lazy(() => import('./pages/Watchlist/WatchlistPage'));
 const RecentPage = lazy(() => import('./pages/Recent/RecentPage'));
 const UserInfoPage = lazy(() => import('./pages/User/UserInfoPage'));
@@ -44,6 +45,7 @@ function App() {
             <Route path="" element={<Navigate replace to="/home/movies" />} />
             <Route path="community" element={<CommunityPage />} />
             <Route path="discover" element={<DiscoverPage />} />
+            <Route path="search" element={<SearchPage />} />
             <Route path="watchlist" element={<WatchlistPage />} />
             <Route path="recent" element={<RecentPage />} />
             <Route path="user" element={<UserInfoPage />} />

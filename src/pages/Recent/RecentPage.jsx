@@ -1,10 +1,11 @@
-import { useChangeTitleWebsite } from '~/hooks';
+import { useChangeTitleWebsite, useScrollOnTop } from '~/hooks';
 import WatchlistSection from './RecentSection';
 
 const RecentPage = () => {
   useChangeTitleWebsite({
     title: 'Mark movie - Recent',
   });
+  useScrollOnTop();
   return (
     <div className="flex flex-col">
       <div className="relative w-full p-[30px] !bg-mainSection">

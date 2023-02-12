@@ -1,18 +1,20 @@
-import { Fragment } from 'react';
-import { useParams } from 'react-router-dom';
-import { SearchBar } from '~/components/Bar';
+import { Fragment, useEffect, useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import queryString from 'query-string';
+
+import { SuggestionSearchBar } from '~/components/Bar';
 import {
   LoadingWatch,
   WatchRecommendList,
   WatchTagList,
 } from '~/components/Watch';
-import { useMySWR, useScrollOnTop, useSearch } from '~/hooks';
+import { useMySWR, useScrollOnTop } from '~/hooks';
 import { api } from '~/utils';
 
 const MovieWatchPage = () => {
   const { id } = useParams();
   useScrollOnTop(id);
-  const { input, handleSetInput, isFocus, setIsFocus } = useSearch();
+  // const { input, handleSetInput, isFocus, setIsFocus } = useSearch();
 
   const { myData: movieData, isLoading: movieLoading } = useMySWR({
     api: api.getDetail(id, 'movie'),
@@ -21,6 +23,17 @@ const MovieWatchPage = () => {
     api: api.getRecommend(id, 'movie'),
     max: 5,
   });
+
+  const location = useLocation();
+  const { query } = queryString.parse(location.search);
+  const [newQuery, setNewQuery] = useState(query);
+  const navigateTo = useNavigate();
+  useEffect(() => {
+    if (newQuery) {
+      navigateTo(`/search?query=${newQuery}&page=1`);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [newQuery]);
 
   return (
     <Fragment>
@@ -74,13 +87,11 @@ const MovieWatchPage = () => {
             </div>
           </div>
           <div className="flex-1 flex flex-col gap-4 m-4">
-            <SearchBar
-              input={input}
-              handleSetInput={handleSetInput}
-              isFocus={isFocus}
-              setIsFocus={setIsFocus}
+            <SuggestionSearchBar
+              typeQuery="multi"
+              query={query}
+              setNewQuery={setNewQuery}
               placeholder="Search . . ."
-              type="2"
             />
             {!recommendListLoading && (
               <WatchRecommendList recommendList={recommendList} />

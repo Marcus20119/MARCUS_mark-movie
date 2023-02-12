@@ -2,7 +2,7 @@ import { Fragment, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Navbar } from '~/components/Bar';
 
-import { PersonList } from '~/components/CardAndList';
+import { MainList } from '~/components/CardAndList';
 import { MainPaginate } from '~/components/Paginate';
 import { api } from '~/utils';
 import {
@@ -48,10 +48,10 @@ const TVTypePage = () => {
         peopleData.results &&
         peopleData.results.length > 0 && (
           <Fragment>
-            <PersonList
-              peopleData={peopleData.results}
+            <MainList
+              listData={peopleData.results}
               className="my-[24px]"
-              type="tv"
+              type="person"
             />
             {peopleData.total_pages > 1 && (
               <MainPaginate
