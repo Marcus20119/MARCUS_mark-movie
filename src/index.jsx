@@ -9,10 +9,10 @@ import AuthProvider from './contexts/authContext';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './scss/index.scss';
 import 'react-toastify/dist/ReactToastify.css';
 import reportWebVitals from './reportWebVitals';
 import UserProvider from './contexts/userContext';
+import './scss/index.scss';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
