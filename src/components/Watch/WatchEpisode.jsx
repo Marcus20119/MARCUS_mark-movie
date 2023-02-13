@@ -15,7 +15,7 @@ const WatchEpisode = ({
   return (
     <Link
       to={`/tv/watch/${seriesId}?season=${seasonNumber}&episode=${episodeNumber}`}
-      className={`group flex items-center gap-4  ${
+      className={`group flex items-center gap-4 last-of-type:pb-2 ${
         episodeNumber == episode && seasonNumber == season
           ? '!opacity-100'
           : 'opacity-80'

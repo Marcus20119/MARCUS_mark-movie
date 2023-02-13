@@ -11,8 +11,9 @@ const TVSeriesHomePage = lazy(() => import('./pages/TV/TVSeriesHomePage'));
 const CommunityPage = lazy(() => import('./pages/Community/CommunityPage'));
 const DiscoverPage = lazy(() => import('./pages/Discover/DiscoverPage'));
 const SearchPage = lazy(() => import('./pages/SearchPage'));
-const WatchlistPage = lazy(() => import('./pages/Watchlist/WatchlistPage'));
 const RecentPage = lazy(() => import('./pages/Recent/RecentPage'));
+const WatchlistPage = lazy(() => import('./pages/Watchlist/WatchlistPage'));
+const DownloadedPage = lazy(() => import('./pages/DownloadedPage'));
 const UserInfoPage = lazy(() => import('./pages/User/UserInfoPage'));
 
 const PersonDetailPage = lazy(() => import('./pages/Person/PersonDetailPage'));
@@ -46,8 +47,9 @@ function App() {
             <Route path="community" element={<CommunityPage />} />
             <Route path="discover" element={<DiscoverPage />} />
             <Route path="search" element={<SearchPage />} />
-            <Route path="watchlist" element={<WatchlistPage />} />
             <Route path="recent" element={<RecentPage />} />
+            <Route path="watchlist" element={<WatchlistPage />} />
+            <Route path="downloaded" element={<DownloadedPage />} />
             <Route path="user" element={<UserInfoPage />} />
 
             <Route path="/person">

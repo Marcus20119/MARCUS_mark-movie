@@ -11,6 +11,7 @@ const SuggestionSearchBar = ({
   placeholder,
   setCurrentPage,
   typeQuery = 'multi',
+  needBrighter = false,
 }) => {
   // Ẩn hiện thanh suggestion
   const { show, setShow, nodeRef } = useClickOutSide();
@@ -72,15 +73,17 @@ const SuggestionSearchBar = ({
           className={`bx bx-search absolute left-4 top-1/2 -translate-y-1/2 text-lg ${
             show
               ? 'text-[rgba(255,_255,_255,_0.4)]'
-              : 'text-[rgba(255,_255,_255,_0.15)]'
-          }`}
+              : `text-[{rgba(255,_255,_255,_0.15)}]`
+          } ${needBrighter ? '!text-[#ffffff70]' : ''}`}
         ></i>
         <input
           className={`block w-full pr-3 pl-10 py-[11px] ${
             suggestData && suggestData.length > 0 && show
               ? 'rounded-t-[23px]'
               : 'rounded-full'
-          }  text-white80 bg-[rgba(255,_255,_255,_0.1)] placeholder:text-[rgba(255,_255,_255,_0.15)] transition-none`}
+          }  text-white80 bg-[#393939] placeholder:text-[rgba(255,_255,_255,_0.15)] ${
+            needBrighter ? 'placeholder:!text-[#ffffff70]' : ''
+          } transition-none`}
           type="text"
           placeholder={placeholder}
           value={input}

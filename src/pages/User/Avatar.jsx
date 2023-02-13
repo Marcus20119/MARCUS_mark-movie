@@ -8,12 +8,27 @@ import './Avatar.scss';
 export default function Avatar({ onUpload }) {
   const [uploading, setUploading] = useState(false);
 
-  const { avatarUrl } = useUser();
+  const { avatarUrl, userRow } = useUser();
   useForceRerender([avatarUrl]);
-
   const inputRef = useRef();
 
+  const handleChangeStatusAvatar = async filePath => {
+    try {
+      const { data } = await supabase
+        .from('statuses')
+        .select()
+        .match({ user_id: userRow.id });
+      const newData = await data.map(status => {
+        return { ...status, user_avatar: filePath };
+      });
+      await supabase.from('statuses').upsert(newData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const uploadAvatar = async event => {
+    let filePath;
     try {
       setUploading(true);
 
@@ -24,7 +39,7 @@ export default function Avatar({ onUpload }) {
       const file = event.target.files[0];
       const fileExt = file.name.split('.').pop();
       const fileName = `${Math.random()}.${fileExt}`;
-      const filePath = `${fileName}`;
+      filePath = `${fileName}`;
 
       let { error: uploadError } = await supabase.storage
         .from('avatars')
@@ -33,13 +48,13 @@ export default function Avatar({ onUpload }) {
       if (uploadError) {
         throw uploadError;
       }
-
       onUpload(filePath);
     } catch (error) {
       console.log(error.message);
     } finally {
       setUploading(false);
     }
+    handleChangeStatusAvatar(filePath);
   };
 
   return (

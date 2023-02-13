@@ -1,11 +1,25 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withErrorBoundary } from 'react-error-boundary';
+import queryString from 'query-string';
+
 import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 import { api } from '~/utils';
 import ProgressiveImg from '../Base/ProgressiveImg';
+import { SuggestionSearchBar } from '../Bar';
 
 const DetailBackdrop = ({ movieData }) => {
+  const location = useLocation();
+  const { query } = queryString.parse(location.search);
+  const [newQuery, setNewQuery] = useState(query);
+  const navigateTo = useNavigate();
+  useEffect(() => {
+    if (newQuery) {
+      navigateTo(`/search?query=${newQuery}&page=1`);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [newQuery]);
   return (
     <div className="absolute top-0 left-0 z-[1] w-full overflow-hidden h-[500px]">
       {movieData && (movieData.title || movieData.name) && (
@@ -46,6 +60,15 @@ const DetailBackdrop = ({ movieData }) => {
               backgroundPosition: 'center top',
             }}
           ></div>
+          <div className="absolute z-[3] right-[40px] top-[40px] w-[400px] opacity-80">
+            <SuggestionSearchBar
+              typeQuery="multi"
+              query={query}
+              setNewQuery={setNewQuery}
+              placeholder="Search . . ."
+              needBrighter={true}
+            />
+          </div>
         </Fragment>
       )}
     </div>

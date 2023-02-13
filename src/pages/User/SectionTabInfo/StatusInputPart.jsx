@@ -1,48 +1,68 @@
 import { useState } from 'react';
 import Swal from 'sweetalert2';
 import { ButtonPrimary } from '~/components/Button';
+import { useUser } from '~/contexts/userContext';
 import { supabase } from '~/supabase';
 import { errorToast, loadingAlert, successAlert } from '~/utils';
 
 const StatusInputPart = ({ userRow, handleForceRerender }) => {
   const [content, setContent] = useState('');
+  const { handleShowModelEditInfo } = useUser();
 
   const handleAddPost = async e => {
     e.preventDefault();
+    // Kiểm tra nếu có username mới cho đăng status vì nếu không sẽ không có tên
     try {
-      await Swal.fire({
-        title: 'Are you sure?',
-        text: `Your status will appear in Community Section!`,
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#FF3D71',
-        cancelButtonColor: '#cccccc30',
-        confirmButtonText: 'Post it!',
-        scrollbarPadding: false,
-      }).then(async result => {
-        if (result.isConfirmed) {
-          loadingAlert();
-          const { error } = await supabase.from('statuses').upsert({
-            user_id: userRow.id,
-            user_name: userRow.username,
-            user_avatar: userRow.avatar_url,
-            like_count: 0,
-            dislike_count: 0,
-            content: content,
-            created_at: new Date(),
-          });
-          if (error) {
-            errorToast('Error: ', error.message);
-            console.error(error);
+      if (userRow?.username) {
+        await Swal.fire({
+          title: 'Are you sure?',
+          text: `Your status will appear in Community Section!`,
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#FF3D71',
+          cancelButtonColor: '#cccccc30',
+          confirmButtonText: 'Post it!',
+          scrollbarPadding: false,
+        }).then(async result => {
+          if (result.isConfirmed) {
+            loadingAlert();
+            const { error } = await supabase.from('statuses').upsert({
+              user_id: userRow.id,
+              user_name: userRow.username,
+              user_avatar: userRow.avatar_url,
+              like_count: 0,
+              dislike_count: 0,
+              content: content,
+              created_at: new Date(),
+            });
+            if (error) {
+              errorToast('Error: ', error.message);
+              console.error(error);
+            }
+            setContent('');
+            handleForceRerender();
+            await successAlert({
+              title: 'Posted Successfully!',
+              text: 'Your status has been posted.',
+            });
           }
-          setContent('');
-          handleForceRerender();
-          await successAlert({
-            title: 'Posted Successfully!',
-            text: 'Your status has been posted.',
-          });
-        }
-      });
+        });
+      } else {
+        Swal.fire({
+          title: 'Change User Name!',
+          text: 'You need to change your user name to do this action!',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#FF3D71',
+          cancelButtonColor: '#cccccc30',
+          confirmButtonText: 'Change now!',
+          scrollbarPadding: false,
+        }).then(async result => {
+          if (result.isConfirmed) {
+            handleShowModelEditInfo();
+          }
+        });
+      }
     } catch (err) {
       console.log(err);
     }
@@ -70,6 +90,7 @@ const StatusInputPart = ({ userRow, handleForceRerender }) => {
           <ButtonPrimary
             className="flex-1 px-3 py-2 rounded-lg font-normal"
             onClick={handleAddPost}
+            disabled={!content}
           >
             <i className="bx bxs-edit-alt"></i>
             <span>Post Status</span>

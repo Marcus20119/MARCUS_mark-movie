@@ -17,7 +17,7 @@ const CommunityPage = () => {
   });
 
   return (
-    <div className="w-full bg-[#181818] p-[30px] mb-[12px]">
+    <div className="w-full bg-[#181818] px-[30px] pt-[30px] pb-[42px]">
       {!!tableData && tableData.length > 0 && (
         <div className="grid grid-cols-3 gap-[30px]">
           {Array(3)

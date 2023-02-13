@@ -4,8 +4,8 @@ import { getBucketURL } from '~/supabase/bucketURL';
 
 const CommunityStatus = ({ status, likesTable, loadingLikesTable }) => {
   return (
-    <div className="group relative flex flex-col gap-2 w-full p-3 bg-mainSection rounded-lg hover:-translate-y-3 duration-500">
-      <div className="flex justify-between items-start w-full">
+    <div className="group relative flex flex-col gap-2 w-full p-3 bg-mainSection rounded-lg hover:-translate-y-3 duration-500 last-of-type:flex-1">
+      <div className="flex justify-between items-start w-full ">
         <div className="inline-flex items-center gap-2">
           <img
             src={

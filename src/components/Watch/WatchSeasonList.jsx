@@ -31,7 +31,7 @@ const WatchSeasonList = ({ seasonNumber, seriesId, seasonRef }) => {
     if (seasonRef?.current?.firstChild) {
       const seasonNumber = Number(season);
       seasonRef.current.scrollTop =
-        (20 + seasonRef.current.firstChild.firstChild.offsetHeight) *
+        (22.5 + seasonRef.current.firstChild.firstChild.offsetHeight) *
         (seasonNumber - 1);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
