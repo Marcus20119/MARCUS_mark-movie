@@ -5,6 +5,7 @@ import HomeLayout from './layout/HomeLayout';
 import NotFoundPage from './pages/NotFoundPage';
 import SorryPage from './pages/SorryPage';
 import LoadingPage from './pages/LoadingPage';
+import DownloadedPage from './pages/DownloadedPage';
 
 const MoviesHomePage = lazy(() => import('./pages/Movie/MoviesHomePage'));
 const TVSeriesHomePage = lazy(() => import('./pages/TV/TVSeriesHomePage'));
@@ -13,7 +14,6 @@ const DiscoverPage = lazy(() => import('./pages/Discover/DiscoverPage'));
 const SearchPage = lazy(() => import('./pages/SearchPage'));
 const RecentPage = lazy(() => import('./pages/Recent/RecentPage'));
 const WatchlistPage = lazy(() => import('./pages/Watchlist/WatchlistPage'));
-const DownloadedPage = lazy(() => import('./pages/DownloadedPage'));
 const UserInfoPage = lazy(() => import('./pages/User/UserInfoPage'));
 
 const PersonDetailPage = lazy(() => import('./pages/Person/PersonDetailPage'));

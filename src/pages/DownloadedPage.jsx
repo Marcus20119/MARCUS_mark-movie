@@ -1,6 +1,7 @@
-import { useChangeTitleWebsite } from '~/hooks';
+import { useChangeTitleWebsite, useScrollOnTop } from '~/hooks';
 
 const DownloadedPage = () => {
+  useScrollOnTop();
   useChangeTitleWebsite('Mark Movie - Download');
   return (
     <div className="flex justify-start items-center w-full h-screen">
