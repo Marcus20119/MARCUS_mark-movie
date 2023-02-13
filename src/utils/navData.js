@@ -57,13 +57,6 @@ export const navSection = [
           navigateTo('/watchlist#watchlist_movie');
         },
       },
-      {
-        name: 'Downloaded',
-        iconClass: 'bx bxs-download',
-        originLink: '/downloaded',
-        navigateLink: '/downloaded',
-        needLogIn: true,
-      },
     ],
   },
   {

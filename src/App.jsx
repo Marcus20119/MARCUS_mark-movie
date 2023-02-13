@@ -5,7 +5,6 @@ import HomeLayout from './layout/HomeLayout';
 import NotFoundPage from './pages/NotFoundPage';
 import SorryPage from './pages/SorryPage';
 import LoadingPage from './pages/LoadingPage';
-import DownloadedPage from './pages/DownloadedPage';
 
 const MoviesHomePage = lazy(() => import('./pages/Movie/MoviesHomePage'));
 const TVSeriesHomePage = lazy(() => import('./pages/TV/TVSeriesHomePage'));
@@ -49,7 +48,6 @@ function App() {
             <Route path="search" element={<SearchPage />} />
             <Route path="recent" element={<RecentPage />} />
             <Route path="watchlist" element={<WatchlistPage />} />
-            <Route path="downloaded" element={<DownloadedPage />} />
             <Route path="user" element={<UserInfoPage />} />
 
             <Route path="/person">

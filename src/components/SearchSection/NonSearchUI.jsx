@@ -43,7 +43,7 @@ const NonSearchUI = ({ type }) => {
       !thisYearLoading &&
       popularData &&
       (watchlistData || thisYearData) ? (
-        <div className="flex flex-col gap-4 mt-auto">
+        <div className="flex flex-col gap-4 mt-auto overflow-y-auto scrollbar-hide">
           <div className="flex flex-col gap-[10px]">
             <h3 className="text-2xl text-white font-bold">Popular</h3>
             {popularData.length > 0 ? (
@@ -112,7 +112,7 @@ const NonSearchUI = ({ type }) => {
           </div>
         </div>
       ) : (
-        <div className="flex flex-col gap-4 mt-auto">
+        <div className="flex flex-col gap-4 mt-auto overflow-y-auto scrollbar-hide">
           {Array(2)
             .fill('')
             .map((item, index) => (

@@ -84,10 +84,14 @@ const FilterBar = ({ paramData, currentPage, setCurrentPage }) => {
   const { page, ...initialState } = paramData;
   const [queries, setQueries] = useState(initialState);
   const selectionWrapRef = useRef();
+  const didMountRef = useRef(false);
   useEffect(() => {
-    navigateTo(
-      `/discover?${queryString.stringify(queries)}&page=${currentPage}`
-    );
+    if (didMountRef.current) {
+      navigateTo(
+        `/discover?${queryString.stringify(queries)}&page=${currentPage}`
+      );
+    }
+    didMountRef.current = true;
   }, [currentPage, navigateTo, queries]);
 
   const resetOptions = () => {

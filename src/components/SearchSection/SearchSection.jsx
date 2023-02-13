@@ -10,7 +10,7 @@ const SearchSection = ({ type }) => {
 
   return (
     <div className="relative">
-      <div className="fixed top-0 bottom-0 right-0 left-[80%] gap-[20px] flex flex-col bg-[#181818] py-[24px] px-[20px] text-[rgba(255,_255,_255,_0.4)]">
+      <div className="fixed top-0 bottom-0 right-0 left-[80%] gap-[10px] flex flex-col bg-[#181818] py-[24px] px-[20px] text-[rgba(255,_255,_255,_0.4)]">
         <SearchBar
           input={input}
           handleSetInput={handleSetInput}
