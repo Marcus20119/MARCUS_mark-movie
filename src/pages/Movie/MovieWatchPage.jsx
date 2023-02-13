@@ -8,7 +8,7 @@ import {
   WatchRecommendList,
   WatchTagList,
 } from '~/components/Watch';
-import { useMySWR, useScrollOnTop } from '~/hooks';
+import { useChangeTitleWebsite, useMySWR, useScrollOnTop } from '~/hooks';
 import { api } from '~/utils';
 
 const MovieWatchPage = () => {
@@ -34,6 +34,11 @@ const MovieWatchPage = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newQuery]);
+
+  useChangeTitleWebsite({
+    title: movieData?.title ? movieData.title : '',
+    rerenderCondition: [movieData],
+  });
 
   return (
     <Fragment>

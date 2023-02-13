@@ -1,4 +1,7 @@
+import { useChangeTitleWebsite } from '~/hooks';
+
 const DownloadedPage = () => {
+  useChangeTitleWebsite('Mark Movie - Download');
   return (
     <div className="flex justify-start items-center w-full h-screen">
       <img

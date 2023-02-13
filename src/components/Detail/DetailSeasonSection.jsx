@@ -76,7 +76,7 @@ const DetailSeasonSection = ({
               {!(seasonItem.season_number === 0) &&
                 seasonItem.episode_count !== 0 && (
                   <Link
-                    to={`/tv/watch/${movieData.id}?season=${seasonItem.season_number}&episode=1?query=`}
+                    to={`/tv/watch/${movieData.id}?season=${seasonItem.season_number}&episode=1&query=`}
                     className="flex justify-start items-start gap-[16px] w-full hover:opacity-60"
                     style={{
                       borderBottom: (

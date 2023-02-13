@@ -2,7 +2,7 @@ import { Fragment, useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import queryString from 'query-string';
 import { SuggestionSearchBar } from '~/components/Bar';
-import { useMySWR, useScrollOnTop } from '~/hooks';
+import { useChangeTitleWebsite, useMySWR, useScrollOnTop } from '~/hooks';
 import { api } from '~/utils';
 import {
   LoadingWatch,
@@ -30,6 +30,11 @@ const TVWatchPage = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newQuery]);
+
+  useChangeTitleWebsite({
+    title: movieData?.name ? `${movieData.name} - S${season}E${episode}` : '',
+    rerenderCondition: [movieData, season, episode],
+  });
 
   return (
     <Fragment>
