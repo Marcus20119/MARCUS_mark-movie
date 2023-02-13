@@ -30,7 +30,7 @@ const NavSection = ({ isHomePage = false }) => {
     <Fragment>
       <div className="relative">
         {isHomePage && (
-          <div className="fixed top-0 bottom-0 left-0 right-[85%] gap-[40px] flex flex-col bg-[#181818] py-[20px] px-[20px] text-white border-r-[1px] border-r-[#353338]">
+          <div className="fixed top-0 left-0 right-[85%] h-screen gap-[40px] flex flex-col bg-[#181818] py-[20px] px-[20px] text-white border-r-[1px] border-r-[#353338]">
             <Link
               to="/home/movies"
               className="font-bold text-xl tracking-wider text-white hover:text-white"
@@ -97,7 +97,7 @@ const NavSection = ({ isHomePage = false }) => {
           </div>
         )}
         {!isHomePage && (
-          <div className="fixed top-0 bottom-0 left-0 w-[82px] gap-[40px] flex flex-col bg-[#181818] py-[20px] px-[20px] text-white border-r-[1px] border-r-[#353338]">
+          <div className="fixed top-0 left-0 w-[82px] h-screen gap-[40px] flex flex-col bg-[#181818] py-[20px] px-[20px] text-white border-r-[1px] border-r-[#353338]">
             <Link to="/home/movies">
               <span className="font-bold text-xl tracking-wider navSection-logoLeft">
                 M
