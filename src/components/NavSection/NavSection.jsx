@@ -97,7 +97,7 @@ const NavSection = ({ isHomePage = false }) => {
           </div>
         )}
         {!isHomePage && (
-          <div className="fixed top-0 left-0 w-[82px] h-screen gap-[40px] flex flex-col bg-[#181818] py-[20px] px-[20px] text-white border-r-[1px] border-r-[#353338]">
+          <div className="fixed top-0 left-0 w-[82px] h-screen gap-[40px] flex flex-col justify-between bg-[#181818] py-[20px] px-[20px] text-white border-r-[1px] border-r-[#353338]">
             <Link to="/home/movies">
               <span className="font-bold text-xl tracking-wider navSection-logoLeft">
                 M
@@ -112,15 +112,13 @@ const NavSection = ({ isHomePage = false }) => {
                   key={navItem.groupName}
                   className="flex flex-col gap-[16px]"
                 >
-                  <div className="flex flex-col gap-[14px] ml-4 text-[rgba(255,_255,_255,_0.8)]">
+                  <div className="flex flex-col gap-[14px] text-[rgba(255,_255,_255,_0.8)]">
                     {navItem.items.length > 0 &&
                       navItem.items.map(navItem => (
                         <ToolTipBase
                           key={navItem.name}
                           tipMessage={navItem.name}
                           position="right"
-                          moveUp={12}
-                          moveLeft={12}
                         >
                           <NavLink
                             onClick={async e => {
@@ -135,7 +133,7 @@ const NavSection = ({ isHomePage = false }) => {
                             }
                           >
                             <i
-                              className={`${navItem.iconClass} navSection-icon`}
+                              className={`${navItem.iconClass} h-[30px] w-full text-center text-[28.8px] leading-none`}
                             ></i>
                           </NavLink>
                         </ToolTipBase>
