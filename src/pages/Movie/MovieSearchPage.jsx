@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import queryString from 'query-string';
 
 import { Navbar, SuggestionSearchBar } from '~/components/Bar';
@@ -8,6 +8,7 @@ import {
   useChangeTitleWebsite,
   useMySWR,
   usePaginate,
+  useResponsive,
   useScrollOnTop,
 } from '~/hooks';
 import { api } from '~/utils';
@@ -31,16 +32,28 @@ const MovieGeneralSearchPage = () => {
 
   const [newQuery, setNewQuery] = useState(query);
   const navigateTo = useNavigate();
+  const didMountRef = useRef(false);
   useEffect(() => {
-    navigateTo(`/movie/search?query=${newQuery}&page=${currentPage}`);
+    if (didMountRef.current) {
+      navigateTo(`/movie/search?query=${newQuery}&page=${currentPage}`);
+    }
+    didMountRef.current = true;
   }, [navigateTo, newQuery, currentPage]);
 
+  const { isMobile, isTablet, isLaptop } = useResponsive();
+
   return (
-    <div className="!bg-mainSection py-[20px] px-10  overflow-hidden">
+    <div className="!bg-mainSection py-[20px] px-10 overflow-hidden">
       <Navbar navList={navMovie} />
       {!query && (
-        <h2 className="block text-5xl text-white80 text-center mb-4 mt-4">
-          Find your favorite movies and more . . .
+        <h2
+          className={`block text-5xl text-white80 text-center mb-4 mt-4 ${
+            isLaptop && 'text-5xl'
+          } ${isTablet && 'text-4xl'}`}
+        >
+          {isLaptop
+            ? 'Find your favorite movies and more . . .'
+            : 'Find your favorite movies . . .'}
         </h2>
       )}
       <div className="mt-[24px]">

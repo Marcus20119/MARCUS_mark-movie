@@ -1,11 +1,15 @@
 import { Fragment } from 'react';
+import { useResponsive } from '~/hooks';
 import LoadingSkeleton from '../Base/Loading/Skeleton';
 import { ButtonPlus } from '../Button';
 
 const LoadingContentSection = () => {
+  const { isTablet, isLaptop } = useResponsive();
   return (
     <div className="flex-1 flex flex-col justify-between items-start text-white">
-      <div className="flex flex-col h-[250px] w-full pb-[10px]">
+      <div
+        className={`flex flex-col w-full pb-[10px] ${isLaptop && 'h-[250px]'}`}
+      >
         <Fragment>
           <LoadingSkeleton className="h-[3rem] my-[0.35rem] w-[400px] rounded-md opacity-60" />
           <LoadingSkeleton className="h-[1.125rem] mb-[calc(28px_+_0.3125rem)]  mt-[0.5632rem] w-[300px] rounded-md opacity-60" />
@@ -22,7 +26,11 @@ const LoadingContentSection = () => {
           </div>
           <div className="flex justify-between items-center w-full mb-[8px]">
             <div className="inline-flex justify-start items-center gap-[12px]">
-              <button className="inline-flex justify-start items-center gap-[10px] bg-[#3E56C4] px-[16px] py-[8px] rounded-md opacity-90 hover:opacity-100">
+              <button
+                className={`inline-flex justify-start items-center gap-[10px] bg-[#3E56C4] rounded-md opacity-90 hover:opacity-100 ${
+                  isLaptop && 'px-[16px] py-[8px]'
+                } ${isTablet && 'px-[20px] py-[12px] text-xl'}`}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -35,8 +43,8 @@ const LoadingContentSection = () => {
                 <span>Share</span>
               </button>
               <ButtonPlus
-                padding={12}
-                iconSize={16}
+                padding={isLaptop ? 12 : 16}
+                iconSize={isLaptop ? 16 : 20}
                 buttonClass="!rounded-md"
               />
             </div>

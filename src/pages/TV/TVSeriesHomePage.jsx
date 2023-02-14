@@ -5,7 +5,7 @@ import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 import { MainSection } from '~/components/MainSection';
 import { SearchSection } from '~/components/SearchSection';
 import { api } from '~/utils';
-import { useChangeTitleWebsite, useScrollOnTop } from '~/hooks';
+import { useChangeTitleWebsite, useResponsive, useScrollOnTop } from '~/hooks';
 
 const TVSeriesHomePage = () => {
   useScrollOnTop();
@@ -25,6 +25,8 @@ const TVSeriesHomePage = () => {
     },
   ];
 
+  const { isTablet, isLaptop } = useResponsive();
+
   return (
     <Fragment>
       <MainSection
@@ -32,7 +34,7 @@ const TVSeriesHomePage = () => {
         apiList={apiList}
         type="tv"
       />
-      <SearchSection type="tv" />
+      {isLaptop && <SearchSection type="tv" />}
     </Fragment>
   );
 };

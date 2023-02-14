@@ -45,11 +45,7 @@ const PersonDetailPage = () => {
                       personData.name.slice(-1) === 's' ? "'" : "'s"
                     } Movies`}
                   </h3>
-                  <MainList
-                    listData={movieCreditsData.cast}
-                    numberOfCol={5}
-                    type="movie"
-                  />
+                  <MainList listData={movieCreditsData.cast} type="movie" />
                 </div>
               )}
             {!tvCreditLoading &&
@@ -61,11 +57,7 @@ const PersonDetailPage = () => {
                       personData.name.slice(-1) === 's' ? "'" : "'s"
                     } TV Shows`}
                   </h3>
-                  <MainList
-                    listData={tvCreditsData.cast}
-                    numberOfCol={5}
-                    type="tv"
-                  />
+                  <MainList listData={tvCreditsData.cast} type="tv" />
                 </div>
               )}
           </div>

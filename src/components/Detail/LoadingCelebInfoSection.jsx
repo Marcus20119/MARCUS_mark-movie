@@ -3,10 +3,10 @@ import LoadingSkeleton from '../Base/Loading/Skeleton';
 const LoadingCelebInfoSection = () => {
   return (
     <div className="flex w-full justify-between items-stretch gap-[28px] !bg-mainSection p-[40px]">
-      <div className="relative flex-grow flex flex-col justify-start items-center gap-[20px] w-[20%]">
+      <div className="relative flex-1 flex flex-col justify-start items-center gap-[20px] w-[20%]">
         <LoadingSkeleton className="w-full h-[400px] rounded-md opacity-80" />
       </div>
-      <div className="flex flex-col items-start gap-[12px] w-[80%]">
+      <div className="flex flex-col items-start gap-[12px] w-[78%]">
         <LoadingSkeleton className="h-[3rem] my-[0.35rem] w-[200px] rounded-md opacity-60" />
         <div className="inline-flex justify-start items-center gap-[20px] my-[12px]">
           <div className="flex flex-col gap-[8px]">

@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
+import { useResponsive } from '~/hooks';
 import { api, route } from '~/utils';
 import ProgressiveImg from '../Base/ProgressiveImg';
 
 const FilmCard = ({ type, filmData, alternativeId, children }) => {
+  const { isLaptop } = useResponsive();
   return (
     <Link
       to={route.toDetail(type, alternativeId || filmData.id)}
@@ -22,7 +24,11 @@ const FilmCard = ({ type, filmData, alternativeId, children }) => {
             alt="no-poster"
           />
         )}
-        <div className="absolute top-[5%] left-[7%] inline-flex items-center gap-1 !bg-primary rounded-full py-1 px-2 text-sm font-bold !text-white80 opacity-70 group-hover:opacity-90">
+        <div
+          className={`absolute top-[5%] left-[7%] inline-flex items-center gap-1 !bg-primary rounded-full py-1 px-2 text-sm font-bold !text-white80 opacity-70 group-hover:opacity-90 ${
+            !isLaptop && '!opacity-90'
+          }`}
+        >
           <span>{parseFloat(filmData.vote_average).toFixed(1)}</span>
           <i className="bx bxs-star"></i>
         </div>

@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import queryString from 'query-string';
 
 import { Navbar, SuggestionSearchBar } from '~/components/Bar';
@@ -7,6 +7,7 @@ import {
   useChangeTitleWebsite,
   useMySWR,
   usePaginate,
+  useResponsive,
   useScrollOnTop,
 } from '~/hooks';
 import { api } from '~/utils';
@@ -33,16 +34,28 @@ const PersonSearchPage = () => {
 
   const [newQuery, setNewQuery] = useState(query);
   const navigateTo = useNavigate();
+  const didMountRef = useRef(false);
   useEffect(() => {
-    navigateTo(`/person/search?query=${newQuery}&page=${currentPage}`);
+    if (didMountRef.current) {
+      navigateTo(`/person/search?query=${newQuery}&page=${currentPage}`);
+    }
+    didMountRef.current = true;
   }, [navigateTo, newQuery, currentPage]);
+
+  const { isMobile, isTablet, isLaptop } = useResponsive();
 
   return (
     <div className="!bg-mainSection py-[20px] px-10 overflow-hidden">
       <Navbar navList={navPerson} />
       {!query && (
-        <h2 className="block text-5xl text-white80 text-center mb-4">
-          Find your favorite people and more . . .
+        <h2
+          className={`block text-white80 text-center mb-4 ${
+            isLaptop && 'text-5xl'
+          } ${isTablet && 'text-4xl mt-4'}`}
+        >
+          {isLaptop
+            ? 'Find your favorite people and more . . .'
+            : 'Find your favorite people . . .'}
         </h2>
       )}
       <div className="mt-[24px]">
@@ -55,13 +68,13 @@ const PersonSearchPage = () => {
         />
         {query && (
           <Fragment>
-            <h3 className="italic text-xl text-white my-[24px] mx-[2px]">
-              {`Search result for "${newQuery}" (${peopleData.total_results} results found)`}
-            </h3>
             {!peopleLoading &&
               peopleData.results &&
               peopleData.results.length > 0 && (
                 <Fragment>
+                  <h3 className="italic text-xl text-white my-[24px] mx-[2px]">
+                    {`Search result for "${newQuery}" (${peopleData.total_results} results found)`}
+                  </h3>
                   <MainList
                     listData={peopleData.results}
                     className="my-[24px]"

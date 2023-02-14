@@ -125,7 +125,7 @@ const SuggestionSearchBar = ({
 };
 
 SuggestionSearchBar.propTypes = {
-  query: PropTypes.string.isRequired,
+  query: PropTypes.string,
   setNewQuery: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   setCurrentPage: PropTypes.func,

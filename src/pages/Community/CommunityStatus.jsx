@@ -17,7 +17,9 @@ const CommunityStatus = ({ status, likesTable, loadingLikesTable }) => {
             className="block w-[40px] h-[40px] rounded-full overflow-hidden object-cover object-center bg-[#ffffff50]"
           />
           <div className="flex flex-col justify-between py-[1px]  text-white80">
-            <h4 className="text-lg font-bold">{status.user_name}</h4>
+            <h4 className="text-lg font-bold line-clamp-1">
+              {status.user_name}
+            </h4>
             <span className="text-sm italic opacity-70">
               {convertDate(status.created_at, 'tz')}
             </span>

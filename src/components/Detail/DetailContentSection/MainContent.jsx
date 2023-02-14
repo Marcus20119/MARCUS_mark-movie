@@ -8,11 +8,15 @@ import { MovieTagList } from '~/components/CardAndList';
 import PlusDropDown from './PlusDropDown';
 import { useAuth } from '~/contexts/authContext';
 import { neededSignInAlert } from '~/utils';
+import { useResponsive } from '~/hooks';
 
 const MainContent = ({ movieData }) => {
   const { pathname } = useLocation();
   const { session, handleShowModelLogIn } = useAuth();
   const facebookRef = useRef();
+
+  const { isTablet, isLaptop } = useResponsive();
+
   return (
     <Fragment>
       {movieData && (movieData.title || movieData.name) && (
@@ -20,11 +24,11 @@ const MainContent = ({ movieData }) => {
           <h1
             className={`text-5xl font-merri mb-0 leading-[3.7rem] ${
               movieData.tagline ? 'line-clamp-1' : 'line-clamp-2'
-            }`}
+            } ${isTablet && '!line-clamp-2 mb-4'}`}
           >
             {movieData.title || movieData.name}
           </h1>
-          {movieData.tagline && (
+          {movieData.tagline && !isTablet && (
             <h3 className="text-lg text-[#b5b5b5] mb-[28px] mt-1 line-clamp-1">
               {movieData.tagline}
             </h3>
@@ -64,7 +68,9 @@ const MainContent = ({ movieData }) => {
           <div className="flex justify-between items-center w-full mb-[8px]">
             <div className="inline-flex justify-start items-center gap-[12px]">
               <button
-                className="inline-flex justify-start items-center gap-[10px] bg-[#3E56C4] px-[16px] py-[8px] rounded-md opacity-90 hover:opacity-100"
+                className={`inline-flex justify-start items-center gap-[10px] bg-[#3E56C4] rounded-md opacity-90 hover:opacity-100 ${
+                  isLaptop && 'px-[16px] py-[8px]'
+                } ${isTablet && 'px-[20px] py-[12px] text-xl'}`}
                 onClick={() => facebookRef.current.click()}
               >
                 <svg
@@ -82,8 +88,8 @@ const MainContent = ({ movieData }) => {
               {session?.user?.id ? (
                 <div className="group relative">
                   <ButtonPlus
-                    padding={12}
-                    iconSize={16}
+                    padding={isLaptop ? 12 : 16}
+                    iconSize={isLaptop ? 16 : 20}
                     buttonClass="!rounded-md"
                   />
                   <PlusDropDown
@@ -93,20 +99,22 @@ const MainContent = ({ movieData }) => {
                 </div>
               ) : (
                 <ButtonPlus
-                  padding={12}
-                  iconSize={16}
+                  padding={isLaptop ? 12 : 16}
+                  iconSize={isLaptop ? 16 : 20}
                   buttonClass="!rounded-md"
                   onClick={() => neededSignInAlert(handleShowModelLogIn)}
                 />
               )}
             </div>
-            <MovieTagList
-              movieData={movieData}
-              className="!mb-0"
-              category={movieData.title ? 'movie' : 'tv'}
-              size="large"
-              hidden={false}
-            />
+            {isLaptop && (
+              <MovieTagList
+                movieData={movieData}
+                className="!mb-0"
+                category={movieData.title ? 'movie' : 'tv'}
+                size="large"
+                hidden={false}
+              />
+            )}
           </div>
           <FacebookShareButton
             ref={facebookRef}

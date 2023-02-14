@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import { countries, genres } from '~/utils';
 import { useEffect } from 'react';
+import { useResponsive } from '~/hooks';
 
 const FilterBar = ({ paramData, currentPage, setCurrentPage }) => {
   const filterTabs = [
@@ -84,6 +85,8 @@ const FilterBar = ({ paramData, currentPage, setCurrentPage }) => {
   const { page, ...initialState } = paramData;
   const [queries, setQueries] = useState(initialState);
   const selectionWrapRef = useRef();
+
+  // Chặn useEffect trong lần render đầu tiên
   const didMountRef = useRef(false);
   useEffect(() => {
     if (didMountRef.current) {
@@ -127,9 +130,16 @@ const FilterBar = ({ paramData, currentPage, setCurrentPage }) => {
     resetOptions();
   };
 
+  const { isMobile, isTablet, isLaptop } = useResponsive();
+
   return (
     <div className="flex justify-between items-center gap-3 w-full px-4 pb-3 pt-[10px] bg-[rgba(255,_255,_255,_0.06)] rounded-md">
-      <div ref={selectionWrapRef} className="grid grid-cols-6 gap-4 w-[90%] ">
+      <div
+        ref={selectionWrapRef}
+        className={`grid  gap-4 w-[90%] ${isLaptop && 'grid-cols-6'} ${
+          isTablet && 'grid-cols-3'
+        }`}
+      >
         {filterTabs.map((tab, index) => (
           <div
             key={`discoverFilterTab${index}`}

@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 import Avatar from '~/pages/User/Avatar';
 import { supabase, useFetchAllTable } from '~/supabase';
 import Wallpaper from './Wallpaper';
-import { useChangeTitleWebsite, useScrollOnTop } from '~/hooks';
+import { useChangeTitleWebsite, useResponsive, useScrollOnTop } from '~/hooks';
 import SectionMainInfo from './SectionMainInfo';
 import { useUser } from '~/contexts/userContext';
 import { ButtonPrimary } from '~/components/Button';
@@ -48,6 +48,8 @@ const UserInfoPage = () => {
     initialLoading: true,
   });
 
+  const { isLaptop } = useResponsive();
+
   return (
     <Fragment>
       {userRow?.email && (
@@ -79,15 +81,17 @@ const UserInfoPage = () => {
                     loadingFavoriteActorsTable={loadingFavoriteActorsTable}
                   />
                 </div>
-                <div className="ml-auto mb-[16px]">
-                  <ButtonPrimary
-                    className="px-3 py-2 rounded-lg font-normal"
-                    onClick={handleShowModelEditInfo}
-                  >
-                    <i className="bx bxs-edit-alt"></i>
-                    <span>Edit Info</span>
-                  </ButtonPrimary>
-                </div>
+                {isLaptop && (
+                  <div className="ml-auto mb-[16px]">
+                    <ButtonPrimary
+                      className="px-3 py-2 rounded-lg font-normal"
+                      onClick={handleShowModelEditInfo}
+                    >
+                      <i className="bx bxs-edit-alt"></i>
+                      <span>Edit Info</span>
+                    </ButtonPrimary>
+                  </div>
+                )}
               </div>
               <SectionTab section={section} userRow={userRow} />
             </div>

@@ -9,6 +9,7 @@ import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 import ProgressiveImg from '../Base/ProgressiveImg';
 import { useAuth } from '~/contexts/authContext';
 import { supabase, useFetchSingleRow } from '~/supabase';
+import { useResponsive } from '~/hooks';
 
 const DetailPosterMovieSection = ({ movieData }) => {
   const { session } = useAuth();
@@ -58,10 +59,17 @@ const DetailPosterMovieSection = ({ movieData }) => {
       }
     }
   };
+
+  const { isLaptop } = useResponsive();
+
   return (
     <Fragment>
       {movieData && (movieData.title || movieData.name) && (
-        <div className="flex flex-col gap-[20px] w-[20%]">
+        <div
+          className={`flex flex-col gap-[20px] ${
+            isLaptop ? 'w-[20%]' : 'w-[40%]'
+          }`}
+        >
           {movieData?.poster_path ? (
             <ProgressiveImg
               src={api.getPoster(movieData.poster_path, 'w500')}
@@ -81,7 +89,9 @@ const DetailPosterMovieSection = ({ movieData }) => {
             message="Watch now"
             displayIcon={true}
             widthType="full"
-            className="!rounded-md !text-lg"
+            className={`!rounded-md ${isLaptop && '!text-lg'} ${
+              !isLaptop && 'py-3 text-xl'
+            }`}
             isLink={true}
             path={`/movie/watch/${movieData.id}?query=`}
             onClick={handleAddToRecent}

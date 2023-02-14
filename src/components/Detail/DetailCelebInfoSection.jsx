@@ -18,11 +18,13 @@ import { useAuth } from '~/contexts/authContext';
 import { supabase, useFetchSingleRow } from '~/supabase';
 import { useUser } from '~/contexts/userContext';
 import ProgressiveImg from '../Base/ProgressiveImg';
+import { useResponsive } from '~/hooks';
 
 const DetailCelebInfoSection = ({ personData }) => {
+  const { isTablet, isLaptop } = useResponsive();
   const PersonalInfo = [
     {
-      field: 'Known for department',
+      field: isLaptop ? 'Known for department' : 'Known for',
       value: personData.known_for_department || 'Unknown',
     },
     {
@@ -96,7 +98,11 @@ const DetailCelebInfoSection = ({ personData }) => {
 
   return (
     <div className="flex w-full justify-between items-stretch gap-[28px] !bg-mainSection p-[40px]">
-      <div className="relative flex-grow flex flex-col justify-start items-center gap-[20px] w-[20%]">
+      <div
+        className={`relative flex-1 flex flex-col justify-start items-center gap-[20px] ${
+          isLaptop && 'w-[20%]'
+        } ${isTablet && ''}`}
+      >
         {personData?.profile_path ? (
           <ProgressiveImg
             src={api.getPoster(personData.profile_path, 'h632')}
@@ -115,8 +121,8 @@ const DetailCelebInfoSection = ({ personData }) => {
         <div className="absolute top-[5%] right-[5%]">
           <ToolTipBase tipMessage="Add to favorite list">
             <ButtonPlus
-              padding={12}
-              iconSize={16}
+              padding={isLaptop ? 12 : 16}
+              iconSize={isLaptop ? 16 : 20}
               buttonClass="!rounded-md"
               onClick={handleAddToFavoriteList}
               disabled={loading}
@@ -124,12 +130,16 @@ const DetailCelebInfoSection = ({ personData }) => {
           </ToolTipBase>
         </div>
       </div>
-      <div className="flex flex-col items-start gap-[12px] w-[80%]">
+      <div
+        className={`flex flex-col items-start gap-[12px] ${
+          isLaptop && 'w-[78%]'
+        } ${isTablet && 'w-[60%]'}`}
+      >
         <h1 className="text-5xl text-white font-merri mb-0 leading-[3.7rem]">
           {personData.name}
         </h1>
-        <div className="inline-flex justify-start items-center gap-[20px] my-[12px]">
-          <div className="flex flex-col gap-[8px]">
+        <div className="inline-flex justify-start items-start gap-[20px] my-[12px]">
+          <div className={`flex flex-col gap-[8px] ${isTablet && 'w-[30%]'}`}>
             {PersonalInfo.map((item, index) => (
               <span key={`subInfoTitle${index}`} className="text-[#7A7A7A]">
                 {item.field}
@@ -150,7 +160,11 @@ const DetailCelebInfoSection = ({ personData }) => {
         {personData.biography && (
           <div className="flex flex-col items-start gap-[2px]">
             <h3 className="text-2xl text-white font-bold mb-3">Biography</h3>
-            <p className="custom-scrollbar w-full pr-[12px] text-[#b5b5b5] h-[9.5rem] overflow-y-auto">
+            <p
+              className={`custom-scrollbar w-full pr-[12px] text-[#b5b5b5] overflow-y-auto ${
+                isLaptop && 'h-[9.5rem]'
+              } ${isTablet && 'h-[5rem]'}`}
+            >
               {personData.biography}
             </p>
           </div>

@@ -5,7 +5,7 @@ import { api } from '~/utils';
 import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 import { MainSection } from '~/components/MainSection';
 import { SearchSection } from '~/components/SearchSection';
-import { useChangeTitleWebsite, useScrollOnTop } from '~/hooks';
+import { useChangeTitleWebsite, useResponsive, useScrollOnTop } from '~/hooks';
 
 const MoviesHomePage = () => {
   useScrollOnTop();
@@ -25,6 +25,8 @@ const MoviesHomePage = () => {
     },
   ];
 
+  const { isTablet, isLaptop } = useResponsive();
+
   return (
     <Fragment>
       <MainSection
@@ -32,7 +34,7 @@ const MoviesHomePage = () => {
         apiList={apiList}
         type="movie"
       />
-      <SearchSection type="movie" />
+      {isLaptop && <SearchSection type="movie" />}
     </Fragment>
   );
 };

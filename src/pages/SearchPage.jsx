@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import queryString from 'query-string';
 
@@ -7,6 +7,7 @@ import {
   useChangeTitleWebsite,
   useMySWR,
   usePaginate,
+  useResponsive,
   useScrollOnTop,
 } from '~/hooks';
 import { api } from '~/utils';
@@ -29,16 +30,26 @@ const SearchPage = () => {
 
   const [newQuery, setNewQuery] = useState(query);
   const navigateTo = useNavigate();
+  const didMountRef = useRef(false);
   useEffect(() => {
-    navigateTo(`/search?query=${newQuery}&page=${currentPage}`);
+    if (didMountRef.current) {
+      navigateTo(`/search?query=${newQuery}&page=${currentPage}`);
+    }
+    didMountRef.current = true;
   }, [navigateTo, newQuery, currentPage]);
 
+  const { isMobile, isTablet, isLaptop } = useResponsive();
+
   return (
-    <div className="!bg-mainSection py-[20px] px-10  overflow-hidden">
+    <div className="!bg-mainSection py-[20px] px-10 overflow-hidden">
       <div className="mt-[24px]">
         {!query && (
-          <h2 className="block text-5xl text-white80 text-center mb-4">
-            Find your favorite movies, TV shows, people and more
+          <h2
+            className={`block text-white80 text-center mb-4 ${
+              isLaptop && 'text-5xl'
+            } ${isTablet && 'text-4xl'}`}
+          >
+            Find your favorite movies, TV shows, people and more . . .
           </h2>
         )}
         <SuggestionSearchBar

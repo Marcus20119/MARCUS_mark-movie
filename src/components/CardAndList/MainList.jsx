@@ -1,16 +1,18 @@
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
+import { useResponsive } from '~/hooks';
 import FilmCard from './FilmCard';
 import PersonCard from './PersonCard';
 
 const MainList = ({
   listData = [],
-  numberOfCol = 5,
   className = '',
   cardStyle = '',
   type = 'movie',
   loading = false,
 }) => {
+  const { isMobile, isTablet, isLaptop } = useResponsive();
+  const numberOfCol = isLaptop ? 5 : isTablet ? 3 : 2;
   return (
     <div
       className={`grid gap-[16px] w-full ${className}`}
@@ -45,7 +47,6 @@ const MainList = ({
 MainList.propTypes = {
   listData: PropTypes.array.isRequired,
   type: PropTypes.oneOf(['movie', 'tv', 'person']).isRequired,
-  numberOfCol: PropTypes.number,
   className: PropTypes.string,
   cardStyle: PropTypes.string,
 };

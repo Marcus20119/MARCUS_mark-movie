@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '~/contexts/authContext';
 import { useUser } from '~/contexts/userContext';
-import { useForceRerender } from '~/hooks';
+import { useForceRerender, useResponsive } from '~/hooks';
 import { navSection, neededSignInAlert } from '~/utils';
 import ToolTipBase from '../Base/ToolTipBase';
 import { ButtonPrimary } from '../Button';
@@ -25,6 +25,8 @@ const NavSection = ({ isHomePage = false }) => {
       }
     }
   };
+
+  const { isTablet, isLaptop } = useResponsive();
 
   return (
     <Fragment>
@@ -133,7 +135,14 @@ const NavSection = ({ isHomePage = false }) => {
                             }
                           >
                             <i
-                              className={`${navItem.iconClass} h-[30px] w-full text-center text-[28.8px] leading-none`}
+                              className={`w-full text-center leading-none ${
+                                navItem.iconClass
+                              } ${
+                                navItem.iconClass === 'bx bx-log-out' &&
+                                '-translate-x-1'
+                              } ${isTablet && 'h-[44px] text-[36px]'} ${
+                                isLaptop && 'h-[30px] text-[28.8px]'
+                              }`}
                             ></i>
                           </NavLink>
                         </ToolTipBase>
@@ -159,9 +168,9 @@ const NavSection = ({ isHomePage = false }) => {
               <ToolTipBase tipMessage="Sign In" position="right">
                 <button
                   onClick={handleShowModelLogIn}
-                  className="flex justify-center items-center rounded-full w-[41.2px] h-[42.5px] !bg-primary opacity-80 hover:opacity-100"
+                  className={`flex justify-center items-center rounded-full w-[41.2px] h-[42.5px] !bg-primary opacity-80 hover:opacity-100`}
                 >
-                  <i className="bx bxs-log-in-circle text-3xl"></i>
+                  <i className={`bx bxs-log-in-circle text-3xl `}></i>
                 </button>
               </ToolTipBase>
             )}

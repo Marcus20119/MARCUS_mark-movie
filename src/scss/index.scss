@@ -59,11 +59,10 @@
   .home-layout {
     display: grid;
     grid-template-columns: 15% 65% 20%;
+    // @include responsive('tablet') {
+    //   grid-template-columns: 82px calc(80% - 82px) 20%;
+    // }
   }
-  // .main-layout {
-  //   display: grid;
-  //   grid-template-columns: 15% 85%;
-  // }
   .main-layout {
     display: grid;
     grid-template-columns: 82px calc(100% - 82px);

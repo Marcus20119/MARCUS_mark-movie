@@ -25,7 +25,7 @@ const SectionTab = ({ section, userRow }) => {
           ))}
         </div>
       </div>
-      <div className="min-h-[400px] bg-[#181818] p-[30px]">
+      <div className="min-h-[500px] bg-[#181818] p-[30px]">
         {section === 'info' && <SectionTabInfo userRow={userRow} />}
         {section === 'favorite-actors' && (
           <SectionTabFavoriteActor userRow={userRow} />

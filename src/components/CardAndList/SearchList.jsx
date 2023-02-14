@@ -1,15 +1,18 @@
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
+import { useResponsive } from '~/hooks';
 import FilmCard from './FilmCard';
 import PersonCard from './PersonCard';
 
 const SearchList = ({
   searchData = [],
-  numberOfCol = 5,
   className = '',
   cardStyle = '',
   loading = false,
 }) => {
+  const { isMobile, isTablet, isLaptop } = useResponsive();
+  const numberOfCol = isLaptop ? 5 : isTablet ? 3 : 2;
+
   return (
     <div
       className={`grid gap-[16px] w-full ${className}`}
@@ -38,7 +41,6 @@ const SearchList = ({
 
 SearchList.propTypes = {
   searchData: PropTypes.array.isRequired,
-  numberOfCol: PropTypes.number,
   className: PropTypes.string,
   cardStyle: PropTypes.string,
 };

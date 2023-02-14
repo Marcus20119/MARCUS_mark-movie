@@ -1,6 +1,10 @@
+import { useResponsive } from '~/hooks';
 import LoadingSkeleton from '../Base/Loading/Skeleton';
 
-const LoadingFilmList = ({ numberOfCol = 5, numberOfRow = 1 }) => {
+const LoadingMainList = ({ numberOfRow = 1 }) => {
+  const { isMobile, isTablet, isLaptop } = useResponsive();
+  const numberOfCol = isLaptop ? 5 : isTablet ? 3 : 2;
+
   return (
     <div
       className={`grid gap-[16px] w-full`}
@@ -27,4 +31,4 @@ const LoadingFilmList = ({ numberOfCol = 5, numberOfRow = 1 }) => {
   );
 };
 
-export { LoadingFilmList };
+export { LoadingMainList };

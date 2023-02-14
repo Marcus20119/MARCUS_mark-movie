@@ -2,7 +2,12 @@ import { Fragment, useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import queryString from 'query-string';
 import { SuggestionSearchBar } from '~/components/Bar';
-import { useChangeTitleWebsite, useMySWR, useScrollOnTop } from '~/hooks';
+import {
+  useChangeTitleWebsite,
+  useMySWR,
+  useResponsive,
+  useScrollOnTop,
+} from '~/hooks';
 import { api } from '~/utils';
 import {
   LoadingWatch,
@@ -36,11 +41,28 @@ const TVWatchPage = () => {
     rerenderCondition: [movieData, season, episode],
   });
 
+  const { isTablet, isLaptop } = useResponsive();
+
   return (
     <Fragment>
       {!movieLoading && movieData ? (
-        <div className="flex w-full">
-          <div className="w-[70%] my-10 mx-4">
+        <div className={`flex w-full ${!isLaptop && 'flex-col'}`}>
+          <div className={`my-10 px-4 ${isLaptop ? 'w-[70%]' : 'w-full'}`}>
+            {isTablet && (
+              <div className="flex items-center gap-4 w-full mb-4 pl-4">
+                <div className="font-bold text-2xl tracking-wider text-white hover:text-white">
+                  TV Show
+                </div>
+                <div className="flex-1">
+                  <SuggestionSearchBar
+                    typeQuery="multi"
+                    query={query}
+                    setNewQuery={setNewQuery}
+                    placeholder="Search . . ."
+                  />
+                </div>
+              </div>
+            )}
             <div className="relative w-full h-0 pb-[56.25%] rounded-md overflow-hidden bg-[#ffffff20]">
               <iframe
                 src={`https://www.2embed.to/embed/tmdb/tv?id=${id}&s=${season}&e=${episode}`}
@@ -88,17 +110,21 @@ const TVWatchPage = () => {
             </div>
           </div>
           <div className="flex-1 flex flex-col gap-4 h-full mx-4 py-4">
-            <SuggestionSearchBar
-              typeQuery="multi"
-              query={query}
-              setNewQuery={setNewQuery}
-              placeholder="Search . . ."
-            />
+            {isLaptop && (
+              <SuggestionSearchBar
+                typeQuery="multi"
+                query={query}
+                setNewQuery={setNewQuery}
+                placeholder="Search . . ."
+              />
+            )}
             <div className="flex-1 flex flex-col w-full gap-4">
               <h3 className="text-2xl text-white font-bold">Seasons</h3>
               <div
                 ref={seasonRef}
-                className="custom-scrollbar2 flex flex-col gap-2 w-full max-h-[120vh] overflow-y-auto scrollbar-hide"
+                className={`custom-scrollbar2 flex flex-col gap-2 w-full max-h-[120vh] ${
+                  isLaptop && 'overflow-y-auto scrollbar-hide'
+                }`}
               >
                 {movieData &&
                   movieData.number_of_seasons &&

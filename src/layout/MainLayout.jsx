@@ -1,9 +1,13 @@
 import { Outlet } from 'react-router-dom';
 import { NavSection } from '~/components/NavSection';
+import { useResponsive } from '~/hooks';
 
 const MainLayout = () => {
+  const { isLaptop } = useResponsive();
   return (
-    <div className={`min-h-[120vh] transition-none main-layout`}>
+    <div
+      className={` transition-none main-layout ${isLaptop && 'min-h-[120vh]'}`}
+    >
       <NavSection />
       <Outlet />
     </div>

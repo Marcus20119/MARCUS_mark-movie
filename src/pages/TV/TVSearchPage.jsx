@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import queryString from 'query-string';
 
 import { Navbar, SuggestionSearchBar } from '~/components/Bar';
@@ -8,6 +8,7 @@ import {
   useChangeTitleWebsite,
   useMySWR,
   usePaginate,
+  useResponsive,
   useScrollOnTop,
 } from '~/hooks';
 import { api } from '~/utils';
@@ -31,16 +32,28 @@ const TVSearchPage = () => {
 
   const [newQuery, setNewQuery] = useState(query);
   const navigateTo = useNavigate();
+  const didMountRef = useRef(false);
   useEffect(() => {
-    navigateTo(`/tv/search?query=${newQuery}&page=${currentPage}`);
+    if (didMountRef.current) {
+      navigateTo(`/tv/search?query=${newQuery}&page=${currentPage}`);
+    }
+    didMountRef.current = true;
   }, [navigateTo, newQuery, currentPage]);
+
+  const { isMobile, isTablet, isLaptop } = useResponsive();
 
   return (
     <div className="!bg-mainSection py-[20px] px-10  overflow-hidden">
       <Navbar navList={navTV} />
       {!query && (
-        <h2 className="block text-5xl text-white80 text-center mb-4 mt-4">
-          Find your favorite TV Shows and more . . .
+        <h2
+          className={`block text-white80 text-center mb-4 mt-4 ${
+            isLaptop && 'text-5xl'
+          } ${isTablet && 'text-4xl'}`}
+        >
+          {isLaptop
+            ? 'Find your favorite TV Shows and more . . .'
+            : 'Find your favorite Shows . . .'}
         </h2>
       )}
       <div className="mt-[24px]">
@@ -53,13 +66,13 @@ const TVSearchPage = () => {
         />
         {query && (
           <Fragment>
-            <h3 className="italic text-xl text-white my-[24px] mx-[2px]">
-              {`Search result for "${newQuery}" (${filmsData.total_results} results found)`}
-            </h3>
             {!filmsLoading &&
               filmsData.results &&
               filmsData.results.length > 0 && (
                 <Fragment>
+                  <h3 className="italic text-xl text-white my-[24px] mx-[2px]">
+                    {`Search result for "${newQuery}" (${filmsData.total_results} results found)`}
+                  </h3>
                   <MainList
                     listData={filmsData.results}
                     className="my-[24px]"

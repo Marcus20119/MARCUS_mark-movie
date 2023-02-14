@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useResponsive } from '~/hooks';
 import { useFetchAllTable } from '~/supabase';
 import FavoritePart from './FavoritePart';
 import IntroPart from './IntroPart';
@@ -21,9 +22,17 @@ const SectionTabInfo = ({ userRow }) => {
       initialLoading: true,
     });
 
+  const { isMobile, isTablet, isLaptop } = useResponsive();
+
   return (
-    <div className="flex items-start gap-[30px] ">
-      <div className="flex flex-col justify-start gap-[30px] w-[35%]">
+    <div
+      className={`flex items-start gap-[30px] ${isLaptop ? '' : 'flex-col'}`}
+    >
+      <div
+        className={`flex flex-col justify-start gap-[30px] ${
+          isLaptop ? 'w-[35%]' : 'w-full'
+        }`}
+      >
         <IntroPart userRow={userRow} />
         <FavoritePart type="movie" />
         <FavoritePart type="tv" />

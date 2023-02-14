@@ -1,3 +1,6 @@
 .swiper-slide {
   width: calc((100% - 30px) / 4) !important;
+  @media only screen and (max-width: 1279px) and (min-width: 678px) {
+    width: calc((100% - 20px) / 3) !important;
+  }
 }

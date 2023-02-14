@@ -7,7 +7,7 @@ import { api } from '~/utils';
 import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 import ProgressiveImg from '../Base/ProgressiveImg';
 import ModalBase from '../Base/ModalBase';
-import { useModal } from '~/hooks';
+import { useModal, useResponsive } from '~/hooks';
 import DetailSeasonSection from './DetailSeasonSection';
 
 const DetailPosterTVSection = ({ movieData }) => {
@@ -17,10 +17,16 @@ const DetailPosterTVSection = ({ movieData }) => {
     handleHide: handleHideModelSeason,
   } = useModal();
 
+  const { isLaptop } = useResponsive();
+
   return (
     <Fragment>
       {movieData && (movieData.title || movieData.name) && (
-        <div className="flex flex-col gap-[20px] w-[20%]">
+        <div
+          className={`flex flex-col gap-[20px] ${
+            isLaptop ? 'w-[20%]' : 'w-[40%]'
+          }`}
+        >
           {movieData?.poster_path ? (
             <ProgressiveImg
               src={api.getPoster(movieData.poster_path, 'w500')}

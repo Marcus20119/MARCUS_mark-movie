@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Navbar } from '~/components/Bar';
 
@@ -37,8 +37,12 @@ const TVTypePage = () => {
   const { currentPage, handlePageClick } = usePaginate(location);
 
   const navigateTo = useNavigate();
+  const didMountRef = useRef(false);
   useEffect(() => {
-    navigateTo(`/person/${typeApi}?page=${currentPage}`);
+    if (didMountRef.current) {
+      navigateTo(`/person/${typeApi}?page=${currentPage}`);
+    }
+    didMountRef.current = true;
   }, [navigateTo, currentPage, typeApi]);
 
   return (

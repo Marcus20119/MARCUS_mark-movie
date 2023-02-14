@@ -1,4 +1,5 @@
-import { Fragment, useEffect } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Fragment, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Navbar } from '~/components/Bar';
 
@@ -57,16 +58,22 @@ const TVTypePage = () => {
     usePaginate(location);
 
   const navigateTo = useNavigate();
+  const didMountRef1 = useRef(false);
   useEffect(() => {
-    navigateTo(`/tv/${typeApi}?page=${currentPage}`);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (didMountRef1.current) {
+      navigateTo(`/tv/${typeApi}?page=${currentPage}`);
+    }
+    didMountRef1.current = true;
   }, [navigateTo, currentPage]);
 
   // Reset currentPage nếu như chuyển type
+  const didMountRef2 = useRef(false);
   useEffect(() => {
-    navigateTo(`/tv/${typeApi}?page=1`);
-    setCurrentPage(1);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (didMountRef2.current) {
+      navigateTo(`/tv/${typeApi}?page=1`);
+      setCurrentPage(1);
+    }
+    didMountRef2.current = true;
   }, [typeApi]);
 
   return (

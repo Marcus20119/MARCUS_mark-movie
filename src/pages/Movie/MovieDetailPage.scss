@@ -1,6 +1,12 @@
 .detail-castList .swiper-slide {
   width: calc((100% - 12px * 6) / 7) !important;
+  @media only screen and (max-width: 1279px) and (min-width: 678px) {
+    width: calc((100% - 12px * 6) / 4) !important;
+  }
 }
 .detail-trailer .swiper-slide {
   width: calc((100% - 16px * 4) / 5) !important;
+  @media only screen and (max-width: 1279px) and (min-width: 678px) {
+    width: calc((100%) / 3) !important;
+  }
 }

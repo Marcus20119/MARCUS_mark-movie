@@ -1,8 +1,11 @@
+import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { useResponsive } from '~/hooks';
 import { api, route } from '~/utils';
 import ProgressiveImg from '../Base/ProgressiveImg';
 
 const WatchRecommendList = ({ recommendList }) => {
+  const { isTablet } = useResponsive();
   return (
     <div className="flex flex-col w-full gap-4">
       <h3 className="text-2xl text-white font-bold">Recommend</h3>
@@ -36,6 +39,16 @@ const WatchRecommendList = ({ recommendList }) => {
             <span className="text-base line-clamp-2 mb-1 text-white80 opacity-80">
               {movieData.release_date}
             </span>
+            {isTablet && (
+              <Fragment>
+                <span className="text-white80 font-bold text-lg mt-2">
+                  Overview:
+                </span>
+                <p className="flex-1 text-white80 opacity-60 overflow-auto scrollbar-hide">
+                  {movieData.overview}
+                </p>
+              </Fragment>
+            )}
           </div>
         </Link>
       ))}

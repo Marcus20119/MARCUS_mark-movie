@@ -5,6 +5,7 @@ import LoadingBounce from '~/components/Base/Loading/Bounce';
 import ToolTipBase from '~/components/Base/ToolTipBase';
 import { ButtonMinus } from '~/components/Button';
 import FilmCard from '~/components/CardAndList/FilmCard';
+import { useResponsive } from '~/hooks';
 import { supabase, useFetchAllTable } from '~/supabase';
 import { errorToast, successToast } from '~/utils';
 
@@ -38,6 +39,10 @@ const SectionTabFavoriteFilm = ({ userRow, type }) => {
       setForceDisable(false);
     }
   };
+
+  const { isTablet, isLaptop } = useResponsive();
+  const numberOfCol = isLaptop ? 5 : isTablet ? 3 : 2;
+
   return (
     <Fragment>
       {!loading && !!tableData && tableData.length > 0 && (
@@ -45,7 +50,7 @@ const SectionTabFavoriteFilm = ({ userRow, type }) => {
           <div
             className="grid gap-[16px] w-full"
             style={{
-              gridTemplateColumns: `repeat(5, minmax(0, 1fr))`,
+              gridTemplateColumns: `repeat(${numberOfCol}, minmax(0, 1fr))`,
             }}
           >
             {tableData.map((filmData, index) => (
@@ -55,7 +60,11 @@ const SectionTabFavoriteFilm = ({ userRow, type }) => {
                 alternativeId={filmData[`${type}_id`]}
                 type={type}
               >
-                <div className="absolute top-[5%] right-[5%] hidden group-hover:block">
+                <div
+                  className={`absolute top-[5%] right-[5%] hidden group-hover:block ${
+                    !isLaptop && '!block'
+                  }`}
+                >
                   <ToolTipBase tipMessage="Remove from favorite list">
                     <ButtonMinus
                       padding={12}

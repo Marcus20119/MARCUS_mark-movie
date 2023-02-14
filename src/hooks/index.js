@@ -9,3 +9,4 @@ export * from './usePlusDropDown';
 export * from './useChangeTitleWebsite';
 export * from './useDetectScrolledToBottom';
 export * from './useClickOutSide';
+export * from './useResponsive';

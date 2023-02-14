@@ -21,7 +21,7 @@ const MainPaginate = ({ handlePageClick, totalPage, currentPage }) => {
         marginPagesDisplayed={1}
         pageCount={totalPage <= 99 ? totalPage : 99}
         previousLabel={prevElement}
-        initialPage={currentPage - 1}
+        // initialPage={currentPage - 1}
         forcePage={currentPage - 1}
         disableInitialCallback={true}
         renderOnZeroPageCount={null}

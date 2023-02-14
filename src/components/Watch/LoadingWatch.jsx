@@ -1,13 +1,31 @@
-import { useSearch } from '~/hooks';
+import { useResponsive, useSearch } from '~/hooks';
 import { SearchBar } from '../Bar';
 import LoadingSkeleton from '../Base/Loading/Skeleton';
 
 const LoadingWatch = () => {
   const { input, handleSetInput, isFocus, setIsFocus } = useSearch();
+  const { isTablet, isLaptop } = useResponsive();
 
   return (
-    <div className="flex w-full">
-      <div className="w-[70%] my-10 mx-4">
+    <div className={`flex w-full ${!isLaptop && 'flex-col'}`}>
+      <div className={`my-10 px-4 ${isLaptop ? 'w-[70%]' : 'w-full'}`}>
+        {isTablet && (
+          <div className="flex items-center gap-4 w-full mb-4 pl-4">
+            <div className="font-bold text-2xl tracking-wider text-white hover:text-white">
+              Movie
+            </div>
+            <div className="flex-1">
+              <SearchBar
+                input={input}
+                handleSetInput={handleSetInput}
+                isFocus={isFocus}
+                setIsFocus={setIsFocus}
+                placeholder="Search . . ."
+                type="2"
+              />
+            </div>
+          </div>
+        )}
         <div className="relative w-full pt-[56.25%] rounded-md overflow-hidden">
           <div className="absolute inset-0">
             <LoadingSkeleton className="w-full h-full opacity-50" />

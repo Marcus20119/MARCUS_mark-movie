@@ -1,12 +1,13 @@
 /* eslint-disable no-labels */
 import { useEffect } from 'react';
 import { Fragment } from 'react';
-import { LoadingFilmList } from '~/components/CardAndList';
+import { LoadingMainList } from '~/components/CardAndList';
 import FilmCard from '~/components/CardAndList/FilmCard';
 import { useAuth } from '~/contexts/authContext';
+import { useResponsive } from '~/hooks';
 import { supabase, useFetchAllTable } from '~/supabase';
 
-const WatchlistSection = ({ type }) => {
+const RecentSection = ({ type }) => {
   const { session } = useAuth();
   const { tableData, loading } = useFetchAllTable({
     table: `recent_${type}s`,
@@ -39,6 +40,8 @@ const WatchlistSection = ({ type }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tableData]);
 
+  const { isTablet, isLaptop } = useResponsive();
+  const numberOfCol = isLaptop ? 5 : isTablet ? 3 : 2;
   return (
     <Fragment>
       {!loading && !!tableData?.length && tableData.length > 0 && (
@@ -46,7 +49,7 @@ const WatchlistSection = ({ type }) => {
           <div
             className="grid gap-[16px] w-full"
             style={{
-              gridTemplateColumns: `repeat(5, minmax(0, 1fr))`,
+              gridTemplateColumns: `repeat(${numberOfCol}, minmax(0, 1fr))`,
             }}
           >
             {tableData.slice(0, 10).map((filmData, index) => (
@@ -60,7 +63,7 @@ const WatchlistSection = ({ type }) => {
           </div>
         </div>
       )}
-      {loading && <LoadingFilmList />}
+      {loading && <LoadingMainList numberOfRow={isLaptop ? 1 : 2} />}
       {!loading && !!tableData && tableData.length === 0 && (
         <Fragment>
           <span className="text-white80 italic">{`You still not have any ${
@@ -72,4 +75,4 @@ const WatchlistSection = ({ type }) => {
   );
 };
 
-export default WatchlistSection;
+export default RecentSection;

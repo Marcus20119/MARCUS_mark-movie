@@ -8,6 +8,7 @@ import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 import { api } from '~/utils';
 import ProgressiveImg from '../Base/ProgressiveImg';
 import { SuggestionSearchBar } from '../Bar';
+import { useResponsive } from '~/hooks';
 
 const DetailBackdrop = ({ movieData }) => {
   const location = useLocation();
@@ -20,6 +21,9 @@ const DetailBackdrop = ({ movieData }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newQuery]);
+
+  const { isMobile, isTablet, isLaptop } = useResponsive();
+
   return (
     <div className="absolute top-0 left-0 z-[1] w-full overflow-hidden h-[500px]">
       {movieData && (movieData.title || movieData.name) && (
@@ -60,7 +64,11 @@ const DetailBackdrop = ({ movieData }) => {
               backgroundPosition: 'center top',
             }}
           ></div>
-          <div className="absolute z-[3] right-[40px] top-[40px] w-[400px] opacity-80">
+          <div
+            className={`absolute z-[50] right-[40px] top-[40px]  opacity-80 ${
+              isLaptop && 'w-[400px]'
+            } ${isTablet && 'w-[350px]'} ${isMobile && 'hidden'}`}
+          >
             <SuggestionSearchBar
               typeQuery="multi"
               query={query}
