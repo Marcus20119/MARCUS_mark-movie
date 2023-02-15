@@ -2,14 +2,20 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { api, route } from '~/utils';
 import ProgressiveImg from '../Base/ProgressiveImg';
+import { useResponsive } from '~/hooks';
 
 const PersonCard = ({ personData, children, alternativeId }) => {
+  const { isLaptop } = useResponsive();
   return (
     <Link
       to={route.toDetail('person', alternativeId || personData.id)}
       className="group w-full cursor-pointer rounded-md"
     >
-      <div className="group relative w-full h-0 bg-transparent pt-[145%] rounded-md overflow-hidden group-hover:-translate-y-2">
+      <div
+        className={`group relative w-full h-0 bg-transparent pt-[145%] rounded-md overflow-hidden imgMobile ${
+          isLaptop && 'group-hover:-translate-y-2'
+        }`}
+      >
         {personData?.profile_path ? (
           <ProgressiveImg
             src={api.getPoster(personData.profile_path, 'h632')}

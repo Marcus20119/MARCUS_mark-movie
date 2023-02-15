@@ -7,12 +7,20 @@ import CastItem from './CastItem';
 import NextBtn from '~/components/Base/Swiper/NextBtn';
 import PrevBtn from '~/components/Base/Swiper/PrevBtn';
 import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
+import { useResponsive } from '~/hooks';
 
 const DetailCastSection = ({ castsData }) => {
   const nextRef = useRef();
   const prevRef = useRef();
+
+  const { isMobile } = useResponsive();
+
   return (
-    <div className="relative w-full px-[40px] pt-[40px] pb-[30px] !bg-mainSection">
+    <div
+      className={`relative w-full pt-[40px]  !bg-mainSection ${
+        !isMobile ? 'px-[40px] pb-[30px]' : 'px-[16px] pb-[20px]'
+      }`}
+    >
       <h3 className="text-2xl text-white font-bold mb-3">Casts</h3>
       <Swiper
         spaceBetween={12}
@@ -30,7 +38,7 @@ const DetailCastSection = ({ castsData }) => {
         <NextBtn ref={nextRef} />
         <PrevBtn ref={prevRef} />
       </Swiper>
-      {castsData.length > 7 && (
+      {!isMobile && castsData.length > 7 && (
         <div className="absolute top-[40px] right-[40px] inline-flex justify-center gap-2">
           <button
             className="flex justify-center items-center w-7 h-7 bg-[rgba(255,_255,_255,_0.3)] rounded-full text-white text-xl opacity-70 hover:opacity-100"

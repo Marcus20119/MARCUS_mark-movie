@@ -5,7 +5,12 @@ import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 import { MainList } from '~/components/CardAndList';
 import { DetailCelebInfoSection } from '~/components/Detail';
 import { api } from '~/utils';
-import { useChangeTitleWebsite, useMySWR, useScrollOnTop } from '~/hooks';
+import {
+  useChangeTitleWebsite,
+  useMySWR,
+  useResponsive,
+  useScrollOnTop,
+} from '~/hooks';
 import { Fragment } from 'react';
 import LoadingCelebInfoSection from '~/components/Detail/LoadingCelebInfoSection';
 
@@ -30,6 +35,8 @@ const PersonDetailPage = () => {
     rerenderCondition: [personData],
   });
 
+  const { isMobile } = useResponsive();
+
   return (
     <div>
       {!personLoading && personData.name && (
@@ -39,7 +46,11 @@ const PersonDetailPage = () => {
             {!movieCreditLoading &&
               movieCreditsData?.cast &&
               movieCreditsData.cast.length > 0 && (
-                <div className="relative w-full p-[30px] !bg-mainSection">
+                <div
+                  className={`relative w-full !bg-mainSection ${
+                    !isMobile ? 'p-[30px]' : 'px-[16px] py-[20px]'
+                  }`}
+                >
                   <h3 className="text-2xl text-white font-bold mb-[24px]">
                     {`${personData.name}${
                       personData.name.slice(-1) === 's' ? "'" : "'s"
@@ -51,7 +62,11 @@ const PersonDetailPage = () => {
             {!tvCreditLoading &&
               tvCreditsData?.cast &&
               tvCreditsData.cast.length > 0 && (
-                <div className="relative w-full p-[30px] !bg-mainSection">
+                <div
+                  className={`relative w-full !bg-mainSection ${
+                    !isMobile ? 'p-[30px]' : 'px-[16px] py-[20px]'
+                  }`}
+                >
                   <h3 className="text-2xl text-white font-bold mb-[24px]">
                     {`${personData.name}${
                       personData.name.slice(-1) === 's' ? "'" : "'s"

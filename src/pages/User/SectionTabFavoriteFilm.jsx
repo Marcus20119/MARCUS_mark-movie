@@ -40,13 +40,13 @@ const SectionTabFavoriteFilm = ({ userRow, type }) => {
     }
   };
 
-  const { isTablet, isLaptop } = useResponsive();
+  const { isMobile, isTablet, isLaptop } = useResponsive();
   const numberOfCol = isLaptop ? 5 : isTablet ? 3 : 2;
 
   return (
     <Fragment>
       {!loading && !!tableData && tableData.length > 0 && (
-        <div className="relative w-full p-[10px]">
+        <div className={`relative w-full ${!isMobile ? 'p-[10px]' : ''}`}>
           <div
             className="grid gap-[16px] w-full"
             style={{

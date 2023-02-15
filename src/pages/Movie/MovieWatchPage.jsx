@@ -45,13 +45,17 @@ const MovieWatchPage = () => {
     rerenderCondition: [movieData],
   });
 
-  const { isTablet, isLaptop } = useResponsive();
+  const { isMobile, isTablet, isLaptop } = useResponsive();
 
   return (
     <Fragment>
       {!movieLoading && movieData ? (
         <div className={`flex w-full ${!isLaptop && 'flex-col'}`}>
-          <div className={`my-10 px-4 ${isLaptop ? 'w-[70%]' : 'w-full'}`}>
+          <div
+            className={`${isLaptop ? 'w-[70%]' : 'w-full'} ${
+              !isMobile ? 'my-10 px-4' : 'my-6 px-3'
+            }`}
+          >
             {isTablet && (
               <div className="flex items-center gap-4 w-full mb-4 pl-4">
                 <div className="font-bold text-2xl tracking-wider text-white hover:text-white">
@@ -67,7 +71,7 @@ const MovieWatchPage = () => {
                 </div>
               </div>
             )}
-            <div className="relative w-full h-0 pb-[56.25%] rounded-md overflow-hidden bg-[#ffffff20]">
+            <div className="relative w-full h-0 pb-[56.25%] rounded-md overflow-hidden imgMobile bg-[#ffffff20]">
               <iframe
                 src={`https://2embed.org/embed/movie?tmdb=${id}`}
                 frameBorder="0"
@@ -113,7 +117,11 @@ const MovieWatchPage = () => {
               </div>
             </div>
           </div>
-          <div className="flex-1 flex flex-col gap-4 m-4">
+          <div
+            className={`flex-1 flex flex-col gap-4 ${
+              !isMobile ? 'm-4' : 'm-3'
+            }`}
+          >
             {isLaptop && (
               <SuggestionSearchBar
                 typeQuery="multi"

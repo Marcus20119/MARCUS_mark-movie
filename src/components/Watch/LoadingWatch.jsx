@@ -4,11 +4,15 @@ import LoadingSkeleton from '../Base/Loading/Skeleton';
 
 const LoadingWatch = () => {
   const { input, handleSetInput, isFocus, setIsFocus } = useSearch();
-  const { isTablet, isLaptop } = useResponsive();
+  const { isMobile, isTablet, isLaptop } = useResponsive();
 
   return (
     <div className={`flex w-full ${!isLaptop && 'flex-col'}`}>
-      <div className={`my-10 px-4 ${isLaptop ? 'w-[70%]' : 'w-full'}`}>
+      <div
+        className={` ${isLaptop ? 'w-[70%]' : 'w-full'} ${
+          !isMobile ? 'my-10 px-4' : 'my-6 px-3'
+        }`}
+      >
         {isTablet && (
           <div className="flex items-center gap-4 w-full mb-4 pl-4">
             <div className="font-bold text-2xl tracking-wider text-white hover:text-white">
@@ -67,15 +71,19 @@ const LoadingWatch = () => {
           </div>
         </div>
       </div>
-      <div className="flex-1 flex flex-col gap-4 m-4">
-        <SearchBar
-          input={input}
-          handleSetInput={handleSetInput}
-          isFocus={isFocus}
-          setIsFocus={setIsFocus}
-          placeholder="Search . . ."
-          type="2"
-        />
+      <div
+        className={`flex-1 flex flex-col gap-4 ${!isMobile ? 'm-4' : 'm-3'}`}
+      >
+        {isLaptop && (
+          <SearchBar
+            input={input}
+            handleSetInput={handleSetInput}
+            isFocus={isFocus}
+            setIsFocus={setIsFocus}
+            placeholder="Search . . ."
+            type="2"
+          />
+        )}
         <div className="flex flex-col w-full gap-4">
           <LoadingSkeleton className="w-[120px] h-[1.5rem] my-[0.25rem] opacity-50 rounded-md" />
           {Array(5)

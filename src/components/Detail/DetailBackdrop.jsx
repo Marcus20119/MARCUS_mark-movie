@@ -25,7 +25,11 @@ const DetailBackdrop = ({ movieData }) => {
   const { isMobile, isTablet, isLaptop } = useResponsive();
 
   return (
-    <div className="absolute top-0 left-0 z-[1] w-full overflow-hidden h-[500px]">
+    <div
+      className={`absolute top-0 left-0 z-[1] w-full overflow-hidden ${
+        !isMobile ? 'h-[500px]' : 'h-[300px]'
+      }`}
+    >
       {movieData && (movieData.title || movieData.name) && (
         <Fragment>
           {movieData?.backdrop_path ? (
@@ -44,7 +48,9 @@ const DetailBackdrop = ({ movieData }) => {
             />
           )}
           <div
-            className="absolute top-0 left-0 z-[2] block w-full h-[500px] object-top bg-center bg-cover bg-no-repeat"
+            className={`absolute top-0 left-0 z-[2] block w-full object-top bg-center bg-cover bg-no-repeat ${
+              !isMobile ? 'h-[500px]' : 'h-[300px]'
+            }`}
             style={{
               background: `linear-gradient(
                 0deg,

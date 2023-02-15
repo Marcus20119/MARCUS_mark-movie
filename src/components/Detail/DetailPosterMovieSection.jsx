@@ -60,22 +60,24 @@ const DetailPosterMovieSection = ({ movieData }) => {
     }
   };
 
-  const { isLaptop } = useResponsive();
+  const { isMobile, isTablet, isLaptop } = useResponsive();
 
   return (
     <Fragment>
       {movieData && (movieData.title || movieData.name) && (
         <div
-          className={`flex flex-col gap-[20px] ${
-            isLaptop ? 'w-[20%]' : 'w-[40%]'
-          }`}
+          className={`flex flex-col gap-[20px] ${isLaptop && 'w-[20%]'} ${
+            isTablet && 'w-[40%]'
+          } ${isMobile && 'w-[60%]'}`}
         >
           {movieData?.poster_path ? (
             <ProgressiveImg
               src={api.getPoster(movieData.poster_path, 'w500')}
               placeholderSrc={api.getPoster(movieData.poster_path, 'w92')}
               alt={movieData.poster_path}
-              className="w-full object-contain rounded-md min-h-[365px]"
+              className={`imgMobile w-full object-contain rounded-md ${
+                !isMobile ? 'min-h-[365px]' : 'min-h-[300px]'
+              }`}
               resetClassName={true}
             />
           ) : (

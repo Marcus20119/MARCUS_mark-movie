@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 import { convertDate } from '~/helpers';
+import { useResponsive } from '~/hooks';
 
 const SubContent = ({ movieData }) => {
+  const { isMobile } = useResponsive();
+
   const subInfo = [
     {
-      title: 'PRODUCTION COMPANY',
+      title: !isMobile ? 'PRODUCTION COMPANY' : 'PRODUCTION',
       content: movieData?.production_companies?.[0]?.name || 'Unknown',
     },
     {
@@ -39,7 +42,7 @@ const SubContent = ({ movieData }) => {
           {subInfo.map((item, index) => (
             <span
               key={`subInfoContent${index}`}
-              className="text-white font-bold"
+              className="text-white font-bold line-clamp-1"
             >
               {item.content}
             </span>

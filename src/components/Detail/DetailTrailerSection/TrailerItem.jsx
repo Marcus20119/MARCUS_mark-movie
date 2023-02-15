@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 
 import ModalBase from '~/components/Base/ModalBase';
 import { api } from '~/utils';
-import { useModal } from '~/hooks';
+import { useModal, useResponsive } from '~/hooks';
 import ProgressiveImg from '~/components/Base/ProgressiveImg';
 
 const TrailerItem = ({ keyId, index }) => {
   const { show, handleShow, handleHide } = useModal();
+
+  const { isMobile, isTablet, isLaptop } = useResponsive();
 
   return (
     <div>
@@ -38,7 +40,9 @@ const TrailerItem = ({ keyId, index }) => {
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-              className="w-[1000px] h-[562.5px]"
+              className={`${isLaptop && 'w-[1000px] h-[562.5px]'} ${
+                isTablet && 'w-[600px] h-[337.5px]'
+              } ${isMobile && 'w-[350px] h-[196.875px]'}`}
             ></iframe>
           </Fragment>
         </ModalBase>

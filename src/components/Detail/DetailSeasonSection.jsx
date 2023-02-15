@@ -8,6 +8,7 @@ import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 import { api } from '~/utils';
 import { supabase, useFetchSingleRow } from '~/supabase';
 import { useAuth } from '~/contexts/authContext';
+import { useResponsive } from '~/hooks';
 
 const DetailSeasonSection = ({
   seasonsData,
@@ -63,8 +64,15 @@ const DetailSeasonSection = ({
       }
     }
   };
+
+  const { isMobile } = useResponsive();
+
   return (
-    <div className={`relative w-full p-[30px] ${wrapClassName}`}>
+    <div
+      className={`relative w-full ${wrapClassName} ${
+        !isMobile ? 'p-[30px]' : 'px-[16px] py-[20px]'
+      }`}
+    >
       {showTitle && (
         <h3 className="text-2xl text-white font-bold mb-3">Seasons</h3>
       )}
@@ -118,7 +126,13 @@ const DetailSeasonSection = ({
                         seasonItem.episode_count
                       } episodes`}</span>
                       {showContent && (
-                        <p className="text-[#b5b5b5]">{seasonItem.overview}</p>
+                        <p
+                          className={`text-[#b5b5b5] ${
+                            isMobile && 'line-clamp-6'
+                          }`}
+                        >
+                          {seasonItem.overview}
+                        </p>
                       )}
                     </div>
                   </Link>

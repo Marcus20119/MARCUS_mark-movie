@@ -17,22 +17,24 @@ const DetailPosterTVSection = ({ movieData }) => {
     handleHide: handleHideModelSeason,
   } = useModal();
 
-  const { isLaptop } = useResponsive();
+  const { isMobile, isTablet, isLaptop } = useResponsive();
 
   return (
     <Fragment>
       {movieData && (movieData.title || movieData.name) && (
         <div
-          className={`flex flex-col gap-[20px] ${
-            isLaptop ? 'w-[20%]' : 'w-[40%]'
-          }`}
+          className={`flex flex-col gap-[20px] ${isLaptop && 'w-[20%]'} ${
+            isTablet && 'w-[40%]'
+          } ${isMobile && 'w-[60%]'}`}
         >
           {movieData?.poster_path ? (
             <ProgressiveImg
               src={api.getPoster(movieData.poster_path, 'w500')}
               placeholderSrc={api.getPoster(movieData.poster_path, 'w92')}
               alt={movieData.poster_path}
-              className="w-full object-contain rounded-md min-h-[365px]"
+              className={`imgMobile w-full object-contain rounded-md ${
+                !isMobile ? 'min-h-[365px]' : 'min-h-[300px]'
+              }`}
               resetClassName={true}
             />
           ) : (
@@ -52,7 +54,11 @@ const DetailPosterTVSection = ({ movieData }) => {
         </div>
       )}
       <ModalBase visible={showModelSeason} onClose={handleHideModelSeason}>
-        <div className="relative w-[500px] bg-[#181818] py-6 pl-2 pr-4 rounded-2xl z-2 transition-all float-border ">
+        <div
+          className={`"relative bg-[#181818] py-6 pl-2 pr-4 rounded-2xl z-2 transition-all float-border ${
+            !isMobile ? 'w-[500px]' : 'w-[350px]'
+          }`}
+        >
           {movieData.seasons && movieData.seasons.length > 0 && (
             <div className="custom-scrollbar max-h-[70vh] overflow-auto">
               <DetailSeasonSection

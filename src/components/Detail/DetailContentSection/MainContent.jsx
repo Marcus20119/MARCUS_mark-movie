@@ -69,8 +69,10 @@ const MainContent = ({ movieData }) => {
             <div className="inline-flex justify-start items-center gap-[12px]">
               <button
                 className={`inline-flex justify-start items-center gap-[10px] bg-[#3E56C4] rounded-md opacity-90 hover:opacity-100 ${
-                  isLaptop && 'px-[16px] py-[8px]'
-                } ${isTablet && 'px-[20px] py-[12px] text-xl'}`}
+                  isLaptop
+                    ? 'px-[16px] py-[8px]'
+                    : 'px-[20px] py-[12px] text-xl'
+                }`}
                 onClick={() => facebookRef.current.click()}
               >
                 <svg

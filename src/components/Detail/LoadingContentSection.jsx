@@ -4,15 +4,19 @@ import LoadingSkeleton from '../Base/Loading/Skeleton';
 import { ButtonPlus } from '../Button';
 
 const LoadingContentSection = () => {
-  const { isTablet, isLaptop } = useResponsive();
+  const { isMobile, isLaptop } = useResponsive();
   return (
-    <div className="flex-1 flex flex-col justify-between items-start text-white">
+    <div
+      className={`flex-1 flex flex-col justify-between items-start text-white ${
+        isMobile && 'w-full'
+      }`}
+    >
       <div
         className={`flex flex-col w-full pb-[10px] ${isLaptop && 'h-[250px]'}`}
       >
         <Fragment>
-          <LoadingSkeleton className="h-[3rem] my-[0.35rem] w-[400px] rounded-md opacity-60" />
-          <LoadingSkeleton className="h-[1.125rem] mb-[calc(28px_+_0.3125rem)]  mt-[0.5632rem] w-[300px] rounded-md opacity-60" />
+          <LoadingSkeleton className="h-[3rem] my-[0.35rem] w-[70%] max-w-[400px] rounded-md opacity-60" />
+          <LoadingSkeleton className="h-[1.125rem] mb-[calc(28px_+_0.3125rem)] mt-[0.5632rem] w-[300px] rounded-md opacity-60" />
           <LoadingSkeleton className="h-[16px] mb-[calc(12px_+_1.6px)] mt-[7.2px] w-[150px] rounded-md opacity-60" />
           <div
             className={`flex justify-start items-center gap-2 h-[20px] mb-[16px] `}
@@ -28,8 +32,10 @@ const LoadingContentSection = () => {
             <div className="inline-flex justify-start items-center gap-[12px]">
               <button
                 className={`inline-flex justify-start items-center gap-[10px] bg-[#3E56C4] rounded-md opacity-90 hover:opacity-100 ${
-                  isLaptop && 'px-[16px] py-[8px]'
-                } ${isTablet && 'px-[20px] py-[12px] text-xl'}`}
+                  isLaptop
+                    ? 'px-[16px] py-[8px]'
+                    : 'px-[20px] py-[12px] text-xl'
+                }`}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -55,13 +61,15 @@ const LoadingContentSection = () => {
         <Fragment>
           <div className="inline-flex justify-start items-center gap-[20px] my-[24px]">
             <div className="flex flex-col gap-[8px]">
-              {['PRODUCTION COMPANY', 'COUNTRIES', 'RELEASE DATE'].map(
-                (item, index) => (
-                  <span key={`subInfoTitle${index}`} className="text-[#7A7A7A]">
-                    {item}
-                  </span>
-                )
-              )}
+              {[
+                !isMobile ? 'PRODUCTION COMPANY' : 'PRODUCTION',
+                'COUNTRIES',
+                'RELEASE DATE',
+              ].map((item, index) => (
+                <span key={`subInfoTitle${index}`} className="text-[#7A7A7A]">
+                  {item}
+                </span>
+              ))}
             </div>
             <div className="flex flex-col gap-[8px]">
               {Array(3)

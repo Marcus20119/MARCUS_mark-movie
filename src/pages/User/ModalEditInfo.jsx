@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { InputBar } from '~/components/Bar';
 import ModalBase from '~/components/Base/ModalBase';
 import { useUser } from '~/contexts/userContext';
+import { useResponsive } from '~/hooks';
 import { supabase } from '~/supabase';
 import { errorToast, successToast } from '~/utils';
 
@@ -48,9 +49,16 @@ const ModalEditInfo = () => {
     };
     handleUpsertData();
   };
+
+  const { isMobile } = useResponsive();
+
   return (
     <ModalBase visible={showModelEditInfo} onClose={handleHideModelEditInfo}>
-      <div className="relative w-[450px] bg-[#181818] px-12 py-[40px] rounded-2xl z-2 transition-all float-border">
+      <div
+        className={`relative bg-[#181818] rounded-2xl z-2 transition-all float-border ${
+          !isMobile ? 'w-[450px] px-12 py-[40px]' : 'w-[350px] px-8 py-[30px]'
+        }`}
+      >
         <div className="w-full">
           <form className="w-full" onSubmit={e => e.preventDefault()}>
             <div className="flex flex-col gap-[16px] my-[8px]">

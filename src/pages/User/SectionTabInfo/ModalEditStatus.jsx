@@ -3,6 +3,7 @@ import { useState } from 'react';
 import ModalBase from '~/components/Base/ModalBase';
 import { ButtonPrimary } from '~/components/Button';
 import { convertDate } from '~/helpers';
+import { useResponsive } from '~/hooks';
 import { supabase } from '~/supabase';
 import { getBucketURL } from '~/supabase/bucketURL';
 import { errorToast, successToast } from '~/utils';
@@ -38,12 +39,19 @@ const ModalEditStatus = ({
     };
     handleUpsertData();
   };
+
+  const { isMobile } = useResponsive();
+
   return (
     <ModalBase
       visible={showModelEditStatus}
       onClose={handleHideModelEditStatus}
     >
-      <div className="relative w-[600px] bg-[#181818] px-12 py-[40px] rounded-2xl z-2 transition-all float-border">
+      <div
+        className={`relative bg-[#181818] rounded-2xl z-2 transition-all float-border ${
+          !isMobile ? 'w-[600px] px-12 py-[40px]' : 'w-[350px] px-8 py-[30px]'
+        }`}
+      >
         <div className="flex flex-col gap-3 w-full">
           <div className="flex justify-between items-start w-full">
             <div className="inline-flex items-center gap-2">

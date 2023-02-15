@@ -46,7 +46,7 @@ const MovieDetailPage = () => {
     rerenderCondition: [movieData],
   });
 
-  const { isMobile, isTablet, isLaptop } = useResponsive();
+  const { isMobile, isLaptop } = useResponsive();
 
   return (
     <div className="relative !bg-mainSection min-h-[150vh] ">
@@ -59,9 +59,9 @@ const MovieDetailPage = () => {
             }`}
           >
             <div
-              className={`flex w-full items-start justify-between px-[40px] ${
+              className={`flex w-full items-start justify-between ${
                 isLaptop ? 'gap-5' : 'gap-4 flex-col'
-              }`}
+              } ${!isMobile ? 'px-[40px]' : 'px-[16px]'}`}
             >
               <DetailPosterMovieSection movieData={movieData} />
               <DetailContentSection movieData={movieData} />
@@ -89,9 +89,9 @@ const MovieDetailPage = () => {
             }`}
           >
             <div
-              className={`flex w-full items-start justify-between px-[40px] ${
+              className={`flex w-full items-start justify-between ${
                 isLaptop ? 'gap-5' : 'gap-4 flex-col'
-              }`}
+              } ${!isMobile ? 'px-[40px]' : 'px-[16px]'}`}
             >
               <LoadingPosterSection />
               <LoadingContentSection />

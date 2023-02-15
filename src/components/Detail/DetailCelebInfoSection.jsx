@@ -21,7 +21,7 @@ import ProgressiveImg from '../Base/ProgressiveImg';
 import { useResponsive } from '~/hooks';
 
 const DetailCelebInfoSection = ({ personData }) => {
-  const { isTablet, isLaptop } = useResponsive();
+  const { isMobile, isTablet, isLaptop } = useResponsive();
   const PersonalInfo = [
     {
       field: isLaptop ? 'Known for department' : 'Known for',
@@ -97,11 +97,15 @@ const DetailCelebInfoSection = ({ personData }) => {
   };
 
   return (
-    <div className="flex w-full justify-between items-stretch gap-[28px] !bg-mainSection p-[40px]">
+    <div
+      className={`flex w-full justify-between items-stretch gap-[28px] !bg-mainSection ${
+        !isMobile ? 'p-[40px]' : 'flex-col p-[16px]'
+      }`}
+    >
       <div
         className={`relative flex-1 flex flex-col justify-start items-center gap-[20px] ${
           isLaptop && 'w-[20%]'
-        } ${isTablet && ''}`}
+        } ${isTablet && ''} ${isMobile && 'w-[70%] mx-auto'}`}
       >
         {personData?.profile_path ? (
           <ProgressiveImg
@@ -139,7 +143,11 @@ const DetailCelebInfoSection = ({ personData }) => {
           {personData.name}
         </h1>
         <div className="inline-flex justify-start items-start gap-[20px] my-[12px]">
-          <div className={`flex flex-col gap-[8px] ${isTablet && 'w-[30%]'}`}>
+          <div
+            className={`flex flex-col gap-[8px] flex-shrink-0 ${
+              isTablet && 'w-[30%]'
+            }`}
+          >
             {PersonalInfo.map((item, index) => (
               <span key={`subInfoTitle${index}`} className="text-[#7A7A7A]">
                 {item.field}

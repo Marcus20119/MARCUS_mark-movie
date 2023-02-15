@@ -7,14 +7,22 @@ import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 import NextBtn from '~/components/Base/Swiper/NextBtn';
 import PrevBtn from '~/components/Base/Swiper/PrevBtn';
 import TrailerItem from './TrailerItem';
+import { useResponsive } from '~/hooks';
 
 const DetailTrailerSection = ({ videosData }) => {
   const keys = videosData.map(videoData => videoData.key);
 
   const nextRef = useRef();
   const prevRef = useRef();
+
+  const { isMobile } = useResponsive();
+
   return (
-    <div className="relative w-full p-[30px] !bg-mainSection">
+    <div
+      className={`relative w-full !bg-mainSection ${
+        !isMobile ? 'p-[30px]' : 'py-[20px] px-[16px]'
+      }`}
+    >
       <h3 className="text-2xl text-white font-bold mb-3">Trailers & Videos</h3>
       <Swiper spaceBetween={16} slidesPerView="auto" className="detail-trailer">
         {keys &&
@@ -30,7 +38,7 @@ const DetailTrailerSection = ({ videosData }) => {
         <NextBtn ref={nextRef} />
         <PrevBtn ref={prevRef} />
       </Swiper>
-      {keys.length > 5 && (
+      {!isMobile && keys.length > 5 && (
         <div className="absolute top-[40px] right-[40px] inline-flex justify-center gap-2">
           <button
             className="flex justify-center items-center w-7 h-7 bg-[rgba(255,_255,_255,_0.3)] rounded-full text-white text-xl opacity-70 hover:opacity-100"
