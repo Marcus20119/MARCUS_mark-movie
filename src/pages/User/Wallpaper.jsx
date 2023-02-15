@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useRef, useState } from 'react';
+import { useResponsive } from '~/hooks';
 import { supabase } from '~/supabase';
 import './Avatar.scss';
 
@@ -32,7 +33,7 @@ export default function Wallpaper({ url, onUpload }) {
 
   const inputRef = useRef();
 
-  const uploadAvatar = async event => {
+  const uploadWallpaper = async event => {
     try {
       setUploading(true);
 
@@ -61,12 +62,16 @@ export default function Wallpaper({ url, onUpload }) {
     }
   };
 
+  const { isMobile } = useResponsive();
+
   return (
     <Fragment>
-      <div className="userAvatar w-full ">
+      <div className="userAvatar w-full">
         <div className="overflow-hidden">
           <div
-            className="block w-full h-[350px] object-top backdrop-blur-3xl opacity-50 bg-center bg-cover bg-no-repeat"
+            className={`block w-full object-top backdrop-blur-3xl opacity-50 bg-center bg-cover bg-no-repeat ${
+              !isMobile ? 'h-[350px]' : 'h-[250px]'
+            }`}
             style={{
               backgroundImage: avatarUrl
                 ? `linear-gradient(0deg, rgb(34, 34, 34, 0.85), transparent), url('${avatarUrl}')`
@@ -88,7 +93,7 @@ export default function Wallpaper({ url, onUpload }) {
         </div>
         <Fragment>
           <label className="button primary hidden" htmlFor="single">
-            Upload an avatar
+            Upload an wallpaper
           </label>
           <div className="visually-hidden hidden">
             <input
@@ -96,15 +101,15 @@ export default function Wallpaper({ url, onUpload }) {
               type="file"
               id="single"
               accept="image/*"
-              onChange={uploadAvatar}
+              onChange={uploadWallpaper}
               disabled={uploading}
             />
           </div>
         </Fragment>
       </div>
       <div
-        className="absolute top-[275px] right-[5%] flex justify-center items-center gap-2 bg-[rgba(255,_255,_255,_0.8)] px-3 py-2 rounded-lg z-20 cursor-pointer hover:bg-white"
-        title="Upload an avatar"
+        className={`absolute  right-[5%] flex justify-center items-center gap-2 bg-[rgba(255,_255,_255,_0.8)] px-3 py-2 rounded-lg z-20 cursor-pointer hover:bg-white"
+        title="Upload an avatar ${!isMobile ? 'top-[275px]' : 'top-[20px]'}`}
         onClick={() => inputRef.current.click()}
       >
         <i className="bx bxs-camera text-lg"></i>

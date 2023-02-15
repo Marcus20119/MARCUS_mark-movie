@@ -12,8 +12,12 @@ import {
 } from '~/hooks';
 import { api } from '~/utils';
 import { MainPaginate } from '~/components/Paginate';
-import LoadingBounce from '~/components/Base/Loading/Bounce';
 import { SearchList } from '~/components/CardAndList/SearchList';
+import {
+  SearchAnnounce,
+  SearchHeader,
+  SearchNotFoundAndLoading,
+} from '~/components/Search';
 
 const SearchPage = () => {
   useChangeTitleWebsite({ title: 'Mark Movie - Search' });
@@ -38,19 +42,17 @@ const SearchPage = () => {
     didMountRef.current = true;
   }, [navigateTo, newQuery, currentPage]);
 
-  const { isMobile, isTablet, isLaptop } = useResponsive();
+  const { isMobile } = useResponsive();
 
   return (
-    <div className="!bg-mainSection py-[20px] px-10 overflow-hidden">
-      <div className="mt-[24px]">
+    <div
+      className={`!bg-mainSection overflow-hidden ${
+        !isMobile ? 'py-[20px] px-10' : 'p-[16px] min-h-screen'
+      }`}
+    >
+      <div className={!isMobile ? 'mt-[24px]' : 'mt-[8px]'}>
         {!query && (
-          <h2
-            className={`block text-white80 text-center mb-4 ${
-              isLaptop && 'text-5xl'
-            } ${isTablet && 'text-4xl'}`}
-          >
-            Find your favorite movies, TV shows, people and more . . .
-          </h2>
+          <SearchHeader message="Find your favorite movies, TV shows, people and more . . ." />
         )}
         <SuggestionSearchBar
           typeQuery="multi"
@@ -65,9 +67,10 @@ const SearchPage = () => {
               filmsData.results &&
               filmsData.results.length > 0 && (
                 <Fragment>
-                  <h3 className="italic text-xl text-white my-[24px] mx-[2px]">
-                    {`Search result for "${newQuery}" (${filmsData.total_results} results found)`}
-                  </h3>
+                  <SearchAnnounce
+                    query={newQuery}
+                    totalResult={filmsData.total_results}
+                  />
                   <SearchList
                     searchData={filmsData.results}
                     className="my-[24px]"
@@ -81,16 +84,7 @@ const SearchPage = () => {
                   )}
                 </Fragment>
               )}
-            {!filmsLoading &&
-              filmsData.results &&
-              filmsData.results.length === 0 && (
-                <span className="block text-[rgba(255,_255,_255,_0.8)] mt-3 ml-1">
-                  No result was found! Try another keyword . . .
-                </span>
-              )}
-            {(filmsLoading || !filmsData.results) && (
-              <LoadingBounce mainClass="flex justify-center items-center w-full mb-auto mt-3" />
-            )}
+            <SearchNotFoundAndLoading loading={filmsLoading} data={filmsData} />
           </Fragment>
         )}
       </div>

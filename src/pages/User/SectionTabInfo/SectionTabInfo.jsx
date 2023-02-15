@@ -22,16 +22,18 @@ const SectionTabInfo = ({ userRow }) => {
       initialLoading: true,
     });
 
-  const { isMobile, isTablet, isLaptop } = useResponsive();
+  const { isMobile, isLaptop } = useResponsive();
 
   return (
     <div
-      className={`flex items-start gap-[30px] ${isLaptop ? '' : 'flex-col'}`}
+      className={`flex items-start ${isLaptop ? '' : 'flex-col'} ${
+        !isMobile ? 'gap-[30px]' : 'gap-[16px]'
+      }`}
     >
       <div
-        className={`flex flex-col justify-start gap-[30px] ${
+        className={`flex flex-col justify-start ${
           isLaptop ? 'w-[35%]' : 'w-full'
-        }`}
+        } ${!isMobile ? 'gap-[30px]' : 'gap-[16px]'}`}
       >
         <IntroPart userRow={userRow} />
         <FavoritePart type="movie" />

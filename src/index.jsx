@@ -13,6 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import reportWebVitals from './reportWebVitals';
 import UserProvider from './contexts/userContext';
 import './scss/index.scss';
+import ModalLogIn from './components/NavSection/ModalLogIn';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -21,6 +22,7 @@ root.render(
       <AuthProvider>
         <UserProvider>
           <App />
+          <ModalLogIn />
         </UserProvider>
       </AuthProvider>
       <ToastContainer />

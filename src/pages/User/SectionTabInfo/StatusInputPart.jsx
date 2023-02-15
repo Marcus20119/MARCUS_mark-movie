@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Swal from 'sweetalert2';
 import { ButtonPrimary } from '~/components/Button';
 import { useUser } from '~/contexts/userContext';
+import { useResponsive } from '~/hooks';
 import { supabase } from '~/supabase';
 import { errorToast, loadingAlert, successAlert } from '~/utils';
 
@@ -68,6 +69,8 @@ const StatusInputPart = ({ userRow, handleForceRerender }) => {
     }
   };
 
+  const { isMobile } = useResponsive();
+
   return (
     <div className="flex flex-col items-start gap-3 bg-mainSection py-3 px-4 rounded-lg text-white80">
       <h3 className="font-bold text-xl text-white tracking-wide">Status</h3>
@@ -82,8 +85,16 @@ const StatusInputPart = ({ userRow, handleForceRerender }) => {
           onChange={e => setContent(e.target.value)}
           className="textarea-scrollbar w-full min-h-[100px] bg-white80 rounded-md px-[12px] py-[6px] text-mainSection"
         />
-        <div className="flex justify-between items-center">
-          <span className="w-[60%] italic text-white80 opacity-50">
+        <div
+          className={`flex justify-between items-center ${
+            isMobile && 'flex-col-reverse gap-2'
+          }`}
+        >
+          <span
+            className={`italic text-white80 opacity-50 ${
+              !isMobile ? 'w-[60%]' : 'w-full'
+            }`}
+          >
             Your post will appear in "Community Section" and everyone can see
             it!
           </span>

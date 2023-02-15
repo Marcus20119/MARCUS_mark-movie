@@ -1,14 +1,16 @@
 import { Outlet } from 'react-router-dom';
-import { NavSection } from '~/components/NavSection';
+import { NavSection, NavSectionMobile } from '~/components/NavSection';
 import { useResponsive } from '~/hooks';
 
 const MainLayout = () => {
-  const { isLaptop } = useResponsive();
+  const { isMobile, isLaptop } = useResponsive();
   return (
     <div
-      className={` transition-none main-layout ${isLaptop && 'min-h-[120vh]'}`}
+      className={` transition-none ${isLaptop && 'min-h-[120vh]'} ${
+        !isMobile ? 'main-layout' : 'w-full mt-[56px]'
+      }`}
     >
-      <NavSection />
+      {!isMobile ? <NavSection /> : <NavSectionMobile />}
       <Outlet />
     </div>
   );

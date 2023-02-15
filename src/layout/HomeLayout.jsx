@@ -2,14 +2,26 @@ import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useResponsive } from '~/hooks';
 import LoadingPage from '~/pages/LoadingPage';
-import { NavSection } from '../components/NavSection';
+import { NavSection, NavSectionMobile } from '../components/NavSection';
 
 const MainLayout = () => {
-  const { isTablet, isLaptop } = useResponsive();
+  const { isMobile, isTablet, isLaptop } = useResponsive();
   return (
     <Suspense fallback={<LoadingPage isHomePage={isLaptop ? true : false} />}>
-      <div className={isLaptop ? 'home-layout' : isTablet ? 'main-layout' : ''}>
-        <NavSection isHomePage={isLaptop ? true : false} />
+      <div
+        className={
+          isLaptop
+            ? 'home-layout'
+            : isTablet
+            ? 'main-layout'
+            : 'w-full mt-[56px]'
+        }
+      >
+        {!isMobile ? (
+          <NavSection isHomePage={isLaptop ? true : false} />
+        ) : (
+          <NavSectionMobile />
+        )}
         <Outlet />
       </div>
     </Suspense>

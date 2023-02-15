@@ -20,7 +20,11 @@ const CommunityPage = () => {
   const { isMobile, isTablet, isLaptop } = useResponsive();
 
   return (
-    <div className="w-full bg-[#181818] px-[30px] pt-[30px] pb-[42px] min-h-screen">
+    <div
+      className={`w-full bg-[#181818] pt-[30px] pb-[42px] min-h-screen ${
+        !isMobile ? 'px-[30px]' : 'px-[16px]'
+      }`}
+    >
       {!!tableData && tableData.length > 0 && (
         <Fragment>
           {isLaptop && (
@@ -72,17 +76,15 @@ const CommunityPage = () => {
             </div>
           )}
           {isMobile && (
-            <div className="grid grid-cols-2 gap-[30px]">
-              <div className="flex flex-col gap-[30px]">
-                {tableData.map((status, indexStatus) => (
-                  <CommunityStatus
-                    key={`communityStatus-${indexStatus}`}
-                    status={status}
-                    likesTable={likesTable}
-                    loadingLikesTable={loadingLikesTable}
-                  />
-                ))}
-              </div>
+            <div className="flex flex-col gap-[16px]">
+              {tableData.map((status, indexStatus) => (
+                <CommunityStatus
+                  key={`communityStatus-${indexStatus}`}
+                  status={status}
+                  likesTable={likesTable}
+                  loadingLikesTable={loadingLikesTable}
+                />
+              ))}
             </div>
           )}
         </Fragment>

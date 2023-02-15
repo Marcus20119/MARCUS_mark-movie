@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useSearch } from '~/hooks';
 import NonSearchUI from './NonSearchUI';
 import SearchUI from './SearchUI';
-import { SearchBar } from '../Bar';
+import { SearchBar } from '../../Bar';
 
 const SearchSection = ({ type }) => {
   const { input, handleSetInput, isFocus, setIsFocus } = useSearch();

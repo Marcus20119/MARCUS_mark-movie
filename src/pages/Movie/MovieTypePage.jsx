@@ -10,6 +10,7 @@ import {
   useChangeTitleWebsite,
   useMySWR,
   usePaginate,
+  useResponsive,
   useScrollOnTop,
 } from '~/hooks';
 import { navMovie } from '~/utils';
@@ -76,8 +77,14 @@ const MovieTypePage = () => {
     didMountRef2.current = true;
   }, [typeApi]);
 
+  const { isMobile } = useResponsive();
+
   return (
-    <div className="!bg-mainSection py-[20px] px-10 overflow-hidden">
+    <div
+      className={`!bg-mainSection overflow-hidden ${
+        !isMobile ? 'py-[20px] px-10' : 'p-[16px] min-h-screen'
+      }`}
+    >
       <Navbar navList={navMovie} />
       {!filmsLoading && filmsData.results && filmsData.results.length > 0 && (
         <Fragment>

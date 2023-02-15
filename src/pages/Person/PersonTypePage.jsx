@@ -9,6 +9,7 @@ import {
   useChangeTitleWebsite,
   useMySWR,
   usePaginate,
+  useResponsive,
   useScrollOnTop,
 } from '~/hooks';
 import { navPerson } from '~/utils';
@@ -45,8 +46,14 @@ const TVTypePage = () => {
     didMountRef.current = true;
   }, [navigateTo, currentPage, typeApi]);
 
+  const { isMobile } = useResponsive();
+
   return (
-    <div className="!bg-mainSection py-[20px] px-10  overflow-hidden">
+    <div
+      className={`!bg-mainSection overflow-hidden ${
+        !isMobile ? 'py-[20px] px-10' : 'p-[16px] min-h-screen'
+      }`}
+    >
       <Navbar navList={navPerson} />
       {!peopleLoading &&
         peopleData.results &&

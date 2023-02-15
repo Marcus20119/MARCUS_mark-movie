@@ -32,3 +32,24 @@
     display: none;
   }
 }
+
+@keyframes slideFromLeft {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  to {
+    opacity: 0.8;
+  }
+}
+.slide-from-left {
+  transform: translateX(-100%);
+  animation: slideFromLeft cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
+  opacity: 0;
+}
+.fade-in {
+  animation: fadeIn cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
+  opacity: 0;
+}

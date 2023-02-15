@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { PropTypes } from 'prop-types';
 import { useResponsive } from '~/hooks';
 import { api, route } from '~/utils';
 import ProgressiveImg from '../Base/ProgressiveImg';
@@ -10,7 +11,11 @@ const FilmCard = ({ type, filmData, alternativeId, children }) => {
       to={route.toDetail(type, alternativeId || filmData.id)}
       className="group w-full cursor-pointer rounded-md"
     >
-      <div className="group relative w-full h-0 bg-transparent pt-[145%] rounded-md overflow-hidden group-hover:-translate-y-2">
+      <div
+        className={`group relative w-full h-0 bg-transparent pt-[145%] rounded-md overflow-hidden imgMobile ${
+          isLaptop && 'group-hover:-translate-y-2'
+        }`}
+      >
         {filmData?.poster_path ? (
           <ProgressiveImg
             src={api.getPoster(filmData.poster_path, 'w500')}
@@ -19,7 +24,7 @@ const FilmCard = ({ type, filmData, alternativeId, children }) => {
           />
         ) : (
           <img
-            className="absolute inset-0 block w-full h-full object-cover object-center"
+            className="absolute inset-0 block w-full h-full object-cover object-center imgMobile"
             src="/imgs/no-poster.jpg"
             alt="no-poster"
           />
@@ -39,6 +44,13 @@ const FilmCard = ({ type, filmData, alternativeId, children }) => {
       </h6>
     </Link>
   );
+};
+
+FilmCard.propTypes = {
+  type: PropTypes.oneOf(['movie', 'tv', 'person']),
+  filmData: PropTypes.object.isRequired,
+  alternativeId: PropTypes.string,
+  children: PropTypes.any,
 };
 
 export default FilmCard;

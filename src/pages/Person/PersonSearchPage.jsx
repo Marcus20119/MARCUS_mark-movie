@@ -12,9 +12,13 @@ import {
 } from '~/hooks';
 import { api } from '~/utils';
 import { MainPaginate } from '~/components/Paginate';
-import LoadingBounce from '~/components/Base/Loading/Bounce';
 import { navPerson } from '~/utils';
 import { MainList } from '~/components/CardAndList';
+import {
+  SearchAnnounce,
+  SearchHeader,
+  SearchNotFoundAndLoading,
+} from '~/components/Search';
 
 const PersonSearchPage = () => {
   useChangeTitleWebsite({
@@ -42,21 +46,23 @@ const PersonSearchPage = () => {
     didMountRef.current = true;
   }, [navigateTo, newQuery, currentPage]);
 
-  const { isMobile, isTablet, isLaptop } = useResponsive();
+  const { isMobile, isLaptop } = useResponsive();
 
   return (
-    <div className="!bg-mainSection py-[20px] px-10 overflow-hidden">
+    <div
+      className={`!bg-mainSection overflow-hidden ${
+        !isMobile ? 'py-[20px] px-10' : 'p-[16px] min-h-screen'
+      }`}
+    >
       <Navbar navList={navPerson} />
       {!query && (
-        <h2
-          className={`block text-white80 text-center mb-4 ${
-            isLaptop && 'text-5xl'
-          } ${isTablet && 'text-4xl mt-4'}`}
-        >
-          {isLaptop
-            ? 'Find your favorite people and more . . .'
-            : 'Find your favorite people . . .'}
-        </h2>
+        <SearchHeader
+          message={
+            isLaptop
+              ? 'Find your favorite people and more . . .'
+              : 'Find your favorite people . . .'
+          }
+        />
       )}
       <div className="mt-[24px]">
         <SuggestionSearchBar
@@ -72,9 +78,11 @@ const PersonSearchPage = () => {
               peopleData.results &&
               peopleData.results.length > 0 && (
                 <Fragment>
-                  <h3 className="italic text-xl text-white my-[24px] mx-[2px]">
-                    {`Search result for "${newQuery}" (${peopleData.total_results} results found)`}
-                  </h3>
+                  <SearchAnnounce
+                    query={newQuery}
+                    totalResult={peopleData.total_results}
+                  />
+
                   <MainList
                     listData={peopleData.results}
                     className="my-[24px]"
@@ -89,16 +97,10 @@ const PersonSearchPage = () => {
                   )}
                 </Fragment>
               )}
-            {!peopleLoading &&
-              peopleData.results &&
-              peopleData.results.length === 0 && (
-                <span className="block text-[rgba(255,_255,_255,_0.8)] mt-3 ml-1">
-                  No result was found! Try another keyword . . .
-                </span>
-              )}
-            {(peopleLoading || !peopleData.results) && (
-              <LoadingBounce mainClass="flex justify-center items-center w-full mb-auto mt-3" />
-            )}
+            <SearchNotFoundAndLoading
+              loading={peopleLoading}
+              data={peopleData}
+            />
           </Fragment>
         )}
       </div>

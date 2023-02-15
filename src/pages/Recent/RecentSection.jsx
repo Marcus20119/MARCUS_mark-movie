@@ -45,7 +45,7 @@ const RecentSection = ({ type }) => {
   return (
     <Fragment>
       {!loading && !!tableData?.length && tableData.length > 0 && (
-        <div className="relative w-full p-[10px]">
+        <div className="relative w-full py-[10px]">
           <div
             className="grid gap-[16px] w-full"
             style={{

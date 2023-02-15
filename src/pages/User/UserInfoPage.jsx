@@ -18,7 +18,10 @@ const UserInfoPage = () => {
   const { userRow, handleForceGetUserRow, handleShowModelEditInfo } = useUser();
   const { search } = useLocation();
   const section = search.split('=')[1];
-  useScrollOnTop(section, 178);
+
+  const { isMobile, isLaptop } = useResponsive();
+
+  useScrollOnTop(section, !isMobile ? 178 : 150);
 
   const updateProfile = async newUserRow => {
     try {
@@ -48,8 +51,6 @@ const UserInfoPage = () => {
     initialLoading: true,
   });
 
-  const { isLaptop } = useResponsive();
-
   return (
     <Fragment>
       {userRow?.email && (
@@ -64,8 +65,16 @@ const UserInfoPage = () => {
               }}
             />
 
-            <div className="absolute top-[300px] left-0 w-full z-10">
-              <div className="flex items-end gap-3 px-[60px]">
+            <div
+              className={`absolute left-0 w-full z-10 ${
+                !isMobile ? 'top-[300px]' : 'top-[170px]'
+              }`}
+            >
+              <div
+                className={`flex items-end gap-3  ${
+                  !isMobile ? 'px-[60px]' : 'flex-col px-[16px]'
+                }`}
+              >
                 <Avatar
                   url={userRow.avatar_url}
                   onUpload={url => {
@@ -74,7 +83,7 @@ const UserInfoPage = () => {
                     updateProfile(newData);
                   }}
                 />
-                <div className="max-w-[60%]">
+                <div className={!isMobile ? 'max-w-[60%]' : 'w-full'}>
                   <SectionMainInfo
                     userRow={userRow}
                     favoriteActorsTable={favoriteActorsTable}

@@ -133,17 +133,23 @@ const FilterBar = ({ paramData, currentPage, setCurrentPage }) => {
   const { isMobile, isTablet, isLaptop } = useResponsive();
 
   return (
-    <div className="flex justify-between items-center gap-3 w-full px-4 pb-3 pt-[10px] bg-[rgba(255,_255,_255,_0.06)] rounded-md">
+    <div
+      className={`flex justify-between items-center gap-3 w-full pb-3 pt-[10px] bg-[rgba(255,_255,_255,_0.06)] rounded-md ${
+        !isMobile ? 'px-4' : 'flex-col px-[16px]'
+      }`}
+    >
       <div
         ref={selectionWrapRef}
-        className={`grid  gap-4 w-[90%] ${isLaptop && 'grid-cols-6'} ${
-          isTablet && 'grid-cols-3'
-        }`}
+        className={`grid  ${isLaptop && 'gap-4 grid-cols-6 w-[90%]'} ${
+          isTablet && 'gap-4 grid-cols-3 w-[90%]'
+        } ${isMobile && 'gap-y-2 gap-x-4 grid-cols-2 w-full'}`}
       >
         {filterTabs.map((tab, index) => (
           <div
             key={`discoverFilterTab${index}`}
-            className="flex flex-col items-start gap-2 w-full"
+            className={`flex flex-col items-start w-full ${
+              !isMobile ? 'gap-2' : 'gap-1'
+            }`}
           >
             <label
               className="text-white font-bold tracking-wider"
@@ -153,7 +159,9 @@ const FilterBar = ({ paramData, currentPage, setCurrentPage }) => {
             </label>
             <div className="relative w-full">
               <select
-                className="relative w-full px-2 py-1 rounded-md cursor-pointer focus:shadow-select"
+                className={`relative w-full px-2 rounded-md cursor-pointer focus:shadow-select ${
+                  !isMobile ? 'py-1' : 'py-2'
+                }`}
                 name={tab.query}
                 id={`#discoverFilterTab${index}`}
                 defaultValue={paramData[tab.query] || ''}
@@ -173,7 +181,9 @@ const FilterBar = ({ paramData, currentPage, setCurrentPage }) => {
         ))}
       </div>
       <button
-        className="self-end px-4 py-1 rounded-md bg-[var(--primary-color)] text-white font-bold tracking-wider opacity-90 hover:opacity-100"
+        className={`rounded-md bg-[var(--primary-color)] text-white font-bold tracking-wider opacity-90 hover:opacity-100 ${
+          !isMobile ? 'self-end px-4 py-1' : 'w-full px-4 py-2 text-lg mt-1'
+        }`}
         onClick={handleResetQueries}
       >
         Reset

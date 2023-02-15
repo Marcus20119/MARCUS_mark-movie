@@ -48,7 +48,7 @@ const WatchlistSection = ({ type }) => {
   return (
     <Fragment>
       {!loading && !!tableData?.length && tableData.length > 0 && (
-        <div className="relative w-full p-[10px]">
+        <div className="relative w-full py-[10px]">
           <div
             className="grid gap-[16px] w-full"
             style={{
@@ -67,7 +67,11 @@ const WatchlistSection = ({ type }) => {
                     !isLaptop && '!block'
                   }`}
                 >
-                  <ToolTipBase tipMessage="Remove from watchlist">
+                  <ToolTipBase
+                    tipMessage="Remove from watchlist"
+                    position={(index + 1) % numberOfCol === 0 ? 'left' : 'top'}
+                    moveRight={(index + 1) % numberOfCol === 0 ? 5 : 0}
+                  >
                     <ButtonMinus
                       padding={12}
                       iconSize={16}

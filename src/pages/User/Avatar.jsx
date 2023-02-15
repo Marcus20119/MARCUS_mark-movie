@@ -1,7 +1,7 @@
 import { Fragment, useRef, useState } from 'react';
 import ToolTipBase from '~/components/Base/ToolTipBase';
 import { useUser } from '~/contexts/userContext';
-import { useForceRerender } from '~/hooks';
+import { useForceRerender, useResponsive } from '~/hooks';
 import { supabase } from '~/supabase';
 import './Avatar.scss';
 
@@ -57,10 +57,18 @@ export default function Avatar({ onUpload }) {
     handleChangeStatusAvatar(filePath);
   };
 
+  const { isMobile } = useResponsive();
+
   return (
-    <div className="userAvatar w-[200px]">
+    <div
+      className={`userAvatar ${!isMobile ? 'w-[200px]' : 'w-[180px] mx-auto'}`}
+    >
       <div className="relative">
-        <div className="block w-[200px] h-[200px] rounded-full border-[4px] border-solid border-[#222] overflow-hidden">
+        <div
+          className={`block rounded-full border-[4px] border-solid border-[#222] overflow-hidden ${
+            !isMobile ? 'w-[200px] h-[200px]' : 'w-[180px] h-[180px]'
+          }`}
+        >
           <img
             src={avatarUrl ? avatarUrl : '/imgs/no-face.jpg'}
             alt={avatarUrl ? 'Avatar' : 'No image'}
@@ -77,7 +85,7 @@ export default function Avatar({ onUpload }) {
             className="inputAvatar-icon z-10"
             onClick={() => inputRef.current.click()}
           >
-            <i className="bx bxs-camera"></i>
+            <i className={`bx bxs-camera ${isMobile && '!text-3xl'}`}></i>
           </div>
         </ToolTipBase>
         {uploading && (

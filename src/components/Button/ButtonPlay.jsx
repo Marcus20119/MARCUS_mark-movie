@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 import { HashLink } from 'react-router-hash-link';
+import { useResponsive } from '~/hooks';
 
 const ButtonPlay = ({
   type = 'button',
@@ -13,13 +14,17 @@ const ButtonPlay = ({
   path = '/',
   onClick = () => {},
 }) => {
+  const { isMobile } = useResponsive();
+
   let widthClassName = '';
   switch (widthType) {
     case 'full':
       widthClassName = 'w-full';
       break;
     case 'fit':
-      widthClassName = 'w-auto py-[0.75rem] px-[2rem]';
+      widthClassName = !isMobile
+        ? 'w-auto py-[0.75rem] px-[2rem]'
+        : 'w-auto py-[0.55rem] px-[1.5rem]';
       break;
     default:
       break;
@@ -67,15 +72,15 @@ const ButtonPlay = ({
 };
 
 ButtonPlay.propTypes = {
-  message: PropTypes.string.isRequired,
-  widthType: PropTypes.string.isRequired,
   type: PropTypes.string,
   className: PropTypes.string,
+  message: PropTypes.string.isRequired,
+  widthType: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   displayIcon: PropTypes.bool,
-  onClick: PropTypes.func,
   isLink: PropTypes.bool,
   path: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export { ButtonPlay };

@@ -1,10 +1,19 @@
+import PropTypes from 'prop-types';
+
 import { LikeAndDislike, LoadingLikeAndDislike } from '~/components/Status';
 import { convertDate } from '~/helpers';
-import { getBucketURL } from '~/supabase/bucketURL';
+import { useResponsive } from '~/hooks';
+import { getBucketURL } from '~/supabase';
 
 const CommunityStatus = ({ status, likesTable, loadingLikesTable }) => {
+  const { isLaptop } = useResponsive();
+
   return (
-    <div className="group relative flex flex-col gap-2 w-full p-3 bg-mainSection rounded-lg hover:-translate-y-3 duration-500 last-of-type:flex-1">
+    <div
+      className={`group relative flex flex-col gap-2 w-full p-3 bg-mainSection rounded-lg duration-500 last-of-type:flex-1 ${
+        isLaptop && 'hover:-translate-y-3'
+      }`}
+    >
       <div className="flex justify-between items-start w-full ">
         <div className="inline-flex items-center gap-2">
           <img
@@ -33,6 +42,12 @@ const CommunityStatus = ({ status, likesTable, loadingLikesTable }) => {
       <p className="text-white80">{status.content}</p>
     </div>
   );
+};
+
+CommunityStatus.propTypes = {
+  status: PropTypes.string,
+  likesTable: PropTypes.array,
+  loadingLikesTable: PropTypes.bool,
 };
 
 export default CommunityStatus;

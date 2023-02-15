@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { useClickOutSide, useMySWR } from '~/hooks';
+import { useClickOutSide, useMySWR, useResponsive } from '~/hooks';
 import { api } from '~/utils';
 
 const SuggestionSearchBar = ({
@@ -66,6 +66,8 @@ const SuggestionSearchBar = ({
     }
   };
 
+  const { isMobile } = useResponsive();
+
   return (
     <div ref={nodeRef} className="relative w-full">
       <div className="relative w-full">
@@ -79,7 +81,7 @@ const SuggestionSearchBar = ({
         <input
           className={`block w-full pr-3 pl-10 py-[11px] ${
             suggestData && suggestData.length > 0 && show
-              ? 'rounded-t-[23px]'
+              ? 'rounded-t-[23px] rounded-b-none'
               : 'rounded-full'
           }  text-white80 bg-[#393939] placeholder:text-[rgba(255,_255,_255,_0.15)] ${
             needBrighter ? 'placeholder:!text-[#ffffff70]' : ''
@@ -114,8 +116,8 @@ const SuggestionSearchBar = ({
                 setShow(false);
               }}
             >
-              <i className="bx bx-search text-lg "></i>
-              <span>{item}</span>
+              <i className="bx bx-search text-lg"></i>
+              <span className={isMobile && 'py-1'}>{item}</span>
             </div>
           ))}
         </div>

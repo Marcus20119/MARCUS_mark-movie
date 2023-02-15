@@ -2,7 +2,7 @@ import { useResponsive } from '~/hooks';
 import LoadingSkeleton from '../Base/Loading/Skeleton';
 
 const LoadingMainList = ({ numberOfRow = 1 }) => {
-  const { isMobile, isTablet, isLaptop } = useResponsive();
+  const { isTablet, isLaptop } = useResponsive();
   const numberOfCol = isLaptop ? 5 : isTablet ? 3 : 2;
 
   return (
@@ -23,7 +23,7 @@ const LoadingMainList = ({ numberOfRow = 1 }) => {
               <LoadingSkeleton className="absolute inset-0 w-full opacity-50" />
             </div>
             <h6 className="text-center my-[10px] text-[1.1rem]">
-              <LoadingSkeleton className="h-[1.1rem] my-[0.3rem] w-full rounded-sm opacity-70" />
+              <LoadingSkeleton className="h-[1.1rem] my-[0.3rem] w-full rounded-[5px] opacity-70" />
             </h6>
           </div>
         ))}

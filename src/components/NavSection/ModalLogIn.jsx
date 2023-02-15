@@ -4,12 +4,18 @@ import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 import ModalBase from '~/components/Base/ModalBase';
 import { supabase } from '~/supabase';
 import { useAuth } from '~/contexts/authContext';
+import { useResponsive } from '~/hooks';
 
 const ModalLogIn = () => {
   const { showModelLogIn, handleHideModelLogIn } = useAuth();
+  const { isMobile } = useResponsive();
   return (
     <ModalBase visible={showModelLogIn} onClose={handleHideModelLogIn}>
-      <div className="relative w-[450px] bg-[#181818] px-12 py-[40px] rounded-2xl z-2 transition-all float-border">
+      <div
+        className={`relative bg-[#181818] rounded-2xl z-2 transition-all float-border ${
+          !isMobile ? 'w-[450px] px-12 py-[40px]' : 'w-[380px] px-8 py-[32px]'
+        }`}
+      >
         <Auth
           supabaseClient={supabase}
           appearance={{ theme: ThemeSupa }}

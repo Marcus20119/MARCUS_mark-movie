@@ -2,8 +2,8 @@ import { Fragment } from 'react';
 import { withErrorBoundary } from 'react-error-boundary';
 
 import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
-import { MainSection } from '~/components/MainSection';
-import { SearchSection } from '~/components/SearchSection';
+import { MainSection } from '~/components/Home/MainSection';
+import { SearchSection } from '~/components/Home/SearchSection';
 import { api } from '~/utils';
 import { useChangeTitleWebsite, useResponsive, useScrollOnTop } from '~/hooks';
 

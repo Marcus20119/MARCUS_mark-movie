@@ -27,7 +27,7 @@ const ProgressiveImg = ({
     <img
       src={imgSrc}
       alt={alt || ''}
-      className={`progressiveImg ${
+      className={`progressiveImg imgMobile ${
         resetClassName
           ? ''
           : 'absolute inset-0 block w-full h-full object-cover object-center'

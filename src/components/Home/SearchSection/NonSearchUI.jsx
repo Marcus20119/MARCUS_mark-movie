@@ -12,7 +12,7 @@ import { api } from '~/utils';
 import { useMySWR } from '~/hooks';
 import { useFetchAllTable } from '~/supabase';
 import { useAuth } from '~/contexts/authContext';
-import LoadingSkeleton from '../Base/Loading/Skeleton';
+import LoadingSkeleton from '../../Base/Loading/Skeleton';
 
 const NonSearchUI = ({ type }) => {
   const apiPopular = api.getPopular(type, 1);

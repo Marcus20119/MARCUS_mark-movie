@@ -1,6 +1,7 @@
 import { memo, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
+import { useResponsive } from '~/hooks';
 
 // create div tag
 function createPortalWrapper() {
@@ -24,6 +25,9 @@ const PortalWrapper = ({
   useEffect(() => {
     document.body.appendChild(portalWrapperEle);
   }, []);
+
+  const { isMobile } = useResponsive();
+
   const renderContent = (
     <div className={containerClassName} style={containerStyle}>
       {overlay && (
@@ -35,7 +39,7 @@ const PortalWrapper = ({
       <div className={bodyClassName} style={bodyStyle}>
         {children}
       </div>
-      {displayCloseButton && (
+      {!isMobile && displayCloseButton && (
         <i
           className="close-button bx bx-x absolute top-[5%] right-[5%] z-[666] cursor-pointer text-white text-4xl"
           onClick={onClose}

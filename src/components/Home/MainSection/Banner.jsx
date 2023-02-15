@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withErrorBoundary } from 'react-error-boundary';
 
 import './Banner.scss';
-import { useMySWR } from '~/hooks';
+import { useMySWR, useResponsive } from '~/hooks';
 import { ButtonPlay, ButtonPlus } from '~/components/Button';
 import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 import LoadingSkeleton from '~/components/Base/Loading/Skeleton';
@@ -11,7 +11,8 @@ import { api, genres, neededSignInAlert, route } from '~/utils';
 import { MovieTagList, LoadingMovieTagList } from '~/components/CardAndList';
 import PlusDropDownBanner from './PlusDropDownBanner';
 import { useAuth } from '~/contexts/authContext';
-import ProgressiveImg from '../Base/ProgressiveImg';
+import ProgressiveImg from '../../Base/ProgressiveImg';
+import { Fragment } from 'react';
 
 function Banner({ apiLink, type }) {
   const { myData: movies, isLoading: moviesLoading } = useMySWR({
@@ -33,8 +34,14 @@ function Banner({ apiLink, type }) {
 
   const { session, handleShowModelLogIn } = useAuth();
 
+  const { isMobile } = useResponsive();
+
   return (
-    <div className="banner w-full h-[350px] my-4 rounded-xl overflow-hidden shadow-[0_50px_100px_rgb(255,_61,_113,_0.1)]">
+    <div
+      className={`banner w-full my-4 rounded-xl overflow-hidden shadow-[0_50px_100px_rgb(255,_61,_113,_0.1)] ${
+        !isMobile ? 'h-[350px]' : 'h-[210px] imgMobile'
+      }`}
+    >
       {!moviesLoading && movies && movies.length > 0 && (
         <Carousel
           fade
@@ -64,11 +71,13 @@ function Banner({ apiLink, type }) {
                 <h3 className="carousel-caption__name line-clamp-1">
                   {movie.title || movie.name}
                 </h3>
-                <MovieTagList
-                  movieData={movie}
-                  genresData={neededGenres}
-                  category={type}
-                />
+                {!isMobile && (
+                  <MovieTagList
+                    movieData={movie}
+                    genresData={neededGenres}
+                    category={type}
+                  />
+                )}
                 <div className="carousel-caption__wrap-btn">
                   <ButtonPlay
                     message="Watch"
@@ -77,17 +86,23 @@ function Banner({ apiLink, type }) {
                     isLink={true}
                     path={route.toDetail(type, movie.id)}
                   />
-                  {session?.user?.id ? (
-                    <div className="group relative">
-                      <ButtonPlus padding={14} iconSize={24} />
-                      <PlusDropDownBanner movieData={movie} type={type} />
-                    </div>
-                  ) : (
-                    <ButtonPlus
-                      padding={14}
-                      iconSize={24}
-                      onClick={() => neededSignInAlert(handleShowModelLogIn)}
-                    />
+                  {!isMobile && (
+                    <Fragment>
+                      {session?.user?.id ? (
+                        <div className="group relative">
+                          <ButtonPlus padding={14} iconSize={24} />
+                          <PlusDropDownBanner movieData={movie} type={type} />
+                        </div>
+                      ) : (
+                        <ButtonPlus
+                          padding={14}
+                          iconSize={24}
+                          onClick={() =>
+                            neededSignInAlert(handleShowModelLogIn)
+                          }
+                        />
+                      )}
+                    </Fragment>
                   )}
                 </div>
               </Carousel.Caption>
@@ -98,9 +113,21 @@ function Banner({ apiLink, type }) {
       {(moviesLoading || movies.length === 0) && (
         <div className="relative w-full h-full text-transparent bg-transparent">
           <LoadingSkeleton className="absolute inset-0 opacity-30" />
-          <div className="absolute left-[2.5rem] bottom-[0.5rem] py-[20px] flex flex-col">
-            <LoadingSkeleton className="w-[300px] h-[57.6px] mb-[12px] rounded-lg opacity-70" />
-            <LoadingMovieTagList />
+          <div
+            className={`absolute py-[20px] flex flex-col ${
+              !isMobile
+                ? 'left-[2.5rem] bottom-[0.5rem]'
+                : 'left-[1rem] bottom-0'
+            }`}
+          >
+            <LoadingSkeleton
+              className={`rounded-lg opacity-70 ${
+                !isMobile
+                  ? 'w-[300px] h-[48px] mb-[16.8px] mt-[4.8px]'
+                  : 'w-[200px] h-[24px] mb-[14.4px] mt-[2.4px]'
+              }`}
+            />
+            {!isMobile && <LoadingMovieTagList />}
             <div className="carousel-caption__wrap-btn">
               <ButtonPlay
                 message="Watch"
@@ -108,7 +135,9 @@ function Banner({ apiLink, type }) {
                 className="tracking-[0.15rem]"
                 disabled={true}
               />
-              <ButtonPlus padding={14} iconSize={24} disabled={true} />
+              {!isMobile && (
+                <ButtonPlus padding={14} iconSize={24} disabled={true} />
+              )}
             </div>
           </div>
         </div>

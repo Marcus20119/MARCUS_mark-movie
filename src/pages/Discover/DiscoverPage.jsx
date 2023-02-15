@@ -7,6 +7,7 @@ import {
   useChangeTitleWebsite,
   useMySWR,
   usePaginate,
+  useResponsive,
   useScrollOnTop,
 } from '~/hooks';
 import { api } from '~/utils';
@@ -29,8 +30,14 @@ const DiscoverPage = () => {
   const { currentPage, setCurrentPage, handlePageClick } =
     usePaginate(location);
 
+  const { isMobile } = useResponsive();
+
   return (
-    <div className="flex flex-col w-full min-h-screen items-start gap-[28px] !bg-mainSection p-[40px]">
+    <div
+      className={`flex flex-col w-full min-h-screen items-start gap-[28px] !bg-mainSection ${
+        !isMobile ? 'p-[40px]' : 'p-[16px] mb-3'
+      }`}
+    >
       <FilterBar
         paramData={paramData}
         currentPage={currentPage}

@@ -3,8 +3,8 @@ import { withErrorBoundary } from 'react-error-boundary';
 
 import { api } from '~/utils';
 import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
-import { MainSection } from '~/components/MainSection';
-import { SearchSection } from '~/components/SearchSection';
+import { MainSection } from '~/components/Home/MainSection';
+import { SearchSection } from '~/components/Home/SearchSection';
 import { useChangeTitleWebsite, useResponsive, useScrollOnTop } from '~/hooks';
 
 const MoviesHomePage = () => {

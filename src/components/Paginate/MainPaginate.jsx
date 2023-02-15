@@ -1,7 +1,7 @@
 import ReactPaginate from 'react-paginate';
 import PropTypes from 'prop-types';
 import './MainPaginate.scss';
-import { useForceRerender } from '~/hooks';
+import { useForceRerender, useResponsive } from '~/hooks';
 
 const MainPaginate = ({ handlePageClick, totalPage, currentPage }) => {
   useForceRerender([currentPage]);
@@ -11,14 +11,17 @@ const MainPaginate = ({ handlePageClick, totalPage, currentPage }) => {
   const nextElement = (
     <i className="bx bx-chevron-right inline-flex items-center justify-center mt-[1px] !text-lg"></i>
   );
+
+  const { isMobile } = useResponsive();
+
   return (
     <div className="flex w-full justify-center items-center">
       <ReactPaginate
         breakLabel="..."
         nextLabel={nextElement}
         onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
-        marginPagesDisplayed={1}
+        pageRangeDisplayed={!isMobile ? 5 : 3}
+        marginPagesDisplayed={!isMobile ? 1 : 0}
         pageCount={totalPage <= 99 ? totalPage : 99}
         previousLabel={prevElement}
         // initialPage={currentPage - 1}

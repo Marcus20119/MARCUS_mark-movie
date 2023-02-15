@@ -18,7 +18,7 @@ const ToolTipBase = ({
   const [show, setShow] = useState(false);
   const [coords, setCoords] = useState({});
   const handleMouseEnter = e => {
-    setCoords(e.target.getBoundingClientRect());
+    setCoords(e.currentTarget.getBoundingClientRect());
     setShow(true);
   };
   const handleMouseLeave = e => {
@@ -107,9 +107,37 @@ const ToolTipBase = ({
             displayCloseButton={false}
           >
             {tipMessage}
-            {position === 'right' && (
-              <div className="absolute left-0 top-2/4 -translate-y-2/4 -translate-x-[6px] border-[10px] border-b-[#D0D0D0] border-l-[#D0D0D0] border-t-transparent border-r-transparent rounded-[4px] rotate-45"></div>
-            )}
+
+            <div className="absolute left-0 top-2/4 -translate-y-2/4 -translate-x-[6px] border-[10px] border-b-[#D0D0D0] border-l-[#D0D0D0] border-t-transparent border-r-transparent rounded-[4px] rotate-45"></div>
+          </PortalWrapper>
+        </CSSTransition>
+      )}
+      {position === 'left' && (
+        <CSSTransition in={show} timeout={200} classNames="fade" unmountOnExit>
+          <PortalWrapper
+            containerClassName="z-[777]"
+            bodyClassName={`w-fit whitespace-nowrap content absolute inline-block text-center z-[777] ${tipClassName}`}
+            bodyStyle={{
+              maxWidth: '300px',
+              top:
+                coords.top +
+                coords.height / 2 +
+                window.scrollY -
+                moveUp +
+                moveDown,
+              left:
+                coords.left +
+                15 -
+                coords.width +
+                window.scrollX -
+                moveLeft +
+                moveRight,
+              transform: 'translate(-100%, -50%)',
+            }}
+            displayCloseButton={false}
+          >
+            {tipMessage}
+            <div className="absolute right-0 top-2/4 -translate-y-2/4 translate-x-[6px] border-[10px] border-t-[#D0D0D0] border-r-[#D0D0D0] border-b-transparent border-l-transparent rounded-[4px] rotate-45"></div>
           </PortalWrapper>
         </CSSTransition>
       )}

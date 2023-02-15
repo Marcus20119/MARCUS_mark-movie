@@ -6,7 +6,6 @@ import { useForceRerender, useResponsive } from '~/hooks';
 import { navSection, neededSignInAlert } from '~/utils';
 import ToolTipBase from '../Base/ToolTipBase';
 import { ButtonPrimary } from '../Button';
-import ModalLogIn from './ModalLogIn';
 import './NavSection.scss';
 const NavSection = ({ isHomePage = false }) => {
   const navigateTo = useNavigate();
@@ -177,7 +176,6 @@ const NavSection = ({ isHomePage = false }) => {
           </div>
         )}
       </div>
-      <ModalLogIn />
     </Fragment>
   );
 };
