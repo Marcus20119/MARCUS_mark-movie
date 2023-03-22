@@ -21,6 +21,7 @@ const MovieCardY = ({ movieData, type }) => {
             src={api.getPoster(poster_path, 'w342')}
             placeholderSrc={api.getPoster(poster_path, 'w92')}
             alt={poster_path}
+            skeleton={false}
           />
         ) : (
           <img

@@ -52,6 +52,7 @@ const MovieCardX = ({ movieData, type, isSearch }) => {
                 src={api.getPoster(movieData.poster_path, 'w342')}
                 placeholderSrc={api.getPoster(movieData.poster_path, 'w92')}
                 alt={movieData.poster_path}
+                skeleton={false}
               />
             ) : (
               <img

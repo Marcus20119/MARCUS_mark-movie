@@ -79,6 +79,7 @@ const DetailPosterMovieSection = ({ movieData }) => {
                 !isMobile ? 'min-h-[365px]' : 'min-h-[300px]'
               }`}
               resetClassName={true}
+              skeleton={false}
             />
           ) : (
             <img

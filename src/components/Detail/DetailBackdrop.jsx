@@ -27,7 +27,7 @@ const DetailBackdrop = ({ movieData }) => {
   return (
     <div
       className={`absolute top-0 left-0 z-[1] w-full overflow-hidden ${
-        !isMobile ? 'h-[500px]' : 'h-[300px]'
+        !isMobile ? 'h-[500px]' : 'h-[350px]'
       }`}
     >
       {movieData && (movieData.title || movieData.name) && (
@@ -38,6 +38,7 @@ const DetailBackdrop = ({ movieData }) => {
               placeholderSrc={api.getBackdrop(movieData.backdrop_path, 'w300')}
               alt={movieData.backdrop_path}
               resetClassName={true}
+              skeleton={false}
               className="absolute top-0 left-0 z-[1] block w-full h-full object-cover object-top backdrop-blur-3xl"
             />
           ) : (
@@ -49,7 +50,7 @@ const DetailBackdrop = ({ movieData }) => {
           )}
           <div
             className={`absolute top-0 left-0 z-[2] block w-full object-top bg-center bg-cover bg-no-repeat ${
-              !isMobile ? 'h-[500px]' : 'h-[300px]'
+              !isMobile ? 'h-[500px]' : 'h-[350px]'
             }`}
             style={{
               background: `linear-gradient(

@@ -45,7 +45,7 @@ const CommunityStatus = ({ status, likesTable, loadingLikesTable }) => {
 };
 
 CommunityStatus.propTypes = {
-  status: PropTypes.string,
+  status: PropTypes.object,
   likesTable: PropTypes.array,
   loadingLikesTable: PropTypes.bool,
 };

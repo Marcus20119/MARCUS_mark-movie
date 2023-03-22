@@ -58,6 +58,7 @@ function Banner({ apiLink, type }) {
                   src={api.getPoster(movie.backdrop_path, 'original')}
                   placeholderSrc={api.getPoster(movie.backdrop_path, 'w300')}
                   alt={movie.backdrop_path}
+                  skeleton={false}
                 />
               ) : (
                 <img

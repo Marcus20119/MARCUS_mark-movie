@@ -113,6 +113,7 @@ const DetailCelebInfoSection = ({ personData }) => {
             placeholderSrc={api.getPoster(personData.profile_path, 'w45')}
             alt={personData.profile_path}
             resetClassName={true}
+            skeleton={false}
             className="block w-full h-full object-cover object-center rounded-md"
           />
         ) : (

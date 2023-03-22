@@ -55,7 +55,7 @@ const MovieDetailPage = () => {
           <DetailBackdrop movieData={movieData} />
           <div
             className={`absolute right-0 left-0 z-10 ${
-              isLaptop ? 'top-[250px]' : 'top-[150px]'
+              isLaptop ? 'top-[250px]' : 'top-[100px]'
             }`}
           >
             <div
@@ -85,7 +85,7 @@ const MovieDetailPage = () => {
           <LoadingBackdrop />
           <div
             className={`absolute right-0 left-0 z-10 ${
-              isLaptop ? 'top-[250px]' : 'top-[150px]'
+              isLaptop ? 'top-[250px]' : 'top-[100px]'
             }`}
           >
             <div

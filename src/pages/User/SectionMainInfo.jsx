@@ -69,7 +69,8 @@ const SectionMainInfo = ({
                         <ToolTipBase
                           tipMessage="See more"
                           position="bottom"
-                          moveUp={4}
+                          moveUp={20}
+                          moveLeft={16}
                         >
                           <div className="absolute inset-0 flex justify-center items-center bg-[rgba(0,0,0,0.4)] z-10">
                             <i className="bx bx-dots-horizontal-rounded text-white"></i>

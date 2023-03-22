@@ -45,6 +45,7 @@ const FavoritePart = ({ type }) => {
                     placeholderSrc={api.getPoster(filmData.poster_path, 'w92')}
                     alt={filmData.poster_path}
                     resetClassName={true}
+                    skeleton={false}
                     className="h-full w-full object-cover"
                   />
                 ) : (

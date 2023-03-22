@@ -29,8 +29,6 @@ const TVWatchPage = lazy(() => import('./pages/TV/TVWatchPage'));
 const TVTypePage = lazy(() => import('./pages/TV/TVTypePage'));
 const TVSearchPage = lazy(() => import('./pages/TV/TVSearchPage'));
 
-const TestPage = lazy(() => import('./pages/TestPage'));
-
 function App() {
   return (
     <Fragment>
@@ -69,8 +67,6 @@ function App() {
               <Route path=":type" element={<TVTypePage />} />
               <Route path="search" element={<TVSearchPage />} />
             </Route>
-
-            <Route path="test" element={<TestPage />} />
           </Route>
 
           <Route path="settings" element={<SorryPage />} />
