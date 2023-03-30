@@ -18,8 +18,14 @@ Overall, the website appears to be a user-friendly platform for movie enthusiast
 ## Technologies Used
 ### `Front End`
 
-#### <div style="display:inline-flex;align-items:center;gap:8px"><img src="https://drive.google.com/uc?export=view&id=1M-Wm7qhXE8zOR_gQFEr-jABxP44r00k4" alt="HTML5" style="transform:translateY(5px);display:inline-block;width:20px;"></img><span>  HTML5</span></div>
-#### <div style="display:inline-flex;align-items:center;gap:8px"><img src="https://drive.google.com/uc?export=view&id=1dlAQsejX3TYzp19WXNTPNpj9ja3_Jr2k" alt="HTML5" style="transform:translateY(5px);display:inline-block;width:20px;"></img><span>  CSS3</span></div>
- Reactjs
+- <img src="https://drive.google.com/uc?export=view&id=1M-Wm7qhXE8zOR_gQFEr-jABxP44r00k4" alt="HTML5" style="width:14px;"/>  HTML5
+- <img src="https://drive.google.com/uc?export=view&id=1dlAQsejX3TYzp19WXNTPNpj9ja3_Jr2k" alt="CSS3" style="width:14px;"/>  CSS3
+- <img src="https://drive.google.com/uc?export=view&id=1XraSgHfNGpaHGDHTFnvUZz07TsbkL471" alt="JS" style="width:14px;"/>  Javascript
+- <img src="https://drive.google.com/uc?export=view&id=1u7yNCZalHaA-sjeZ8NAMwkHGRPI7S22o" alt="React" style="width:14px;"/>  Reactjs
+  - react-router-dom
   - react-error-boundary
+  - react-paginate
+  - react-responsive
+- <img src="https://drive.google.com/uc?export=view&id=1dlAQsejX3TYzp19WXNTPNpj9ja3_Jr2k" alt="HTML5" style="width:14px;"/>  CSS3
+
   
