@@ -113,7 +113,10 @@ const NavSectionMobile = () => {
                 </Link>
               ) : (
                 <ButtonPrimary
-                  onClick={handleShowModelLogIn}
+                  onClick={() => {
+                    handleShowModelLogIn();
+                    setShow(false);
+                  }}
                   className="text-lg"
                 >
                   Sign In
