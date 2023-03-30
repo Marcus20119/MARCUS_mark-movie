@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { api, route } from '~/utils';
-import ProgressiveImg from '../Base/ProgressiveImg';
+import { ProgressiveImgCustom } from '../Base/ProgressiveImg';
 import { useResponsive } from '~/hooks';
 
 const PersonCard = ({ personData, children, alternativeId }) => {
@@ -17,7 +17,7 @@ const PersonCard = ({ personData, children, alternativeId }) => {
         }`}
       >
         {personData?.profile_path ? (
-          <ProgressiveImg
+          <ProgressiveImgCustom
             src={api.getPoster(personData.profile_path, 'h632')}
             placeholderSrc={api.getPoster(personData.profile_path, 'w45')}
             alt={personData.profile_path}

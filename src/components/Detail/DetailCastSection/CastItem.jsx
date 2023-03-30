@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { api, route } from '~/utils';
-import ProgressiveImg from '~/components/Base/ProgressiveImg';
+import { ProgressiveImgCustom } from '~/components/Base/ProgressiveImg';
 
 const CastItem = ({ castData }) => {
   return (
@@ -15,7 +15,7 @@ const CastItem = ({ castData }) => {
               className="relative block w-full pt-[100%] h-0 rounded-full overflow-hidden"
             >
               {castData?.profile_path ? (
-                <ProgressiveImg
+                <ProgressiveImgCustom
                   src={api.getPoster(castData.profile_path, 'h632')}
                   placeholderSrc={api.getPoster(castData.profile_path, 'w45')}
                   alt={castData.original_name}

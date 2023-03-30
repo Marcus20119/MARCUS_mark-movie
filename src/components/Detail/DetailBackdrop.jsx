@@ -6,7 +6,7 @@ import queryString from 'query-string';
 
 import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 import { api } from '~/utils';
-import ProgressiveImg from '../Base/ProgressiveImg';
+import { ProgressiveImgCustom } from '../Base/ProgressiveImg';
 import { SuggestionSearchBar } from '../Bar';
 import { useResponsive } from '~/hooks';
 
@@ -33,7 +33,7 @@ const DetailBackdrop = ({ movieData }) => {
       {movieData && (movieData.title || movieData.name) && (
         <Fragment>
           {movieData?.backdrop_path ? (
-            <ProgressiveImg
+            <ProgressiveImgCustom
               src={api.getBackdrop(movieData.backdrop_path, 'original')}
               placeholderSrc={api.getBackdrop(movieData.backdrop_path, 'w300')}
               alt={movieData.backdrop_path}

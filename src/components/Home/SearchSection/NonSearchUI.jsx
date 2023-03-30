@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { withErrorBoundary } from 'react-error-boundary';
-import { Fragment } from 'react';
+import { Fragment, memo } from 'react';
 
 import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
 import { ButtonPlay } from '~/components/Button';
@@ -140,6 +140,6 @@ NonSearchUI.propTypes = {
   type: PropTypes.oneOf(['movie', 'tv']).isRequired,
 };
 
-export default withErrorBoundary(NonSearchUI, {
+export default withErrorBoundary(memo(NonSearchUI), {
   FallbackComponent: ErrorFallBack,
 });

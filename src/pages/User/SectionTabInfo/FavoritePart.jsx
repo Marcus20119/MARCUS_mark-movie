@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import LoadingSkeleton from '~/components/Base/Loading/Skeleton';
-import ProgressiveImg from '~/components/Base/ProgressiveImg';
+import { ProgressiveImgCustom } from '~/components/Base/ProgressiveImg';
 import { useAuth } from '~/contexts/authContext';
 import { useFetchAllTable } from '~/supabase';
 import { api, route } from '~/utils';
@@ -40,7 +40,7 @@ const FavoritePart = ({ type }) => {
                 className="group relative overflow-hidden"
               >
                 {filmData?.poster_path ? (
-                  <ProgressiveImg
+                  <ProgressiveImgCustom
                     src={api.getPoster(filmData.poster_path, 'w500')}
                     placeholderSrc={api.getPoster(filmData.poster_path, 'w92')}
                     alt={filmData.poster_path}

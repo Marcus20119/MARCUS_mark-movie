@@ -1,13 +1,13 @@
-.progressiveImg-loading {
+.ProgressiveImgCustom-loading {
   filter: blur(10px);
   clip-path: inset(0);
 }
 
-.progressiveImg-loaded {
+.ProgressiveImgCustom-loaded {
   filter: blur(0px);
   transition: filter 0.5s linear;
 }
-.progressiveImg-overlay {
+.ProgressiveImgCustom-overlay {
   background: linear-gradient(
       180deg,
       black 0%,
@@ -58,4 +58,14 @@
       rgba(0, 0, 0, 0.9) 99%,
       black 100%
     );
+}
+.progressiveImgOriginal-loading {
+  filter: blur(10px);
+  clip-path: inset(0);
+  // background-color: #222;
+}
+
+.progressiveImgOriginal-loaded {
+  filter: blur(0px);
+  transition: filter 0.5s linear;
 }

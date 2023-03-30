@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { useResponsive } from '~/hooks';
 import { api, route } from '~/utils';
-import ProgressiveImg from '../Base/ProgressiveImg';
+import { ProgressiveImgCustom } from '../Base/ProgressiveImg';
 
 const WatchRecommendList = ({ recommendList }) => {
   const { isTablet } = useResponsive();
@@ -18,7 +18,7 @@ const WatchRecommendList = ({ recommendList }) => {
           <div className="w-[30%]">
             <div className="relative w-full h-0 pt-[140%] rounded-md overflow-hidden">
               {movieData.poster_path ? (
-                <ProgressiveImg
+                <ProgressiveImgCustom
                   src={api.getPoster(movieData.poster_path, 'w500')}
                   placeholderSrc={api.getPoster(movieData.poster_path, 'w92')}
                   alt={movieData.poster_path}

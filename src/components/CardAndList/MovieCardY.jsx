@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
 import { api, route } from '~/utils';
-import ProgressiveImg from '../Base/ProgressiveImg';
+import {
+  ProgressiveImgCustom,
+  ProgressiveImgOriginal,
+} from '../Base/ProgressiveImg';
 import { ButtonPlay } from '../Button';
 
 const MovieCardY = ({ movieData, type }) => {
@@ -17,11 +20,10 @@ const MovieCardY = ({ movieData, type }) => {
     <div className="flex flex-col gap-[10px] w-full p-[10px] rounded-xl bg-[rgba(255,_255,_255,_0.08)] text-white">
       <div className="relative w-full pt-full bg-transparent rounded-lg overflow-hidden">
         {poster_path ? (
-          <ProgressiveImg
+          <ProgressiveImgOriginal
             src={api.getPoster(poster_path, 'w342')}
             placeholderSrc={api.getPoster(poster_path, 'w92')}
             alt={poster_path}
-            skeleton={false}
           />
         ) : (
           <img

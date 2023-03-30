@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import { useResponsive } from '~/hooks';
 import { api, route } from '~/utils';
-import ProgressiveImg from '../Base/ProgressiveImg';
+import { ProgressiveImgCustom } from '../Base/ProgressiveImg';
 
 const FilmCard = ({ type, filmData, alternativeId, children }) => {
   const { isLaptop } = useResponsive();
@@ -17,7 +17,7 @@ const FilmCard = ({ type, filmData, alternativeId, children }) => {
         }`}
       >
         {filmData?.poster_path ? (
-          <ProgressiveImg
+          <ProgressiveImgCustom
             src={api.getPoster(filmData.poster_path, 'w500')}
             placeholderSrc={api.getPoster(filmData.poster_path, 'w92')}
             alt={filmData.poster_path}

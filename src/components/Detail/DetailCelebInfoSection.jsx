@@ -17,7 +17,7 @@ import ToolTipBase from '../Base/ToolTipBase';
 import { useAuth } from '~/contexts/authContext';
 import { supabase, useFetchSingleRow } from '~/supabase';
 import { useUser } from '~/contexts/userContext';
-import ProgressiveImg from '../Base/ProgressiveImg';
+import { ProgressiveImgCustom } from '../Base/ProgressiveImg';
 import { useResponsive } from '~/hooks';
 
 const DetailCelebInfoSection = ({ personData }) => {
@@ -108,7 +108,7 @@ const DetailCelebInfoSection = ({ personData }) => {
         } ${isTablet && ''} ${isMobile && 'w-[70%] mx-auto'}`}
       >
         {personData?.profile_path ? (
-          <ProgressiveImg
+          <ProgressiveImgCustom
             src={api.getPoster(personData.profile_path, 'h632')}
             placeholderSrc={api.getPoster(personData.profile_path, 'w45')}
             alt={personData.profile_path}

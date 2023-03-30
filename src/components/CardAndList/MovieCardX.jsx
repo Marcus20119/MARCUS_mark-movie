@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Fragment, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { api, genres, route } from '~/utils';
-import ProgressiveImg from '../Base/ProgressiveImg';
+import { ProgressiveImgOriginal } from '../Base/ProgressiveImg';
 import { MovieTagList } from './MovieTagList';
 
 const MovieCardX = ({ movieData, type, isSearch }) => {
@@ -48,11 +48,10 @@ const MovieCardX = ({ movieData, type, isSearch }) => {
         >
           <div className="relative w-[34%] h-0 pt-[34%] bg-transparent rounded-lg overflow-hidden">
             {movieData.poster_path ? (
-              <ProgressiveImg
+              <ProgressiveImgOriginal
                 src={api.getPoster(movieData.poster_path, 'w342')}
                 placeholderSrc={api.getPoster(movieData.poster_path, 'w92')}
                 alt={movieData.poster_path}
-                skeleton={false}
               />
             ) : (
               <img

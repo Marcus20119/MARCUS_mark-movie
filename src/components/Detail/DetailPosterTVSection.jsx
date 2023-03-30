@@ -5,7 +5,7 @@ import { withErrorBoundary } from 'react-error-boundary';
 import { ButtonPlay } from '~/components/Button';
 import { api } from '~/utils';
 import ErrorFallBack from '~/components/Base/ErrorFallBack/ErrorFallBack';
-import ProgressiveImg from '../Base/ProgressiveImg';
+import { ProgressiveImgCustom } from '../Base/ProgressiveImg';
 import ModalBase from '../Base/ModalBase';
 import { useModal, useResponsive } from '~/hooks';
 import DetailSeasonSection from './DetailSeasonSection';
@@ -28,7 +28,7 @@ const DetailPosterTVSection = ({ movieData }) => {
           } ${isMobile && 'w-[60%]'}`}
         >
           {movieData?.poster_path ? (
-            <ProgressiveImg
+            <ProgressiveImgCustom
               src={api.getPoster(movieData.poster_path, 'w500')}
               placeholderSrc={api.getPoster(movieData.poster_path, 'w92')}
               alt={movieData.poster_path}

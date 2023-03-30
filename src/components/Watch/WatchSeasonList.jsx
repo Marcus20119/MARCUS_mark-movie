@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import queryString from 'query-string';
 import { useMySWR } from '~/hooks';
 import { api } from '~/utils';
-import ProgressiveImg from '../Base/ProgressiveImg';
+import { ProgressiveImgCustom } from '../Base/ProgressiveImg';
 import WatchEpisode from './WatchEpisode';
 
 const WatchSeasonList = ({ seasonNumber, seriesId, seasonRef }) => {
@@ -47,7 +47,7 @@ const WatchSeasonList = ({ seasonNumber, seriesId, seasonRef }) => {
             <div className="w-[30%]">
               <div className="relative w-full h-0 pt-[140%] rounded-md overflow-hidden">
                 {myData.poster_path ? (
-                  <ProgressiveImg
+                  <ProgressiveImgCustom
                     src={api.getPoster(myData.poster_path, 'w500')}
                     placeholderSrc={api.getPoster(myData.poster_path, 'w92')}
                     alt={myData.poster_path}

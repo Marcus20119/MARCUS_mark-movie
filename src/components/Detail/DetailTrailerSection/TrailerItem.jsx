@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import ModalBase from '~/components/Base/ModalBase';
 import { api } from '~/utils';
 import { useModal, useResponsive } from '~/hooks';
-import ProgressiveImg from '~/components/Base/ProgressiveImg';
+import { ProgressiveImgCustom } from '~/components/Base/ProgressiveImg';
 
 const TrailerItem = ({ keyId, index }) => {
   const { show, handleShow, handleHide } = useModal();
@@ -18,7 +18,7 @@ const TrailerItem = ({ keyId, index }) => {
           className="group relative w-full h-0 pt-[60%] overflow-hidden border-[2px] rounded-sm border-solid border-[#222222] hover:border-[var(--primary-color)] cursor-pointer"
           onClick={handleShow}
         >
-          <ProgressiveImg
+          <ProgressiveImgCustom
             src={api.getThumbnail(keyId, 'hqdefault')}
             placeholderSrc={api.getThumbnail(keyId, 'default')}
             alt={`thumbnailKey${index}`}

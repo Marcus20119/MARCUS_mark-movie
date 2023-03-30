@@ -18,12 +18,14 @@ const AuthProvider = props => {
   const [session, setSession] = useState({});
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
+    supabase.auth.getSession().then(({ data: { session: authSession } }) => {
+      setSession(authSession);
     });
 
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
+    supabase.auth.onAuthStateChange((_event, authSession) => {
+      if (authSession.access_token !== session.access_token) {
+        setSession(authSession);
+      }
       handleHideModelLogIn();
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps

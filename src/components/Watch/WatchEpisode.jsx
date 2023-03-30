@@ -2,7 +2,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import queryString from 'query-string';
 import { api } from '~/utils';
-import ProgressiveImg from '../Base/ProgressiveImg';
+import { ProgressiveImgCustom } from '../Base/ProgressiveImg';
 
 const WatchEpisode = ({
   seriesId,
@@ -33,7 +33,7 @@ const WatchEpisode = ({
       <div className="w-[30%]">
         <div className="relative w-full h-0 pt-[70%] rounded-md overflow-hidden">
           {episodeData.still_path ? (
-            <ProgressiveImg
+            <ProgressiveImgCustom
               src={api.getBackdrop(episodeData.still_path, 'w185')}
               placeholderSrc={api.getBackdrop(episodeData.still_path, 'w92')}
               alt={episodeData.still_path}

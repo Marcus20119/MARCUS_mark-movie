@@ -11,7 +11,7 @@ import { api, genres, neededSignInAlert, route } from '~/utils';
 import { MovieTagList, LoadingMovieTagList } from '~/components/CardAndList';
 import PlusDropDownBanner from './PlusDropDownBanner';
 import { useAuth } from '~/contexts/authContext';
-import ProgressiveImg from '../../Base/ProgressiveImg';
+import { ProgressiveImgOriginal } from '../../Base/ProgressiveImg';
 import { Fragment } from 'react';
 
 function Banner({ apiLink, type }) {
@@ -53,12 +53,11 @@ function Banner({ apiLink, type }) {
           {movies.map(movie => (
             <Carousel.Item key={`banner${movie.id}`}>
               {movie?.backdrop_path ? (
-                <ProgressiveImg
+                <ProgressiveImgOriginal
                   className="carousel-item__img"
                   src={api.getPoster(movie.backdrop_path, 'original')}
                   placeholderSrc={api.getPoster(movie.backdrop_path, 'w300')}
                   alt={movie.backdrop_path}
-                  skeleton={false}
                 />
               ) : (
                 <img
