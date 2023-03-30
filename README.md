@@ -17,11 +17,9 @@ Overall, the website appears to be a user-friendly platform for movie enthusiast
 
 ## Technologies Used
 ### `Front End`
-###
-<div style="display:inline-flex;align-items:center;gap:4px">
-  <img src="https://drive.google.com/uc?export=view&id=1dlAQsejX3TYzp19WXNTPNpj9ja3_Jr2k" alt="HTML5" style="transform:translateY(5px);display:inline-block;width:20px;"></img>
-  <span>HTML5</span>
-</div>
+
+#### <div style="display:inline-flex;align-items:center;gap:8px"><img src="https://drive.google.com/uc?export=view&id=1M-Wm7qhXE8zOR_gQFEr-jABxP44r00k4" alt="HTML5" style="transform:translateY(5px);display:inline-block;width:20px;"></img><span>  HTML5</span></div>
+#### <div style="display:inline-flex;align-items:center;gap:8px"><img src="https://drive.google.com/uc?export=view&id=1dlAQsejX3TYzp19WXNTPNpj9ja3_Jr2k" alt="HTML5" style="transform:translateY(5px);display:inline-block;width:20px;"></img><span>  CSS3</span></div>
  Reactjs
   - react-error-boundary
   
