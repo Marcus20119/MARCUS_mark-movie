@@ -10,7 +10,7 @@ const SearchList = ({
   cardStyle = '',
   loading = false,
 }) => {
-  const { isMobile, isTablet, isLaptop } = useResponsive();
+  const { isTablet, isLaptop } = useResponsive();
   const numberOfCol = isLaptop ? 5 : isTablet ? 3 : 2;
 
   return (

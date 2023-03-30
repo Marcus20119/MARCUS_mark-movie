@@ -25,7 +25,7 @@ const TVSeriesHomePage = () => {
     },
   ];
 
-  const { isTablet, isLaptop } = useResponsive();
+  const { isLaptop } = useResponsive();
 
   return (
     <Fragment>

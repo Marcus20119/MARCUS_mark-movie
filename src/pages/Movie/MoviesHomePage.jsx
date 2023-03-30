@@ -25,7 +25,7 @@ const MoviesHomePage = () => {
     },
   ];
 
-  const { isTablet, isLaptop } = useResponsive();
+  const { isLaptop } = useResponsive();
 
   return (
     <Fragment>
