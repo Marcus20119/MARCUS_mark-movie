@@ -1,9 +1,6 @@
 import PropTypes from 'prop-types';
 import { api, route } from '~/utils';
-import {
-  ProgressiveImgCustom,
-  ProgressiveImgOriginal,
-} from '../Base/ProgressiveImg';
+import { ProgressiveImgOriginal } from '../Base/ProgressiveImg';
 import { ButtonPlay } from '../Button';
 
 const MovieCardY = ({ movieData, type }) => {
