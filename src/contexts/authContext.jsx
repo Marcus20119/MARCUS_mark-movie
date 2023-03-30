@@ -23,9 +23,7 @@ const AuthProvider = props => {
     });
 
     supabase.auth.onAuthStateChange((_event, authSession) => {
-      if (authSession.access_token !== session.access_token) {
-        setSession(authSession);
-      }
+      setSession(authSession);
       handleHideModelLogIn();
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
