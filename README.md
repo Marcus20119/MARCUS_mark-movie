@@ -81,7 +81,7 @@ This website actually allows its users to watch movies and series
 
 ### `Responsive Design`
 
-The Mark Movie Block website has a responsive design that adjusts to fit the screen size of the device being used, including desktop computers, tablets, and mobile phones. This feature ensures accessibility and consistency across all devices, making it user-friendly for a wider range of users.
+The Mark Movie website has a responsive design that adjusts to fit the screen size of the device being used, including desktop computers, tablets, and mobile phones. This feature ensures accessibility and consistency across all devices, making it user-friendly for a wider range of users.
 
 ### <img src="https://github.com/Marcus20119/IMAGES/blob/main/mark_movie/mark-movie-responsive.png?raw=true" alt="Explore" style="display:block;border-radius:8px;"></img>
 
