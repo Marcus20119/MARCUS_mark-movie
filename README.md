@@ -40,6 +40,8 @@ Overall, the website appears to be a user-friendly platform for movie enthusiast
 ### `Back End`
 
 - <img src="https://github.com/Marcus20119/IMAGES/blob/main/icons/supabase.png?raw=true" alt="Supabase" style="width:14px;"/> Supabase
+  - Authentication
+  - Storage
 
 ## Great features
 
