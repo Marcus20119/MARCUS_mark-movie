@@ -84,3 +84,8 @@ The Mark Movie Block website has a responsive design that adjusts to fit the scr
 
 ### <img src="https://github.com/Marcus20119/IMAGES/blob/main/mark_movie/mark-movie-responsive.png?raw=true" alt="Explore" style="display:block;border-radius:8px;"></img>
 
+### `Other Features`
+
+- Pagination
+- Swiper + Slider
+- Recent List + Watch List
