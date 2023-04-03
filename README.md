@@ -4,9 +4,9 @@ You can explore this website by yourself [here](https://mark-movie.vercel.app/ho
 
 ## Project Description
 
-This project creates a film website called "Mark Movie" where users can browse and search for movies, view movie details and reviews, and submit their own reviews.
+This project creates a film website called "Mark Movie" where users can browse and search for movies, view movie details and submit their own reviews.
 
-The homepage displays a list of popular movies, and users can navigate to different sections of the site using the navigation bar at the top of the page.
+The homepage displays a list of popular movies, and users can navigate to different sections of the site using the navigation bar at the left of the page.
 
 ### <img src="https://github.com/Marcus20119/IMAGES/blob/main/mark_movie/mark-movie-deploy.png?raw=true" alt="Home page" style="display:block;border-radius:8px;"></img>
 
