@@ -47,11 +47,11 @@ Overall, the website appears to be a user-friendly platform for movie enthusiast
 
 ### `Explore Film by filtering`
 
-By clicking on the "Filter" button, users can select filters such as genre, release year, rating, and language to find movies that meet their specific preferences. The selected filters are then applied to the movie list, displaying only the movies that match the selected criteria. This feature enhances the user experience by making it easier to find and choose a movie to watch, saving time and improving overall satisfaction with the website.
+By clicking on the "Discover" button, users can select filters such as genre, release year, rating, and language to find movies that meet their specific preferences. The selected filters are then applied to the movie list, displaying only the movies that match the selected criteria. This feature enhances the user experience by making it easier to find and choose a movie to watch, saving time and improving overall satisfaction with the website.
 
 ### <img src="https://github.com/Marcus20119/IMAGES/blob/main/mark_movie/mark-movie-filter.gif?raw=true" alt="Explore" style="display:block;border-radius:8px;"></img>
 
-### `Skeleton loading & Progressive image`
+### `Skeleton loading & Progressive image loading`
 
 Mark Movie implements two features to improve user experience: skeleton loading and progressive image loading. Skeleton loading displays a visual representation of the content while the page is loading, providing reassurance to the user. Meanwhile, progressive image loading gradually increases the resolution of images, ensuring quick loading times. Together, these features create a seamless browsing experience.
 
