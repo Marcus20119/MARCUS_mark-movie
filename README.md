@@ -10,7 +10,7 @@ The homepage displays a list of popular movies, and users can navigate to differ
 
 ### <img src="https://github.com/Marcus20119/IMAGES/blob/main/mark_movie/mark-movie-deploy.png?raw=true" alt="Home page" style="display:block;border-radius:8px;"></img>
 
-The movie detail pages include information such as the movie synopsis, cast and crew, and user reviews.
+The movie detail pages include information such as the movie synopsis, cast and crew, and trailers.
 
 ### <img src="https://github.com/Marcus20119/IMAGES/blob/main/mark_movie/mark-movie-detail.png?raw=true" alt="Home page" style="display:block;border-radius:8px;"></img>
 
