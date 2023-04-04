@@ -31,7 +31,6 @@ Overall, the website appears to be a user-friendly platform for movie enthusiast
   - react-share
   - react-toastify
   - react-transition-group
-  - react-hook-form + yup
 - Others
   - sweetalert2
   - swiper
