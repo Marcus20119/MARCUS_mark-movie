@@ -7,16 +7,16 @@ export const api = {
     return `https://image.tmdb.org/t/p/${width}${backdrop_path}`;
   },
   getPopular(type = 'movie', page = 1) {
-    return `https://api.themoviedb.org/3/${type}/popular?api_key=${apiKey}&language=en-US&page=${page}$include_adult=false`;
+    return `https://api.themoviedb.org/3/${type}/popular?api_key=${apiKey}&language=en-US&page=${page}&include_adult=true`;
   },
   getTopRated(type = 'movie', page = 1) {
-    return `https://api.themoviedb.org/3/${type}/top_rated?api_key=${apiKey}&language=en-US&page=${page}$include_adult=false`;
+    return `https://api.themoviedb.org/3/${type}/top_rated?api_key=${apiKey}&language=en-US&page=${page}&include_adult=true`;
   },
   getSearch(query = '', type = 'movie', page = 1) {
-    return `https://api.themoviedb.org/3/search/${type}?api_key=${apiKey}&language=en-US&query=${query}&page=${page}$include_adult=false`;
+    return `https://api.themoviedb.org/3/search/${type}?api_key=${apiKey}&language=en-US&query=${query}&page=${page}&include_adult=true`;
   },
   getSearchMulti(query = '', page = 1) {
-    return `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&language=en-US&query=${query}&page=${page}$include_adult=false`;
+    return `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&language=en-US&query=${query}&page=${page}&include_adult=true`;
   },
   getDetail(id = '', type = 'movie') {
     return `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}&language=en-US`;
@@ -31,28 +31,28 @@ export const api = {
     return `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${apiKey}&language=en-US`;
   },
   getRecommend(id = '', type = 'movie', page = 1) {
-    return `https://api.themoviedb.org/3/${type}/${id}/recommendations?api_key=${apiKey}&language=en-US&page=${page}$include_adult=false`;
+    return `https://api.themoviedb.org/3/${type}/${id}/recommendations?api_key=${apiKey}&language=en-US&page=${page}&include_adult=true`;
   },
   getPersonCredits(id = '', type = 'movie') {
     return `https://api.themoviedb.org/3/person/${id}/${type}_credits?api_key=${apiKey}&language=en-US`;
   },
   getDiscover(category = '', query = '') {
-    return `https://api.themoviedb.org/3/discover/${category}?api_key=${apiKey}${query}$include_adult=false`;
+    return `https://api.themoviedb.org/3/discover/${category}?api_key=${apiKey}${query}&include_adult=true`;
   },
   movie: {
     getNowPlaying(page = 1) {
-      return `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=${page}$include_adult=false`;
+      return `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=${page}&include_adult=true`;
     },
     getUpComing(page = 1) {
-      return `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US&page=${page}$include_adult=false`;
+      return `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US&page=${page}&include_adult=true`;
     },
   },
   tv: {
     getAiringToday(page = 1) {
-      return `https://api.themoviedb.org/3/tv/airing_today?api_key=${apiKey}&language=en-US&page=${page}$include_adult=false`;
+      return `https://api.themoviedb.org/3/tv/airing_today?api_key=${apiKey}&language=en-US&page=${page}&include_adult=true`;
     },
     getOnTheAir(page = 1) {
-      return `https://api.themoviedb.org/3/tv/on_the_air?api_key=${apiKey}&language=en-US&page=${page}$include_adult=false`;
+      return `https://api.themoviedb.org/3/tv/on_the_air?api_key=${apiKey}&language=en-US&page=${page}&include_adult=true`;
     },
     getSeason(id, season) {
       return `https://api.themoviedb.org/3/tv/${id}/season/${season}?api_key=${apiKey}&language=en-US`;
